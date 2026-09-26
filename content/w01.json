@@ -116,40 +116,113 @@
      "id": "w1c01",
      "en": "Really?",
      "ko": "진짜?",
-     "note": "끝을 올리면 놀람, 내리면 시큰둥하게 들려요."
+     "note": "끝을 올리면 놀람, 내리면 시큰둥하게 들려요.",
+     "ex": [
+      {
+       "en": "Really? You ran a marathon?",
+       "ko": "진짜? 마라톤을 뛰었다고?"
+      },
+      {
+       "en": "Really? I had no idea.",
+       "ko": "진짜요? 전혀 몰랐어요."
+      }
+     ]
     },
     {
      "id": "w1c02",
      "en": "No way!",
      "ko": "말도 안 돼!",
-     "note": "좋은 소식에도 써요. 밝게 올려 말하면 놀라움, 낮게 말하면 거절처럼 들려요."
+     "note": "좋은 소식에도 써요. 밝게 올려 말하면 놀라움, 낮게 말하면 거절처럼 들려요.",
+     "ex": [
+      {
+       "en": "No way! You met him in person?",
+       "ko": "말도 안 돼! 그 사람을 직접 만났다고?"
+      },
+      {
+       "en": "No way! This place is still open?",
+       "ko": "말도 안 돼! 여기 아직 영업해?"
+      }
+     ]
     },
     {
      "id": "w1c03",
      "en": "That makes sense.",
      "ko": "그럴 만하네 / 이해돼요",
-     "note": "상대 설명을 이해했다는 신호. 대화를 부드럽게 이어줘요."
+     "note": "상대 설명을 이해했다는 신호. 대화를 부드럽게 이어줘요.",
+     "ex": [
+      {
+       "en": "Oh, you were sick? That makes sense.",
+       "ko": "아, 아팠구나? 그럴 만하네."
+      },
+      {
+       "en": "That makes sense. The traffic was terrible.",
+       "ko": "그럴 만하네요. 차가 엄청 막혔잖아요."
+      }
+     ]
     },
     {
      "id": "w1c04",
      "en": "I know, right?",
      "ko": "그러니까! / 내 말이!",
-     "note": "상대 의견에 강하게 공감할 때. 친한 사이에서 써요."
+     "note": "상대 의견에 강하게 공감할 때. 친한 사이에서 써요.",
+     "ex": [
+      {
+       "en": "Mondays are the worst. — I know, right?",
+       "ko": "월요일은 최악이야. — 내 말이!"
+      },
+      {
+       "en": "I know, right? It's so expensive now.",
+       "ko": "그러니까요! 요즘 너무 비싸요."
+      }
+     ]
     },
     {
      "id": "w1c05",
      "en": "Good for you!",
      "ko": "잘됐다!",
-     "note": "상대의 좋은 소식을 축하할 때. 비꼬는 톤이면 반대 뜻이 되니 밝게 말하세요."
+     "note": "상대의 좋은 소식을 축하할 때. 비꼬는 톤이면 반대 뜻이 되니 밝게 말하세요.",
+     "ex": [
+      {
+       "en": "I got promoted! — Good for you!",
+       "ko": "나 승진했어! — 잘됐다!"
+      },
+      {
+       "en": "You finally quit smoking? Good for you!",
+       "ko": "드디어 담배 끊었어? 잘했네!"
+      }
+     ]
     }
    ],
    "pragmatic": "영어 대화에서는 맞장구를 안 하면 관심 없다는 신호로 받아들여요. 상대가 말을 멈추면 짧게라도 꼭 반응하세요.",
-   "improv": [
-    {
-     "situation_ko": "친구가 다음 달에 일본 여행을 간다고 신나서 말해요. 오늘 표현을 3개 이상 써서 반응하고, 질문을 하나 이어가세요.",
-     "starter_en": "Guess what? I'm going to Japan next month!"
-    }
-   ]
+   "roleplay": {
+    "situation_ko": "회사 동료가 좋은 소식을 들고 왔어요. 오늘 표현으로 반응하세요.",
+    "turns": [
+     {
+      "a": "Guess what? I got accepted to grad school!",
+      "intent_ko": "믿기지 않는다며 축하해주세요.",
+      "hint": "No way! / Good for you!",
+      "model": "No way! Good for you!"
+     },
+     {
+      "a": "Classes start in two weeks.",
+      "intent_ko": "놀라며 되물어보세요.",
+      "hint": "Really?",
+      "model": "Really? That soon?"
+     },
+     {
+      "a": "I want to go now, before I get too busy with work.",
+      "intent_ko": "그 이유가 이해된다고 말하세요.",
+      "hint": "That makes sense.",
+      "model": "That makes sense. Work only gets busier."
+     },
+     {
+      "a": "Studying and working at the same time is going to be so hard.",
+      "intent_ko": "강하게 공감해주세요.",
+      "hint": "I know, right?",
+      "model": "I know, right? But you'll do great."
+     }
+    ]
+   }
   },
   {
    "day": 2,
@@ -265,40 +338,113 @@
      "id": "w1c06",
      "en": "Sorry, I didn't catch that.",
      "ko": "미안, 잘 못 들었어요.",
-     "note": "What?보다 훨씬 부드러워요. 소음이나 속도 탓으로 돌리는 느낌이라 상대가 기분 상하지 않아요."
+     "note": "What?보다 훨씬 부드러워요. 소음이나 속도 탓으로 돌리는 느낌이라 상대가 기분 상하지 않아요.",
+     "ex": [
+      {
+       "en": "Sorry, I didn't catch your name.",
+       "ko": "죄송해요, 성함을 못 들었어요."
+      },
+      {
+       "en": "Sorry, I didn't catch that. The music is too loud.",
+       "ko": "미안, 못 들었어. 음악이 너무 커."
+      }
+     ]
     },
     {
      "id": "w1c07",
      "en": "Could you say that again?",
      "ko": "다시 한 번 말해줄래요?",
-     "note": "Could you ~?는 공손한 부탁. Again?만 짧게 말하면 퉁명스럽게 들릴 수 있어요."
+     "note": "Could you ~?는 공손한 부탁. Again?만 짧게 말하면 퉁명스럽게 들릴 수 있어요.",
+     "ex": [
+      {
+       "en": "Could you say that again? The address?",
+       "ko": "다시 한 번 말해줄래요? 주소요?"
+      },
+      {
+       "en": "Sorry, could you say that again more slowly?",
+       "ko": "미안한데 좀 천천히 다시 말해줄래요?"
+      }
+     ]
     },
     {
      "id": "w1c08",
      "en": "What do you mean by ~?",
      "ko": "~가 무슨 뜻이에요?",
-     "note": "모르는 단어나 표현을 콕 집어 물을 때. by 뒤에 그 단어를 그대로 넣어요."
+     "note": "모르는 단어나 표현을 콕 집어 물을 때. by 뒤에 그 단어를 그대로 넣어요.",
+     "ex": [
+      {
+       "en": "What do you mean by \"soon\"? Today?",
+       "ko": "\"곧\"이 무슨 뜻이에요? 오늘이요?"
+      },
+      {
+       "en": "What do you mean by that?",
+       "ko": "그게 무슨 말이에요?"
+      }
+     ]
     },
     {
      "id": "w1c09",
      "en": "You mean ~?",
      "ko": "~라는 말이에요?",
-     "note": "내가 이해한 내용을 확인할 때. 끝을 올려 말해요."
+     "note": "내가 이해한 내용을 확인할 때. 끝을 올려 말해요.",
+     "ex": [
+      {
+       "en": "You mean the red one?",
+       "ko": "빨간 거 말하는 거예요?"
+      },
+      {
+       "en": "You mean we have to wait an hour?",
+       "ko": "한 시간 기다려야 한다는 말이에요?"
+      }
+     ]
     },
     {
      "id": "w1c10",
      "en": "Could you speak a little slower?",
      "ko": "조금만 천천히 말해줄래요?",
-     "note": "a little을 넣으면 요청이 부드러워져요."
+     "note": "a little을 넣으면 요청이 부드러워져요.",
+     "ex": [
+      {
+       "en": "Could you speak a little slower? I'm still learning.",
+       "ko": "조금만 천천히 말해줄래요? 아직 배우는 중이라서요."
+      },
+      {
+       "en": "Sorry, could you speak a little slower?",
+       "ko": "죄송한데 조금만 천천히 말해주실래요?"
+      }
+     ]
     }
    ],
    "pragmatic": "What?이라고만 되물으면 무례하게 들릴 수 있어요. Sorry를 앞에 붙이거나 Could you ~?로 부드럽게 되물으세요.",
-   "improv": [
-    {
-     "situation_ko": "외국인 동료가 빠르게 말했는데 무슨 뜻인지 모르겠어요. 오늘 되묻기 표현으로 뜻을 확인한 뒤 대답까지 해보세요.",
-     "starter_en": "We should grab a bite and then hit the hay early tonight."
-    }
-   ]
+   "roleplay": {
+    "situation_ko": "길에서 외국인이 빠르게 길을 물어봐요. 되묻기 표현으로 끝까지 알아들으세요.",
+    "turns": [
+     {
+      "a": "Excuse me, do you know where the nearest subway station is?",
+      "intent_ko": "잘 못 들었다고 말하세요.",
+      "hint": "Sorry, I didn't catch that.",
+      "model": "Sorry, I didn't catch that."
+     },
+     {
+      "a": "The subway. I'm trying to get to Hongdae, but I'm totally turned around.",
+      "intent_ko": "'turned around'가 무슨 뜻인지 물어보세요.",
+      "hint": "What do you mean by ~?",
+      "model": "What do you mean by \"turned around\"?"
+     },
+     {
+      "a": "Like, I'm lost. I don't know which way is north.",
+      "intent_ko": "길을 잃었다는 뜻인지 확인하세요.",
+      "hint": "You mean ~?",
+      "model": "Oh, you mean you're lost?"
+     },
+     {
+      "a": "Yeah! So is it that way, past the bank, then left at the second light?",
+      "intent_ko": "조금 천천히 다시 말해달라고 하세요.",
+      "hint": "Could you speak a little slower?",
+      "model": "Could you speak a little slower? Past the bank, and then?"
+     }
+    ]
+   }
   },
   {
    "day": 3,
@@ -411,40 +557,113 @@
      "id": "w1c11",
      "en": "Let me think.",
      "ko": "글쎄요, 생각 좀 해볼게요.",
-     "note": "바로 답이 안 나올 때 침묵 대신 쓰는 가장 기본 표현이에요."
+     "note": "바로 답이 안 나올 때 침묵 대신 쓰는 가장 기본 표현이에요.",
+     "ex": [
+      {
+       "en": "Let me think. Maybe Friday works.",
+       "ko": "생각해볼게요. 금요일이 괜찮을 것 같아요."
+      },
+      {
+       "en": "Hmm, let me think about it.",
+       "ko": "음, 좀 생각해볼게요."
+      }
+     ]
     },
     {
      "id": "w1c12",
      "en": "That's a good question.",
      "ko": "좋은 질문이네요.",
-     "note": "칭찬이라기보다 생각할 시간을 버는 신호예요. 원어민이 자주 써요."
+     "note": "칭찬이라기보다 생각할 시간을 버는 신호예요. 원어민이 자주 써요.",
+     "ex": [
+      {
+       "en": "That's a good question. I've never thought about it.",
+       "ko": "좋은 질문이네요. 생각해본 적이 없어요."
+      },
+      {
+       "en": "Why Seoul? That's a good question.",
+       "ko": "왜 서울이냐고요? 좋은 질문이네요."
+      }
+     ]
     },
     {
      "id": "w1c13",
      "en": "How can I put it...",
      "ko": "뭐라고 해야 하나…",
-     "note": "설명할 말을 고르는 중이라는 신호. 끝을 흐리며 말해요."
+     "note": "설명할 말을 고르는 중이라는 신호. 끝을 흐리며 말해요.",
+     "ex": [
+      {
+       "en": "How can I put it... he's not rude, just direct.",
+       "ko": "뭐라고 해야 하나… 무례한 건 아니고 직설적이에요."
+      },
+      {
+       "en": "It was, how can I put it, a little awkward.",
+       "ko": "그게, 뭐라고 해야 하나, 좀 어색했어요."
+      }
+     ]
     },
     {
      "id": "w1c14",
      "en": "You know what I mean?",
      "ko": "무슨 말인지 알죠?",
-     "note": "설명이 완벽하지 않을 때 상대의 이해를 확인하며 넘어가는 표현이에요."
+     "note": "설명이 완벽하지 않을 때 상대의 이해를 확인하며 넘어가는 표현이에요.",
+     "ex": [
+      {
+       "en": "It's cozy but small, you know what I mean?",
+       "ko": "아늑한데 좁아요, 무슨 말인지 알죠?"
+      },
+      {
+       "en": "I just need a break, you know what I mean?",
+       "ko": "그냥 좀 쉬고 싶어요, 무슨 말인지 알죠?"
+      }
+     ]
     },
     {
      "id": "w1c15",
      "en": "It's kind of like ~",
      "ko": "~ 비슷한 거예요",
-     "note": "딱 맞는 설명이 없을 때 비슷한 것에 빗대는 표현이에요."
+     "note": "딱 맞는 설명이 없을 때 비슷한 것에 빗대는 표현이에요.",
+     "ex": [
+      {
+       "en": "It's kind of like a Korean pancake.",
+       "ko": "한국식 팬케이크 비슷한 거예요."
+      },
+      {
+       "en": "It's kind of like a small festival.",
+       "ko": "작은 축제 같은 거예요."
+      }
+     ]
     }
    ],
    "pragmatic": "대답이 바로 안 나올 때 침묵보다 Let me think. 같은 시간 벌기 표현이 훨씬 자연스러워요. 원어민도 생각할 시간을 이렇게 벌어요.",
-   "improv": [
-    {
-     "situation_ko": "새로 알게 된 외국인이 왜 지금 일을 하게 됐는지 물어요. 시간 벌기 표현으로 시작해서 이유를 설명하세요.",
-     "starter_en": "So what made you choose that job?"
-    }
-   ]
+   "roleplay": {
+    "situation_ko": "모임에서 처음 만난 외국인이 이것저것 물어봐요. 시간 벌기 표현으로 여유 있게 답하세요.",
+    "turns": [
+     {
+      "a": "So, what's your favorite thing about living in Seoul?",
+      "intent_ko": "좋은 질문이라며 시간을 버세요.",
+      "hint": "That's a good question.",
+      "model": "That's a good question. Let me think."
+     },
+     {
+      "a": "Take your time!",
+      "intent_ko": "뭐라고 해야 할지 고르며, 편리해서 좋다고 말하세요.",
+      "hint": "How can I put it...",
+      "model": "How can I put it... everything is so convenient here."
+     },
+     {
+      "a": "Convenient how?",
+      "intent_ko": "없는 게 없는 거대한 편의점 같다고 빗대세요.",
+      "hint": "It's kind of like ~",
+      "model": "It's kind of like a giant convenience store. You can get anything, anytime."
+     },
+     {
+      "a": "Ha, that's a great way to put it.",
+      "intent_ko": "새벽 2시에도 치킨을 시킬 수 있다고 하며, 이해했는지 확인하세요.",
+      "hint": "You know what I mean?",
+      "model": "Like, you can order fried chicken at 2 a.m. You know what I mean?"
+     }
+    ]
+   }
   },
   {
    "day": 4,
@@ -561,40 +780,113 @@
      "id": "w1c16",
      "en": "How about you?",
      "ko": "당신은요?",
-     "note": "대답한 뒤 공을 넘기는 스몰토크 기본기예요. 끝을 올려 말해요."
+     "note": "대답한 뒤 공을 넘기는 스몰토크 기본기예요. 끝을 올려 말해요.",
+     "ex": [
+      {
+       "en": "I'm doing great. How about you?",
+       "ko": "전 잘 지내요. 당신은요?"
+      },
+      {
+       "en": "I'll have a latte. How about you?",
+       "ko": "전 라떼 마실래요. 당신은요?"
+      }
+     ]
     },
     {
      "id": "w1c17",
      "en": "How was it?",
      "ko": "어땠어요?",
-     "note": "상대가 경험을 말하면 가장 먼저 꺼낼 질문이에요."
+     "note": "상대가 경험을 말하면 가장 먼저 꺼낼 질문이에요.",
+     "ex": [
+      {
+       "en": "You saw the new movie? How was it?",
+       "ko": "새 영화 봤어요? 어땠어요?"
+      },
+      {
+       "en": "How was it? Was it worth the wait?",
+       "ko": "어땠어요? 기다린 보람이 있었어요?"
+      }
+     ]
     },
     {
      "id": "w1c18",
      "en": "What made you ~?",
      "ko": "왜 ~하게 됐어요?",
-     "note": "Why보다 부드럽게 이유를 묻는 표현이에요. 따지는 느낌이 없어요."
+     "note": "Why보다 부드럽게 이유를 묻는 표현이에요. 따지는 느낌이 없어요.",
+     "ex": [
+      {
+       "en": "What made you move to Korea?",
+       "ko": "왜 한국으로 오게 됐어요?"
+      },
+      {
+       "en": "What made you change your mind?",
+       "ko": "왜 마음이 바뀌었어요?"
+      }
+     ]
     },
     {
      "id": "w1c19",
      "en": "Tell me more about it.",
      "ko": "더 얘기해줘요.",
-     "note": "관심을 보여주는 표현. 상대가 신나게 말하게 만들어요."
+     "note": "관심을 보여주는 표현. 상대가 신나게 말하게 만들어요.",
+     "ex": [
+      {
+       "en": "You went to Vietnam? Tell me more about it.",
+       "ko": "베트남 갔었어요? 더 얘기해줘요."
+      },
+      {
+       "en": "That sounds interesting. Tell me more about it.",
+       "ko": "재밌겠네요. 더 얘기해줘요."
+      }
+     ]
     },
     {
      "id": "w1c20",
      "en": "So what happened next?",
      "ko": "그래서 어떻게 됐어요?",
-     "note": "이야기를 끝까지 끌어내는 질문. So를 붙이면 더 몰입한 느낌이에요."
+     "note": "이야기를 끝까지 끌어내는 질문. So를 붙이면 더 몰입한 느낌이에요.",
+     "ex": [
+      {
+       "en": "So what happened next? Did he call back?",
+       "ko": "그래서 어떻게 됐어요? 그 사람이 다시 전화했어요?"
+      },
+      {
+       "en": "And then? So what happened next?",
+       "ko": "그리고요? 그래서 어떻게 됐어요?"
+      }
+     ]
     }
    ],
    "pragmatic": "대답만 하고 끝내면 대화가 끊겨요. 답한 뒤 How about you?로 공을 넘기는 게 스몰토크의 기본 규칙이에요.",
-   "improv": [
-    {
-     "situation_ko": "친구가 제주도에 다녀왔다고 해요. 오늘 표현으로 질문을 최소 3개 이어가세요.",
-     "starter_en": "I just got back from Jeju last week!"
-    }
-   ]
+   "roleplay": {
+    "situation_ko": "친구가 지난 주말 이야기를 꺼내요. 질문을 되돌리며 대화를 이어가세요.",
+    "turns": [
+     {
+      "a": "I finally tried surfing last weekend!",
+      "intent_ko": "어땠는지 물어보세요.",
+      "hint": "How was it?",
+      "model": "No way! How was it?"
+     },
+     {
+      "a": "Honestly, I fell off like fifty times.",
+      "intent_ko": "왜 서핑을 해볼 생각을 했는지 물어보세요.",
+      "hint": "What made you ~?",
+      "model": "Ha! What made you try surfing?"
+     },
+     {
+      "a": "My friend is an instructor in Yangyang. And then something funny happened.",
+      "intent_ko": "그래서 어떻게 됐는지 물어보세요.",
+      "hint": "So what happened next?",
+      "model": "Really? So what happened next?"
+     },
+     {
+      "a": "A kid stood up on his first try and laughed at me. Anyway, what did you do this weekend?",
+      "intent_ko": "짧게 답하고, 다음 주 계획을 되물으세요.",
+      "hint": "How about you?",
+      "model": "Nothing special, I just rested. How about you? Any plans for next weekend?"
+     }
+    ]
+   }
   },
   {
    "day": 5,
@@ -709,40 +1001,113 @@
      "id": "w1c21",
      "en": "What's the word...",
      "ko": "뭐더라…",
-     "note": "단어가 혀끝에서 맴돌 때. 혼잣말처럼 말하면 상대가 기다려주거나 도와줘요."
+     "note": "단어가 혀끝에서 맴돌 때. 혼잣말처럼 말하면 상대가 기다려주거나 도와줘요.",
+     "ex": [
+      {
+       "en": "It's a... what's the word... a blender!",
+       "ko": "그게… 뭐더라… 믹서기!"
+      },
+      {
+       "en": "She's very, what's the word, generous.",
+       "ko": "그녀는 아주, 뭐더라, 너그러워요."
+      }
+     ]
     },
     {
      "id": "w1c22",
      "en": "I'm not sure how to say this in English.",
      "ko": "이걸 영어로 어떻게 말해야 할지 모르겠어요.",
-     "note": "한국 문화처럼 딱 맞는 영어가 없을 때 쓰면, 상대가 설명을 기대하며 들어줘요."
+     "note": "한국 문화처럼 딱 맞는 영어가 없을 때 쓰면, 상대가 설명을 기대하며 들어줘요.",
+     "ex": [
+      {
+       "en": "I'm not sure how to say this in English, but it's a kind of rice cake.",
+       "ko": "영어로 어떻게 말할지 모르겠지만, 떡의 한 종류예요."
+      },
+      {
+       "en": "I'm not sure how to say this in English. It's a feeling of deep sadness.",
+       "ko": "영어로 어떻게 말할지 모르겠어요. 깊은 슬픔 같은 감정이에요."
+      }
+     ]
     },
     {
      "id": "w1c23",
      "en": "something like ~",
      "ko": "~쯤, ~ 같은 거",
-     "note": "정확한 숫자나 이름이 기억나지 않을 때 대충 말하는 표현이에요."
+     "note": "정확한 숫자나 이름이 기억나지 않을 때 대충 말하는 표현이에요.",
+     "ex": [
+      {
+       "en": "It costs something like 20 dollars.",
+       "ko": "20달러쯤 해요."
+      },
+      {
+       "en": "He said something like \"see you later.\"",
+       "ko": "그가 \"나중에 봐\" 비슷한 말을 했어요."
+      }
+     ]
     },
     {
      "id": "w1c24",
      "en": "I mean, ~",
      "ko": "그러니까, ~",
-     "note": "방금 한 말을 더 구체적으로 고쳐 말할 때 앞에 붙여요."
+     "note": "방금 한 말을 더 구체적으로 고쳐 말할 때 앞에 붙여요.",
+     "ex": [
+      {
+       "en": "It's far. I mean, it's a two-hour drive.",
+       "ko": "멀어요. 그러니까, 차로 두 시간이에요."
+      },
+      {
+       "en": "I like it. I mean, it's not perfect, but I like it.",
+       "ko": "좋아요. 그러니까, 완벽하진 않지만 좋아요."
+      }
+     ]
     },
     {
      "id": "w1c25",
      "en": "Let me put it another way.",
      "ko": "다르게 말해볼게요.",
-     "note": "상대가 이해 못 한 것 같을 때 설명을 바꾸는 신호예요."
+     "note": "상대가 이해 못 한 것 같을 때 설명을 바꾸는 신호예요.",
+     "ex": [
+      {
+       "en": "Let me put it another way. It's too risky.",
+       "ko": "다르게 말해볼게요. 너무 위험해요."
+      },
+      {
+       "en": "Okay, let me put it another way.",
+       "ko": "좋아요, 다르게 말해볼게요."
+      }
+     ]
     }
    ],
    "pragmatic": "딱 맞는 단어가 생각 안 나도 멈추지 마세요. What's the word...로 시간을 벌고 쉬운 말로 풀어 설명하는 돌려 말하기가 회화 실력의 핵심이에요.",
-   "improv": [
-    {
-     "situation_ko": "외국인 친구가 '눈치'가 뭐냐고 물어요. 딱 맞는 영어 단어가 없으니 오늘 표현으로 풀어서 설명하세요.",
-     "starter_en": "My Korean coworker said I have no nunchi. What does that mean?"
-    }
-   ]
+   "roleplay": {
+    "situation_ko": "외국인 친구가 한국 문화에 대해 물어봐요. 딱 맞는 단어가 없을 때 돌려 말하세요.",
+    "turns": [
+     {
+      "a": "What's that thing everyone eats on their birthday here?",
+      "intent_ko": "단어가 생각 안 나는 척 시간을 벌며 미역국이라고 하세요.",
+      "hint": "What's the word...",
+      "model": "Oh, what's the word... seaweed soup! Miyeokguk."
+     },
+     {
+      "a": "Seaweed soup? Why on your birthday?",
+      "intent_ko": "영어로 어떻게 말할지 모르겠다고 하며 설명을 시작하세요.",
+      "hint": "I'm not sure how to say this in English.",
+      "model": "I'm not sure how to say this in English, but it's about thanking your mom."
+     },
+     {
+      "a": "Thanking your mom? I don't get it.",
+      "intent_ko": "다르게 말해보겠다며, 엄마들이 출산 후에 먹는 음식이라고 설명하세요.",
+      "hint": "Let me put it another way.",
+      "model": "Let me put it another way. Moms eat it after they give birth."
+     },
+     {
+      "a": "Oh! So it's like a tradition?",
+      "intent_ko": "그러니까 그걸 먹으며 엄마를 기억하는 거라고, 천 년쯤 된 전통이라고 하세요.",
+      "hint": "I mean, ~ / something like ~",
+      "model": "Yes. I mean, you remember your mom. It's something like a thousand-year-old tradition."
+     }
+    ]
+   }
   },
   {
    "day": 6,
