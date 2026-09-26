@@ -44,7 +44,8 @@ button:focus-visible{outline:3px solid var(--now);outline-offset:2px}
 .timer{font-size:64px;font-weight:800;text-align:center;font-variant-numeric:tabular-nums;margin:8px 0}
 .count{font-size:13px;color:var(--sub);text-align:right;margin-bottom:6px}
 label{display:block;margin-top:14px;font-weight:600}
-input{font:inherit;font-size:18px;width:100%;padding:12px;border-radius:10px;border:2px solid var(--rule);background:var(--bg);color:var(--ink);margin-top:6px}
+.vbtn{width:auto;padding:8px 12px;font-size:13px;margin:0 0 12px}
+input,select{font:inherit;font-size:18px;width:100%;padding:12px;border-radius:10px;border:2px solid var(--rule);background:var(--bg);color:var(--ink);margin-top:6px}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
 </head>
@@ -68,11 +69,41 @@ function mark(ids, r) { for (const id of ids || []) { const p = S.results[id]; i
 
 // ---------- 음성 ----------
 let VA = null, VB = null;
+// 장난감·로봇 음성 제외, 자연스러운 음성 우선 (프리미엄 > 향상됨 > 기본)
+const BAD = /Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Good News|Jester|Organ|Superstar|Trinoids|Whisper|Wobble|Zarvox|Grandpa|Grandma|Eddy|Flo|Reed|Rocko|Sandy|Shelley|Fred|Junior|Ralph|Kathy/i;
+const FEMALE = ["Ava", "Samantha", "Allison", "Zoe", "Susan", "Nicky", "Joelle", "Noelle", "Karen", "Moira", "Kate", "Serena"];
+const MALE = ["Evan", "Nathan", "Tom", "Aaron", "Alex", "Daniel", "Oliver", "Arthur", "Lee"];
+function vScore(v, names) {
+  let s = 0; const i = names.findIndex(n => v.name.includes(n));
+  if (i >= 0) s += 100 - i;
+  if (/Premium/i.test(v.name)) s += 50; else if (/Enhanced/i.test(v.name)) s += 30;
+  if (/en-US/i.test(v.lang)) s += 10;
+  return s;
+}
 function pickVoices() {
-  const v = speechSynthesis.getVoices().filter(x => /^en/i.test(x.lang));
-  const us = v.filter(x => /en-US/i.test(x.lang));
-  const pool = us.length ? us : v;
-  VA = pool[0] || null; VB = pool.find(x => x !== VA) || VA;
+  const v = speechSynthesis.getVoices().filter(x => /^en/i.test(x.lang) && !BAD.test(x.name));
+  const best = names => v.slice().sort((a, b) => vScore(b, names) - vScore(a, names))[0] || null;
+  VA = best(FEMALE); VB = best(MALE);
+  if (VB === VA) VB = v.find(x => x !== VA) || VA;
+  try { // 사용자가 직접 고른 음성이 있으면 우선
+    const a = localStorage.getItem("sd_va"), b = localStorage.getItem("sd_vb");
+    if (a) VA = v.find(x => x.name === a) || VA;
+    if (b) VB = v.find(x => x.name === b) || VB;
+  } catch (e) {}
+}
+function voicePanel() {
+  const box = $("#vp"); if (box.innerHTML) { box.innerHTML = ""; return; }
+  const all = speechSynthesis.getVoices().filter(x => /^en/i.test(x.lang) && !BAD.test(x.name));
+  if (!all.length) { box.innerHTML = `<div class="card"><p class="muted">이 브라우저에서 영어 음성을 찾지 못했어요. 사파리로 열어보세요.</p></div>`; return; }
+  const opts = sel => all.map(v => `<option value="${esc(v.name)}"${v === sel ? " selected" : ""}>${esc(v.name)} (${esc(v.lang)})</option>`).join("");
+  box.innerHTML = `<div class="card"><label>${esc(who("A"))} 목소리<select id="sa">${opts(VA)}</select></label><button id="ta">▶ 미리듣기</button>
+    <label>내 목소리<select id="sb">${opts(VB)}</select></label><button id="tb">▶ 미리듣기</button>
+    <p class="muted">이 브라우저에서 쓸 수 있는 음성 ${all.length}개. 고른 음성은 이 기기에 저장돼요.</p></div>`;
+  const set = (id, key, isA) => { const v = all.find(x => x.name === $(id).value); if (isA) VA = v; else VB = v; try { localStorage.setItem(key, v.name); } catch (e) {} };
+  $("#sa").onchange = () => set("#sa", "sd_va", true);
+  $("#sb").onchange = () => set("#sb", "sd_vb", false);
+  $("#ta").onclick = () => { stopAudio(); speak("Hey! Long time no see. How've you been?", { who: "A" }); };
+  $("#tb").onclick = () => { stopAudio(); speak("No way! Good for you!", { who: "B" }); };
 }
 if ("speechSynthesis" in window) { pickVoices(); speechSynthesis.onvoiceschanged = pickVoices; }
 function speak(text, { rate = 1, who = "A" } = {}) {
@@ -141,7 +172,9 @@ function render() {
   const [, fn] = S.steps[S.step];
   app.innerHTML = `<header><h1>D+${S.n} ${esc(S.theme || "")}${S.practice ? " (연습 모드)" : ""}</h1><h2>${esc(S.day.title)}</h2></header>
     <nav class="map" aria-label="오늘 진행">${S.steps.map(([t], i) => `<div class="st ${i < S.step ? "pass" : i === S.step ? "cur" : ""}"><i></i>${t}</div>`).join("")}</nav>
+    <button class="vbtn" id="vbtn">🔊 음성 설정</button><div id="vp"></div>
     <section id="stage"></section>`;
+  $("#vbtn").onclick = voicePanel;
   fn($("#stage"));
   window.scrollTo(0, 0);
 }
