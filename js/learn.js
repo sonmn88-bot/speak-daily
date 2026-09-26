@@ -21,9 +21,14 @@ function newSession(day, w, practice) {
     }
     if (s.due.length) s.steps.push(["워밍업", warmup]);
   }
-  if (day.lines && day.lines.length) s.steps.push(["듣기", listen], ["섀도잉", shadow], ["인출", recall]);
+  const hasLines = day.lines && day.lines.length;
+  if (hasLines) s.steps.push(["듣기", listen]);
+  if (day.chunks && day.chunks.length) s.steps.push(["표현", study]);
+  if (hasLines) s.steps.push(["섀도잉", shadow], ["인출", recall]);
+  if (day.roleplay) s.steps.push(["롤플레이", roleplay]);
   if (day.improv && day.improv.length) s.steps.push(["즉흥", improv]);
   if (!practice && (day.type === "review_cum" || (S.monthly && S.dw === 7))) s.steps.push(["측정", measure]);
+  if (testItems(day).length) s.steps.push(["마무리", finalTest]);
   s.steps.push(["완료", finish]);
   return s;
 }
@@ -56,7 +61,7 @@ function renderLearn(el) {
 const next = () => { LS.step++; renderLearn($("#view")); };
 
 // ---------- 한국어 → 영어 인출 카드 ----------
-function drill(el, items, onDone) {
+function drill(el, items, onDone, record = true) {
   let i = 0;
   const show = () => {
     const it = items[i];
@@ -69,7 +74,7 @@ function drill(el, items, onDone) {
       $("#ctl").innerHTML = `<button id="again">🔊 다시 듣기</button>
         <div class="row"><button class="bO" data-r="O">O 바로 말함</button><button class="bT" data-r="T">△ 더듬음</button><button class="bX" data-r="X">X 못 함</button></div>`;
       $("#again").onclick = () => speak(it.en, { who: "B" });
-      el.querySelectorAll("[data-r]").forEach(b => b.onclick = () => { mark(it.ids, b.dataset.r); i++; i < items.length ? show() : onDone(); });
+      el.querySelectorAll("[data-r]").forEach(b => b.onclick = () => { if (record) mark(it.ids, b.dataset.r); i++; i < items.length ? show() : onDone(); });
     };
   };
   show();
@@ -78,7 +83,7 @@ function warmup(el) { drill(el, LS.due.map(c => ({ ko: c.ko, en: c.en, ids: [c.i
 function recall(el) {
   const L = LS.day.lines, items = [];
   L.forEach((l, i) => { if (l.sp === "B") items.push({ ko: l.ko, en: l.en, ids: l.chunks, ctx: i > 0 ? `${who("A")}: ${L[i - 1].en}` : "" }); });
-  drill(el, items, next);
+  drill(el, items, next, false);
 }
 
 // ---------- 듣기 ----------
@@ -110,26 +115,28 @@ function listen(el) {
 
 // ---------- 섀도잉 ----------
 function shadow(el) {
-  const L = LS.day.lines, rates = [0.8, 1]; let pass = 0;
-  el.innerHTML = `<div class="card"><p class="muted">한 줄 듣고, 멈추는 동안 똑같이 따라 말하세요. 0.8배 한 번, 1.0배 한 번 진행해요.</p>
+  const L = LS.day.lines; let pass = 0, rate = 1;
+  el.innerHTML = `<div class="card"><p class="muted">한 줄 듣고, 멈추는 동안 똑같이 따라 말하세요. 어려우면 끝나고 천천히 한 번 더 할 수 있어요.</p>
     ${L.map((l, i) => `<div class="line" id="l${i}"><div class="sp">${esc(who(l.sp))}</div><div>${esc(l.en)}</div><div class="muted">${esc(l.ko)}</div></div>`).join("")}</div>
-    <button class="go" id="go">▶ 0.8배로 시작</button>`;
+    <button class="go" id="go">▶ 따라 말하기 시작</button><div id="slow"></div>`;
   const b = $("#go");
-  b.onclick = async () => {
-    if (pass >= 2) return next();
-    const r = RUN; b.disabled = true;
+  const run = async () => {
+    const r = RUN; b.disabled = true; $("#slow").innerHTML = "";
     for (let i = 0; i < L.length; i++) {
       if (r !== RUN) return;
       el.querySelectorAll(".line").forEach(x => x.classList.remove("on"));
       const le = $("#l" + i); le.classList.add("on"); le.scrollIntoView({ block: "center", behavior: "smooth" });
       const t0 = Date.now();
-      await speak(L[i].en, { rate: rates[pass], who: L[i].sp });
+      await speak(L[i].en, { rate, who: L[i].sp });
       await sleep(Math.max(1200, (Date.now() - t0) * 1.1 + 500)); // 따라 말할 시간
     }
     if (r !== RUN) return;
     pass++; b.disabled = false;
-    b.textContent = pass < 2 ? "▶ 1.0배로 시작" : `다음: ${nextLabel()}`;
+    b.textContent = `다음: ${nextLabel()}`; b.onclick = next;
+    $("#slow").innerHTML = `<button id="sl">🐢 0.8배로 한 번 더</button>`;
+    $("#sl").onclick = () => { rate = 0.8; run(); };
   };
+  b.onclick = run;
 }
 
 // ---------- 즉흥 ----------
@@ -227,3 +234,88 @@ ROUTES.review = el => {
     LS = newSession(day, w, true); location.hash = "learn";
   });
 };
+
+// ---------- 표현 익히기 ----------
+function study(el) {
+  const C = LS.day.chunks; let i = 0;
+  const show = () => {
+    const c = C[i], line = LS.day.lines.find(l => (l.chunks || []).includes(c.id)); let reps = 0;
+    const samples = [line, ...(c.ex || [])].filter(Boolean);
+    el.innerHTML = `<div class="card"><div class="count">${i + 1} / ${C.length}</div>
+      <p style="font-size:26px;font-weight:800;margin:0">${esc(c.en)}</p><p class="ko" style="font-size:16px">${esc(c.ko)}</p>
+      <p class="muted">💡 ${esc(c.note)}</p>
+      ${samples.map((e, k) => `<div class="line" id="s${k}"><div class="sp">${k === 0 && line ? "대화 속에서" : "다른 상황"}</div>${esc(e.en)}<div class="muted">${esc(e.ko)}</div></div>`).join("")}
+      <button id="ex">🔊 예문 듣기</button></div>
+      <p class="muted">표현을 듣고 소리 내 따라 말하세요. 세 번 따라 하면 넘어갈 수 있어요.</p>
+      <button class="go" id="rep">🔊 듣고 따라 말하기 (0/3)</button>`;
+    $("#ex").onclick = async () => {
+      const r = RUN;
+      for (let k = 0; k < samples.length; k++) {
+        if (r !== RUN) return;
+        el.querySelectorAll(".line").forEach(x => x.classList.toggle("on", x.id === "s" + k));
+        await speak(samples[k].en, { who: "B" }); await sleep(600);
+      }
+    };
+    const b = $("#rep");
+    b.onclick = async () => {
+      b.disabled = true; await speak(c.en, { who: "B" }); await sleep(1500);
+      if (!$("#rep")) return;
+      reps++; b.disabled = false;
+      if (reps < 3) b.textContent = `🔊 듣고 따라 말하기 (${reps}/3)`;
+      else { b.textContent = i < C.length - 1 ? "다음 표현" : `다음: ${nextLabel()}`; b.onclick = () => { i++; i < C.length ? show() : next(); }; }
+    };
+  };
+  show();
+}
+
+// ---------- 유도 롤플레이 ----------
+function roleplay(el) {
+  const R = LS.day.roleplay; let i = 0;
+  const show = () => {
+    const t = R.turns[i];
+    el.innerHTML = `<div class="card"><p class="muted">${esc(R.situation_ko)}</p><div class="count">${i + 1} / ${R.turns.length}</div>
+      <div class="line"><div class="sp">${esc(who("A"))}</div>${esc(t.a)}</div>
+      <p class="ko" style="margin-top:14px">${esc(t.intent_ko)}</p><p class="muted">쓸 표현: ${esc(t.hint)}</p><div id="ans"></div></div>
+      <button id="hear">🔊 상대 말 다시 듣기</button><div id="ctl"><button class="go" id="rv">말한 뒤 모범 답 보기</button></div>`;
+    speak(t.a, { who: "A" });
+    $("#hear").onclick = () => speak(t.a, { who: "A" });
+    $("#rv").onclick = () => {
+      $("#ans").innerHTML = `<div class="line on"><div class="sp">모범 답</div>${esc(t.model)}</div>`;
+      speak(t.model, { who: "B" });
+      $("#ctl").innerHTML = `<button id="ag">🔊 모범 답 다시 듣기</button><button class="go" id="nx">${i < R.turns.length - 1 ? "다음 턴" : `다음: ${nextLabel()}`}</button>`;
+      $("#ag").onclick = () => speak(t.model, { who: "B" });
+      $("#nx").onclick = () => { i++; i < R.turns.length ? show() : next(); };
+    };
+  };
+  show();
+}
+
+// ---------- 마무리 테스트 (틀리면 맞힐 때까지 다시 출제, 첫 결과를 기록) ----------
+function testItems(day) {
+  const ids = day.chunks && day.chunks.length ? day.chunks.map(c => c.id)
+    : [...new Set((day.lines || []).flatMap(l => l.chunks || []))].slice(0, 10);
+  return ids.filter(id => S.chunks[id]);
+}
+function finalTest(el) {
+  const q = testItems(LS.day).map(id => ({ c: S.chunks[id], tries: 0 })).sort(() => Math.random() - 0.5);
+  const first = {};
+  const show = () => {
+    if (!q.length) return next();
+    const it = q[0], c = it.c;
+    el.innerHTML = `<div class="card"><div class="count">남은 문제 ${q.length}</div><p class="muted">힌트 없이 영어로 말해보세요. 틀린 표현은 조금 뒤에 다시 나와요.</p>
+      <p class="ko">${esc(c.ko)}</p><div id="ans"></div></div><div id="ctl"><button class="go" id="rv">정답 보기</button></div>`;
+    $("#rv").onclick = () => {
+      $("#ans").innerHTML = `<div class="en">${esc(c.en)}</div>`;
+      speak(c.en, { who: "B" });
+      $("#ctl").innerHTML = `<div class="row"><button class="bO" data-r="O">O 바로 말함</button><button class="bT" data-r="T">△ 더듬음</button><button class="bX" data-r="X">X 못 함</button></div>`;
+      el.querySelectorAll("[data-r]").forEach(b => b.onclick = () => {
+        const r = b.dataset.r;
+        if (!(c.id in first)) { first[c.id] = r; mark([c.id], r); }
+        q.shift(); it.tries++;
+        if (r !== "O" && it.tries < 3) q.splice(Math.min(2, q.length), 0, it);
+        show();
+      });
+    };
+  };
+  show();
+}
