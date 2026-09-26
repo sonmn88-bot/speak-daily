@@ -83,6 +83,28 @@ function speak(text, { rate = 1, who = "A" } = {}) {
 }
 const stopAudio = () => { try { speechSynthesis.cancel(); } catch (e) {} };
 
+// ---------- 녹음 (발음 비교·월간 테스트) ----------
+let CUR_REC = null;
+async function recStart() {
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  const mr = new MediaRecorder(stream), parts = [];
+  mr.ondataavailable = e => e.data.size && parts.push(e.data);
+  mr.start();
+  const rec = {
+    stop: () => new Promise(res => {
+      if (mr.state === "inactive") return res(null);
+      mr.onstop = () => { stream.getTracks().forEach(t => t.stop()); CUR_REC = null; res(new Blob(parts, { type: mr.mimeType || "audio/mp4" })); };
+      mr.stop();
+    })
+  };
+  CUR_REC = rec;
+  return rec;
+}
+function playUrl(url) {
+  return new Promise(res => { const a = new Audio(url); a.onended = a.onerror = res; a.play().catch(res); });
+}
+const playBlob = blob => playUrl(URL.createObjectURL(blob));
+
 function voicePanel(box) {
   if (box.innerHTML) { box.innerHTML = ""; return; }
   const all = enVoices();
@@ -103,6 +125,7 @@ const ROUTES = {};
 function fail(msg) { $("#view").innerHTML = `<div class="card"><p class="ko">${esc(msg)}</p></div>`; }
 function route() {
   stopAudio(); RUN++;
+  if (CUR_REC) CUR_REC.stop();
   const parts = (location.hash.slice(1) || "home").split("/");
   const name = ROUTES[parts[0]] ? parts[0] : "home";
   document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.r === name));

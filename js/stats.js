@@ -20,11 +20,20 @@ ROUTES.home = el => {
       <button class="go" id="start">${done ? "오늘 대화 다시 연습" : LS && !LS.practice ? "이어서 학습하기" : "오늘 학습 시작"}</button></div>
     <div class="card"><h3>${S.week}주차</h3><div class="wk">${cells}</div>
       <p class="muted">연속 ${streak()}일째 학습 중이고, 오늘 복습할 표현이 ${dueCount}개 있어요.</p></div>
+    ${missionCard()}${S.st.monthly && S.st.monthly[S.st.date.slice(0, 7)] ? "" : `<div class="card"><p class="ko">이번 달 기준 테스트를 아직 안 했어요</p>
+      <p class="muted">매달 같은 질문 3개에 답해 녹음해두면, 달마다 내 말하기가 어떻게 달라졌는지 직접 들을 수 있어요. 약 5분.</p><button id="mt">기준 테스트 하기</button></div>`}
     <div class="row"><button id="rv">🗂 지난 대화</button><button id="an">📈 분석</button></div>`;
+  if ($("#mt")) $("#mt").onclick = () => location.hash = "mtest";
   $("#start").onclick = () => { if (LS && LS.practice && !done) LS = null; location.hash = "learn"; };
   $("#rv").onclick = () => location.hash = "review";
   $("#an").onclick = () => location.hash = "stats";
 };
+
+function missionCard() {
+  const m = [...S.st.history].reverse().find(h => h.stats && h.stats.mission);
+  if (!m) return "";
+  return `<div class="card"><h3>🎯 실전 미션</h3><p class="ko">${esc(m.stats.mission)}</p><p class="muted">${m.date === S.st.date ? "내일까지" : "다음 학습 전까지"} 실제 대화나 혼잣말에서 한 번 써보세요.</p></div>`;
+}
 
 // ---------- 분석 계산 ----------
 function analyze() {
@@ -45,7 +54,9 @@ function analyze() {
   const last7 = H.slice(-7), r7 = { O: 0, T: 0, X: 0 };
   last7.forEach(h => Object.values(h.results || {}).forEach(r => r7[r]++));
   const x7 = pct(r7.X, r7.O + r7.T + r7.X);
-  return { H, res, totalR, listen1, listenN: listenH.length, items, mastered, risk, mins, alarms, hours, measures, x7 };
+  const mAns = H.filter(h => h.stats && typeof h.stats.missionPrev === "boolean");
+  const mission = { n: mAns.length, used: mAns.filter(h => h.stats.missionPrev).length };
+  return { H, res, totalR, listen1, listenN: listenH.length, items, mastered, risk, mins, alarms, hours, measures, x7, mission };
 }
 
 function diagnose(a) {
@@ -65,6 +76,10 @@ function diagnose(a) {
     const f = a.measures[0], l = a.measures[a.measures.length - 1];
     if (l.pauses < f.pauses) out.push(`60초 발화의 멈춤이 ${f.pauses}번에서 ${l.pauses}번으로 줄었어요.`);
     if (l.used > f.used) out.push(`60초 발화에서 쓴 표현이 ${f.used}개에서 ${l.used}개로 늘었어요.`);
+  }
+  if (a.mission.n >= 3) {
+    const r = pct(a.mission.used, a.mission.n);
+    out.push(r >= 60 ? `실전 미션을 ${r}% 실천했어요. 배운 표현이 실제 말로 옮겨지고 있어요.` : `실전 미션 실천률이 ${r}%예요. 혼잣말로라도 한 번 써보는 것만으로 기억이 훨씬 오래가요.`);
   }
   if (!out.length) out.push("아직 뚜렷한 약점 신호는 없어요. 지금 흐름을 유지하세요.");
   return out;
@@ -152,7 +167,11 @@ ROUTES.stats = el => {
   html += `<div class="card"><h3>학습 습관</h3>
     <p class="muted">${avgH === null ? "아직 기록이 없어요." : `평균 완료 시각은 ${Math.floor(avgH)}시 ${String(Math.round((avgH % 1) * 60)).padStart(2, "0")}분쯤이에요.`}</p>
     ${a.H.length ? ac.map((c, k) => meter(k === 0 ? "알림 전" : k < 4 ? `${k}번째 뒤` : "4번 이상", pct(c, a.H.length), "var(--now)")).join("") : ""}
-    <p class="muted">완료하기 전까지 받은 알림 수 기준이에요.</p></div>`;
+    <p class="muted">완료하기 전까지 받은 알림 수 기준이에요.</p>
+    ${a.mission.n ? meter("실전 미션", pct(a.mission.used, a.mission.n), "var(--o)") : ""}</div>`;
+  const df = difficulty();
+  html += `<div class="card"><h3>현재 난이도: ${df.lv}</h3><p class="muted">${esc(df.why)}</p></div>`;
+  html += monthlyCard();
 
   // 월간 요약 코드
   html += `<div class="card"><h3>월간 심층 분석</h3><p class="muted">한 달에 한 번 아래 코드를 복사해서 Claude에게 "월간 분석" 요청과 함께 붙여넣으세요. 다음 달 커리큘럼 조정에 써요.</p>
@@ -165,6 +184,7 @@ ROUTES.stats = el => {
     $("#pd").innerHTML = `<div class="card" style="background:var(--bg)"><p class="ko">${esc(c.en)}</p><p class="muted">${esc(c.ko)}${c.note ? `<br>${esc(c.note)}` : ""}<br>O ${it.o} / △ ${it.t} / X ${it.x}, 다음 복습 ${it.due}</p></div>`;
     speak(c.en, { who: "B" });
   });
+  bindMonthly();
   $("#cp").onclick = async () => {
     const code = JSON.stringify(monthlyCode(a));
     try { await navigator.clipboard.writeText(code); $("#cpm").textContent = "복사했어요."; }
@@ -181,3 +201,73 @@ function monthlyCode(a) {
     avgMin: Math.round(avg(a.mins)), avgAlarm: +avg(a.alarms).toFixed(1), mastered: a.mastered, seen: a.items.length,
     weak, measures: a.measures.slice(-5).map(m => [m.date, m.pauses, m.used, m.confidence]) };
 }
+
+// ---------- 월간 기준 테스트 ----------
+const MQ = [
+  { en: "Tell me about yourself.", ko: "자기소개를 해주세요." },
+  { en: "What did you do last weekend?", ko: "지난 주말에 뭐 했어요?" },
+  { en: "If you could change one thing about your daily life, what would it be and why?", ko: "일상에서 하나를 바꿀 수 있다면 무엇을, 왜 바꾸고 싶나요?" },
+];
+function monthlyCard() {
+  const M = S.st.monthly || {}, months = Object.keys(M).sort();
+  let h = `<div class="card"><h3>월간 기준 테스트</h3>`;
+  if (!months.length) return h + `<p class="muted">매달 같은 질문 3개에 60초씩 답하고 녹음해요. 첫 기록이 기준점이 돼요.</p><button class="go" id="mt2">첫 테스트 하기</button></div>`;
+  if (months.length >= 2) h += `<div class="brow"><span></span><em style="width:auto;flex:1;text-align:left">월별 멈춤 합계 → ${months.map(m => M[m].answers.reduce((a, x) => a + (x.pauses || 0), 0)).join(" → ")}</em></div>`;
+  h += MQ.map((q, i) => `<p class="muted" style="margin-bottom:4px">${i + 1}. ${esc(q.ko)}</p><div class="pills">${months.map(m =>
+    `<button class="pill" data-play="${m}-q${i + 1}">▶ ${m}</button>`).join("")}</div>`).join("");
+  if (!M[S.st.date.slice(0, 7)]) h += `<button class="go" id="mt2">이번 달 테스트 하기</button>`;
+  return h + `<p class="muted">같은 질문에 대한 지난달과 이번 달 내 목소리를 비교해 들어보세요.</p></div>`;
+}
+function bindMonthly() {
+  if ($("#mt2")) $("#mt2").onclick = () => location.hash = "mtest";
+  document.querySelectorAll("[data-play]").forEach(b => b.onclick = () => playUrl(`${API}/api/rec?k=${encodeURIComponent(KEY)}&id=${b.dataset.play}`));
+}
+ROUTES.mtest = el => {
+  const month = S.st.date.slice(0, 7), answers = []; let i = 0;
+  const show = () => {
+    if (i >= MQ.length) return save();
+    const q = MQ[i]; let blob = null, rec = null;
+    el.innerHTML = `<header><h1>${month} 기준 테스트</h1><h2>질문 ${i + 1} / ${MQ.length}</h2></header>
+      <div class="card"><p class="en" style="margin:0">${esc(q.en)}</p><p class="muted">${esc(q.ko)}</p><button id="hq">🔊 질문 듣기</button></div>
+      <div class="card"><p class="muted">녹음을 시작하고 60초 동안 답하세요. 완벽하지 않아도 멈추지 말고 계속 말하는 게 중요해요.</p>
+      <div class="timer" id="tm">60</div><button class="go" id="rc">🎙 녹음 시작</button><button id="pb" disabled>▶ 내 답 들어보기</button></div>
+      <div class="card"><label>3초 넘게 멈춘 횟수<input id="p" type="number" inputmode="numeric" min="0"></label>
+      <label>자신감 (1~5)</label><div class="row" id="cf">${[1, 2, 3, 4, 5].map(v => `<button data-v="${v}">${v}</button>`).join("")}</div></div>
+      <button class="go" id="nx" disabled>다음</button><p class="muted" id="msg"></p>`;
+    let conf = 0;
+    const check = () => { $("#nx").disabled = !(blob && conf && $("#p").value !== ""); };
+    $("#hq").onclick = () => speak(q.en, { who: "A" });
+    $("#p").oninput = check;
+    el.querySelectorAll("#cf button").forEach(b => b.onclick = () => { conf = +b.dataset.v; el.querySelectorAll("#cf button").forEach(x => x.classList.toggle("go", x === b)); check(); });
+    $("#pb").onclick = () => blob && playBlob(blob);
+    const stop = async () => { if (!rec) return; const r = rec; rec = null; blob = await r.stop(); $("#rc").textContent = "🎙 다시 녹음"; $("#pb").disabled = !blob; check(); };
+    $("#rc").onclick = async () => {
+      if (rec) return stop();
+      try { stopAudio(); rec = await recStart(); } catch (e) { $("#msg").textContent = "마이크 권한이 필요해요. 설정에서 허용해주세요."; return; }
+      $("#rc").textContent = "⏹ 녹음 멈추기";
+      const r = RUN, me = rec;
+      for (let s = 60; s > 0; s--) { if (r !== RUN || rec !== me) return; $("#tm").textContent = s; await sleep(1000); }
+      if (rec === me) { $("#tm").textContent = "0"; stop(); }
+    };
+    $("#nx").onclick = () => { answers.push({ q: q.en, id: `${month}-q${i + 1}`, blob, pauses: +$("#p").value, confidence: conf }); i++; show(); };
+  };
+  const save = async () => {
+    el.innerHTML = `<div class="card"><p class="ko">저장하는 중…</p><p class="muted" id="msg"></p></div>`;
+    try {
+      for (const a of answers) {
+        const r = await fetch(`${API}/api/rec?k=${encodeURIComponent(KEY)}&id=${a.id}`, { method: "POST", headers: { "Content-Type": a.blob.type || "audio/mp4" }, body: a.blob });
+        if (!r.ok) throw new Error("녹음 " + r.status);
+      }
+      const r = await fetch(`${API}/api/monthly?k=${encodeURIComponent(KEY)}`, { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ month, answers: answers.map(({ blob, ...x }) => x) }) });
+      if (!r.ok) throw new Error(r.status);
+      await loadAll();
+      el.innerHTML = `<div class="card"><p class="ko">이번 달 기준 테스트 저장 완료</p><p class="muted">다음 달에 같은 질문으로 다시 녹음하면, 분석 탭에서 두 달의 목소리를 비교해 들을 수 있어요.</p></div><button class="go" id="h">분석 보기</button>`;
+      $("#h").onclick = () => location.hash = "stats";
+    } catch (e) {
+      el.innerHTML = `<div class="card"><p class="ko">저장하지 못했어요</p><p class="muted">${esc(e.message)}. 알림 서버를 최신 코드로 바꿨는지 확인하세요.</p></div><button class="go" id="re">다시 저장</button>`;
+      $("#re").onclick = save;
+    }
+  };
+  show();
+};
