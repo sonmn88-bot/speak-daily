@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Speak Daily">
+<title>Speak Daily</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--bg:#F2F4F7;--card:#FFFFFF;--ink:#17212F;--sub:#5B6676;--line:#2E8B57;--now:#F0A500;--o:#2E8B57;--t:#E0A100;--x:#D64545;--rule:#D9DEE5;
+  font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;color:var(--ink);background:var(--bg);
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#10151D;--card:#1A212C;--ink:#E8ECF1;--sub:#9AA5B4;--rule:#2A3340}}
+*{box-sizing:inherit}
+body{margin:0;background:var(--bg)}
+main{max-width:560px;margin:0 auto;padding:16px 18px 48px}
+header h1{font-size:14px;font-weight:600;color:var(--sub);margin:4px 0 2px}
+header h2{font-size:24px;font-weight:800;margin:0 0 14px;letter-spacing:-.01em}
+.map{display:flex;align-items:flex-start;margin:6px 0 20px}
+.st{flex:1;text-align:center;font-size:11px;color:var(--sub);position:relative}
+.st::before{content:"";position:absolute;top:8px;left:-50%;width:100%;height:4px;background:var(--rule)}
+.st:first-child::before{display:none}
+.st.pass::before,.st.cur::before{background:var(--line)}
+.st i{display:block;width:20px;height:20px;margin:0 auto 6px;border-radius:50%;background:var(--card);border:4px solid var(--rule);position:relative;z-index:1}
+.st.pass i{border-color:var(--line);background:var(--line)}
+.st.cur i{border-color:var(--now)}
+.st.cur{color:var(--ink);font-weight:700}
+.card{background:var(--card);border-radius:14px;padding:18px;margin-bottom:14px}
+.ko{font-size:19px;font-weight:700;line-height:1.5;margin:0}
+.en{font-size:19px;line-height:1.5;margin-top:8px}
+.muted{color:var(--sub);font-size:14px;line-height:1.6}
+.sp{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:2px}
+button{font:inherit;border:0;border-radius:12px;padding:14px 16px;font-size:16px;font-weight:700;cursor:pointer;width:100%;margin-top:10px;background:var(--rule);color:var(--ink)}
+button.go{background:var(--ink);color:var(--bg)}
+button:disabled{opacity:.35}
+button:focus-visible{outline:3px solid var(--now);outline-offset:2px}
+.row{display:flex;gap:8px}.row button{flex:1;padding:14px 6px}
+.bO{background:var(--o);color:#fff}.bT{background:var(--t);color:#1a1a1a}.bX{background:var(--x);color:#fff}
+.line{padding:10px 12px;border-radius:10px;margin:4px 0}
+.line.on{background:color-mix(in srgb,var(--now) 22%,transparent)}
+.opt{text-align:left;font-weight:500;background:var(--bg)}
+.opt.wrong{background:color-mix(in srgb,var(--x) 25%,transparent)}
+.timer{font-size:64px;font-weight:800;text-align:center;font-variant-numeric:tabular-nums;margin:8px 0}
+.count{font-size:13px;color:var(--sub);text-align:right;margin-bottom:6px}
+label{display:block;margin-top:14px;font-weight:600}
+input{font:inherit;font-size:18px;width:100%;padding:12px;border-radius:10px;border:2px solid var(--rule);background:var(--bg);color:var(--ink);margin-top:6px}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main id="app"><p class="muted">불러오는 중…</p></main>
+<script>
+const API = "https://speak-daily.sonmn88.workers.dev";
+const $ = s => document.querySelector(s);
+const app = $("#app");
+const qs = new URLSearchParams(location.search);
+let KEY = qs.get("k");
+try { if (KEY) localStorage.setItem("sd_k", KEY); else KEY = localStorage.getItem("sd_k"); } catch (e) {}
+
+const S = { results: {}, stats: { start: Date.now(), listenTries: 0 }, measure: null, step: 0, steps: [], practice: qs.has("again") };
+const RANK = { O: 0, T: 1, X: 2 };
+let RUN = 0;
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const nextLabel = () => (S.steps[S.step + 1] || [""])[0];
+function mark(ids, r) { for (const id of ids || []) { const p = S.results[id]; if (!p || RANK[r] > RANK[p]) S.results[id] = r; } }
+
+// ---------- 음성 ----------
+let VA = null, VB = null;
+function pickVoices() {
+  const v = speechSynthesis.getVoices().filter(x => /^en/i.test(x.lang));
+  const us = v.filter(x => /en-US/i.test(x.lang));
+  const pool = us.length ? us : v;
+  VA = pool[0] || null; VB = pool.find(x => x !== VA) || VA;
+}
+if ("speechSynthesis" in window) { pickVoices(); speechSynthesis.onvoiceschanged = pickVoices; }
+function speak(text, { rate = 1, who = "A" } = {}) {
+  return new Promise(res => {
+    if (!("speechSynthesis" in window)) return res();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US"; u.rate = rate;
+    const v = who === "B" ? VB : VA; if (v) u.voice = v;
+    const t = setTimeout(res, 2000 + text.split(" ").length * 700 / rate); // iOS에서 onend 누락 대비
+    u.onend = u.onerror = () => { clearTimeout(t); res(); };
+    speechSynthesis.speak(u);
+  });
+}
+const stopAudio = () => { try { speechSynthesis.cancel(); } catch (e) {} };
+
+// ---------- 시작 ----------
+function fail(msg) { app.innerHTML = `<div class="card"><p class="ko">${esc(msg)}</p></div>`; }
+
+async function boot() {
+  if (!KEY) return fail("카톡 알림의 버튼으로 한 번 열어주세요. 처음 한 번 열면 이 기기에 접속 정보가 저장돼요.");
+  let st;
+  try {
+    const r = await fetch(`${API}/api/state?k=${encodeURIComponent(KEY)}`);
+    if (!r.ok) throw new Error(r.status);
+    st = await r.json();
+  } catch (e) { return fail(`서버에 연결하지 못했어요. 네트워크를 확인하고 새로고침하세요. (${e.message})`); }
+  S.st = st; S.n = st.n; S.week = Math.ceil(st.n / 7); S.dw = ((st.n - 1) % 7) + 1;
+  S.monthly = S.week % 4 === 0 && S.dw >= 6;
+
+  S.chunks = {}; S.cast = {};
+  for (let w = 1; w <= S.week; w++) {
+    try {
+      const r = await fetch(`content/w${String(w).padStart(2, "0")}.json`, { cache: "no-cache" });
+      if (!r.ok) continue;
+      const d = await r.json();
+      for (const dd of d.days) for (const c of dd.chunks || []) S.chunks[c.id] = c;
+      if (w === S.week) { S.theme = d.theme; S.cast = d.cast || {}; S.day = d.days.find(x => x.day === S.dw); }
+    } catch (e) {}
+  }
+  if (st.today && st.today.done && !S.practice) return doneScreen(true);
+  if (!S.day) return fail(`${S.week}주차 ${S.dw}일 콘텐츠가 아직 올라오지 않았어요.`);
+
+  // 복습 대상: 복습일이 된 표현 (월간 총복습엔 졸업 표현 포함)
+  const srs = st.srs || {};
+  const cap = S.day.type !== "learn" || S.monthly ? 20 : 8;
+  S.due = Object.entries(srs)
+    .filter(([id, it]) => it.due <= st.date && (!it.grad || S.monthly) && S.chunks[id])
+    .sort((a, b) => (a[1].due < b[1].due ? -1 : 1)).map(([id]) => S.chunks[id]).slice(0, cap);
+  if (S.day.type !== "learn" && S.due.length < cap) {
+    const have = new Set(S.due.map(c => c.id));
+    const extra = Object.values(S.chunks).filter(c => !have.has(c.id) && srs[c.id])
+      .sort((a, b) => srs[a.id].level - srs[b.id].level);
+    S.due = S.due.concat(extra.slice(0, cap - S.due.length));
+  }
+
+  if (S.due.length) S.steps.push(["워밍업", warmup]);
+  if (S.day.lines && S.day.lines.length) S.steps.push(["듣기", listen], ["섀도잉", shadow], ["인출", recall]);
+  if (S.day.improv && S.day.improv.length) S.steps.push(["즉흥", improv]);
+  if (S.day.type === "review_cum" || (S.monthly && S.dw === 7)) S.steps.push(["측정", measure]);
+  S.steps.push(["완료", finish]);
+  render();
+}
+
+function render() {
+  stopAudio(); RUN++;
+  const [, fn] = S.steps[S.step];
+  app.innerHTML = `<header><h1>D+${S.n} ${esc(S.theme || "")}${S.practice ? " (연습 모드)" : ""}</h1><h2>${esc(S.day.title)}</h2></header>
+    <nav class="map" aria-label="오늘 진행">${S.steps.map(([t], i) => `<div class="st ${i < S.step ? "pass" : i === S.step ? "cur" : ""}"><i></i>${t}</div>`).join("")}</nav>
+    <section id="stage"></section>`;
+  fn($("#stage"));
+  window.scrollTo(0, 0);
+}
+const next = () => { S.step++; render(); };
+const who = sp => (sp === "A" ? (S.cast.A && S.cast.A.name) || "A" : "나");
+
+// ---------- 한국어 → 영어 인출 카드 (워밍업·인출 공용) ----------
+function drill(el, items, onDone) {
+  let i = 0;
+  const show = () => {
+    const it = items[i];
+    el.innerHTML = `<div class="card"><div class="count">${i + 1} / ${items.length}</div>
+      ${it.ctx ? `<p class="muted">${esc(it.ctx)}</p>` : ""}<p class="ko">${esc(it.ko)}</p><div id="ans"></div></div>
+      <p class="muted">영어로 소리 내 말한 다음 정답을 확인하세요.</p><div id="ctl"><button class="go" id="reveal">정답 보기</button></div>`;
+    $("#reveal").onclick = () => {
+      $("#ans").innerHTML = `<div class="en">${esc(it.en)}</div>`;
+      speak(it.en, { who: "B" });
+      $("#ctl").innerHTML = `<button id="again">🔊 다시 듣기</button>
+        <div class="row"><button class="bO" data-r="O">O 바로 말함</button><button class="bT" data-r="T">△ 더듬음</button><button class="bX" data-r="X">X 못 함</button></div>`;
+      $("#again").onclick = () => speak(it.en, { who: "B" });
+      el.querySelectorAll("[data-r]").forEach(b => b.onclick = () => { mark(it.ids, b.dataset.r); i++; i < items.length ? show() : onDone(); });
+    };
+  };
+  show();
+}
+
+function warmup(el) { drill(el, S.due.map(c => ({ ko: c.ko, en: c.en, ids: [c.id] })), next); }
+
+function recall(el) {
+  const L = S.day.lines, items = [];
+  L.forEach((l, i) => { if (l.sp === "B") items.push({ ko: l.ko, en: l.en, ids: l.chunks, ctx: i > 0 ? `${who("A")}: ${L[i - 1].en}` : "" }); });
+  drill(el, items, next);
+}
+
+// ---------- 듣기 ----------
+async function playAll(rate, onLine) {
+  const r = RUN;
+  for (let i = 0; i < S.day.lines.length; i++) {
+    if (r !== RUN) return;
+    const l = S.day.lines[i]; onLine && onLine(i);
+    await speak(l.en, { rate, who: l.sp }); await sleep(250);
+  }
+}
+function listen(el) {
+  const d = S.day; let asked = false;
+  el.innerHTML = `<div class="card"><p class="muted">${esc(d.context_ko)}</p><p class="muted">자막 없이 끝까지 들어보세요.</p>
+    <button class="go" id="play">▶ 대화 듣기</button><div id="q"></div></div>`;
+  $("#play").onclick = async () => {
+    const b = $("#play"); b.disabled = true; await playAll(1);
+    if (!$("#play")) return; b.disabled = false; b.textContent = "▶ 다시 듣기";
+    if (!asked) { asked = true; showQ(); }
+  };
+  function showQ() {
+    const q = d.listen_q;
+    $("#q").innerHTML = `<p class="ko" style="margin-top:18px">${esc(q.q)}</p>${q.options.map((o, i) => `<button class="opt" data-i="${i}">${esc(o)}</button>`).join("")}<p class="muted" id="fb"></p>`;
+    $("#q").querySelectorAll(".opt").forEach(b => b.onclick = () => {
+      S.stats.listenTries++;
+      if (+b.dataset.i === q.answer) {
+        $("#q").innerHTML = `<p class="ko" style="margin-top:18px">정답이에요.</p>${d.pragmatic ? `<p class="muted">💡 ${esc(d.pragmatic)}</p>` : ""}<button class="go" id="nx">다음: ${nextLabel()}</button>`;
+        $("#nx").onclick = next;
+      } else { b.classList.add("wrong"); b.disabled = true; $("#fb").textContent = "다시 들어보고 골라보세요."; }
+    });
+  }
+}
+
+// ---------- 섀도잉 ----------
+function shadow(el) {
+  const L = S.day.lines, rates = [0.8, 1]; let pass = 0;
+  el.innerHTML = `<div class="card"><p class="muted">한 줄 듣고, 멈추는 동안 똑같이 따라 말하세요. 0.8배 한 번, 1.0배 한 번 진행해요.</p>
+    ${L.map((l, i) => `<div class="line" id="l${i}"><div class="sp">${esc(who(l.sp))}</div><div>${esc(l.en)}</div><div class="muted">${esc(l.ko)}</div></div>`).join("")}</div>
+    <button class="go" id="go">▶ 0.8배로 시작</button>`;
+  const b = $("#go");
+  b.onclick = async () => {
+    if (pass >= 2) return next();
+    const r = RUN; b.disabled = true;
+    for (let i = 0; i < L.length; i++) {
+      if (r !== RUN) return;
+      el.querySelectorAll(".line").forEach(x => x.classList.remove("on"));
+      const le = $("#l" + i); le.classList.add("on"); le.scrollIntoView({ block: "center", behavior: "smooth" });
+      const t0 = Date.now();
+      await speak(L[i].en, { rate: rates[pass], who: L[i].sp });
+      await sleep(Math.max(1200, (Date.now() - t0) * 1.1 + 500)); // 따라 말할 시간
+    }
+    if (r !== RUN) return;
+    pass++; b.disabled = false;
+    b.textContent = pass < 2 ? "▶ 1.0배로 시작" : `다음: ${nextLabel()}`;
+  };
+}
+
+// ---------- 즉흥 ----------
+function countdown(sec, el) {
+  const r = RUN;
+  return new Promise(async res => {
+    for (let s = sec; s > 0; s--) { if (r !== RUN) return; el.textContent = s; await sleep(1000); }
+    el.textContent = "0"; res();
+  });
+}
+function improv(el) {
+  const it = S.day.improv[0], rounds = [90, 60, 45]; let k = 0;
+  el.innerHTML = `<div class="card"><p class="ko">${esc(it.situation_ko)}</p><p class="en">“${esc(it.starter_en)}”</p><button id="hear">🔊 상대 말 듣기</button></div>
+    <div class="card"><p class="muted">같은 내용을 점점 짧은 시간 안에 말해요. 막혀도 멈추지 말고 아는 표현으로 돌려 말하세요.</p>
+    <div class="timer" id="tm">${rounds[0]}</div><button class="go" id="go">▶ ${rounds[0]}초 시작</button></div>`;
+  $("#hear").onclick = () => speak(it.starter_en, { who: "A" });
+  const b = $("#go");
+  b.onclick = async () => {
+    if (k >= rounds.length) return next();
+    b.disabled = true; await countdown(rounds[k], $("#tm"));
+    if (!$("#go")) return;
+    k++; b.disabled = false;
+    if (k < rounds.length) { b.textContent = `▶ ${rounds[k]}초 시작`; $("#tm").textContent = rounds[k]; }
+    else b.textContent = `다음: ${nextLabel()}`;
+  };
+}
+
+// ---------- 60초 측정 ----------
+function measure(el) {
+  let conf = 0;
+  el.innerHTML = `<div class="card"><p class="ko">60초 자유 발화</p>
+    <p class="muted">이번 주에 있었던 일을 배운 표현을 최대한 넣어 60초 동안 말하세요. 폰 음성 메모로 녹음해두면 나중에 비교할 수 있어요.</p>
+    <div class="timer" id="tm">60</div><button class="go" id="go">▶ 60초 시작</button></div>
+    <div class="card"><label>3초 넘게 멈춘 횟수<input id="p" type="number" inputmode="numeric" min="0"></label>
+    <label>이번 주 표현을 쓴 개수<input id="u" type="number" inputmode="numeric" min="0"></label>
+    <label>자신감 (1~5)</label><div class="row" id="cf">${[1, 2, 3, 4, 5].map(v => `<button data-v="${v}">${v}</button>`).join("")}</div></div>
+    <button class="go" id="sv" disabled>기록하고 다음으로</button>`;
+  $("#go").onclick = async () => { $("#go").disabled = true; await countdown(60, $("#tm")); if ($("#go")) $("#go").disabled = false; };
+  const check = () => { $("#sv").disabled = !(conf && $("#p").value !== "" && $("#u").value !== ""); };
+  $("#p").oninput = $("#u").oninput = check;
+  el.querySelectorAll("#cf button").forEach(b => b.onclick = () => {
+    conf = +b.dataset.v; el.querySelectorAll("#cf button").forEach(x => x.classList.toggle("go", x === b)); check();
+  });
+  $("#sv").onclick = () => { S.measure = { pauses: +$("#p").value, used: +$("#u").value, confidence: conf }; next(); };
+}
+
+// ---------- 완료 ----------
+function finish(el) {
+  const t = { O: 0, T: 0, X: 0 }; Object.values(S.results).forEach(r => t[r]++);
+  if (S.practice) {
+    el.innerHTML = `<div class="card"><p class="ko">연습 끝</p><p class="muted">연습 모드는 기록을 저장하지 않아요. O ${t.O} / △ ${t.T} / X ${t.X}</p></div>`;
+    return;
+  }
+  el.innerHTML = `<div class="card"><p class="ko">기록을 저장하면 오늘 알림이 멈춰요.</p><p class="muted">O ${t.O} / △ ${t.T} / X ${t.X}</p></div>
+    <button class="go" id="sv">오늘 학습 완료</button><p class="muted" id="msg"></p>`;
+  $("#sv").onclick = async () => {
+    const b = $("#sv"); b.disabled = true; $("#msg").textContent = "저장하는 중…";
+    try {
+      const r = await fetch(`${API}/api/complete?k=${encodeURIComponent(KEY)}`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ results: S.results, measure: S.measure,
+          stats: { ...S.stats, type: S.day.type, minutes: Math.round((Date.now() - S.stats.start) / 60000) } })
+      });
+      if (!r.ok) throw new Error(r.status);
+      (S.st.history = S.st.history || []).push({ date: S.st.date });
+      doneScreen(false);
+    } catch (e) { b.disabled = false; $("#msg").textContent = `저장하지 못했어요. 연결을 확인하고 다시 누르세요. (${e.message})`; }
+  };
+}
+function streak() {
+  const ds = new Set((S.st.history || []).map(h => h.date)); let c = 0, d = Date.parse(S.st.date);
+  while (ds.has(new Date(d).toISOString().slice(0, 10))) { c++; d -= 86400000; }
+  return c;
+}
+function doneScreen(already) {
+  stopAudio();
+  app.innerHTML = `<header><h1>D+${S.n}</h1><h2>${already ? "오늘 학습은 이미 끝났어요" : "오늘 학습 완료"}</h2></header>
+    <div class="card"><p class="ko">연속 ${streak()}일째</p><p class="muted">오늘 알림은 더 오지 않아요. 내일 아침 8시에 다음 과제가 도착해요.</p></div>
+    ${already ? `<button id="ag">한 번 더 연습하기 (기록은 저장 안 됨)</button>` : ""}`;
+  if (already) $("#ag").onclick = () => { qs.set("again", "1"); location.search = qs.toString(); };
+}
+
+boot();
+</script>
+</body>
+</html>
