@@ -1,0 +1,50 @@
+{
+  "week": 1,
+  "theme": "반응 표현",
+  "cast": {
+    "A": { "name": "Mia", "desc": "동네 단골 카페에서 알게 된 캐나다 출신 디자이너. 서울 3년 차." }
+  },
+  "days": [
+    {
+      "day": 1,
+      "type": "learn",
+      "title": "맞장구로 대화 살리기",
+      "context_ko": "단골 카페에서 커피를 기다리다 한동안 못 본 Mia를 만났어요. Mia 표정이 유난히 밝아요.",
+      "listen_q": {
+        "q": "Mia가 기분이 좋은 이유는?",
+        "options": ["이사를 해서", "원하던 회사에 붙어서", "휴가를 떠나서", "커피 쿠폰을 받아서"],
+        "answer": 1
+      },
+      "lines": [
+        { "sp": "A", "en": "Hey! Long time no see. How've you been?", "ko": "어머! 오랜만이에요. 어떻게 지냈어요?" },
+        { "sp": "B", "en": "Pretty good, thanks. You look really happy today.", "ko": "잘 지냈죠, 고마워요. 오늘 되게 기분 좋아 보이네요.", "chunks": [] },
+        { "sp": "A", "en": "I am! I finally got the job at that design studio.", "ko": "맞아요! 드디어 그 디자인 스튜디오에 붙었어요." },
+        { "sp": "B", "en": "No way! Good for you!", "ko": "말도 안 돼! 잘됐다!", "chunks": ["w1c02", "w1c05"] },
+        { "sp": "A", "en": "Thanks! I start next Monday.", "ko": "고마워요! 다음 주 월요일부터 출근해요." },
+        { "sp": "B", "en": "Really? That soon?", "ko": "진짜요? 그렇게 빨리요?", "chunks": ["w1c01"] },
+        { "sp": "A", "en": "Yeah. They said the team is really short on people.", "ko": "네. 팀에 사람이 많이 부족하대요." },
+        { "sp": "B", "en": "That makes sense. Everyone's hiring before the year ends.", "ko": "그럴 만하네요. 연말 전에 다들 사람 뽑잖아요.", "chunks": ["w1c03"] },
+        { "sp": "A", "en": "And the best part is, it's a ten-minute walk from my place.", "ko": "제일 좋은 건, 집에서 걸어서 10분이라는 거예요." },
+        { "sp": "B", "en": "So no more crowded subway for you.", "ko": "그럼 이제 지옥철 안 타도 되겠네요.", "chunks": [] },
+        { "sp": "A", "en": "Exactly. Line 2 at eight in the morning is the worst.", "ko": "바로 그거예요. 아침 8시 2호선은 최악이에요." },
+        { "sp": "B", "en": "I know, right? I can barely breathe in there.", "ko": "그러니까요! 안에서 숨도 제대로 못 쉬어요.", "chunks": ["w1c04"] },
+        { "sp": "A", "en": "Let's celebrate this week. Coffee's on me!", "ko": "이번 주에 축하해요. 커피는 제가 살게요!" },
+        { "sp": "B", "en": "Sounds great. Congrats again, Mia.", "ko": "좋아요. 다시 한번 축하해요, Mia.", "chunks": [] }
+      ],
+      "chunks": [
+        { "id": "w1c01", "en": "Really?", "ko": "진짜?", "note": "끝을 올리면 놀람, 내리면 시큰둥하게 들려요." },
+        { "id": "w1c02", "en": "No way!", "ko": "말도 안 돼!", "note": "좋은 소식에도 써요. 밝게 올려 말하면 놀라움, 낮게 말하면 거절처럼 들려요." },
+        { "id": "w1c03", "en": "That makes sense.", "ko": "그럴 만하네 / 이해돼요", "note": "상대 설명을 이해했다는 신호. 대화를 부드럽게 이어줘요." },
+        { "id": "w1c04", "en": "I know, right?", "ko": "그러니까! / 내 말이!", "note": "상대 의견에 강하게 공감할 때. 친한 사이에서 써요." },
+        { "id": "w1c05", "en": "Good for you!", "ko": "잘됐다!", "note": "상대의 좋은 소식을 축하할 때. 비꼬는 톤이면 반대 뜻이 되니 밝게 말하세요." }
+      ],
+      "pragmatic": "영어 대화에서는 맞장구를 안 하면 관심 없다는 신호로 받아들여요. 상대가 말을 멈추면 짧게라도 꼭 반응하세요.",
+      "improv": [
+        {
+          "situation_ko": "친구가 다음 달에 일본 여행을 간다고 신나서 말해요. 오늘 표현을 3개 이상 써서 반응하고, 질문을 하나 이어가세요.",
+          "starter_en": "Guess what? I'm going to Japan next month!"
+        }
+      ]
+    }
+  ]
+}
