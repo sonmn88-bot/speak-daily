@@ -1,50 +1,898 @@
 {
-  "week": 1,
-  "theme": "반응 표현",
-  "cast": {
-    "A": { "name": "Mia", "desc": "동네 단골 카페에서 알게 된 캐나다 출신 디자이너. 서울 3년 차." }
-  },
-  "days": [
+ "week": 1,
+ "theme": "반응 표현",
+ "cast": {
+  "A": {
+   "name": "Mia",
+   "desc": "동네 단골 카페에서 알게 된 캐나다 출신 디자이너. 서울 3년 차."
+  }
+ },
+ "days": [
+  {
+   "day": 1,
+   "type": "learn",
+   "title": "맞장구로 대화 살리기",
+   "context_ko": "단골 카페에서 커피를 기다리다 한동안 못 본 Mia를 만났어요. Mia 표정이 유난히 밝아요.",
+   "listen_q": {
+    "q": "Mia가 기분이 좋은 이유는?",
+    "options": [
+     "이사를 해서",
+     "원하던 회사에 붙어서",
+     "휴가를 떠나서",
+     "커피 쿠폰을 받아서"
+    ],
+    "answer": 1
+   },
+   "lines": [
     {
-      "day": 1,
-      "type": "learn",
-      "title": "맞장구로 대화 살리기",
-      "context_ko": "단골 카페에서 커피를 기다리다 한동안 못 본 Mia를 만났어요. Mia 표정이 유난히 밝아요.",
-      "listen_q": {
-        "q": "Mia가 기분이 좋은 이유는?",
-        "options": ["이사를 해서", "원하던 회사에 붙어서", "휴가를 떠나서", "커피 쿠폰을 받아서"],
-        "answer": 1
-      },
-      "lines": [
-        { "sp": "A", "en": "Hey! Long time no see. How've you been?", "ko": "어머! 오랜만이에요. 어떻게 지냈어요?" },
-        { "sp": "B", "en": "Pretty good, thanks. You look really happy today.", "ko": "잘 지냈죠, 고마워요. 오늘 되게 기분 좋아 보이네요.", "chunks": [] },
-        { "sp": "A", "en": "I am! I finally got the job at that design studio.", "ko": "맞아요! 드디어 그 디자인 스튜디오에 붙었어요." },
-        { "sp": "B", "en": "No way! Good for you!", "ko": "말도 안 돼! 잘됐다!", "chunks": ["w1c02", "w1c05"] },
-        { "sp": "A", "en": "Thanks! I start next Monday.", "ko": "고마워요! 다음 주 월요일부터 출근해요." },
-        { "sp": "B", "en": "Really? That soon?", "ko": "진짜요? 그렇게 빨리요?", "chunks": ["w1c01"] },
-        { "sp": "A", "en": "Yeah. They said the team is really short on people.", "ko": "네. 팀에 사람이 많이 부족하대요." },
-        { "sp": "B", "en": "That makes sense. Everyone's hiring before the year ends.", "ko": "그럴 만하네요. 연말 전에 다들 사람 뽑잖아요.", "chunks": ["w1c03"] },
-        { "sp": "A", "en": "And the best part is, it's a ten-minute walk from my place.", "ko": "제일 좋은 건, 집에서 걸어서 10분이라는 거예요." },
-        { "sp": "B", "en": "So no more crowded subway for you.", "ko": "그럼 이제 지옥철 안 타도 되겠네요.", "chunks": [] },
-        { "sp": "A", "en": "Exactly. Line 2 at eight in the morning is the worst.", "ko": "바로 그거예요. 아침 8시 2호선은 최악이에요." },
-        { "sp": "B", "en": "I know, right? I can barely breathe in there.", "ko": "그러니까요! 안에서 숨도 제대로 못 쉬어요.", "chunks": ["w1c04"] },
-        { "sp": "A", "en": "Let's celebrate this week. Coffee's on me!", "ko": "이번 주에 축하해요. 커피는 제가 살게요!" },
-        { "sp": "B", "en": "Sounds great. Congrats again, Mia.", "ko": "좋아요. 다시 한번 축하해요, Mia.", "chunks": [] }
-      ],
-      "chunks": [
-        { "id": "w1c01", "en": "Really?", "ko": "진짜?", "note": "끝을 올리면 놀람, 내리면 시큰둥하게 들려요." },
-        { "id": "w1c02", "en": "No way!", "ko": "말도 안 돼!", "note": "좋은 소식에도 써요. 밝게 올려 말하면 놀라움, 낮게 말하면 거절처럼 들려요." },
-        { "id": "w1c03", "en": "That makes sense.", "ko": "그럴 만하네 / 이해돼요", "note": "상대 설명을 이해했다는 신호. 대화를 부드럽게 이어줘요." },
-        { "id": "w1c04", "en": "I know, right?", "ko": "그러니까! / 내 말이!", "note": "상대 의견에 강하게 공감할 때. 친한 사이에서 써요." },
-        { "id": "w1c05", "en": "Good for you!", "ko": "잘됐다!", "note": "상대의 좋은 소식을 축하할 때. 비꼬는 톤이면 반대 뜻이 되니 밝게 말하세요." }
-      ],
-      "pragmatic": "영어 대화에서는 맞장구를 안 하면 관심 없다는 신호로 받아들여요. 상대가 말을 멈추면 짧게라도 꼭 반응하세요.",
-      "improv": [
-        {
-          "situation_ko": "친구가 다음 달에 일본 여행을 간다고 신나서 말해요. 오늘 표현을 3개 이상 써서 반응하고, 질문을 하나 이어가세요.",
-          "starter_en": "Guess what? I'm going to Japan next month!"
-        }
-      ]
+     "sp": "A",
+     "en": "Hey! Long time no see. How've you been?",
+     "ko": "어머! 오랜만이에요. 어떻게 지냈어요?"
+    },
+    {
+     "sp": "B",
+     "en": "Pretty good, thanks. You look really happy today.",
+     "ko": "잘 지냈죠, 고마워요. 오늘 되게 기분 좋아 보이네요.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "I am! I finally got the job at that design studio.",
+     "ko": "맞아요! 드디어 그 디자인 스튜디오에 붙었어요."
+    },
+    {
+     "sp": "B",
+     "en": "No way! Good for you!",
+     "ko": "말도 안 돼! 잘됐다!",
+     "chunks": [
+      "w1c02",
+      "w1c05"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Thanks! I start next Monday.",
+     "ko": "고마워요! 다음 주 월요일부터 출근해요."
+    },
+    {
+     "sp": "B",
+     "en": "Really? That soon?",
+     "ko": "진짜요? 그렇게 빨리요?",
+     "chunks": [
+      "w1c01"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Yeah. They said the team is really short on people.",
+     "ko": "네. 팀에 사람이 많이 부족하대요."
+    },
+    {
+     "sp": "B",
+     "en": "That makes sense. Everyone's hiring before the year ends.",
+     "ko": "그럴 만하네요. 연말 전에 다들 사람 뽑잖아요.",
+     "chunks": [
+      "w1c03"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "And the best part is, it's a ten-minute walk from my place.",
+     "ko": "제일 좋은 건, 집에서 걸어서 10분이라는 거예요."
+    },
+    {
+     "sp": "B",
+     "en": "So no more crowded subway for you.",
+     "ko": "그럼 이제 지옥철 안 타도 되겠네요.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "Exactly. Line 2 at eight in the morning is the worst.",
+     "ko": "바로 그거예요. 아침 8시 2호선은 최악이에요."
+    },
+    {
+     "sp": "B",
+     "en": "I know, right? I can barely breathe in there.",
+     "ko": "그러니까요! 안에서 숨도 제대로 못 쉬어요.",
+     "chunks": [
+      "w1c04"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Let's celebrate this week. Coffee's on me!",
+     "ko": "이번 주에 축하해요. 커피는 제가 살게요!"
+    },
+    {
+     "sp": "B",
+     "en": "Sounds great. Congrats again, Mia.",
+     "ko": "좋아요. 다시 한번 축하해요, Mia.",
+     "chunks": []
     }
-  ]
+   ],
+   "chunks": [
+    {
+     "id": "w1c01",
+     "en": "Really?",
+     "ko": "진짜?",
+     "note": "끝을 올리면 놀람, 내리면 시큰둥하게 들려요."
+    },
+    {
+     "id": "w1c02",
+     "en": "No way!",
+     "ko": "말도 안 돼!",
+     "note": "좋은 소식에도 써요. 밝게 올려 말하면 놀라움, 낮게 말하면 거절처럼 들려요."
+    },
+    {
+     "id": "w1c03",
+     "en": "That makes sense.",
+     "ko": "그럴 만하네 / 이해돼요",
+     "note": "상대 설명을 이해했다는 신호. 대화를 부드럽게 이어줘요."
+    },
+    {
+     "id": "w1c04",
+     "en": "I know, right?",
+     "ko": "그러니까! / 내 말이!",
+     "note": "상대 의견에 강하게 공감할 때. 친한 사이에서 써요."
+    },
+    {
+     "id": "w1c05",
+     "en": "Good for you!",
+     "ko": "잘됐다!",
+     "note": "상대의 좋은 소식을 축하할 때. 비꼬는 톤이면 반대 뜻이 되니 밝게 말하세요."
+    }
+   ],
+   "pragmatic": "영어 대화에서는 맞장구를 안 하면 관심 없다는 신호로 받아들여요. 상대가 말을 멈추면 짧게라도 꼭 반응하세요.",
+   "improv": [
+    {
+     "situation_ko": "친구가 다음 달에 일본 여행을 간다고 신나서 말해요. 오늘 표현을 3개 이상 써서 반응하고, 질문을 하나 이어가세요.",
+     "starter_en": "Guess what? I'm going to Japan next month!"
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "type": "learn",
+   "title": "되묻기로 끝까지 알아듣기",
+   "context_ko": "퇴근길, 시끄러운 거리에서 Mia에게 전화가 왔어요. 새 회사 첫 출근을 마친 참이래요.",
+   "listen_q": {
+    "q": "Mia의 매니저는 어떤 사람인가요?",
+    "options": [
+     "말이 아주 빠르다",
+     "매우 엄격하다",
+     "영어를 잘 못한다",
+     "늘 지각한다"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Hey, it's Mia! Do you have a minute?",
+     "ko": "안녕, 나 Mia예요! 잠깐 시간 돼요?"
+    },
+    {
+     "sp": "B",
+     "en": "Sure. Sorry, I didn't catch that. It's really loud out here.",
+     "ko": "그럼요. 미안, 잘 못 들었어요. 여기 엄청 시끄럽네요.",
+     "chunks": [
+      "w1c06"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "I said, I just finished my first day at the new job!",
+     "ko": "새 회사 첫날 막 끝났다고요!"
+    },
+    {
+     "sp": "B",
+     "en": "Really? How did it go?",
+     "ko": "진짜요? 어땠어요?",
+     "chunks": [
+      "w1c01"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Honestly, it was a bit of a zoo.",
+     "ko": "솔직히, 좀 동물원 같았어요."
+    },
+    {
+     "sp": "B",
+     "en": "What do you mean by \"a zoo\"?",
+     "ko": "\"동물원\"이 무슨 뜻이에요?",
+     "chunks": [
+      "w1c08"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Like, total chaos. Everyone was running around.",
+     "ko": "완전 난장판이요. 다들 뛰어다니더라고요."
+    },
+    {
+     "sp": "B",
+     "en": "You mean it was super busy?",
+     "ko": "엄청 바빴다는 말이에요?",
+     "chunks": [
+      "w1c09"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Exactly. And my manager talks a mile a minute.",
+     "ko": "바로 그거예요. 그리고 매니저가 말을 엄청 빨리 해요."
+    },
+    {
+     "sp": "B",
+     "en": "Could you say that again? A mile a what?",
+     "ko": "다시 한 번 말해줄래요? 1마일에 뭐라고요?",
+     "chunks": [
+      "w1c07"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "A mile a minute. It means she talks really, really fast.",
+     "ko": "1분에 1마일. 말이 엄청 빠르다는 뜻이에요."
+    },
+    {
+     "sp": "B",
+     "en": "That makes sense. Just like you right now! Could you speak a little slower?",
+     "ko": "그럴 만하네요. 지금 당신처럼요! 조금만 천천히 말해줄래요?",
+     "chunks": [
+      "w1c03",
+      "w1c10"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Ha! Sorry, I'm just excited. But my team seems really nice.",
+     "ko": "하! 미안해요, 신나서요. 그래도 팀원들은 정말 좋아 보여요."
+    },
+    {
+     "sp": "B",
+     "en": "Good for you! That's the most important part.",
+     "ko": "잘됐다! 그게 제일 중요하죠.",
+     "chunks": [
+      "w1c05"
+     ]
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w1c06",
+     "en": "Sorry, I didn't catch that.",
+     "ko": "미안, 잘 못 들었어요.",
+     "note": "What?보다 훨씬 부드러워요. 소음이나 속도 탓으로 돌리는 느낌이라 상대가 기분 상하지 않아요."
+    },
+    {
+     "id": "w1c07",
+     "en": "Could you say that again?",
+     "ko": "다시 한 번 말해줄래요?",
+     "note": "Could you ~?는 공손한 부탁. Again?만 짧게 말하면 퉁명스럽게 들릴 수 있어요."
+    },
+    {
+     "id": "w1c08",
+     "en": "What do you mean by ~?",
+     "ko": "~가 무슨 뜻이에요?",
+     "note": "모르는 단어나 표현을 콕 집어 물을 때. by 뒤에 그 단어를 그대로 넣어요."
+    },
+    {
+     "id": "w1c09",
+     "en": "You mean ~?",
+     "ko": "~라는 말이에요?",
+     "note": "내가 이해한 내용을 확인할 때. 끝을 올려 말해요."
+    },
+    {
+     "id": "w1c10",
+     "en": "Could you speak a little slower?",
+     "ko": "조금만 천천히 말해줄래요?",
+     "note": "a little을 넣으면 요청이 부드러워져요."
+    }
+   ],
+   "pragmatic": "What?이라고만 되물으면 무례하게 들릴 수 있어요. Sorry를 앞에 붙이거나 Could you ~?로 부드럽게 되물으세요.",
+   "improv": [
+    {
+     "situation_ko": "외국인 동료가 빠르게 말했는데 무슨 뜻인지 모르겠어요. 오늘 되묻기 표현으로 뜻을 확인한 뒤 대답까지 해보세요.",
+     "starter_en": "We should grab a bite and then hit the hay early tonight."
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "type": "learn",
+   "title": "생각할 시간 벌기",
+   "context_ko": "카페에서 Mia와 수다를 떨다가, Mia가 처음으로 내 직업을 물어봐요.",
+   "listen_q": {
+    "q": "'나'는 무슨 일을 하나요?",
+    "options": [
+     "고등학생 영어 과외",
+     "초등학교 교사",
+     "회사 번역가",
+     "카페 매니저"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "So, I've never asked. What do you do for work?",
+     "ko": "그러고 보니 한 번도 안 물어봤네요. 무슨 일 해요?"
+    },
+    {
+     "sp": "B",
+     "en": "That's a good question. It's not that simple.",
+     "ko": "좋은 질문이네요. 그렇게 간단하진 않아요.",
+     "chunks": [
+      "w1c12"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Not that simple? Now I'm curious.",
+     "ko": "간단하지 않다고요? 궁금해지네요."
+    },
+    {
+     "sp": "B",
+     "en": "How can I put it... I teach English to high school students.",
+     "ko": "뭐라고 해야 하나… 고등학생들한테 영어를 가르쳐요.",
+     "chunks": [
+      "w1c13"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Oh, like a teacher at a school?",
+     "ko": "아, 학교 선생님 같은 거요?"
+    },
+    {
+     "sp": "B",
+     "en": "Not exactly. It's kind of like private tutoring.",
+     "ko": "딱 그건 아니고요. 과외 비슷한 거예요.",
+     "chunks": [
+      "w1c15"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "I've heard about that. Hagwons, right?",
+     "ko": "들어본 적 있어요. 학원이죠?"
+    },
+    {
+     "sp": "B",
+     "en": "Yeah, but mine's much smaller. Just a few students at a time, you know what I mean?",
+     "ko": "네, 근데 훨씬 작아요. 한 번에 몇 명만요, 무슨 말인지 알죠?",
+     "chunks": [
+      "w1c14"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Got it. Do you like it?",
+     "ko": "알겠어요. 그 일 좋아해요?"
+    },
+    {
+     "sp": "B",
+     "en": "Let me think... Most days, yes. They keep me on my toes.",
+     "ko": "글쎄요… 대부분은요. 애들 덕분에 늘 긴장하며 살아요.",
+     "chunks": [
+      "w1c11"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "That sounds like a lot of pressure, though.",
+     "ko": "그래도 부담이 꽤 클 것 같아요."
+    },
+    {
+     "sp": "B",
+     "en": "I know, right? The big exam is in November.",
+     "ko": "그러니까요! 큰 시험이 11월에 있거든요.",
+     "chunks": [
+      "w1c04"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "No way. That's so soon!",
+     "ko": "말도 안 돼. 곧이네요!"
+    },
+    {
+     "sp": "B",
+     "en": "Really soon. That's why I've been so busy lately.",
+     "ko": "진짜 곧이에요. 그래서 요즘 계속 바빴어요.",
+     "chunks": []
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w1c11",
+     "en": "Let me think.",
+     "ko": "글쎄요, 생각 좀 해볼게요.",
+     "note": "바로 답이 안 나올 때 침묵 대신 쓰는 가장 기본 표현이에요."
+    },
+    {
+     "id": "w1c12",
+     "en": "That's a good question.",
+     "ko": "좋은 질문이네요.",
+     "note": "칭찬이라기보다 생각할 시간을 버는 신호예요. 원어민이 자주 써요."
+    },
+    {
+     "id": "w1c13",
+     "en": "How can I put it...",
+     "ko": "뭐라고 해야 하나…",
+     "note": "설명할 말을 고르는 중이라는 신호. 끝을 흐리며 말해요."
+    },
+    {
+     "id": "w1c14",
+     "en": "You know what I mean?",
+     "ko": "무슨 말인지 알죠?",
+     "note": "설명이 완벽하지 않을 때 상대의 이해를 확인하며 넘어가는 표현이에요."
+    },
+    {
+     "id": "w1c15",
+     "en": "It's kind of like ~",
+     "ko": "~ 비슷한 거예요",
+     "note": "딱 맞는 설명이 없을 때 비슷한 것에 빗대는 표현이에요."
+    }
+   ],
+   "pragmatic": "대답이 바로 안 나올 때 침묵보다 Let me think. 같은 시간 벌기 표현이 훨씬 자연스러워요. 원어민도 생각할 시간을 이렇게 벌어요.",
+   "improv": [
+    {
+     "situation_ko": "새로 알게 된 외국인이 왜 지금 일을 하게 됐는지 물어요. 시간 벌기 표현으로 시작해서 이유를 설명하세요.",
+     "starter_en": "So what made you choose that job?"
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "type": "learn",
+   "title": "질문을 되돌려 대화 이어가기",
+   "context_ko": "월요일 아침 카페. 주말에 부산에 다녀온 Mia와 마주쳤어요.",
+   "listen_q": {
+    "q": "주말에 Mia에게 생긴 일은?",
+    "options": [
+     "폰을 잃어버렸다가 되찾았다",
+     "기차를 놓쳤다",
+     "호텔 예약이 취소됐다",
+     "친구와 싸웠다"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Morning! How was your weekend?",
+     "ko": "좋은 아침! 주말 어땠어요?"
+    },
+    {
+     "sp": "B",
+     "en": "Pretty quiet. I mostly worked. How about you?",
+     "ko": "꽤 조용했어요. 거의 일했어요. 당신은요?",
+     "chunks": [
+      "w1c16"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "I went to Busan with some friends from work.",
+     "ko": "회사 친구들이랑 부산 다녀왔어요."
+    },
+    {
+     "sp": "B",
+     "en": "No way! How was it?",
+     "ko": "말도 안 돼! 어땠어요?",
+     "chunks": [
+      "w1c02",
+      "w1c17"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Amazing. We went to Gamcheon Culture Village.",
+     "ko": "최고였어요. 감천문화마을에 갔어요."
+    },
+    {
+     "sp": "B",
+     "en": "Oh, I've never been there. Tell me more about it.",
+     "ko": "아, 저 거기 한 번도 안 가봤어요. 더 얘기해줘요.",
+     "chunks": [
+      "w1c19"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "It's a village on a hill with colorful houses. Super photogenic.",
+     "ko": "언덕 위에 알록달록한 집들이 있는 마을이에요. 사진이 엄청 잘 나와요."
+    },
+    {
+     "sp": "B",
+     "en": "What made you pick Busan?",
+     "ko": "왜 부산으로 정했어요?",
+     "chunks": [
+      "w1c18"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "My coworker is from there, so she showed us around.",
+     "ko": "동료가 부산 출신이라 구경시켜줬어요."
+    },
+    {
+     "sp": "B",
+     "en": "That makes sense. A local guide is the best.",
+     "ko": "그럴 만하네요. 현지인 가이드가 최고죠.",
+     "chunks": [
+      "w1c03"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Right? But on the last night, I lost my phone.",
+     "ko": "그렇죠? 근데 마지막 날 밤에 폰을 잃어버렸어요."
+    },
+    {
+     "sp": "B",
+     "en": "Really? So what happened next?",
+     "ko": "진짜요? 그래서 어떻게 됐어요?",
+     "chunks": [
+      "w1c01",
+      "w1c20"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "A taxi driver found it and brought it back to our hotel!",
+     "ko": "택시 기사님이 찾아서 호텔까지 가져다주셨어요!"
+    },
+    {
+     "sp": "B",
+     "en": "Wow, good for you! People in Busan are so kind.",
+     "ko": "와, 잘됐다! 부산 사람들 정말 친절하네요.",
+     "chunks": [
+      "w1c05"
+     ]
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w1c16",
+     "en": "How about you?",
+     "ko": "당신은요?",
+     "note": "대답한 뒤 공을 넘기는 스몰토크 기본기예요. 끝을 올려 말해요."
+    },
+    {
+     "id": "w1c17",
+     "en": "How was it?",
+     "ko": "어땠어요?",
+     "note": "상대가 경험을 말하면 가장 먼저 꺼낼 질문이에요."
+    },
+    {
+     "id": "w1c18",
+     "en": "What made you ~?",
+     "ko": "왜 ~하게 됐어요?",
+     "note": "Why보다 부드럽게 이유를 묻는 표현이에요. 따지는 느낌이 없어요."
+    },
+    {
+     "id": "w1c19",
+     "en": "Tell me more about it.",
+     "ko": "더 얘기해줘요.",
+     "note": "관심을 보여주는 표현. 상대가 신나게 말하게 만들어요."
+    },
+    {
+     "id": "w1c20",
+     "en": "So what happened next?",
+     "ko": "그래서 어떻게 됐어요?",
+     "note": "이야기를 끝까지 끌어내는 질문. So를 붙이면 더 몰입한 느낌이에요."
+    }
+   ],
+   "pragmatic": "대답만 하고 끝내면 대화가 끊겨요. 답한 뒤 How about you?로 공을 넘기는 게 스몰토크의 기본 규칙이에요.",
+   "improv": [
+    {
+     "situation_ko": "친구가 제주도에 다녀왔다고 해요. 오늘 표현으로 질문을 최소 3개 이어가세요.",
+     "starter_en": "I just got back from Jeju last week!"
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "type": "learn",
+   "title": "말이 막혀도 돌려 말하기",
+   "context_ko": "Mia가 내가 말한 11월의 큰 시험이 뭔지 궁금해해요. 한국의 수능을 영어로 설명해야 해요.",
+   "listen_q": {
+    "q": "수능 날 한국에서 일어나는 일로 대화에 나온 것은?",
+    "options": [
+     "듣기 평가 동안 비행기가 멈춘다",
+     "모든 가게가 문을 닫는다",
+     "대중교통이 무료다",
+     "공휴일로 지정된다"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "You said the big exam is in November. What's it called again?",
+     "ko": "11월에 큰 시험 있다고 했죠. 이름이 뭐였더라?"
+    },
+    {
+     "sp": "B",
+     "en": "It's called Suneung. What's the word... it's like the SAT.",
+     "ko": "수능이라고 해요. 뭐더라… SAT 같은 거예요.",
+     "chunks": [
+      "w1c21"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Oh, a college entrance exam?",
+     "ko": "아, 대학 입학시험이요?"
+    },
+    {
+     "sp": "B",
+     "en": "Right. But I'm not sure how to say this in English... it's a much bigger deal here.",
+     "ko": "맞아요. 근데 이걸 영어로 어떻게 말해야 할지… 여기선 훨씬 큰일이에요.",
+     "chunks": [
+      "w1c22"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Bigger how?",
+     "ko": "얼마나 큰데요?"
+    },
+    {
+     "sp": "B",
+     "en": "The whole country kind of stops. I mean, even planes stop flying during the listening test.",
+     "ko": "나라 전체가 멈추다시피 해요. 그러니까, 듣기 평가 동안엔 비행기도 안 떠요.",
+     "chunks": [
+      "w1c24"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Wait, planes stop? Seriously?",
+     "ko": "잠깐, 비행기가 멈춘다고요? 진짜로요?"
+    },
+    {
+     "sp": "B",
+     "en": "Seriously. Offices open late too, something like an hour later.",
+     "ko": "진짜로요. 회사도 늦게 시작해요, 한 시간쯤 늦게요.",
+     "chunks": [
+      "w1c23"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "That's wild. Why is it such a big deal?",
+     "ko": "대박이네요. 왜 그렇게 큰일이에요?"
+    },
+    {
+     "sp": "B",
+     "en": "Let me put it another way. One test can decide your university, and maybe your career.",
+     "ko": "다르게 말해볼게요. 시험 하나로 대학이, 어쩌면 진로까지 정해져요.",
+     "chunks": [
+      "w1c25"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Wow. That's a lot of pressure for an eighteen-year-old.",
+     "ko": "와. 열여덟 살한테는 엄청난 부담이네요."
+    },
+    {
+     "sp": "B",
+     "en": "I know, right? That's why I try to keep my students calm.",
+     "ko": "그러니까요! 그래서 전 학생들을 차분하게 해주려고 해요.",
+     "chunks": [
+      "w1c04"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "You must be a good teacher, then.",
+     "ko": "그럼 좋은 선생님이겠네요."
+    },
+    {
+     "sp": "B",
+     "en": "Ha, let me think... I hope so!",
+     "ko": "하, 글쎄요… 그랬으면 좋겠네요!",
+     "chunks": [
+      "w1c11"
+     ]
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w1c21",
+     "en": "What's the word...",
+     "ko": "뭐더라…",
+     "note": "단어가 혀끝에서 맴돌 때. 혼잣말처럼 말하면 상대가 기다려주거나 도와줘요."
+    },
+    {
+     "id": "w1c22",
+     "en": "I'm not sure how to say this in English.",
+     "ko": "이걸 영어로 어떻게 말해야 할지 모르겠어요.",
+     "note": "한국 문화처럼 딱 맞는 영어가 없을 때 쓰면, 상대가 설명을 기대하며 들어줘요."
+    },
+    {
+     "id": "w1c23",
+     "en": "something like ~",
+     "ko": "~쯤, ~ 같은 거",
+     "note": "정확한 숫자나 이름이 기억나지 않을 때 대충 말하는 표현이에요."
+    },
+    {
+     "id": "w1c24",
+     "en": "I mean, ~",
+     "ko": "그러니까, ~",
+     "note": "방금 한 말을 더 구체적으로 고쳐 말할 때 앞에 붙여요."
+    },
+    {
+     "id": "w1c25",
+     "en": "Let me put it another way.",
+     "ko": "다르게 말해볼게요.",
+     "note": "상대가 이해 못 한 것 같을 때 설명을 바꾸는 신호예요."
+    }
+   ],
+   "pragmatic": "딱 맞는 단어가 생각 안 나도 멈추지 마세요. What's the word...로 시간을 벌고 쉬운 말로 풀어 설명하는 돌려 말하기가 회화 실력의 핵심이에요.",
+   "improv": [
+    {
+     "situation_ko": "외국인 친구가 '눈치'가 뭐냐고 물어요. 딱 맞는 영어 단어가 없으니 오늘 표현으로 풀어서 설명하세요.",
+     "starter_en": "My Korean coworker said I have no nunchi. What does that mean?"
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "type": "review_week",
+   "title": "주간 복습: 약속했던 축하 커피",
+   "context_ko": "첫날 Mia가 약속했던 축하 커피를 사는 날이에요. 이번 주 표현이 새 대화 속에 섞여 나와요.",
+   "listen_q": {
+    "q": "Mia가 이번 주에 새로 맡은 것은?",
+    "options": [
+     "큰 프로젝트",
+     "신입 교육",
+     "해외 출장",
+     "팀장 역할"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Okay, coffee's on me today, as promised!",
+     "ko": "자, 약속대로 오늘 커피는 제가 살게요!"
+    },
+    {
+     "sp": "B",
+     "en": "Really? Thanks, Mia!",
+     "ko": "진짜요? 고마워요, Mia!",
+     "chunks": [
+      "w1c01"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "So, first week done. And guess what? My manager gave me a big project.",
+     "ko": "첫 주 끝났어요. 근데 있잖아요, 매니저가 큰 프로젝트를 맡겼어요."
+    },
+    {
+     "sp": "B",
+     "en": "No way! Already? Good for you!",
+     "ko": "말도 안 돼! 벌써요? 잘됐다!",
+     "chunks": [
+      "w1c02",
+      "w1c05"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "I know! But it's a bit of a zoo again.",
+     "ko": "그러니까요! 근데 또 좀 동물원 같아요."
+    },
+    {
+     "sp": "B",
+     "en": "Sorry, I didn't catch that. You mean it's chaos again?",
+     "ko": "미안, 잘 못 들었어요. 또 난장판이라는 말이에요?",
+     "chunks": [
+      "w1c06",
+      "w1c09"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Ha, you remembered. Yeah, total chaos.",
+     "ko": "하, 기억하네요. 네, 완전 난장판이요."
+    },
+    {
+     "sp": "B",
+     "en": "That makes sense. It's a new team.",
+     "ko": "그럴 만하죠. 새로운 팀이잖아요.",
+     "chunks": [
+      "w1c03"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Anyway, enough about me. How was your week?",
+     "ko": "아무튼 제 얘기는 그만. 당신 한 주는 어땠어요?"
+    },
+    {
+     "sp": "B",
+     "en": "Let me think. How can I put it... it's kind of like the calm before the storm.",
+     "ko": "글쎄요. 뭐라고 해야 하나… 폭풍 전의 고요 같은 거예요.",
+     "chunks": [
+      "w1c11",
+      "w1c13",
+      "w1c15"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "The calm before the storm? What do you mean?",
+     "ko": "폭풍 전의 고요요? 무슨 뜻이에요?"
+    },
+    {
+     "sp": "B",
+     "en": "I mean, the exam is coming, so next month will be crazy. You know what I mean?",
+     "ko": "그러니까, 시험이 다가와서 다음 달은 정신없을 거예요. 무슨 말인지 알죠?",
+     "chunks": [
+      "w1c24",
+      "w1c14"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Totally. So what made you become a tutor in the first place?",
+     "ko": "완전 알죠. 근데 애초에 왜 과외 선생님이 됐어요?"
+    },
+    {
+     "sp": "B",
+     "en": "That's a good question. I'm not sure how to say this in English, but I love watching students grow.",
+     "ko": "좋은 질문이네요. 영어로 어떻게 말할지 모르겠는데, 학생들이 성장하는 걸 보는 게 정말 좋아요.",
+     "chunks": [
+      "w1c12",
+      "w1c22"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Aw, that's sweet. You should tell me more about your students sometime.",
+     "ko": "아, 멋지다. 언제 학생들 얘기 더 해줘요."
+    },
+    {
+     "sp": "B",
+     "en": "I will. And tell me more about that big project. How was the first meeting?",
+     "ko": "그럴게요. 그 큰 프로젝트 얘기도 더 해줘요. 첫 회의는 어땠어요?",
+     "chunks": [
+      "w1c19",
+      "w1c17"
+     ]
+    }
+   ],
+   "chunks": [],
+   "pragmatic": "이번 주 표현을 새 상황에서 다시 꺼내 쓰는 날이에요. 같은 표현도 맥락이 바뀌면 억양과 뉘앙스가 달라지는 걸 느껴보세요.",
+   "improv": [
+    {
+     "situation_ko": "Mia가 다음 주 계획을 물어요. 이번 주 표현을 최대한 섞어 대답하고, 질문을 되돌려주세요.",
+     "starter_en": "So, what's your plan for next week?"
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "type": "review_cum",
+   "title": "누적 복습과 첫 60초 측정",
+   "context_ko": "이번 주에 배운 표현을 섞어서 복습하고, 첫 60초 자유 발화를 기록하는 날이에요. 이 기록이 앞으로 성장을 비교하는 기준점이 돼요.",
+   "chunks": [],
+   "improv": [
+    {
+     "situation_ko": "다른 친구에게 이번 주 Mia와 있었던 일 중 하나를 이야기하듯 말해보세요. 이번 주 표현을 최소 5개 넣어보세요.",
+     "starter_en": "So, what happened with your friend Mia this week?"
+    }
+   ]
+  }
+ ]
 }
