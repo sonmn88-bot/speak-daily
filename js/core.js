@@ -44,7 +44,7 @@ function streak() {
 }
 
 // ---------- 음성 ----------
-let VA = null, VB = null;
+let VA = null, VB = null, VC = null; // A=상대(여), B=나, C=상대(남)
 const BAD = /Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Good News|Jester|Organ|Superstar|Trinoids|Whisper|Wobble|Zarvox|Grandpa|Grandma|Eddy|Flo|Reed|Rocko|Sandy|Shelley|Fred|Junior|Ralph|Kathy/i;
 const FEMALE = ["Ava", "Samantha", "Allison", "Zoe", "Susan", "Nicky", "Joelle", "Noelle", "Karen", "Moira", "Kate", "Serena"];
 const MALE = ["Evan", "Nathan", "Tom", "Aaron", "Alex", "Daniel", "Oliver", "Arthur", "Lee"];
@@ -61,6 +61,7 @@ function pickVoices() {
   const best = names => v.slice().sort((a, b) => vScore(b, names) - vScore(a, names))[0] || null;
   VA = best(FEMALE); VB = best(MALE);
   if (VB === VA) VB = v.find(x => x !== VA) || VA;
+  VC = v.slice().sort((a, b) => vScore(b, MALE) - vScore(a, MALE)).find(x => x !== VB && x !== VA) || VB;
   try {
     const a = localStorage.getItem("sd_va"), b = localStorage.getItem("sd_vb");
     if (a) VA = v.find(x => x.name === a) || VA;
@@ -75,7 +76,7 @@ function speak(text, { rate = 1, who = "A" } = {}) {
     if (!("speechSynthesis" in window)) return res();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "en-US"; u.rate = rate;
-    const v = who === "B" ? VB : VA; if (v) u.voice = v;
+    const v = who === "B" ? VB : who === "C" ? VC : VA; if (v) u.voice = v;
     const t = setTimeout(res, 2000 + text.split(" ").length * 700 / rate); // iOS onend 누락 대비
     u.onend = u.onerror = () => { clearTimeout(t); res(); };
     speechSynthesis.speak(u);

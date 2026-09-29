@@ -1,6 +1,7 @@
 // ===== 학습 탭 + 기록 탭 =====
 const RANK = { O: 0, T: 1, X: 2 };
 const who = sp => (sp === "A" ? (LS && LS.cast.A && LS.cast.A.name) || "A" : "나");
+const vo = sp => (sp === "A" && LS && LS.cast.A && LS.cast.A.gender === "m" ? "C" : sp); // 남성 상대역은 C 음성
 const nextLabel = () => (LS.steps[LS.step + 1] || [""])[0];
 function mark(ids, r) { for (const id of ids || []) { const p = LS.results[id]; if (!p || RANK[r] > RANK[p]) LS.results[id] = r; } }
 
@@ -18,7 +19,7 @@ function difficulty() {
 // ---------- 세션 만들기 ----------
 function newSession(day, w, practice) {
   const s = { id: `${w}-${day.day}${practice ? "p" : ""}`, w, n: dayN(w, day.day), day, practice,
-    cast: (S.weeks[w] || {}).cast || {}, theme: (S.weeks[w] || {}).theme || "",
+    cast: day.cast || (S.weeks[w] || {}).cast || {}, theme: (S.weeks[w] || {}).theme || "",
     step: 0, results: {}, stats: { start: Date.now(), listenTries: 0 }, measure: null, steps: [], due: [], recs: {} };
   s.diff = difficulty(); s.stats.level = s.diff.lv;
   if (!practice) {
@@ -111,7 +112,7 @@ function recall(el) {
 // ---------- 듣기 ----------
 async function playAll(rate) {
   const r = RUN;
-  for (const l of LS.day.lines) { if (r !== RUN) return; await speak(l.en, { rate, who: l.sp }); await sleep(250); }
+  for (const l of LS.day.lines) { if (r !== RUN) return; await speak(l.en, { rate, who: vo(l.sp) }); await sleep(250); }
 }
 function listen(el) {
   const d = LS.day; let asked = false;
@@ -149,7 +150,7 @@ function shadow(el) {
       el.querySelectorAll(".line").forEach(x => x.classList.remove("on"));
       const le = $("#l" + i); le.classList.add("on"); le.scrollIntoView({ block: "center", behavior: "smooth" });
       const t0 = Date.now();
-      await speak(L[i].en, { rate, who: L[i].sp });
+      await speak(L[i].en, { rate, who: vo(L[i].sp) });
       await sleep(Math.max(1200, (Date.now() - t0) * 1.1 + 500)); // 따라 말할 시간
     }
     if (r !== RUN) return;
@@ -175,7 +176,7 @@ function improv(el) {
   el.innerHTML = `<div class="card"><p class="ko">${esc(it.situation_ko)}</p><p class="en">“${esc(it.starter_en)}”</p><button id="hear">🔊 상대 말 듣기</button></div>
     <div class="card"><p class="muted">같은 내용을 점점 짧은 시간 안에 말해요. 막혀도 멈추지 말고 아는 표현으로 돌려 말하세요.</p>
     <div class="timer" id="tm">${rounds[0]}</div><button class="go" id="go">▶ ${rounds[0]}초 시작</button></div>`;
-  $("#hear").onclick = () => speak(it.starter_en, { who: "A" });
+  $("#hear").onclick = () => speak(it.starter_en, { who: vo("A") });
   const b = $("#go");
   b.onclick = async () => {
     if (k >= rounds.length) return next();
@@ -314,8 +315,8 @@ function roleplay(el) {
       <div class="line"><div class="sp">${esc(who("A"))}</div>${esc(t.a)}</div>
       <p class="ko" style="margin-top:14px">${esc(t.intent_ko)}</p><p class="muted">쓸 표현: ${esc(t.hint)}</p><div id="ans"></div></div>
       <button id="hear">🔊 상대 말 다시 듣기</button><div id="ctl"><button class="go" id="rv">말한 뒤 모범 답 보기</button></div>`;
-    speak(t.a, { who: "A" });
-    $("#hear").onclick = () => speak(t.a, { who: "A" });
+    speak(t.a, { who: vo("A") });
+    $("#hear").onclick = () => speak(t.a, { who: vo("A") });
     $("#rv").onclick = () => {
       $("#ans").innerHTML = `<div class="line on"><div class="sp">모범 답</div>${esc(t.model)}</div>`;
       speak(t.model, { who: "B" });
