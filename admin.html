@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Speak Daily 관리자</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--bg:#F2F4F7;--card:#FFFFFF;--ink:#17212F;--sub:#5B6676;--line:#2E8B57;--now:#F0A500;--o:#2E8B57;--t:#E0A100;--x:#D64545;--rule:#D9DEE5;
+  font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;color:var(--ink);background:var(--bg);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#10151D;--card:#1A212C;--ink:#E8ECF1;--sub:#9AA5B4;--rule:#2A3340}}
+*{box-sizing:inherit} body{margin:0;background:var(--bg)}
+main{max-width:900px;margin:0 auto;padding:16px 16px 48px}
+h1{font-size:14px;color:var(--sub);margin:4px 0 2px;font-weight:600} h2{font-size:24px;margin:0 0 14px;font-weight:800} h3{font-size:17px;margin:0 0 10px}
+.card{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px}
+.muted{color:var(--sub);font-size:13px;line-height:1.6}
+button,input{font:inherit}
+button{border:0;border-radius:10px;padding:10px 14px;font-size:14px;font-weight:700;cursor:pointer;background:var(--rule);color:var(--ink)}
+button.go{background:var(--ink);color:var(--bg)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--now);outline-offset:2px}
+input{font-size:16px;width:100%;padding:10px;border-radius:10px;border:2px solid var(--rule);background:var(--bg);color:var(--ink);margin:6px 0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.kpi{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.kpi div{background:var(--bg);border-radius:10px;padding:10px}
+.kpi b{display:block;font-size:20px;font-variant-numeric:tabular-nums}
+.kpi span{font-size:12px;color:var(--sub)}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:8px 6px;border-bottom:1px solid var(--rule);text-align:left;white-space:nowrap;font-variant-numeric:tabular-nums}
+th{color:var(--sub);font-weight:600}
+.bar{display:flex;height:12px;border-radius:6px;overflow:hidden;background:var(--bg);flex:1}
+.bar i{display:block;height:100%}
+.brow{display:flex;align-items:center;gap:8px;font-size:13px;margin:5px 0}
+.brow span{width:92px;color:var(--sub);flex:none}
+.brow em{font-style:normal;width:56px;text-align:right;flex:none;font-variant-numeric:tabular-nums}
+.heat td{width:12%;text-align:center;border-radius:6px;border:2px solid var(--card)}
+.ok{color:var(--o)} .bad{color:var(--x)} .warn{color:var(--t)}
+pre{white-space:pre-wrap;word-break:break-all;font-size:12px;background:var(--bg);padding:10px;border-radius:10px;max-height:200px;overflow:auto}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+const API = "https://speak-daily.sonmn88.workers.dev";
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const DAYMS = 86400000, KST = 9 * 3600000;
+const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
+const avg = a => (a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0);
+const fmt = t => new Date(t + KST).toISOString().slice(5, 16).replace("T", " ");
+const kday = t => new Date(t + KST).toISOString().slice(0, 10);
+let KEY = localStorage.getItem("sd_admin") || sessionStorage.getItem("sd_admin") || "", D = null, TAB = "now", SEL = "me";
+
+// ---------- 로그인 ----------
+function login(msg = "") {
+  $("#app").innerHTML = `<h1>Speak Daily</h1><h2>관리자</h2><div class="card"><p class="muted">관리용 비밀번호(ADMIN_KEY)를 입력하세요. 이 창을 닫으면 다시 입력해야 해요.</p>
+    <input id="pw" type="password" autocomplete="current-password">
+    <label class="muted" style="display:flex;gap:8px;align-items:center;margin:4px 0 10px"><input id="rm" type="checkbox" style="width:auto;margin:0"> 이 기기에서 기억하기 (내 폰에서만 켜세요)</label>
+    <button class="go" id="go">들어가기</button><p class="muted bad">${esc(msg)}</p><p><a href="./" class="muted">← 앱으로 돌아가기</a></p></div>`;
+  $("#go").onclick = () => { KEY = $("#pw").value.trim(); ($("#rm").checked ? localStorage : sessionStorage).setItem("sd_admin", KEY); load(); };
+  $("#pw").onkeydown = e => e.key === "Enter" && $("#go").click();
+}
+const api = (path, extra = "") => fetch(`${API}${path}?key=${encodeURIComponent(KEY)}${extra}`).then(async r => { if (r.status === 403) throw new Error("403"); return r.json(); });
+
+async function load() {
+  $("#app").innerHTML = `<p class="muted">불러오는 중…</p>`;
+  try {
+    const ov = await api("/admin/api/overview");
+    for (const u of ov.users) u.ev = (await api("/admin/api/events", `&u=${u.id}&days=30`)).events || [];
+    const maxN = Math.max(...ov.users.map(u => u.n)), chunks = {}, lessons = {};
+    for (let w = 1; w <= Math.ceil(maxN / 7) + 1; w++) {
+      try {
+        const r = await fetch(`content/w${String(w).padStart(2, "0")}.json`, { cache: "no-cache" }); if (!r.ok) continue;
+        const d = await r.json();
+        for (const day of d.days) { lessons[(w - 1) * 7 + day.day] = day.title; for (const c of day.chunks || []) chunks[c.id] = c; }
+      } catch (e) {}
+    }
+    D = { ...ov, chunks, lessons };
+    D.users.forEach(u => (u.a = analyze(u)));
+    render();
+  } catch (e) { sessionStorage.removeItem("sd_admin"); localStorage.removeItem("sd_admin"); login(e.message === "403" ? "비밀번호가 맞지 않아요." : "불러오지 못했어요: " + e.message); }
+}
+
+// ---------- 분석 ----------
+function difficulty(H) {
+  const h = H.filter(x => x.results && Object.keys(x.results).length).slice(-3);
+  if (h.length < 3) return "보통";
+  const r = h.map(x => { const v = Object.values(x.results); return v.filter(y => y === "O").length / v.length; });
+  return r.every(x => x >= 0.9) ? "도전" : avg(r) < 0.6 ? "기초" : "보통";
+}
+function streak(H, today) {
+  const ds = new Set(H.map(h => h.date)); let d = Date.parse(today); if (!ds.has(today)) d -= DAYMS;
+  let c = 0; while (ds.has(new Date(d).toISOString().slice(0, 10))) { c++; d -= DAYMS; } return c;
+}
+function analyze(u) {
+  const H = u.history, ev = u.ev, srs = u.srs, today = D.date;
+  const res = { O: 0, T: 0, X: 0 }; H.forEach(h => Object.values(h.results || {}).forEach(r => res[r]++));
+  const r7 = { O: 0, T: 0, X: 0 }; H.slice(-7).forEach(h => Object.values(h.results || {}).forEach(r => r7[r]++));
+  const st = H.map(h => h.stats || {});
+  const days = new Set(H.map(h => h.date)).size;
+  const elapsed = u.start ? Math.floor((Date.parse(today) - Date.parse(u.start)) / DAYMS) + 1 : 0;
+  const drill = {}; st.forEach(s => Object.entries(s.drill || {}).forEach(([k, v]) => { drill[k] = drill[k] || { n: 0, ok: 0 }; drill[k].n += v.n; drill[k].ok += v.ok; }));
+  const listenH = st.filter(s => s.listenTries > 0);
+  const opens = ev.filter(e => e.type === "open"), steps = ev.filter(e => e.type === "step" && !e.practice);
+  const stepT = {}; steps.forEach(e => (stepT[e.name] = stepT[e.name] || []).push(e.ms / 60000));
+  const completes = ev.filter(e => e.type === "complete"), drop = {}, seen = new Set();
+  ev.filter(e => e.type === "leave").reverse().forEach(e => {
+    const k = e.lesson + "|" + kday(e.t); if (seen.has(k)) return; seen.add(k);
+    if (!completes.some(c => c.lesson === e.lesson && c.t > e.t)) drop[e.step || "?"] = (drop[e.step || "?"] || 0) + 1;
+  });
+  const heat = Array.from({ length: 7 }, () => Array(7).fill(0)), blocks = [0, 6, 9, 12, 15, 18, 21];
+  opens.forEach(e => { const d = new Date(e.t + KST), h = d.getUTCHours(); heat[d.getUTCDay()][blocks.filter(b => h >= b).length - 1]++; });
+  const cnt = (arr, f) => arr.reduce((m, e) => { const k = f(e) || "?"; m[k] = (m[k] || 0) + 1; return m; }, {});
+  const lat = (u.alarms || []).filter(a => a.kind === "remind").map(a => { const o = opens.find(e => e.t > a.at && e.t - a.at < 6 * 3600000); return o ? (o.t - a.at) / 60000 : null; }).filter(x => x !== null);
+  const items = Object.entries(srs);
+  return {
+    H, res, r7, days, elapsed, lessons: H.length, streak: streak(H, today),
+    oAll: pct(res.O, res.O + res.T + res.X), o7: pct(r7.O, r7.O + r7.T + r7.X),
+    avgMin: avg(st.map(s => s.minutes).filter(x => x > 0)), avgAlarm: avg(H.map(h => h.alarms || 0)),
+    hints: avg(st.map(s => s.hints || 0)), listen1: pct(listenH.filter(s => s.listenTries === 1).length, listenH.length),
+    voice: pct(st.filter(s => (s.mode || "voice") === "voice").length, st.length), drill, level: difficulty(H),
+    mastered: items.filter(([, it]) => it.grad).length, seenN: items.length,
+    lastOpen: opens.length ? opens[opens.length - 1].t : null, opens30: opens.length,
+    stepT, drop, heat, src: cnt(opens, e => e.src), dev: cnt(opens, e => `${e.dev || "?"}·${e.app || "?"}`),
+    lat: lat.length ? { avg: avg(lat), n: lat.length } : null, recentOpens: opens.slice(-20).reverse(),
+    weak: items.filter(([, it]) => !it.grad).sort((a, b) => (b[1].x * 2 + b[1].t) - (a[1].x * 2 + a[1].t)).slice(0, 10),
+    mission: (() => { const m = st.filter(s => typeof s.missionPrev === "boolean"); return m.length ? pct(m.filter(s => s.missionPrev).length, m.length) : null; })(),
+  };
+}
+
+// ---------- 화면 ----------
+const meter = (label, v, color, tail) => `<div class="brow"><span>${label}</span><div class="bar"><i style="width:${Math.min(100, v)}%;background:${color}"></i></div><em>${tail ?? v + "%"}</em></div>`;
+function render() {
+  const tabs = [["now", "멤버 현황"], ["cmp", "비교"], ["user", "사용자 상세"], ["content", "콘텐츠"], ["ops", "운영"]];
+  $("#app").innerHTML = `<h1>Speak Daily 관리자 · ${D.date}</h1><h2>${tabs.find(t => t[0] === TAB)[1]}</h2>
+    <div class="tabs">${tabs.map(([k, n]) => `<button class="${k === TAB ? "go" : ""}" data-t="${k}">${n}</button>`).join("")}<button id="rl">새로고침</button><button id="lo">로그아웃</button><a href="./" style="align-self:center;margin-left:6px" class="muted">← 앱으로</a></div><div id="v"></div>`;
+  $("#lo").onclick = () => { localStorage.removeItem("sd_admin"); sessionStorage.removeItem("sd_admin"); KEY = ""; login(); };
+  document.querySelectorAll("[data-t]").forEach(b => b.onclick = () => { TAB = b.dataset.t; render(); });
+  $("#rl").onclick = load;
+  ({ now: vNow, cmp: vCmp, user: vUser, content: vContent, ops: vOps })[TAB]($("#v"));
+}
+
+function vNow(el) {
+  el.innerHTML = `<div class="grid">${D.users.map(u => { const a = u.a, t = u.today;
+    return `<div class="card"><h3>${esc(u.name)} <span class="muted">(${u.id})</span></h3>
+      <p class="muted">${u.authorized ? '<span class="ok">● 카카오 연결됨</span>' : '<span class="bad">● 연결 안 됨</span>'} · 시작 ${u.start || "-"} · 마지막 접속 ${a.lastOpen ? fmt(a.lastOpen) : "기록 없음"}</p>
+      <div class="kpi"><div><b>레슨 ${u.n}</b><span>현재 진도</span></div><div><b>${a.streak}일</b><span>연속 학습</span></div>
+      <div><b>${a.days}/${a.elapsed}</b><span>학습한 날 / 경과일</span></div><div><b>${t.done ? `<span class="ok">완료 ${t.lessons || 1}</span>` : `<span class="warn">미완료</span>`}</b><span>오늘 (알림 ${t.alarms || 0}번)</span></div>
+      <div><b>${a.oAll}%</b><span>누적 정답률(O)</span></div><div><b>${a.mastered}/${a.seenN}</b><span>졸업 / 배운 표현</span></div></div></div>`; }).join("")}</div>
+    <p class="muted">행동 기록(접속, 단계 시간 등)은 학습 개선 ①을 배포한 뒤부터 쌓여요.</p>`;
+}
+
+function vCmp(el) {
+  const U = D.users, row = (label, f) => `<tr><th>${label}</th>${U.map(u => `<td>${f(u.a, u)}</td>`).join("")}</tr>`;
+  const dk = { cloze: "빈칸", use: "상황", build: "조립" };
+  el.innerHTML = `<div class="card wrap"><table><tr><th></th>${U.map(u => `<th>${esc(u.name)}</th>`).join("")}</tr>
+    ${row("레슨 진도", (a, u) => `레슨 ${u.n}`)}${row("완료한 레슨", a => a.lessons)}
+    ${row("학습일 비율", a => `${pct(a.days, a.elapsed)}% (${a.days}/${a.elapsed})`)}${row("연속 학습일", a => a.streak + "일")}
+    ${row("평균 학습 시간", a => a.avgMin ? a.avgMin.toFixed(1) + "분" : "-")}${row("정답률 전체 / 최근 7", a => `${a.oAll}% / ${a.o7}%`)}
+    ${row("듣기 첫 시도 정답", a => a.listen1 + "%")}${row("드릴 정답률", a => Object.entries(a.drill).map(([k, v]) => `${dk[k] || k} ${pct(v.ok, v.n)}%`).join(" · ") || "-")}
+    ${row("힌트 / 레슨", a => a.hints.toFixed(1))}${row("현재 난이도", a => a.level)}${row("소리 모드 비율", a => a.voice + "%")}
+    ${row("졸업 / 배운 표현", a => `${a.mastered}/${a.seenN}`)}${row("평균 완료 전 알림", a => a.avgAlarm.toFixed(1) + "번")}
+    ${row("알림 후 접속까지", a => (a.lat ? Math.round(a.lat.avg) + "분" : "-"))}${row("실전 미션 실천", a => (a.mission === null ? "-" : a.mission + "%"))}
+    ${row("30일 접속 수", a => a.opens30)}</table></div>
+    <div class="card"><h3>읽는 법</h3><p class="muted">학습일 비율이 낮으면 습관 문제, 정답률이 낮으면 난이도 문제, 알림 후 접속이 길면 알림 시간 문제일 가능성이 커요. 소리 모드 비율이 50% 미만이면 말하기 연습량이 부족해요.</p></div>`;
+}
+
+function vUser(el) {
+  const u = D.users.find(x => x.id === SEL) || D.users[0], a = u.a, C = D.chunks;
+  const stepOrder = ["워밍업", "듣기", "표현", "드릴", "섀도잉", "인출", "롤플레이", "즉흥", "측정", "마무리"];
+  const st = stepOrder.filter(s => a.stepT[s]).map(s => [s, avg(a.stepT[s])]), maxSt = Math.max(1, ...st.map(x => x[1]));
+  const days = ["일", "월", "화", "수", "목", "금", "토"], bl = ["0-6", "6-9", "9-12", "12-15", "15-18", "18-21", "21-24"], hmax = Math.max(1, ...a.heat.flat());
+  const pills = obj => Object.entries(obj).sort((x, y) => y[1] - x[1]).map(([k, v]) => `${esc(k)} <b>${v}</b>`).join(" · ") || "기록 없음";
+  el.innerHTML = `<div class="tabs">${D.users.map(x => `<button class="${x.id === u.id ? "go" : ""}" data-u="${x.id}">${esc(x.name)}</button>`).join("")}</div>
+  <div class="grid">
+    <div class="card"><h3>단계별 평균 소요 시간</h3>${st.length ? st.map(([s, m]) => meter(s, (m / maxSt) * 100, "var(--line)", m.toFixed(1) + "분")).join("") : '<p class="muted">기록 없음</p>'}</div>
+    <div class="card"><h3>중간 이탈 지점</h3>${Object.keys(a.drop).length ? Object.entries(a.drop).sort((x, y) => y[1] - x[1]).map(([s, n]) => meter(s, pct(n, Math.max(...Object.values(a.drop))), "var(--x)", n + "회")).join("") : '<p class="muted">이탈 기록 없음</p>'}
+      <p class="muted">레슨을 시작했다가 끝내지 않고 나간 마지막 단계예요.</p></div>
+    <div class="card"><h3>접속 경로와 기기</h3><p class="muted">경로: ${pills(a.src)}</p><p class="muted">기기: ${pills(a.dev)}</p>
+      <p class="muted">a1~a4는 1~4번째 알림, q는 저녁 퀴즈, direct는 직접 접속이에요.</p>
+      <p class="muted">알림 후 접속까지 평균 ${a.lat ? Math.round(a.lat.avg) + "분 (" + a.lat.n + "회)" : "기록 없음"}</p></div>
+    <div class="card"><h3>약한 표현 Top 10</h3>${a.weak.length ? `<table>${a.weak.map(([id, it]) => `<tr><td>${esc((C[id] || {}).en || id)}</td><td class="muted">O${it.o} △${it.t} X${it.x}</td><td class="muted">다음 ${it.due}</td></tr>`).join("")}</table>` : '<p class="muted">없음</p>'}</div>
+  </div>
+  <div class="card wrap"><h3>접속 시간대 (최근 30일)</h3><table class="heat"><tr><th></th>${bl.map(b => `<th>${b}</th>`).join("")}</tr>
+    ${a.heat.map((r, d) => `<tr><th>${days[d]}</th>${r.map(v => `<td style="background:color-mix(in srgb,var(--line) ${Math.round((v / hmax) * 85)}%,transparent)">${v || ""}</td>`).join("")}</tr>`).join("")}</table></div>
+  <div class="card wrap"><h3>레슨 기록</h3><table><tr><th>날짜</th><th>레슨</th><th>시간</th><th>O/△/X</th><th>모드</th><th>힌트</th><th>난이도</th><th>알림</th></tr>
+    ${[...a.H].reverse().map(h => { const c = { O: 0, T: 0, X: 0 }, s = h.stats || {}; Object.values(h.results || {}).forEach(r => c[r]++);
+      return `<tr><td>${h.date}</td><td>${h.n} ${esc((D.lessons[h.n] || "").slice(0, 14))}</td><td>${s.minutes ?? "-"}분</td><td>${c.O}/${c.T}/${c.X}</td><td>${s.mode === "silent" ? "🤫" : "🗣"}</td><td>${s.hints ?? "-"}</td><td>${s.level || "-"}</td><td>${h.alarms ?? "-"}</td></tr>`; }).join("") || '<tr><td colspan="8" class="muted">기록 없음</td></tr>'}</table></div>
+  <div class="card wrap"><h3>최근 접속 기록</h3><table><tr><th>시각</th><th>경로</th><th>기기</th><th>레슨</th></tr>
+    ${a.recentOpens.map(e => `<tr><td>${fmt(e.t)}</td><td>${esc(e.src)}</td><td>${esc(e.dev)} · ${esc(e.app)}</td><td>${e.lesson ?? "-"}</td></tr>`).join("") || '<tr><td colspan="4" class="muted">기록 없음</td></tr>'}</table></div>`;
+  document.querySelectorAll("[data-u]").forEach(b => b.onclick = () => { SEL = b.dataset.u; vUser(el); });
+}
+
+function vContent(el) {
+  const per = {};
+  D.users.forEach(u => u.history.forEach(h => {
+    const p = per[h.n] = per[h.n] || { O: 0, all: 0, min: [], users: new Set() };
+    Object.values(h.results || {}).forEach(r => { p.all++; if (r === "O") p.O++; });
+    if ((h.stats || {}).minutes > 0) p.min.push(h.stats.minutes); p.users.add(u.name);
+  }));
+  const chunk = {};
+  D.users.forEach(u => Object.entries(u.srs).forEach(([id, it]) => { const c = chunk[id] = chunk[id] || { x: 0, t: 0, o: 0, weakIn: 0, inN: 0 }; c.x += it.x; c.t += it.t; c.o += it.o; c.inN++; if (!it.grad && (it.x > 0 || it.level <= 1)) c.weakIn++; }));
+  const common = Object.entries(chunk).filter(([, c]) => c.inN >= 2 && c.weakIn === c.inN);
+  const hard = Object.entries(chunk).sort((a, b) => (b[1].x * 2 + b[1].t) - (a[1].x * 2 + a[1].t)).slice(0, 12);
+  const C = D.chunks;
+  el.innerHTML = `<div class="card wrap"><h3>레슨별 난이도</h3><table><tr><th>레슨</th><th>제목</th><th>정답률</th><th>평균 시간</th><th>완료한 사람</th></tr>
+    ${Object.keys(per).sort((a, b) => a - b).map(n => { const p = per[n], r = pct(p.O, p.all);
+      return `<tr><td>${n}</td><td>${esc(D.lessons[n] || "")}</td><td class="${r < 60 ? "bad" : r >= 90 ? "ok" : ""}">${r}%</td><td>${p.min.length ? avg(p.min).toFixed(1) + "분" : "-"}</td><td>${[...p.users].map(esc).join(", ")}</td></tr>`; }).join("") || '<tr><td colspan="5" class="muted">기록 없음</td></tr>'}</table>
+    <p class="muted">정답률 60% 미만은 너무 어려운 레슨, 90% 이상은 쉬운 레슨이에요. 다음 주차 제작에 반영할 수 있어요.</p></div>
+  <div class="grid">
+    <div class="card"><h3>두 사람 공통 약점</h3>${common.length ? `<table>${common.map(([id, c]) => `<tr><td>${esc((C[id] || {}).en || id)}</td><td class="muted">X ${c.x} · △ ${c.t}</td></tr>`).join("")}</table>` : '<p class="muted">아직 없음</p>'}
+      <p class="muted">공통 약점은 설명이나 예문이 부족한 표현일 가능성이 커요. 다음 주차 대화에 다시 넣기 좋아요.</p></div>
+    <div class="card"><h3>가장 많이 틀린 표현</h3>${hard.length ? `<table>${hard.map(([id, c]) => `<tr><td>${esc((C[id] || {}).en || id)}</td><td class="muted">O ${c.o} · △ ${c.t} · X ${c.x}</td></tr>`).join("")}</table>` : '<p class="muted">아직 없음</p>'}</div>
+  </div>`;
+}
+
+function vOps(el) {
+  const runs = [...(D.runs || [])].reverse().slice(0, 20);
+  el.innerHTML = `<div class="grid">
+    <div class="card"><h3>알림 실행</h3><p class="muted">아직 오늘 레슨을 완료하지 않은 사람에게 지금 알림을 보내요.</p><button class="go" id="run">지금 알림 실행</button>
+      <p class="muted" style="margin-top:12px">테스트 알림 (완료 여부와 무관하게 보낼 사람)</p>${D.users.map(u => `<button data-test="${u.id}" style="margin:0 6px 6px 0">${esc(u.name)}</button>`).join("")}<pre id="out" hidden></pre></div>
+    <div class="card"><h3>사용자 추가·이름 변경</h3><input id="uid" placeholder="아이디 (영문 소문자·숫자, 예: gf)"><input id="unm" placeholder="표시 이름 (예: 여자친구)">
+      <button class="go" id="add">저장하고 초대 링크 받기</button><p class="muted">이미 있는 아이디면 이름만 바뀌고 학습 기록은 유지돼요. 초대 링크는 24시간 유효해요.</p><pre id="addout" hidden></pre></div>
+  </div>
+  <div class="card wrap"><h3>실행 기록 (최근 20회)</h3><table><tr><th>시각</th><th>실행</th>${D.users.map(u => `<th>${esc(u.name)}</th>`).join("")}</tr>
+    ${runs.map(r => `<tr><td>${esc(r.at)}</td><td>${r.by === "cron" ? "자동" : "수동·GitHub"}</td>${D.users.map(u => `<td class="${String(r.out[u.id] || "").startsWith("오류") ? "bad" : ""}">${esc(r.out[u.id] || "-")}</td>`).join("")}</tr>`).join("") || '<tr><td class="muted">기록 없음</td></tr>'}</table></div>
+  <div class="grid">${D.users.map(u => `<div class="card"><h3>${esc(u.name)} 알림 발송 기록</h3><table>${[...(u.alarms || [])].reverse().slice(0, 12).map(x => `<tr><td>${fmt(x.at)}</td><td>레슨 ${x.n}</td><td class="muted">${x.kind === "quiz" ? "저녁 퀴즈" : x.count + "번째"}</td></tr>`).join("") || '<tr><td class="muted">기록 없음</td></tr>'}</table></div>`).join("")}</div>
+  <div class="card"><h3>마지막 오류</h3><pre>${esc(D.lastError || "없음")}</pre></div>
+  <div class="card"><h3>분석 요약 코드</h3><p class="muted">Claude에게 "관리자 분석"과 함께 붙여넣으면 두 사람의 학습 상태를 분석하고 커리큘럼 조정안을 드려요.</p><button class="go" id="cp">요약 코드 복사</button><pre id="cpo" hidden></pre></div>`;
+  const show = (id, v) => { const p = $(id); p.hidden = false; p.textContent = typeof v === "string" ? v : JSON.stringify(v, null, 1); };
+  $("#run").onclick = async () => { show("#out", "실행 중…"); try { show("#out", await api("/run")); } catch (e) { show("#out", e.message); } };
+  document.querySelectorAll("[data-test]").forEach(b => b.onclick = async () => { show("#out", "보내는 중…"); try { show("#out", await api("/test", `&u=${b.dataset.test}`)); } catch (e) { show("#out", e.message); } });
+  $("#add").onclick = async () => {
+    const id = $("#uid").value.trim().toLowerCase(), nm = $("#unm").value.trim();
+    try { const r = await api("/adduser", `&u=${encodeURIComponent(id)}&name=${encodeURIComponent(nm)}`); show("#addout", r.error || `초대 링크 (24시간 유효):\n${r.join}`); } catch (e) { show("#addout", e.message); }
+  };
+  $("#cp").onclick = async () => {
+    const code = JSON.stringify({ v: 1, date: D.date, users: D.users.map(u => { const a = u.a; return {
+      id: u.id, n: u.n, lessons: a.lessons, days: a.days, elapsed: a.elapsed, streak: a.streak, oAll: a.oAll, o7: a.o7,
+      avgMin: +a.avgMin.toFixed(1), listen1: a.listen1, hints: +a.hints.toFixed(1), voice: a.voice, level: a.level,
+      drill: a.drill, mastered: a.mastered, seen: a.seenN, avgAlarm: +a.avgAlarm.toFixed(1), lat: a.lat && Math.round(a.lat.avg),
+      drop: a.drop, stepMin: Object.fromEntries(Object.entries(a.stepT).map(([k, v]) => [k, +avg(v).toFixed(1)])),
+      weak: a.weak.map(([id, it]) => `${(D.chunks[id] || {}).en || id}|O${it.o}T${it.t}X${it.x}`) }; }) });
+    try { await navigator.clipboard.writeText(code); show("#cpo", "복사했어요."); } catch (e) { show("#cpo", code); }
+  };
+}
+
+KEY ? load() : login();
+</script>
+</body>
+</html>
