@@ -1,0 +1,10 @@
+name: speak-daily remind
+on:
+  schedule:
+    - cron: "0 23,3,9,12 * * *"   # 한국 시간 8·12·18·21시
+  workflow_dispatch:              # 수동 실행 버튼
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS "https://speak-daily.sonmn88.workers.dev/run?key=${{ secrets.ADMIN_KEY }}"
