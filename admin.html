@@ -60,7 +60,7 @@ function login(msg = "") {
     <label class="muted" style="display:flex;gap:8px;align-items:center;margin:4px 0 10px"><input id="rm" type="checkbox" style="width:auto;margin:0"> 이 기기에서 기억하기 (내 폰에서만 켜세요)</label>
     <button class="go" id="go">들어가기</button><p class="muted bad">${esc(msg)}</p><p><a href="./" class="muted">← 앱으로 돌아가기</a></p></div>`;
   $("#go").onclick = () => { KEY = $("#pw").value.trim(); ($("#rm").checked ? localStorage : sessionStorage).setItem("sd_admin", KEY); load(); };
-  $("#pw").onkeydown = e => e.key === "Enter" && $("#go").click();
+  $("#pw").onkeydown = e => { if (e.key === "Enter") $("#go").click(); };
 }
 const api = (path, extra = "") => fetch(`${API}${path}?key=${encodeURIComponent(KEY)}${extra}`).then(async r => { if (r.status === 403) throw new Error("403"); return r.json(); });
 
