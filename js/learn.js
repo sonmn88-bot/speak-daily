@@ -79,6 +79,7 @@ function newSession(day, w, practice) {
     cast: day.cast || (S.weeks[w] || {}).cast || {}, theme: (S.weeks[w] || {}).theme || "",
     step: 0, results: {}, measure: null, steps: [], due: [], recs: {},
     stats: { start: Date.now(), listenTries: 0, listenPlays: 0, hints: 0, replays: 0, drill: {}, mode: "voice" } };
+  s.silent = isSilent(); s.stats.mode = s.silent ? "silent" : "voice";
   s.diff = difficulty(); s.stats.level = s.diff.lv;
   if (!practice) {
     const srs = S.st.srs, cap = day.type !== "learn" || monthly ? 20 : 8;
@@ -95,10 +96,10 @@ function newSession(day, w, practice) {
   const hasLines = day.lines && day.lines.length;
   if (hasLines) s.steps.push(["듣기", listen]);
   if (day.chunks && day.chunks.length) s.steps.push(["표현", study], ["드릴", drills]);
-  if (hasLines) s.steps.push(["섀도잉", shadow], ["인출", recall]);
+  if (hasLines) { if (!s.silent) s.steps.push(["섀도잉", shadow]); s.steps.push(["인출", recall]); }
   if (day.roleplay) s.steps.push(["롤플레이", roleplay]);
-  if (day.improv && day.improv.length) s.steps.push(["즉흥", improv]);
-  if (!practice && (day.type === "review_cum" || (monthly && dw === 7))) s.steps.push(["측정", measure]);
+  if (day.improv && day.improv.length && !s.silent) s.steps.push(["즉흥", improv]);
+  if (!practice && !s.silent && (day.type === "review_cum" || (monthly && dw === 7))) s.steps.push(["측정", measure]);
   s.test = testList(day);
   if (s.test.length) s.steps.push(["마무리", finalTest]);
   s.steps.push(["완료", finish]);
@@ -133,7 +134,7 @@ function renderLearn(el) {
   if (LS.lastStep !== LS.step) { LS.stepAt = Date.now(); LS.lastStep = LS.step; }
   const [, fn] = LS.steps[LS.step];
   el.innerHTML = `<header><h1>레슨 ${LS.n} ${esc(LS.theme)}${LS.practice ? " (연습 모드)" : ""}</h1><h2>${esc(LS.day.title)}</h2></header>
-    <p class="muted" style="margin-top:-8px">난이도 ${LS.diff.lv}</p>
+    <p class="muted" style="margin-top:-8px">난이도 ${LS.diff.lv} · ${LS.silent ? "🤫 조용한 모드" : "🗣 소리 모드"}</p>
     <nav class="map" aria-label="진행 단계">${LS.steps.map(([t], i) => `<div class="st ${i < LS.step ? "pass" : i === LS.step ? "cur" : ""}"><i></i>${t}</div>`).join("")}</nav>
     <button class="vbtn" id="vbtn">🔊 음성 설정</button><div id="vp"></div><section id="stage"></section>`;
   $("#vbtn").onclick = () => voicePanel($("#vp"));
@@ -144,6 +145,7 @@ const next = () => { LS.step++; renderLearn($("#view")); };
 
 // ---------- 대화 인출 (연습용, 기록 안 함) ----------
 function recall(el) {
+  if (LS.silent) return recallSilent(el);
   const L = LS.day.lines, items = [], audio = LS.diff.lv === "도전";
   L.forEach((l, i) => { if (l.sp === "B") items.push({ ko: l.ko, en: l.en, ids: l.chunks, ctx: i > 0 ? `${who("A")}: ${L[i - 1].en}` : "", ctxEn: i > 0 ? L[i - 1].en : "" }); });
   let i = 0;
@@ -166,9 +168,35 @@ function recall(el) {
   show();
 }
 
+// 조용한 모드 인출: 짧은 대사는 단어 조각 조립, 긴 대사는 3지선다
+function recallSilent(el) {
+  const L = LS.day.lines, items = L.map((l, i) => ({ l, prev: L[i - 1] })).filter(x => x.l.sp === "B"), mine = items.map(x => x.l);
+  let i = 0;
+  const show = () => {
+    if (i >= items.length) return next();
+    const { l, prev } = items[i], long = l.en.split(" ").length > 12;
+    el.innerHTML = `<div class="card"><div class="count">${i + 1} / ${items.length}</div>${prev ? `<p class="muted">${esc(who("A"))}: ${esc(prev.en)}</p>` : ""}
+      <p class="ko">${esc(l.ko)}</p><p class="muted">${long ? "알맞은 내 대사를 고르세요." : "단어를 순서대로 눌러 내 대사를 완성하세요."}</p><div id="bw"></div><div id="res"></div></div><div id="ctl"></div>`;
+    const done = ok => {
+      $("#res").innerHTML = `<p class="ko" style="margin-top:12px;color:${ok ? "var(--o)" : "var(--x)"}">${ok ? "정답!" : "정답은"}</p><div class="en">${hl(l.en, l.chunks)}</div>`;
+      $("#ctl").innerHTML = `<button class="go" id="nx">${i < items.length - 1 ? "다음" : `다음: ${nextLabel()}`}</button>`;
+      $("#nx").onclick = () => { i++; show(); };
+    };
+    if (!long) return buildWidget($("#bw"), l.en, done);
+    const opts = shuffle([l, ...shuffle(mine.filter(x => x !== l)).slice(0, 2)]);
+    $("#bw").innerHTML = opts.map((o, k) => `<button class="opt" data-o="${k}">${esc(o.en)}</button>`).join("");
+    el.querySelectorAll("[data-o]").forEach(b => b.onclick = () => {
+      el.querySelectorAll("[data-o]").forEach(x => { x.disabled = true; if (opts[+x.dataset.o] === l) x.classList.add("right"); else if (x === b) x.classList.add("wrong"); });
+      done(opts[+b.dataset.o] === l);
+    });
+  };
+  show();
+}
+
 // ---------- 워밍업·마무리: 말하기와 문장 조립을 섞어 출제, 틀리면 다시 ----------
 function quiz(el, list, onDone) {
-  const q = list.map(c => ({ c, tries: 0, fmt: Math.random() < 0.35 ? "build" : "speak" })), first = {};
+  const fmt = () => (LS.silent || Math.random() < 0.35 ? "build" : "speak");
+  const q = list.map(c => ({ c, tries: 0, fmt: fmt() })), first = {};
   const show = () => {
     if (!q.length) return onDone();
     const it = q[0], c = it.c;
@@ -176,7 +204,7 @@ function quiz(el, list, onDone) {
     const grade = r => {
       if (!(c.id in first)) { first[c.id] = r; mark([c.id], r); }
       q.shift(); it.tries++;
-      if (r !== "O" && it.tries < (LS.diff.lv === "기초" ? 4 : 3)) { it.fmt = "speak"; q.splice(Math.min(2, q.length), 0, it); }
+      if (r !== "O" && it.tries < (LS.diff.lv === "기초" ? 4 : 3)) { it.fmt = LS.silent ? "build" : "speak"; q.splice(Math.min(2, q.length), 0, it); }
       show();
     };
     if (it.fmt === "build") {
@@ -184,7 +212,7 @@ function quiz(el, list, onDone) {
       $("#q").innerHTML = `<p class="muted">단어를 순서대로 눌러 문장을 완성하세요.</p><p class="ko">${esc(t.ko)}</p><div id="bw"></div>`;
       buildWidget($("#bw"), t.en, ok => {
         $("#ans").innerHTML = `<p class="ko" style="color:${ok ? "var(--o)" : "var(--x)"}">${ok ? "정답!" : "정답은"}</p><div class="en">${hl(t.en, [c.id])}</div>`;
-        speak(t.en, { who: "B" });
+        auto(t.en, "B");
         $("#ctl").innerHTML = `<button class="go" id="nx">다음</button>`; $("#nx").onclick = () => grade(ok ? "O" : "X");
       });
       return;
@@ -209,7 +237,12 @@ async function playAll(rate) {
 function listen(el) {
   const d = LS.day; let asked = false;
   el.innerHTML = `<div class="card"><p class="muted">${esc(d.context_ko)}</p><p class="muted">자막 없이 끝까지 들어보세요.</p>
-    <button class="go" id="play">▶ 대화 듣기</button><div id="q"></div></div>`;
+    <button class="go" id="play">▶ 대화 듣기</button>${LS.silent ? `<button id="read">📖 소리 없이 대본 읽기</button>` : ""}<div id="q"></div></div>`;
+  if (LS.silent) $("#read").onclick = () => {
+    $("#read").remove();
+    $("#q").insertAdjacentHTML("beforebegin", `<div id="tx">${d.lines.map(l => `<div class="line"><div class="sp">${esc(who(l.sp))}</div>${esc(l.en)}</div>`).join("")}</div>`);
+    if (!asked) { asked = true; showQ(); }
+  };
   $("#play").onclick = async () => {
     const b = $("#play"); b.disabled = true; await playAll(1);
     if (!$("#play")) return; b.disabled = false; b.textContent = "▶ 다시 듣기";
@@ -221,6 +254,7 @@ function listen(el) {
     $("#q").querySelectorAll(".opt").forEach(b => b.onclick = () => {
       LS.stats.listenTries++;
       if (+b.dataset.i !== q.answer) { b.classList.add("wrong"); b.disabled = true; $("#fb").textContent = "다시 들어보고 골라보세요."; return; }
+      if ($("#tx")) $("#tx").remove();
       $("#q").innerHTML = `<p class="ko" style="margin-top:18px">정답이에요.</p>${d.pragmatic ? `<p class="muted">💡 ${esc(d.pragmatic)}</p>` : ""}
         <p class="muted" style="margin-top:14px">대본: 표시된 부분이 오늘 표현이에요. 문맥 속에서 어떻게 쓰였는지 보세요.</p>
         ${d.lines.map(l => `<div class="line"><div class="sp">${esc(who(l.sp))}</div>${hl(l.en, l.chunks)}<div class="muted">${esc(l.ko)}</div></div>`).join("")}
@@ -384,13 +418,18 @@ function study(el) {
       ${line ? `<div class="line on"><div class="sp">대화 속에서</div>${hl(line.en, [c.id])}<div class="muted">${esc(line.ko)}</div></div>` : ""}</div>
       ${(c.ex || []).length ? `<div class="card"><p class="muted">예문의 한국어를 보고 먼저 영어로 말해본 뒤 확인하세요.</p>
         ${c.ex.map((e, k) => `<div class="line"><div>${esc(e.ko)}</div><div id="e${k}"></div><button class="vbtn" style="margin-top:6px" data-e="${k}">영어 보기</button></div>`).join("")}</div>` : ""}
-      <p class="muted">표현을 듣고 소리 내 따라 말하세요. ${need}번 따라 하면 넘어갈 수 있어요.</p>
+      <p class="muted">${LS.silent ? "표현을 속으로 세 번 읽으며 실제로 말하는 장면을 떠올려보세요." : `표현을 듣고 소리 내 따라 말하세요. ${need}번 따라 하면 넘어갈 수 있어요.`}</p>
       <button class="go" id="rep">🔊 듣고 따라 말하기 (0/${need})</button>`;
     el.querySelectorAll("[data-e]").forEach(b => b.onclick = () => {
       const e = c.ex[b.dataset.e]; $("#e" + b.dataset.e).innerHTML = `<div class="en" style="font-size:17px">${hl(e.en, [c.id])}</div>`;
-      b.remove(); speak(e.en, { who: "B" });
+      b.remove(); auto(e.en, "B");
     });
     const b = $("#rep");
+    if (LS.silent) {
+      b.textContent = i < C.length - 1 ? "속으로 세 번 읽었어요 → 다음 표현" : `속으로 세 번 읽었어요 → ${nextLabel()}`;
+      b.onclick = () => { i++; i < C.length ? show() : next(); };
+      return;
+    }
     b.onclick = async () => {
       b.disabled = true; await speak(c.en, { who: "B" }); await sleep(1500);
       if (!$("#rep")) return;
@@ -425,7 +464,7 @@ function drills(el) {
     const done = (ok, ans) => {
       rec(it.kind, ok);
       $("#res").innerHTML = `<p class="ko" style="margin-top:12px;color:${ok ? "var(--o)" : "var(--x)"}">${ok ? "정답!" : "정답은"}</p><div class="en">${hl(ans, [it.c.id])}</div>`;
-      speak(ans, { who: "B" });
+      auto(ans, "B");
       $("#ctl").innerHTML = `<button class="go" id="nx">${i < items.length - 1 ? "다음 문제" : `다음: ${nextLabel()}`}</button>`;
       $("#nx").onclick = () => { i++; show(); };
     };
@@ -456,13 +495,22 @@ function roleplay(el) {
       <div class="line"><div class="sp">${esc(who("A"))}</div>${esc(t.a)}</div>
       <p class="ko" style="margin-top:14px">${esc(t.intent_ko)}</p><div id="hint"><button class="vbtn" id="hb">💡 힌트 보기</button></div><div id="ans"></div></div>
       <button id="hear">🔊 상대 말 다시 듣기</button><div id="ctl"><button class="go" id="rv">말한 뒤 모범 답 보기</button></div>`;
-    speak(t.a, { who: vo("A") });
+    auto(t.a, vo("A"));
     $("#hear").onclick = () => { LS.stats.replays++; speak(t.a, { who: vo("A") }); };
+    if (LS.silent) {
+      const opts = shuffle([t.model, ...shuffle(R.turns.filter(x => x !== t).map(x => x.model)).slice(0, 2)]);
+      $("#ctl").innerHTML = `<p class="muted">알맞은 대답을 고르세요.</p>` + opts.map((o, k) => `<button class="opt" data-k="${k}">${esc(o)}</button>`).join("");
+      el.querySelectorAll("#ctl [data-k]").forEach(b => b.onclick = () => {
+        el.querySelectorAll("#ctl [data-k]").forEach(x => { x.disabled = true; if (opts[+x.dataset.k] === t.model) x.classList.add("right"); else if (x === b) x.classList.add("wrong"); });
+        $("#ctl").insertAdjacentHTML("beforeend", `<button class="go" id="nx">${i < R.turns.length - 1 ? "다음 턴" : `다음: ${nextLabel()}`}</button>`);
+        $("#nx").onclick = () => { i++; i < R.turns.length ? show() : next(); };
+      });
+    }
     $("#hb").onclick = () => {
       LS.stats.hints++; $("#hint").innerHTML = `<p class="muted">쓸 표현: ${esc(t.hint)}</p>`;
       mark((LS.day.chunks || []).filter(c => findCore(t.hint, c)).map(c => c.id), "T"); // 힌트를 본 표현은 복습에 △로 반영
     };
-    $("#rv").onclick = () => {
+    if ($("#rv")) $("#rv").onclick = () => {
       $("#ans").innerHTML = `<div class="line on"><div class="sp">모범 답</div>${esc(t.model)}</div>`;
       speak(t.model, { who: "B" });
       $("#ctl").innerHTML = `<button id="ag">🔊 모범 답 다시 듣기</button><button class="go" id="nx">${i < R.turns.length - 1 ? "다음 턴" : `다음: ${nextLabel()}`}</button>`;

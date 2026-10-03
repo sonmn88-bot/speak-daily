@@ -83,6 +83,10 @@ function speak(text, { rate = 1, who = "A" } = {}) {
   });
 }
 const stopAudio = () => { try { speechSynthesis.cancel(); } catch (e) {} };
+// 조용한 모드: 말하기 대신 단어 조각 맞추기, 자동 재생 끔
+const isSilent = () => { try { return localStorage.getItem("sd_silent") === "1"; } catch (e) { return false; } };
+const setSilent = v => { try { localStorage.setItem("sd_silent", v ? "1" : "0"); } catch (e) {} };
+const auto = (text, w) => (LS && LS.silent ? Promise.resolve() : speak(text, { who: w }));
 
 // ---------- 녹음 (발음 비교·월간 테스트) ----------
 let CUR_REC = null;
