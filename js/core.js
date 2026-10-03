@@ -121,6 +121,26 @@ function voicePanel(box) {
   $("#tb").onclick = () => { stopAudio(); speak("No way! Good for you!", { who: "B" }); };
 }
 
+// ---------- 행동 기록 (관리자 분석용) ----------
+let EVQ = [];
+function track(type, data = {}) { EVQ.push({ t: Date.now(), type, ...data }); if (EVQ.length >= 40) flush(); }
+function flush() { // text/plain 전송이라 페이지를 닫는 순간에도 보내짐
+  if (!EVQ.length || !KEY) return;
+  const url = `${API}/api/events?k=${encodeURIComponent(KEY)}`, body = JSON.stringify({ events: EVQ }); EVQ = [];
+  try { if (!(navigator.sendBeacon && navigator.sendBeacon(url, body))) fetch(url, { method: "POST", body, keepalive: true }); } catch (e) {}
+}
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState !== "hidden") return;
+  if (LS && !LS.practice) track("leave", { lesson: LS.n, step: (LS.steps[LS.step] || [""])[0] });
+  flush();
+});
+function device() {
+  const ua = navigator.userAgent;
+  const d = /iPhone/.test(ua) ? "iPhone" : /iPad|Macintosh.*Mobile/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? "iPad" : /Android/.test(ua) ? "Android" : /Mac/.test(ua) ? "Mac" : /Windows/.test(ua) ? "Windows" : "기타";
+  const app = /KAKAOTALK/i.test(ua) ? "카톡" : navigator.standalone || matchMedia("(display-mode: standalone)").matches ? "홈앱" : "브라우저";
+  return { dev: d, app };
+}
+
 // ---------- 화면 전환 ----------
 const ROUTES = {};
 function fail(msg) { $("#view").innerHTML = `<div class="card"><p class="ko">${esc(msg)}</p></div>`; }
@@ -130,6 +150,7 @@ function route() {
   const parts = (location.hash.slice(1) || "home").split("/");
   const name = ROUTES[parts[0]] ? parts[0] : "home";
   document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.r === name));
+  track("view", { r: name });
   ROUTES[name]($("#view"), parts.slice(1));
   window.scrollTo(0, 0);
 }
@@ -139,5 +160,6 @@ async function boot() {
   if (!KEY) return fail("카톡 알림의 버튼으로 한 번 열어주세요. 처음 한 번 열면 이 기기에 접속 정보가 저장돼요.");
   try { await loadAll(); }
   catch (e) { return fail(`서버에 연결하지 못했어요. 네트워크를 확인하고 새로고침하세요. (${e.message})`); }
+  track("open", { src: qs.get("src") || "direct", lesson: S.n, ...device() }); flush();
   route();
 }

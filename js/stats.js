@@ -6,25 +6,28 @@ const dayLabel = d => (d <= 5 ? `${d}일` : d === 6 ? "주간" : "누적");
 
 // ---------- 홈 ----------
 ROUTES.home = el => {
-  const t = S.st.today, done = !!t.done, srs = S.st.srs;
+  const t = S.st.today, done = !!t.done, srs = S.st.srs, cnt = t.lessons || (done ? 1 : 0);
   const dueCount = Object.values(srs).filter(it => it.due <= S.st.date && !it.grad).length;
-  const doneDates = new Set(S.st.history.map(h => h.date));
   const cells = [1, 2, 3, 4, 5, 6, 7].map(d => {
-    const n = dayN(S.week, d), date = dateOfN(n);
-    const cls = doneDates.has(date) ? "done" : n === S.n ? "today" : n < S.n ? "miss" : "";
-    return `<div class="${cls}"><b>${doneDates.has(date) ? "✓" : d}</b>${dayLabel(d)}</div>`;
+    const n = dayN(S.week, d), cls = n < S.n ? "done" : n === S.n ? "today" : "";
+    return `<div class="${cls}"><b>${n < S.n ? "✓" : d}</b>${dayLabel(d)}</div>`;
   }).join("");
-  el.innerHTML = `<header><h1>${S.st.date} D+${S.n}</h1><h2>${esc(S.st.label)}</h2></header>
+  const startLabel = done ? (cnt < MAX_PER_DAY && S.today ? `레슨 ${S.n} 이어서 하기` : "기록 탭에서 복습하기") : LS && !LS.practice ? "이어서 학습하기" : `레슨 ${S.n} 시작`;
+  el.innerHTML = `<header><h1>${S.st.date} 레슨 ${S.n}</h1><h2>${esc(S.st.label)}</h2></header>
     <div class="card"><p class="ko">${done ? "오늘 학습 완료" : "오늘 과제가 남아 있어요"}</p>
-      <p class="muted">${done ? "오늘 알림은 더 오지 않아요." : `지금까지 받은 알림 ${t.alarms || 0}번. 완료하면 알림이 멈춰요.`}</p>
-      <button class="go" id="start">${done ? "오늘 대화 다시 연습" : LS && !LS.practice ? "이어서 학습하기" : "오늘 학습 시작"}</button></div>
+      <p class="muted">${done ? `오늘 ${cnt}레슨 완료. 오늘 알림은 더 오지 않아요.${cnt < MAX_PER_DAY ? " 놓친 진도가 있으면 한 레슨 더 할 수 있어요." : ""}` : `지금까지 받은 알림 ${t.alarms || 0}번. 완료하면 알림이 멈춰요.`}</p>
+      <button class="go" id="start">${startLabel}</button></div>
     <div class="card"><h3>${S.week}주차</h3><div class="wk">${cells}</div>
       <p class="muted">연속 ${streak()}일째 학습 중이고, 오늘 복습할 표현이 ${dueCount}개 있어요.</p></div>
     ${missionCard()}${S.st.monthly && S.st.monthly[S.st.date.slice(0, 7)] ? "" : `<div class="card"><p class="ko">이번 달 기준 테스트를 아직 안 했어요</p>
       <p class="muted">매달 같은 질문 3개에 답해 녹음해두면, 달마다 내 말하기가 어떻게 달라졌는지 직접 들을 수 있어요. 약 5분.</p><button id="mt">기준 테스트 하기</button></div>`}
     <div class="row"><button id="rv">🗂 지난 대화</button><button id="an">📈 분석</button></div>`;
   if ($("#mt")) $("#mt").onclick = () => location.hash = "mtest";
-  $("#start").onclick = () => { if (LS && LS.practice && !done) LS = null; location.hash = "learn"; };
+  $("#start").onclick = () => {
+    if (done && !(cnt < MAX_PER_DAY && S.today)) return (location.hash = "review");
+    if (LS && LS.practice) LS = null;
+    location.hash = "learn";
+  };
   $("#rv").onclick = () => location.hash = "review";
   $("#an").onclick = () => location.hash = "stats";
 };
