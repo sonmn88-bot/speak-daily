@@ -137,7 +137,9 @@
        "en": "Hey, long time no see. How have you been?",
        "ko": "야, 오랜만이다. 어떻게 지냈어?"
       }
-     ]
+     ],
+     "use_ko": "오랜만에 아는 사람을 만났을 때",
+     "sound": "네 단어를 같은 박자로, see를 길게"
     },
     {
      "id": "w2c02",
@@ -153,7 +155,9 @@
        "en": "How's it going with the new job?",
        "ko": "새 일은 어떻게 돼 가?"
       }
-     ]
+     ],
+     "use_ko": "가볍게 안부를 물을 때",
+     "sound": "'하우짓고잉?' How's it이 한 덩어리"
     },
     {
      "id": "w2c03",
@@ -169,7 +173,9 @@
        "en": "What have you been up to lately?",
        "ko": "요즘 뭐 하고 지내?"
       }
-     ]
+     ],
+     "use_ko": "한동안 못 본 사람에게 근황을 물을 때",
+     "sound": "What have you가 '와래뷰', been up to가 '비넙투'"
     },
     {
      "id": "w2c04",
@@ -185,7 +191,9 @@
        "en": "Wow, it's been a while! Two years?",
        "ko": "와, 꽤 됐다! 2년?"
       }
-     ]
+     ],
+     "use_ko": "마지막으로 본 지 꽤 됐다고 느낄 때",
+     "sound": "It's가 '츠'로 약해져 '츠빈어와일'"
     },
     {
      "id": "w2c05",
@@ -201,7 +209,9 @@
        "en": "Same old, same old. Just busy.",
        "ko": "늘 똑같아. 그냥 바빠."
       }
-     ]
+     ],
+     "use_ko": "별일 없이 지냈다고 답할 때",
+     "sound": "'세임올드' 두 번, 두 번째는 살짝 내려요"
     }
    ],
    "pragmatic": "How's it going?에 진지하게 답할 필요 없어요. Good! / Not bad!처럼 짧게 답하고 질문을 돌려주는 게 원어민식 인사예요.",
@@ -364,7 +374,9 @@
        "en": "It's freezing today, isn't it? I forgot my gloves.",
        "ko": "오늘 진짜 춥네요, 그렇죠? 장갑을 깜빡했어요."
       }
-     ]
+     ],
+     "use_ko": "날씨로 처음 보는 사람에게 말을 걸 때",
+     "sound": "isn't it이 '이즌잇'으로 붙고 끝을 내려요"
     },
     {
      "id": "w2c07",
@@ -380,7 +392,9 @@
        "en": "What a view! It's beautiful.",
        "ko": "경치 끝내준다! 정말 예뻐."
       }
-     ]
+     ],
+     "use_ko": "날씨나 풍경에 감탄할 때",
+     "sound": "What a가 '와러'로 붙어요"
     },
     {
      "id": "w2c08",
@@ -396,7 +410,9 @@
        "en": "Is this seat taken, or can I sit here?",
        "ko": "자리 있어요, 아니면 앉아도 돼요?"
       }
-     ]
+     ],
+     "use_ko": "빈자리에 앉아도 되는지 물을 때",
+     "sound": "Is this가 붙어 '이디스', taken은 '테이큰'"
     },
     {
      "id": "w2c09",
@@ -412,7 +428,9 @@
        "en": "Have you been to this museum before?",
        "ko": "이 박물관 와본 적 있어요?"
       }
-     ]
+     ],
+     "use_ko": "같은 장소에 있는 사람에게 대화를 시작할 때",
+     "sound": "Have you가 '해뷰', been here가 '비니어'"
     },
     {
      "id": "w2c10",
@@ -428,7 +446,9 @@
        "en": "I love your bag. It's so cute.",
        "ko": "가방 정말 귀엽다."
       }
-     ]
+     ],
+     "use_ko": "상대의 옷이나 물건을 칭찬할 때",
+     "sound": "love your가 '러뷰어'로 붙어요"
     }
    ],
    "pragmatic": "처음 보는 사람에게는 날씨나 주변 사물처럼 둘 다 보고 있는 것부터 꺼내요. 개인적인 질문은 대화가 조금 이어진 뒤에 해요.",
@@ -593,7 +613,9 @@
        "en": "Me too! I watched it twice.",
        "ko": "나도! 두 번 봤어."
       }
-     ]
+     ],
+     "use_ko": "상대가 좋아하거나 한 일을 나도 그럴 때",
+     "sound": "too를 높고 길게"
     },
     {
      "id": "w2c12",
@@ -609,7 +631,9 @@
        "en": "Same here. I can't wait for the weekend.",
        "ko": "나도 그래. 주말이 너무 기다려져."
       }
-     ]
+     ],
+     "use_ko": "상대가 처한 상황이 나도 똑같을 때",
+     "sound": "here를 살짝 강조해 '세임히어'"
     },
     {
      "id": "w2c13",
@@ -625,7 +649,9 @@
        "en": "I'm not a morning person. — Me neither!",
        "ko": "난 아침형 인간이 아니야. — 나도!"
       }
-     ]
+     ],
+     "use_ko": "상대가 '나는 안 그래'라고 할 때",
+     "sound": "neither는 '니더', '나이더' 둘 다 써요"
     },
     {
      "id": "w2c14",
@@ -641,7 +667,9 @@
        "en": "What do you do for fun around here?",
        "ko": "이 동네에선 뭐 하고 놀아요?"
       }
-     ]
+     ],
+     "use_ko": "상대의 취미를 물을 때",
+     "sound": "What do you do가 '와루유두'로 빠르게"
     },
     {
      "id": "w2c15",
@@ -657,7 +685,9 @@
        "en": "A cooking class? That sounds like fun.",
        "ko": "요리 수업? 재밌겠다."
       }
-     ]
+     ],
+     "use_ko": "상대 계획이나 활동에 관심을 보일 때",
+     "sound": "sounds like가 '사운즐라익'으로 이어져요"
     }
    ],
    "pragmatic": "Me too.는 긍정문에, Me neither.는 부정문에 맞장구칠 때 써요. 공통점을 찾으면 처음 만난 사이도 빠르게 가까워져요.",
@@ -813,7 +843,9 @@
        "en": "Things have been crazy lately at work.",
        "ko": "요즘 회사가 정신없어."
       }
-     ]
+     ],
+     "use_ko": "요즘 바빴다고 근황을 말할 때",
+     "sound": "Things have가 '띵즈브'로 줄어요"
     },
     {
      "id": "w2c17",
@@ -829,7 +861,9 @@
        "en": "I've been meaning to read that book.",
        "ko": "그 책 읽으려고 계속 벼르고 있었어."
       }
-     ]
+     ],
+     "use_ko": "하려던 일을 아직 못 했을 때",
+     "sound": "I've been이 '아입빈', meaning to가 '미닝투'"
     },
     {
      "id": "w2c18",
@@ -845,7 +879,9 @@
        "en": "Not much, just the usual.",
        "ko": "별거 없어, 그냥 늘 하던 거."
       }
-     ]
+     ],
+     "use_ko": "특별한 일 없다고 가볍게 답할 때",
+     "sound": "Not much의 t가 사라져 '나머치'"
     },
     {
      "id": "w2c19",
@@ -861,7 +897,9 @@
        "en": "I'm thinking about moving next year.",
        "ko": "내년에 이사할까 생각 중이야."
       }
-     ]
+     ],
+     "use_ko": "아직 확정 안 된 계획을 말할 때",
+     "sound": "thinking about이 '띵킹어바웃'으로 이어져요"
     },
     {
      "id": "w2c20",
@@ -877,7 +915,9 @@
        "en": "It's been a long week. I need a nap.",
        "ko": "긴 한 주였어. 낮잠이 필요해."
       }
-     ]
+     ],
+     "use_ko": "지친 한 주를 마무리하며 말할 때",
+     "sound": "been a가 '비너'로 붙어요"
     }
    ],
    "pragmatic": "How's your week going?에 Fine.만 하면 대화가 끝나요. 근황 한 줄과 이유를 덧붙이면 상대가 이어서 물어볼 거리가 생겨요.",
@@ -1042,7 +1082,9 @@
        "en": "I should get going. I have an early meeting.",
        "ko": "가봐야겠어. 아침 일찍 회의가 있어서."
       }
-     ]
+     ],
+     "use_ko": "대화를 끝내고 떠나야 할 때",
+     "sound": "should get이 '슈겟', get going은 t가 약해 '게고잉'"
     },
     {
      "id": "w2c22",
@@ -1058,7 +1100,9 @@
        "en": "It was so nice talking to you again.",
        "ko": "다시 얘기하게 돼서 정말 좋았어."
       }
-     ]
+     ],
+     "use_ko": "헤어지며 대화가 즐거웠다고 할 때",
+     "sound": "It was가 '이워즈', talking to you가 '토킹투유'"
     },
     {
      "id": "w2c23",
@@ -1074,7 +1118,9 @@
        "en": "Let's catch up soon over coffee.",
        "ko": "조만간 커피 한잔하면서 얘기하자."
       }
-     ]
+     ],
+     "use_ko": "친구와 다음 만남을 기약할 때",
+     "sound": "catch up이 '캐첩'으로 붙어요"
     },
     {
      "id": "w2c24",
@@ -1090,7 +1136,9 @@
        "en": "Let me know if you're free this weekend.",
        "ko": "이번 주말에 시간 되면 알려줘."
       }
-     ]
+     ],
+     "use_ko": "연락이나 도움의 여지를 남길 때",
+     "sound": "Let me know가 '레미노우'로 붙어요"
     },
     {
      "id": "w2c25",
@@ -1106,7 +1154,9 @@
        "en": "Take care, and say hi to your family.",
        "ko": "잘 지내고, 가족들한테 안부 전해줘."
       }
-     ]
+     ],
+     "use_ko": "헤어질 때 따뜻하게 인사할 때",
+     "sound": "care를 길게 '테익케어'"
     }
    ],
    "pragmatic": "영어권에서는 대화를 갑자기 끊지 않아요. I should get going.으로 신호를 주고, 즐거웠다는 말과 다음 약속으로 부드럽게 마무리해요.",

@@ -126,7 +126,9 @@
        "en": "Really? I had no idea.",
        "ko": "진짜요? 전혀 몰랐어요."
       }
-     ]
+     ],
+     "use_ko": "상대 말이 놀랍거나 믿기 어려울 때",
+     "sound": "'뤼을리'에 가깝게 r을 굴리고, 놀랐으면 끝을 확 올려요"
     },
     {
      "id": "w1c02",
@@ -142,7 +144,9 @@
        "en": "No way! This place is still open?",
        "ko": "말도 안 돼! 여기 아직 영업해?"
       }
-     ]
+     ],
+     "use_ko": "깜짝 놀랄 만한 소식을 들었을 때",
+     "sound": "'노웨이' 한 덩어리로, way를 길고 세게"
     },
     {
      "id": "w1c03",
@@ -158,7 +162,9 @@
        "en": "That makes sense. The traffic was terrible.",
        "ko": "그럴 만하네요. 차가 엄청 막혔잖아요."
       }
-     ]
+     ],
+     "use_ko": "상대 설명을 듣고 이유가 이해될 때",
+     "sound": "makes sense가 이어져 '메익쎈스', That은 약하게"
     },
     {
      "id": "w1c04",
@@ -174,7 +180,9 @@
        "en": "I know, right? It's so expensive now.",
        "ko": "그러니까요! 요즘 너무 비싸요."
       }
-     ]
+     ],
+     "use_ko": "상대 말에 강하게 공감할 때",
+     "sound": "'아이노우롸잇?' right의 t는 거의 안 들리고 끝을 올려요"
     },
     {
      "id": "w1c05",
@@ -190,7 +198,9 @@
        "en": "You finally quit smoking? Good for you!",
        "ko": "드디어 담배 끊었어? 잘했네!"
       }
-     ]
+     ],
+     "use_ko": "상대의 좋은 소식을 축하할 때",
+     "sound": "for가 약해져 '굿퍼유', you를 강하게"
     }
    ],
    "pragmatic": "영어 대화에서는 맞장구를 안 하면 관심 없다는 신호로 받아들여요. 상대가 말을 멈추면 짧게라도 꼭 반응하세요.",
@@ -348,7 +358,9 @@
        "en": "Sorry, I didn't catch that. The music is too loud.",
        "ko": "미안, 못 들었어. 음악이 너무 커."
       }
-     ]
+     ],
+     "use_ko": "상대 말을 잘 못 들었을 때",
+     "sound": "didn't의 t가 사라져 '디든', catch that이 붙어 '캐치댓'"
     },
     {
      "id": "w1c07",
@@ -364,7 +376,9 @@
        "en": "Sorry, could you say that again more slowly?",
        "ko": "미안한데 좀 천천히 다시 말해줄래요?"
       }
-     ]
+     ],
+     "use_ko": "같은 말을 한 번 더 부탁할 때",
+     "sound": "Could you가 '쿠쥬'로 붙어요"
     },
     {
      "id": "w1c08",
@@ -380,7 +394,9 @@
        "en": "What do you mean by that?",
        "ko": "그게 무슨 말이에요?"
       }
-     ]
+     ],
+     "use_ko": "모르는 단어나 표현의 뜻을 물을 때",
+     "sound": "What do you가 '와루유'처럼 빠르게 뭉개져요"
     },
     {
      "id": "w1c09",
@@ -396,7 +412,9 @@
        "en": "You mean we have to wait an hour?",
        "ko": "한 시간 기다려야 한다는 말이에요?"
       }
-     ]
+     ],
+     "use_ko": "내가 이해한 내용이 맞는지 확인할 때",
+     "sound": "'유민?' 한 박자로, 끝을 올려요"
     },
     {
      "id": "w1c10",
@@ -412,7 +430,9 @@
        "en": "Sorry, could you speak a little slower?",
        "ko": "죄송한데 조금만 천천히 말해주실래요?"
       }
-     ]
+     ],
+     "use_ko": "상대가 너무 빨리 말할 때",
+     "sound": "'쿠쥬', a little은 t가 부드러워져 '어리를'"
     }
    ],
    "pragmatic": "What?이라고만 되물으면 무례하게 들릴 수 있어요. Sorry를 앞에 붙이거나 Could you ~?로 부드럽게 되물으세요.",
@@ -567,7 +587,9 @@
        "en": "Hmm, let me think about it.",
        "ko": "음, 좀 생각해볼게요."
       }
-     ]
+     ],
+     "use_ko": "대답하기 전에 생각할 시간이 필요할 때",
+     "sound": "Let me가 '레미'로 붙어요"
     },
     {
      "id": "w1c12",
@@ -583,7 +605,9 @@
        "en": "Why Seoul? That's a good question.",
        "ko": "왜 서울이냐고요? 좋은 질문이네요."
       }
-     ]
+     ],
+     "use_ko": "어려운 질문을 받아 시간을 벌 때",
+     "sound": "That's a가 '댓처', good question은 d가 약해져 '구퀘스천'"
     },
     {
      "id": "w1c13",
@@ -599,7 +623,9 @@
        "en": "It was, how can I put it, a little awkward.",
        "ko": "그게, 뭐라고 해야 하나, 좀 어색했어요."
       }
-     ]
+     ],
+     "use_ko": "적당한 말을 고르는 중일 때",
+     "sound": "can I가 '캐나이', put it이 '푸릿'으로 이어져요"
     },
     {
      "id": "w1c14",
@@ -615,7 +641,9 @@
        "en": "I just need a break, you know what I mean?",
        "ko": "그냥 좀 쉬고 싶어요, 무슨 말인지 알죠?"
       }
-     ]
+     ],
+     "use_ko": "내 설명을 상대가 이해했는지 확인할 때",
+     "sound": "'유노와라이민?' what I가 '와라이'로 붙어요"
     },
     {
      "id": "w1c15",
@@ -631,7 +659,9 @@
        "en": "It's kind of like a small festival.",
        "ko": "작은 축제 같은 거예요."
       }
-     ]
+     ],
+     "use_ko": "비슷한 것에 빗대어 설명할 때",
+     "sound": "kind of가 '카인더'로 줄어들어요"
     }
    ],
    "pragmatic": "대답이 바로 안 나올 때 침묵보다 Let me think. 같은 시간 벌기 표현이 훨씬 자연스러워요. 원어민도 생각할 시간을 이렇게 벌어요.",
@@ -790,7 +820,9 @@
        "en": "I'll have a latte. How about you?",
        "ko": "전 라떼 마실래요. 당신은요?"
       }
-     ]
+     ],
+     "use_ko": "내 대답 뒤에 같은 질문을 돌려줄 때",
+     "sound": "about you가 '어바웃츄'로 붙어요"
     },
     {
      "id": "w1c17",
@@ -806,7 +838,9 @@
        "en": "How was it? Was it worth the wait?",
        "ko": "어땠어요? 기다린 보람이 있었어요?"
       }
-     ]
+     ],
+     "use_ko": "상대 경험의 소감을 물을 때",
+     "sound": "was it이 '워짓'으로 붙어요"
     },
     {
      "id": "w1c18",
@@ -822,7 +856,9 @@
        "en": "What made you change your mind?",
        "ko": "왜 마음이 바뀌었어요?"
       }
-     ]
+     ],
+     "use_ko": "상대가 그렇게 한 이유를 부드럽게 물을 때",
+     "sound": "made you가 '메이쥬'로 붙어요"
     },
     {
      "id": "w1c19",
@@ -838,7 +874,9 @@
        "en": "That sounds interesting. Tell me more about it.",
        "ko": "재밌겠네요. 더 얘기해줘요."
       }
-     ]
+     ],
+     "use_ko": "상대 이야기를 더 듣고 싶을 때",
+     "sound": "about it이 '어바우릿'으로 이어져요"
     },
     {
      "id": "w1c20",
@@ -854,7 +892,9 @@
        "en": "And then? So what happened next?",
        "ko": "그리고요? 그래서 어떻게 됐어요?"
       }
-     ]
+     ],
+     "use_ko": "이야기의 다음 전개가 궁금할 때",
+     "sound": "what happened가 '와래픈드', next는 t가 약해 '넥스'"
     }
    ],
    "pragmatic": "대답만 하고 끝내면 대화가 끊겨요. 답한 뒤 How about you?로 공을 넘기는 게 스몰토크의 기본 규칙이에요.",
@@ -1011,7 +1051,9 @@
        "en": "She's very, what's the word, generous.",
        "ko": "그녀는 아주, 뭐더라, 너그러워요."
       }
-     ]
+     ],
+     "use_ko": "단어가 혀끝에서 맴돌 때",
+     "sound": "What's the가 '왓츠더'로 빠르게, word를 길게 끌어요"
     },
     {
      "id": "w1c22",
@@ -1027,7 +1069,9 @@
        "en": "I'm not sure how to say this in English. It's a feeling of deep sadness.",
        "ko": "영어로 어떻게 말할지 모르겠어요. 깊은 슬픔 같은 감정이에요."
       }
-     ]
+     ],
+     "use_ko": "영어로 딱 맞는 말이 없는 걸 설명하기 시작할 때",
+     "sound": "not sure가 '낫슈어', how to가 '하우루'"
     },
     {
      "id": "w1c23",
@@ -1043,7 +1087,9 @@
        "en": "He said something like \"see you later.\"",
        "ko": "그가 \"나중에 봐\" 비슷한 말을 했어요."
       }
-     ]
+     ],
+     "use_ko": "정확한 숫자나 이름이 기억나지 않을 때",
+     "sound": "'썸띵라익', th는 혀끝을 살짝 물어요"
     },
     {
      "id": "w1c24",
@@ -1059,7 +1105,9 @@
        "en": "I like it. I mean, it's not perfect, but I like it.",
        "ko": "좋아요. 그러니까, 완벽하진 않지만 좋아요."
       }
-     ]
+     ],
+     "use_ko": "방금 한 말을 더 구체적으로 고쳐 말할 때",
+     "sound": "'아이민' 짧게 말하고 살짝 쉬어요"
     },
     {
      "id": "w1c25",
@@ -1075,7 +1123,9 @@
        "en": "Okay, let me put it another way.",
        "ko": "좋아요, 다르게 말해볼게요."
       }
-     ]
+     ],
+     "use_ko": "상대가 이해 못 해서 설명을 바꿀 때",
+     "sound": "Let me '레미', put it '푸릿'으로 이어져요"
     }
    ],
    "pragmatic": "딱 맞는 단어가 생각 안 나도 멈추지 마세요. What's the word...로 시간을 벌고 쉬운 말로 풀어 설명하는 돌려 말하기가 회화 실력의 핵심이에요.",
