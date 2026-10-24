@@ -1,0 +1,1487 @@
+{
+ "week": 4,
+ "theme": "뉴욕 도착과 이동",
+ "cast": {
+  "A": {
+   "name": "Mia",
+   "gender": "f",
+   "desc": "서울에 있는 친구"
+  }
+ },
+ "days": [
+  {
+   "day": 1,
+   "type": "learn",
+   "title": "입국심사 통과하기",
+   "cast": {
+    "A": {
+     "name": "Officer Diaz",
+     "gender": "m",
+     "desc": "JFK 공항 입국심사관"
+    }
+   },
+   "context_ko": "11월 말, 여자친구와 뉴욕 JFK 공항에 도착했어요. 입국심사대에서 심사관이 질문을 해요.",
+   "listen_q": {
+    "q": "'나'는 뉴욕에 얼마나 머무나요?",
+    "options": [
+     "7일",
+     "3일",
+     "2주",
+     "한 달"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Next, please. Passport?",
+     "ko": "다음 분이요. 여권 주세요."
+    },
+    {
+     "sp": "B",
+     "en": "Hi. Here's my passport.",
+     "ko": "안녕하세요. 여기 제 여권이요.",
+     "chunks": [
+      "w4c05"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "What's the purpose of your visit?",
+     "ko": "방문 목적이 뭔가요?"
+    },
+    {
+     "sp": "B",
+     "en": "I'm here for sightseeing. And some shopping.",
+     "ko": "관광하러 왔어요. 쇼핑도 좀 하고요.",
+     "chunks": [
+      "w4c01"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "How long are you staying?",
+     "ko": "얼마나 머무르세요?"
+    },
+    {
+     "sp": "B",
+     "en": "I'm staying for seven days.",
+     "ko": "7일 동안 있어요.",
+     "chunks": [
+      "w4c02"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Where are you staying?",
+     "ko": "어디서 지내세요?"
+    },
+    {
+     "sp": "B",
+     "en": "Sorry, I didn't catch that.",
+     "ko": "죄송한데, 잘 못 들었어요.",
+     "chunks": [
+      "w1c06"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Your hotel. Where are you staying?",
+     "ko": "호텔이요. 어디서 묵으세요?"
+    },
+    {
+     "sp": "B",
+     "en": "Oh, I'm staying at a hotel in Midtown, near Times Square.",
+     "ko": "아, 타임스스퀘어 근처 미드타운 호텔에서 묵어요.",
+     "chunks": [
+      "w4c03"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Are you traveling alone?",
+     "ko": "혼자 여행하세요?"
+    },
+    {
+     "sp": "B",
+     "en": "No, with my girlfriend. This is my first time in New York.",
+     "ko": "아니요, 여자친구랑요. 뉴욕은 처음이에요.",
+     "chunks": [
+      "w4c04"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Welcome to New York. Enjoy your stay.",
+     "ko": "뉴욕에 오신 걸 환영해요. 즐거운 시간 보내세요."
+    },
+    {
+     "sp": "B",
+     "en": "Thank you. Have a good one!",
+     "ko": "감사합니다. 좋은 하루 보내세요!",
+     "chunks": []
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w4c01",
+     "en": "I'm here for ~.",
+     "ko": "~하러 왔어요.",
+     "use_ko": "입국심사에서 방문 목적을 물을 때",
+     "note": "sightseeing(관광), a friend's wedding처럼 for 뒤에 목적을 넣어 짧게 답해요. 휴가·출장은 I'm here on vacation / on business처럼 on을 써요.",
+     "sound": "I'm here for가 이어져 '아임히어r퍼', for는 약하게 '퍼'.",
+     "ex": [
+      {
+       "en": "I'm here for a conference.",
+       "ko": "학회 때문에 왔어요."
+      },
+      {
+       "en": "I'm here for a friend's wedding.",
+       "ko": "친구 결혼식 때문에 왔어요."
+      }
+     ]
+    },
+    {
+     "id": "w4c02",
+     "en": "I'm staying for ~.",
+     "ko": "~ 동안 있어요.",
+     "use_ko": "체류 기간을 물을 때",
+     "note": "기간은 seven days, a week, ten days처럼 말해요. 날짜보다 기간으로 답하는 게 보통이에요.",
+     "sound": "staying for가 '스떼잉퍼'로 이어지고, s 뒤의 t는 된소리처럼 '떼'.",
+     "ex": [
+      {
+       "en": "I'm staying for a week.",
+       "ko": "일주일 있어요."
+      },
+      {
+       "en": "I'm staying for ten days.",
+       "ko": "열흘 있어요."
+      }
+     ]
+    },
+    {
+     "id": "w4c03",
+     "en": "I'm staying at ~.",
+     "ko": "~에서 묵어요.",
+     "use_ko": "숙소를 물을 때",
+     "note": "호텔 이름이나 지역을 말해요. 예약 확인서를 휴대폰에 띄워두면 바로 보여줄 수 있어요.",
+     "sound": "staying at이 붙어 '스떼잉앳', at의 t는 거의 안 들려요.",
+     "ex": [
+      {
+       "en": "I'm staying at the Hilton in Midtown.",
+       "ko": "미드타운 힐튼에서 묵어요."
+      },
+      {
+       "en": "I'm staying at my friend's place in Brooklyn.",
+       "ko": "브루클린 친구 집에서 지내요."
+      }
+     ]
+    },
+    {
+     "id": "w4c04",
+     "en": "This is my first time in ~.",
+     "ko": "~는 처음이에요.",
+     "use_ko": "처음 온 곳이라고 말할 때",
+     "note": "입국심사뿐 아니라 현지인과 스몰토크를 시작할 때도 좋아요. 사람들이 추천을 많이 해줘요.",
+     "sound": "first time은 t가 연달아 나와 앞 t를 거의 삼켜 '퍼스타임'.",
+     "ex": [
+      {
+       "en": "This is my first time in the U.S.",
+       "ko": "미국은 처음이에요."
+      },
+      {
+       "en": "This is my first time in this neighborhood.",
+       "ko": "이 동네는 처음이에요."
+      }
+     ]
+    },
+    {
+     "id": "w4c05",
+     "en": "Here's my ~.",
+     "ko": "여기 제 ~요.",
+     "use_ko": "서류나 물건을 건넬 때",
+     "note": "여권, 티켓, 예약 확인서를 건넬 때 써요. Here you go.도 같이 알아두세요.",
+     "sound": "Here's my가 이어져 '히어r즈마이'.",
+     "ex": [
+      {
+       "en": "Here's my return ticket.",
+       "ko": "여기 제 귀국 항공권이요."
+      },
+      {
+       "en": "Here's my hotel reservation.",
+       "ko": "여기 호텔 예약 확인서요."
+      }
+     ]
+    }
+   ],
+   "pragmatic": "입국심사에서는 질문에 짧고 분명하게 답하는 게 가장 좋아요. 못 알아들었으면 짐작해서 대답하지 말고 Sorry, could you say that again? 처럼 꼭 되물으세요.",
+   "roleplay": {
+    "situation_ko": "입국심사대에서 심사관이 질문해요. 오늘 표현으로 답하세요.",
+    "turns": [
+     {
+      "a": "Good afternoon. Passport, please.",
+      "intent_ko": "여권을 건네세요.",
+      "hint": "Here's my ~.",
+      "model": "Hi. Here's my passport."
+     },
+     {
+      "a": "What brings you to New York?",
+      "intent_ko": "관광하러 왔다고 하세요.",
+      "hint": "I'm here for ~.",
+      "model": "I'm here for sightseeing."
+     },
+     {
+      "a": "How long will you be here?",
+      "intent_ko": "열흘 있는다고 하세요.",
+      "hint": "I'm staying for ~.",
+      "model": "I'm staying for ten days."
+     },
+     {
+      "a": "Do you have a return ticket?",
+      "intent_ko": "귀국 항공권이 있는지 물어요. 보여주면서 대답하세요.",
+      "hint": "",
+      "model": "Yes, here's my return ticket.",
+      "model_alt": "Yes, I do. Here it is."
+     },
+     {
+      "a": "And where are you staying?",
+      "intent_ko": "브루클린 호텔에서 묵는다고 하세요.",
+      "hint": "I'm staying at ~.",
+      "model": "I'm staying at a hotel in Brooklyn."
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "입국심사관이 방문 목적, 기간, 숙소, 동행, 뉴욕 방문 여부를 차례로 물어요. 오늘 표현으로 막힘 없이 대답해보세요.",
+     "starter_en": "Passport, please. What's the purpose of your trip?"
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "type": "learn",
+   "title": "공항에서 시내로 가는 길 묻기",
+   "cast": {
+    "A": {
+     "name": "Kim",
+     "gender": "f",
+     "desc": "JFK 공항 안내 데스크 직원"
+    }
+   },
+   "context_ko": "짐을 찾고 나왔어요. 맨해튼 호텔까지 어떻게 갈지 안내 데스크에 물어봐요.",
+   "listen_q": {
+    "q": "직원이 알려준 가장 저렴한 방법은?",
+    "options": [
+     "에어트레인 + 지하철",
+     "택시",
+     "공항 버스",
+     "우버"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Hi there. How can I help you?",
+     "ko": "안녕하세요. 무엇을 도와드릴까요?"
+    },
+    {
+     "sp": "B",
+     "en": "Hi. How do I get to Midtown Manhattan?",
+     "ko": "안녕하세요. 미드타운 맨해튼에 어떻게 가요?",
+     "chunks": [
+      "w4c06"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Most people take a taxi.",
+     "ko": "대부분 택시를 타요."
+    },
+    {
+     "sp": "B",
+     "en": "How long does it take by taxi?",
+     "ko": "택시로는 얼마나 걸려요?",
+     "chunks": [
+      "w4c08"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "About an hour with traffic. And it's at least seventy dollars.",
+     "ko": "차 막히면 한 시간쯤이요. 그리고 최소 70달러예요."
+    },
+    {
+     "sp": "B",
+     "en": "That makes sense. Is there a cheaper way?",
+     "ko": "그렇겠네요. 더 싼 방법도 있어요?",
+     "chunks": [
+      "w1c03",
+      "w4c09"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Sure. The AirTrain plus the subway is the cheapest.",
+     "ko": "그럼요. 에어트레인에 지하철이 제일 싸요."
+    },
+    {
+     "sp": "B",
+     "en": "Okay. Which train goes to Times Square?",
+     "ko": "알겠어요. 어느 노선이 타임스스퀘어로 가요?",
+     "chunks": [
+      "w4c07"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Take the AirTrain to Jamaica, then the E train to 42nd Street.",
+     "ko": "에어트레인으로 자메이카역까지 가서, E 노선을 타고 42번가에서 내리세요."
+    },
+    {
+     "sp": "B",
+     "en": "Sorry, could you say that again? The E train?",
+     "ko": "죄송한데 다시 한 번 말해주실래요? E 노선이요?",
+     "chunks": [
+      "w1c07"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Yes, the E train. You'll see the signs.",
+     "ko": "네, E 노선이요. 표지판이 보일 거예요."
+    },
+    {
+     "sp": "B",
+     "en": "Got it. Where do I pay?",
+     "ko": "알겠어요. 요금은 어디서 내요?",
+     "chunks": [
+      "w4c10"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "You pay for the AirTrain when you exit. For the subway, just tap your card or phone.",
+     "ko": "에어트레인은 나갈 때 내요. 지하철은 카드나 휴대폰을 대기만 하면 돼요."
+    },
+    {
+     "sp": "B",
+     "en": "Perfect. Thank you so much!",
+     "ko": "완벽해요. 정말 감사합니다!",
+     "chunks": []
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w4c06",
+     "en": "How do I get to ~?",
+     "ko": "~에 어떻게 가요?",
+     "use_ko": "목적지까지 가는 방법을 물을 때",
+     "note": "여행 중 가장 많이 쓰는 질문이에요. 장소 이름만 바꿔 넣으면 돼요.",
+     "sound": "How do I가 '하우두아이', 빠르게 말하면 '하우러아이'처럼 들려요. get to는 t가 연달아 나와 '게투'.",
+     "ex": [
+      {
+       "en": "Excuse me, how do I get to Central Park?",
+       "ko": "실례지만, 센트럴파크에 어떻게 가요?"
+      },
+      {
+       "en": "How do I get to the subway from here?",
+       "ko": "여기서 지하철역까지 어떻게 가요?"
+      }
+     ]
+    },
+    {
+     "id": "w4c07",
+     "en": "Which train goes to ~?",
+     "ko": "어느 노선이 ~로 가요?",
+     "use_ko": "지하철 노선을 고를 때",
+     "note": "뉴욕 지하철은 노선을 알파벳이나 숫자로 불러요. the A train, the 6 train처럼요.",
+     "sound": "Which train이 '위치트레인', goes to는 '고우즈투'.",
+     "ex": [
+      {
+       "en": "Which train goes to Brooklyn?",
+       "ko": "어느 노선이 브루클린으로 가요?"
+      },
+      {
+       "en": "Sorry, which train goes to the airport?",
+       "ko": "죄송한데, 어느 노선이 공항으로 가요?"
+      }
+     ]
+    },
+    {
+     "id": "w4c08",
+     "en": "How long does it take?",
+     "ko": "얼마나 걸려요?",
+     "use_ko": "걸리는 시간을 물을 때",
+     "note": "by subway, by taxi, on foot을 붙여 교통수단별로 물을 수 있어요.",
+     "sound": "does it이 '더짓'으로 붙어 '하우롱더짓테익'.",
+     "ex": [
+      {
+       "en": "How long does it take to get there?",
+       "ko": "거기까지 얼마나 걸려요?"
+      },
+      {
+       "en": "How long does it take on foot?",
+       "ko": "걸어서 얼마나 걸려요?"
+      }
+     ]
+    },
+    {
+     "id": "w4c09",
+     "en": "Is there a cheaper way?",
+     "ko": "더 싼 방법이 있어요?",
+     "use_ko": "교통비나 가격을 아끼고 싶을 때",
+     "note": "cheaper 대신 faster(더 빠른), easier(더 쉬운)를 넣어 응용해요.",
+     "sound": "Is there a가 이어져 '이즈데어러', cheaper는 '치퍼r'.",
+     "ex": [
+      {
+       "en": "A taxi is expensive. Is there a cheaper way?",
+       "ko": "택시는 비싸네요. 더 싼 방법이 있어요?"
+      },
+      {
+       "en": "Is there a cheaper way to get to the airport?",
+       "ko": "공항에 가는 더 싼 방법이 있어요?"
+      }
+     ]
+    },
+    {
+     "id": "w4c10",
+     "en": "Where do I pay?",
+     "ko": "어디서 계산해요?",
+     "use_ko": "요금이나 값을 어디서 내는지 모를 때",
+     "note": "교통, 가게, 매표소 어디서나 써요. 계산대가 안 보일 때 유용해요.",
+     "sound": "Where do I가 '웨어r두아이', 빠르게는 '웨어러아이'.",
+     "ex": [
+      {
+       "en": "Excuse me, where do I pay?",
+       "ko": "실례지만, 어디서 계산해요?"
+      },
+      {
+       "en": "Where do I pay for this?",
+       "ko": "이건 어디서 계산해요?"
+      }
+     ]
+    }
+   ],
+   "pragmatic": "길을 물을 때는 Excuse me로 먼저 말을 걸고, 설명을 들은 뒤에는 Got it. Thanks! 처럼 이해했다는 신호를 주면 좋아요. 노선 이름처럼 중요한 정보는 되물어서 꼭 확인하세요.",
+   "roleplay": {
+    "situation_ko": "호텔 로비에서 브루클린 브리지까지 가는 방법을 물어요.",
+    "turns": [
+     {
+      "a": "Good morning! Need any help?",
+      "intent_ko": "브루클린 브리지에 어떻게 가는지 물어보세요.",
+      "hint": "How do I get to ~?",
+      "model": "Good morning. How do I get to the Brooklyn Bridge?"
+     },
+     {
+      "a": "You can take a taxi or the subway.",
+      "intent_ko": "지하철로 얼마나 걸리는지 물어보세요.",
+      "hint": "How long does it take?",
+      "model": "How long does it take by subway?"
+     },
+     {
+      "a": "About twenty minutes. Take the 4 or 5 train downtown.",
+      "intent_ko": "어느 노선인지 다시 확인하세요.",
+      "hint": "Which train goes to ~?",
+      "model": "Sorry, which train goes to the bridge?"
+     },
+     {
+      "a": "The 4 or 5. But honestly, it's a nice day. You could walk part of the way.",
+      "intent_ko": "걸어갈 수도 있대요. 걸어서는 얼마나 걸리는지 묻거나 지하철로 가겠다고, 원하는 대로 대답하세요.",
+      "hint": "",
+      "model": "Really? How long does it take on foot?",
+      "model_alt": "That sounds nice, but I'll take the subway. We're a little tired."
+     },
+     {
+      "a": "On foot, about an hour. By subway, twenty minutes.",
+      "intent_ko": "요금은 어디서 내는지 물어보세요.",
+      "hint": "Where do I pay?",
+      "model": "Got it. And where do I pay for the subway?"
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "공항에 도착했는데 휴대폰 배터리가 거의 없어요. 안내 데스크에서 숙소까지 가는 방법, 시간, 더 싼 방법, 요금 내는 곳을 차례로 물어보세요.",
+     "starter_en": "Hi, welcome to JFK. What can I do for you?"
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "type": "learn",
+   "title": "호텔 체크인하기",
+   "cast": {
+    "A": {
+     "name": "Marcus",
+     "gender": "m",
+     "desc": "미드타운 호텔 프런트 직원"
+    }
+   },
+   "context_ko": "오후 1시에 호텔에 도착했어요. 체크인은 3시부터라 짐부터 맡기고 싶어요.",
+   "listen_q": {
+    "q": "두 사람은 체크인 전까지 무엇을 하기로 했나요?",
+    "options": [
+     "짐을 맡기고 점심을 먹으러 간다",
+     "로비에서 기다린다",
+     "방을 바꾼다",
+     "다른 호텔로 간다"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Good afternoon! Checking in?",
+     "ko": "안녕하세요! 체크인하세요?"
+    },
+    {
+     "sp": "B",
+     "en": "Hi. Yes, I have a reservation under James Lee.",
+     "ko": "안녕하세요. 네, James Lee로 예약했어요.",
+     "chunks": [
+      "w4c11"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Let me check... Yes, two people, six nights.",
+     "ko": "확인해볼게요… 네, 두 분, 6박이시네요."
+    },
+    {
+     "sp": "B",
+     "en": "That's right. Is early check-in possible?",
+     "ko": "맞아요. 일찍 체크인할 수 있어요?",
+     "chunks": [
+      "w4c12"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "I'm sorry, the room isn't ready yet. Check-in is at three.",
+     "ko": "죄송해요, 아직 방이 준비가 안 됐어요. 체크인은 3시예요."
+    },
+    {
+     "sp": "B",
+     "en": "No worries. Could we leave our bags here?",
+     "ko": "괜찮아요. 짐을 여기 맡겨도 될까요?",
+     "chunks": [
+      "w3c20",
+      "w4c13"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Of course. Here's your tag.",
+     "ko": "물론이죠. 여기 짐표예요."
+    },
+    {
+     "sp": "B",
+     "en": "Thanks. Is breakfast included?",
+     "ko": "감사합니다. 조식도 포함돼 있어요?",
+     "chunks": [
+      "w4c15"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Yes, it's from seven to ten in the lobby café.",
+     "ko": "네, 로비 카페에서 7시부터 10시까지예요."
+    },
+    {
+     "sp": "B",
+     "en": "Great. And what time is checkout?",
+     "ko": "좋네요. 그리고 체크아웃은 몇 시예요?",
+     "chunks": [
+      "w4c14"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Checkout is at eleven. Do you need anything else?",
+     "ko": "체크아웃은 11시예요. 더 필요하신 거 있으세요?"
+    },
+    {
+     "sp": "B",
+     "en": "Let me think... Oh, what do you recommend for lunch around here?",
+     "ko": "음… 아, 이 근처에서 점심으로 뭐 추천해요?",
+     "chunks": [
+      "w1c11",
+      "w3c06"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "There's a great deli right around the corner.",
+     "ko": "바로 모퉁이에 정말 괜찮은 델리가 있어요."
+    },
+    {
+     "sp": "B",
+     "en": "Perfect. We'll be back at three. Thanks!",
+     "ko": "완벽해요. 3시에 돌아올게요. 감사합니다!",
+     "chunks": []
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w4c11",
+     "en": "I have a reservation under ~.",
+     "ko": "~ 이름으로 예약했어요.",
+     "use_ko": "호텔이나 식당에 예약자 이름을 말할 때",
+     "note": "under 뒤에 예약자 이름을 넣어요. 예약 번호가 있으면 함께 보여주면 빨라요.",
+     "sound": "have a가 붙어 '해버', reservation under는 '레저r베이션언더r'.",
+     "ex": [
+      {
+       "en": "Hi, I have a reservation under Kim.",
+       "ko": "안녕하세요, Kim으로 예약했어요."
+      },
+      {
+       "en": "I have a reservation under James for seven o'clock.",
+       "ko": "James 이름으로 7시에 예약했어요."
+      }
+     ]
+    },
+    {
+     "id": "w4c12",
+     "en": "Is early check-in possible?",
+     "ko": "일찍 체크인할 수 있어요?",
+     "use_ko": "체크인 시간보다 먼저 도착했을 때",
+     "note": "안 된다고 하면 짐을 맡기고 다녀오면 돼요. Is late checkout possible?도 같은 틀로 써요.",
+     "sound": "early check-in은 '어r리 체킨', check-in의 k가 in에 붙어요.",
+     "ex": [
+      {
+       "en": "We arrived early. Is early check-in possible?",
+       "ko": "저희가 일찍 왔는데요. 일찍 체크인할 수 있어요?"
+      },
+      {
+       "en": "Is early check-in possible if we pay extra?",
+       "ko": "돈을 더 내면 일찍 체크인할 수 있어요?"
+      }
+     ]
+    },
+    {
+     "id": "w4c13",
+     "en": "Could we leave our bags here?",
+     "ko": "짐을 여기 맡겨도 될까요?",
+     "use_ko": "체크인 전이나 체크아웃 후에 짐을 맡길 때",
+     "note": "대부분의 호텔은 무료로 짐을 맡아줘요. 짐표(tag)를 꼭 받아두세요.",
+     "sound": "Could we가 '쿠위', leave our가 이어져 '리바워r'.",
+     "ex": [
+      {
+       "en": "We're checking out now. Could we leave our bags here until five?",
+       "ko": "지금 체크아웃하는데요. 5시까지 짐을 여기 맡겨도 될까요?"
+      },
+      {
+       "en": "Could we leave our bags here for a few hours?",
+       "ko": "몇 시간만 짐을 여기 맡겨도 될까요?"
+      }
+     ]
+    },
+    {
+     "id": "w4c14",
+     "en": "What time is checkout?",
+     "ko": "체크아웃은 몇 시예요?",
+     "use_ko": "체크아웃 시간을 확인할 때",
+     "note": "breakfast, check-in 등 단어만 바꿔 시간을 물을 수 있어요.",
+     "sound": "What time이 t가 겹쳐 '왓타임', checkout은 앞에 힘을 줘 '체카웃'.",
+     "ex": [
+      {
+       "en": "Sorry, what time is checkout?",
+       "ko": "죄송한데, 체크아웃이 몇 시예요?"
+      },
+      {
+       "en": "What time is checkout on Sunday?",
+       "ko": "일요일엔 체크아웃이 몇 시예요?"
+      }
+     ]
+    },
+    {
+     "id": "w4c15",
+     "en": "Is breakfast included?",
+     "ko": "조식 포함이에요?",
+     "use_ko": "가격에 무엇이 포함되는지 확인할 때",
+     "note": "breakfast 대신 tax, Wi-Fi, a drink를 넣어 응용해요.",
+     "sound": "Is breakfast가 '이즈브렉퍼스트', included는 가운데 clu에 힘을 줘 '인클루디드'.",
+     "ex": [
+      {
+       "en": "Is breakfast included in the price?",
+       "ko": "가격에 조식이 포함돼 있어요?"
+      },
+      {
+       "en": "Is breakfast included every day?",
+       "ko": "매일 조식이 포함돼 있어요?"
+      }
+     ]
+    }
+   ],
+   "pragmatic": "미국 호텔 프런트에서는 짧은 스몰토크가 흔해요. How was your flight? 같은 질문에 Long, but good! 처럼 가볍게 답하면 분위기가 좋아져요.",
+   "roleplay": {
+    "situation_ko": "밤늦게 호텔에 도착해서 체크인해요.",
+    "turns": [
+     {
+      "a": "Good evening. Checking in?",
+      "intent_ko": "Kim 이름으로 예약했다고 하세요.",
+      "hint": "I have a reservation under ~.",
+      "model": "Yes, I have a reservation under Kim."
+     },
+     {
+      "a": "Here you are. Your room is on the twelfth floor.",
+      "intent_ko": "조식이 포함인지 물어보세요.",
+      "hint": "Is breakfast included?",
+      "model": "Thanks. Is breakfast included?"
+     },
+     {
+      "a": "Yes, from seven to ten.",
+      "intent_ko": "체크아웃 시간을 물어보세요.",
+      "hint": "What time is checkout?",
+      "model": "Great. What time is checkout?"
+     },
+     {
+      "a": "Eleven. Oh, I'm sorry, it looks like your room has two single beds, not one king bed.",
+      "intent_ko": "예약한 침대와 다른 방이래요. 정중하게 원하는 걸 말하세요.",
+      "hint": "",
+      "model": "Oh, I actually booked a king bed. Is there another room?",
+      "model_alt": "Hmm, is it possible to change rooms tomorrow?"
+     },
+     {
+      "a": "Let me see what I can do. I can move you tomorrow morning.",
+      "intent_ko": "내일 방을 옮기기 전에 외출하면 짐을 맡겨도 되는지 물어보세요.",
+      "hint": "Could we leave our bags here?",
+      "model": "Thank you. If we go out tomorrow morning, could we leave our bags here?"
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "호텔에 너무 일찍 도착했어요. 예약자 이름을 말하고, 일찍 체크인할 수 있는지, 짐을 맡길 수 있는지, 조식과 체크아웃 시간까지 물어보세요.",
+     "starter_en": "Hi there! How can I help you?"
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "type": "learn",
+   "title": "브로드웨이 티켓 사기",
+   "cast": {
+    "A": {
+     "name": "Rosa",
+     "gender": "f",
+     "desc": "브로드웨이 극장 매표소 직원"
+    }
+   },
+   "context_ko": "여자친구가 꼭 보고 싶어 한 뮤지컬을 보러 극장 매표소에 왔어요. 오늘 저녁 공연 표가 남았는지 물어봐요.",
+   "listen_q": {
+    "q": "두 사람이 산 좌석은?",
+    "options": [
+     "2층 앞쪽 나란히 붙은 자리",
+     "1층 맨 앞자리",
+     "따로 떨어진 1층 자리",
+     "입석"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Hi! What can I do for you?",
+     "ko": "안녕하세요! 무엇을 도와드릴까요?"
+    },
+    {
+     "sp": "B",
+     "en": "Hi. Are there any tickets left for tonight?",
+     "ko": "안녕하세요. 오늘 밤 공연 표 남은 거 있어요?",
+     "chunks": [
+      "w4c16"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "For the eight o'clock show? Let me check. How many?",
+     "ko": "8시 공연이요? 확인해볼게요. 몇 장이요?"
+    },
+    {
+     "sp": "B",
+     "en": "Two tickets, please. For me and my girlfriend.",
+     "ko": "두 장이요. 저랑 여자친구요.",
+     "chunks": [
+      "w4c17"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "We have some in the orchestra and some in the mezzanine.",
+     "ko": "1층 오케스트라석이랑 2층 메자닌석이 조금 있어요."
+    },
+    {
+     "sp": "B",
+     "en": "Sorry, what do you mean by \"mezzanine\"?",
+     "ko": "죄송한데, \"메자닌\"이 무슨 뜻이에요?",
+     "chunks": [
+      "w1c08"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "It's the second level. The view is actually really good.",
+     "ko": "2층이요. 사실 시야가 정말 좋아요."
+    },
+    {
+     "sp": "B",
+     "en": "I see. How much are they?",
+     "ko": "그렇군요. 얼마예요?",
+     "chunks": [
+      "w4c18"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Orchestra seats are a hundred and fifty each. The front mezzanine is ninety-five.",
+     "ko": "오케스트라석은 한 장에 150달러, 메자닌 앞쪽은 95달러예요."
+    },
+    {
+     "sp": "B",
+     "en": "Is there a discount for same-day tickets?",
+     "ko": "당일 표는 할인 있어요?",
+     "chunks": [
+      "w4c19"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Not tonight, sorry. But the mezzanine is a good deal.",
+     "ko": "오늘은 없어요, 죄송해요. 그래도 메자닌이 가격 대비 좋아요."
+    },
+    {
+     "sp": "B",
+     "en": "Okay, I'll go with the mezzanine. Are these seats together?",
+     "ko": "좋아요, 메자닌으로 할게요. 자리가 나란히 붙어 있어요?",
+     "chunks": [
+      "w3c02",
+      "w4c20"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Yes, they're right next to each other, in row C.",
+     "ko": "네, C열에 바로 나란히 붙어 있어요."
+    },
+    {
+     "sp": "B",
+     "en": "Perfect. Do you take cards?",
+     "ko": "완벽해요. 카드 되죠?",
+     "chunks": [
+      "w3c05"
+     ]
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w4c16",
+     "en": "Are there any tickets left for ~?",
+     "ko": "~ 표 남은 거 있어요?",
+     "use_ko": "공연이나 관광지 표가 남았는지 물을 때",
+     "note": "tonight, the 2 p.m. show, Saturday처럼 시간을 붙여요. 매진이면 We're sold out.이라는 말을 들어요.",
+     "sound": "Are there any가 '아r데어r애니', tickets left는 '티킷츠레프트'.",
+     "ex": [
+      {
+       "en": "Are there any tickets left for Saturday?",
+       "ko": "토요일 표 남은 거 있어요?"
+      },
+      {
+       "en": "Are there any tickets left for the 2 p.m. show?",
+       "ko": "오후 2시 공연 표 남은 거 있어요?"
+      }
+     ]
+    },
+    {
+     "id": "w4c17",
+     "en": "Two tickets, please.",
+     "ko": "두 장 주세요.",
+     "use_ko": "표를 몇 장 살지 말할 때",
+     "note": "숫자만 바꾸면 돼요. 어른과 아이를 나눠 말할 땐 Two adults and one child, please.라고 해요.",
+     "sound": "Two tickets가 '투티킷츠', please는 짧게.",
+     "ex": [
+      {
+       "en": "Two tickets, please. One adult, one student.",
+       "ko": "두 장 주세요. 성인 한 명, 학생 한 명이요."
+      },
+      {
+       "en": "Two tickets, please, for the next tour.",
+       "ko": "다음 투어로 두 장 주세요."
+      }
+     ]
+    },
+    {
+     "id": "w4c18",
+     "en": "How much are they?",
+     "ko": "얼마예요?",
+     "use_ko": "여러 개짜리 물건이나 표의 가격을 물을 때",
+     "note": "한 개는 How much is it?, 여러 개는 How much are they? 예요.",
+     "sound": "How much are they가 '하우머치아r데이', are는 약하게.",
+     "ex": [
+      {
+       "en": "These look nice. How much are they?",
+       "ko": "이거 예쁘네요. 얼마예요?"
+      },
+      {
+       "en": "How much are they each?",
+       "ko": "하나에 얼마예요?"
+      }
+     ]
+    },
+    {
+     "id": "w4c19",
+     "en": "Is there a discount for ~?",
+     "ko": "~ 할인 있어요?",
+     "use_ko": "할인이 되는지 물을 때",
+     "note": "students(학생), groups(단체), seniors(어르신)처럼 대상을 넣어요.",
+     "sound": "Is there a가 '이즈데어러', discount는 앞에 힘을 줘 '디스카운트'.",
+     "ex": [
+      {
+       "en": "Is there a discount for groups?",
+       "ko": "단체 할인 있어요?"
+      },
+      {
+       "en": "Is there a discount for buying two?",
+       "ko": "두 개 사면 할인돼요?"
+      }
+     ]
+    },
+    {
+     "id": "w4c20",
+     "en": "Are these seats together?",
+     "ko": "자리가 나란히 붙어 있어요?",
+     "use_ko": "일행과 같이 앉을 수 있는지 확인할 때",
+     "note": "공연, 비행기, 기차 좌석 모두 써요. 대답은 They're next to each other.처럼 와요.",
+     "sound": "Are these seats가 '아r디즈씻츠', together는 가운데에 힘을 줘 '터게더r'.",
+     "ex": [
+      {
+       "en": "Excuse me, are these seats together?",
+       "ko": "실례지만, 이 자리들 붙어 있어요?"
+      },
+      {
+       "en": "Are these seats together or separate?",
+       "ko": "자리가 붙어 있어요, 떨어져 있어요?"
+      }
+     ]
+    }
+   ],
+   "pragmatic": "미국 매표소에서는 좌석 구역 이름이 낯설 수 있어요. orchestra(1층), mezzanine(2층), balcony(위층)처럼 모르는 단어는 What do you mean by ~? 로 바로 물어보면 돼요.",
+   "roleplay": {
+    "situation_ko": "뉴욕 전망대 매표소에서 표를 사요.",
+    "turns": [
+     {
+      "a": "Hi, welcome! How can I help?",
+      "intent_ko": "해 질 무렵 표가 남았는지 물어보세요.",
+      "hint": "Are there any tickets left for ~?",
+      "model": "Hi. Are there any tickets left for sunset?"
+     },
+     {
+      "a": "Yes, we have a few for 4:30. How many?",
+      "intent_ko": "두 장 달라고 하세요.",
+      "hint": "Two tickets, please.",
+      "model": "Two tickets, please."
+     },
+     {
+      "a": "Sure. That's for general admission.",
+      "intent_ko": "가격을 물어보세요.",
+      "hint": "How much are they?",
+      "model": "How much are they?"
+     },
+     {
+      "a": "They're forty-eight each. Oh, but the 4:30 just sold out while we were talking. Sorry!",
+      "intent_ko": "방금 매진됐대요. 당황하지 말고 다른 시간을 물어보거나 원하는 대로 대처하세요.",
+      "hint": "",
+      "model": "Oh no. Are there any tickets left for five?",
+      "model_alt": "That's okay. What other times do you have?"
+     },
+     {
+      "a": "Five o'clock works. Anything else?",
+      "intent_ko": "두 장 사면 할인되는지 물어보세요.",
+      "hint": "Is there a discount for ~?",
+      "model": "Is there a discount for buying two?"
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "박물관 매표소에서 여자친구와 함께 들어갈 표를 사요. 남은 표, 장수, 가격, 할인, 투어 시간까지 오늘 표현으로 물어보세요.",
+     "starter_en": "Hi! Tickets for today?"
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "type": "learn",
+   "title": "지하철 타고 길 찾기",
+   "cast": {
+    "A": {
+     "name": "Andre",
+     "gender": "m",
+     "desc": "지하철역에서 만난 뉴요커"
+    }
+   },
+   "context_ko": "센트럴파크에 가려고 지하철을 탔는데, 맞게 탄 건지 헷갈려요. 옆에 선 뉴요커에게 물어봐요.",
+   "listen_q": {
+    "q": "두 사람은 결국 어디서 내리면 되나요?",
+    "options": [
+     "59번가",
+     "42번가",
+     "14번가",
+     "96번가"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "B",
+     "en": "Excuse me, does this train go to Central Park?",
+     "ko": "실례지만, 이 열차 센트럴파크 가요?",
+     "chunks": [
+      "w4c21"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Which part of the park? It's pretty big.",
+     "ko": "공원 어느 쪽이요? 꽤 넓어요."
+    },
+    {
+     "sp": "B",
+     "en": "Hmm, how can I put it... the south side, near the zoo.",
+     "ko": "음, 뭐라고 해야 하나… 남쪽이요, 동물원 근처요.",
+     "chunks": [
+      "w1c13"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Then yeah, you're good. This is the uptown train.",
+     "ko": "그럼 맞아요. 이게 업타운 방향 열차예요."
+    },
+    {
+     "sp": "B",
+     "en": "Great. So I'm on the right train?",
+     "ko": "다행이다. 그럼 제대로 탄 거죠?",
+     "chunks": [
+      "w4c22"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Yep. Just don't get off too early.",
+     "ko": "네. 너무 일찍만 내리지 마세요."
+    },
+    {
+     "sp": "B",
+     "en": "Where should I get off?",
+     "ko": "어디서 내려야 해요?",
+     "chunks": [
+      "w4c24"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Fifty-ninth Street. It's three stops from here.",
+     "ko": "59번가요. 여기서 세 정거장이에요."
+    },
+    {
+     "sp": "B",
+     "en": "Thanks. Is the zoo within walking distance from there?",
+     "ko": "감사해요. 거기서 동물원까지 걸어갈 수 있는 거리예요?",
+     "chunks": [
+      "w4c23"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Totally. It's about a ten-minute walk.",
+     "ko": "그럼요. 걸어서 10분 정도예요."
+    },
+    {
+     "sp": "B",
+     "en": "And when I get out, which way is the zoo?",
+     "ko": "그리고 나가서 동물원은 어느 쪽이에요?",
+     "chunks": [
+      "w4c25"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Just walk north on Fifth Avenue. You can't miss it.",
+     "ko": "5번가를 따라 북쪽으로 걸어가면 돼요. 바로 보일 거예요."
+    },
+    {
+     "sp": "B",
+     "en": "That makes sense. You're a lifesaver. Thank you!",
+     "ko": "이해됐어요. 덕분에 살았어요. 감사합니다!",
+     "chunks": [
+      "w1c03"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "No problem. Enjoy the park!",
+     "ko": "천만에요. 공원 잘 구경하세요!"
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w4c21",
+     "en": "Does this train go to ~?",
+     "ko": "이 열차 ~ 가요?",
+     "use_ko": "지하철이나 버스를 타기 전에 확인할 때",
+     "note": "버스는 Does this bus go to ~? 로 바꿔 물어요. 뉴욕 지하철은 방향(uptown/downtown)을 잘 확인해야 해요.",
+     "sound": "Does this가 '더즈디스', go to는 '고우투'.",
+     "ex": [
+      {
+       "en": "Excuse me, does this train go to Brooklyn?",
+       "ko": "실례지만, 이 열차 브루클린 가요?"
+      },
+      {
+       "en": "Does this train go to Queens?",
+       "ko": "이 열차 퀸스 가요?"
+      }
+     ]
+    },
+    {
+     "id": "w4c22",
+     "en": "I'm on the right train?",
+     "ko": "제대로 탄 거죠?",
+     "use_ko": "맞는 열차를 탔는지 확인할 때",
+     "note": "Am I on the right train? 이 기본형이고, 말끝을 올려 I'm on the right train? 이라고 해도 자연스러워요.",
+     "sound": "right train이 t가 겹쳐 '라잇트레인'에서 앞 t를 거의 삼켜요.",
+     "ex": [
+      {
+       "en": "Sorry, I'm on the right train for Brooklyn?",
+       "ko": "죄송한데, 브루클린 가는 거 제대로 탄 거죠?"
+      },
+      {
+       "en": "I'm going to Times Square. I'm on the right train?",
+       "ko": "타임스스퀘어 가는데요. 제대로 탄 거죠?"
+      }
+     ]
+    },
+    {
+     "id": "w4c23",
+     "en": "~ within walking distance",
+     "ko": "걸어갈 수 있는 거리",
+     "use_ko": "걸어서 갈 수 있을 만큼 가까운지 물을 때",
+     "note": "Is ~ within walking distance? 처럼 물어요. 대답은 It's about a ten-minute walk.처럼 와요.",
+     "sound": "within walking이 '위딘워킹', distance는 앞에 힘을 줘 '디스턴스'.",
+     "ex": [
+      {
+       "en": "Is the museum within walking distance?",
+       "ko": "박물관은 걸어갈 수 있는 거리예요?"
+      },
+      {
+       "en": "Is the hotel within walking distance from here?",
+       "ko": "호텔이 여기서 걸어갈 수 있는 거리예요?"
+      }
+     ]
+    },
+    {
+     "id": "w4c24",
+     "en": "Where should I get off?",
+     "ko": "어디서 내려야 해요?",
+     "use_ko": "내릴 역을 확인할 때",
+     "note": "we를 넣어 Where should we get off? 라고 하면 일행과 함께 묻는 말이 돼요.",
+     "sound": "should I가 '슈다이', get off는 t가 ㄹ처럼 변해 '게로프'.",
+     "ex": [
+      {
+       "en": "I'm going to SoHo. Where should I get off?",
+       "ko": "소호 가는데요. 어디서 내려야 해요?"
+      },
+      {
+       "en": "Where should I get off for the Met?",
+       "ko": "메트로폴리탄 미술관은 어디서 내려야 해요?"
+      }
+     ]
+    },
+    {
+     "id": "w4c25",
+     "en": "Which way is ~?",
+     "ko": "~는 어느 쪽이에요?",
+     "use_ko": "방향을 물을 때",
+     "note": "역에서 나와서 방향이 헷갈릴 때 바로 써요. 상대가 손으로 가리켜 주는 경우가 많아요.",
+     "sound": "Which way is가 '위치웨이이즈'로 이어져요.",
+     "ex": [
+      {
+       "en": "Excuse me, which way is Times Square?",
+       "ko": "실례지만, 타임스스퀘어는 어느 쪽이에요?"
+      },
+      {
+       "en": "Which way is the exit?",
+       "ko": "출구는 어느 쪽이에요?"
+      }
+     ]
+    }
+   ],
+   "pragmatic": "뉴요커들은 바빠 보여도 길을 물으면 대부분 친절하게 알려줘요. Excuse me로 시작해서 짧게 묻고, 마지막에 Thanks, you're a lifesaver! 처럼 고마움을 표현하면 좋아요.",
+   "roleplay": {
+    "situation_ko": "소호에 가는 길에 지하철에서 헷갈려요.",
+    "turns": [
+     {
+      "a": "You look a little lost. Need help?",
+      "intent_ko": "이 열차가 소호에 가는지 물어보세요.",
+      "hint": "Does this train go to ~?",
+      "model": "Yes, thanks. Does this train go to SoHo?"
+     },
+     {
+      "a": "It does. It's the downtown train.",
+      "intent_ko": "제대로 탄 건지 한 번 더 확인하세요.",
+      "hint": "I'm on the right train?",
+      "model": "Great. So I'm on the right train?"
+     },
+     {
+      "a": "Yep, you're good.",
+      "intent_ko": "어디서 내려야 하는지 물어보세요.",
+      "hint": "Where should I get off?",
+      "model": "Where should I get off?"
+     },
+     {
+      "a": "Prince Street. But this train is running express today, so it'll skip that stop.",
+      "intent_ko": "급행이라 그 역을 지나칠 수도 있대요. 어떻게 하면 좋을지 물어보세요.",
+      "hint": "",
+      "model": "Oh, really? Then which train should I take?",
+      "model_alt": "Hmm, should I get off and take the local train?"
+     },
+     {
+      "a": "Get off at Canal Street and walk. It's close.",
+      "intent_ko": "카날 스트리트에서 걸어갈 수 있는 거리인지 확인하세요.",
+      "hint": "~ within walking distance",
+      "model": "Is SoHo within walking distance from Canal Street?"
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "지하철에서 내려 출구로 나왔는데 방향을 모르겠어요. 지나가는 사람에게 목적지가 어느 쪽인지, 걸어갈 수 있는지, 얼마나 걸리는지 물어보세요.",
+     "starter_en": "Hey, you look lost. Where are you headed?"
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "type": "review_week",
+   "title": "월간 총복습 1: 뉴욕 카페에서 만난 사람",
+   "cast": {
+    "A": {
+     "name": "Dana",
+     "gender": "f",
+     "desc": "브루클린 카페에서 합석한 뉴요커"
+    }
+   },
+   "context_ko": "브루클린의 작은 카페에서 여자친구가 화장실에 간 사이, 옆자리 뉴요커와 대화를 나눠요. 1~4주 표현이 섞여 나와요.",
+   "listen_q": {
+    "q": "Dana가 '나'에게 추천한 것은?",
+    "options": [
+     "추수감사절 퍼레이드",
+     "자유의 여신상 페리",
+     "브로드웨이 뮤지컬",
+     "타임스스퀘어 새해 행사"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "B",
+     "en": "Excuse me, is this seat taken?",
+     "ko": "실례지만, 이 자리 있어요?",
+     "chunks": [
+      "w2c08"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "No, go ahead. Are you visiting?",
+     "ko": "아니요, 앉으세요. 여행 오셨어요?"
+    },
+    {
+     "sp": "B",
+     "en": "Yes. This is my first time in New York. It's freezing today, isn't it?",
+     "ko": "네. 뉴욕은 처음이에요. 오늘 엄청 춥네요, 그렇죠?",
+     "chunks": [
+      "w4c04",
+      "w2c06"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Ha, welcome to November! Where are you from?",
+     "ko": "하, 11월에 온 걸 환영해요! 어디서 왔어요?"
+    },
+    {
+     "sp": "B",
+     "en": "Seoul. I'm here for sightseeing, and a lot of shopping.",
+     "ko": "서울이요. 관광하러 왔어요. 쇼핑도 많이 하고요.",
+     "chunks": [
+      "w4c01"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Nice. What do you do back home?",
+     "ko": "좋네요. 한국에선 무슨 일 해요?"
+    },
+    {
+     "sp": "B",
+     "en": "How can I put it... I teach English to high school students.",
+     "ko": "뭐라고 해야 하나… 고등학생들한테 영어를 가르쳐요.",
+     "chunks": [
+      "w1c13"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Ha, so you're practicing on New Yorkers now? That's funny.",
+     "ko": "하, 그럼 지금 뉴요커들한테 연습하는 거예요? 재밌네요."
+    },
+    {
+     "sp": "B",
+     "en": "I know, right? It's kind of like homework.",
+     "ko": "그러니까요! 숙제 같은 거예요.",
+     "chunks": [
+      "w1c04",
+      "w1c15"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Ha! So what have you done so far?",
+     "ko": "하! 지금까지 뭐 했어요?"
+    },
+    {
+     "sp": "B",
+     "en": "We saw a show last night. I'm thinking about going to the Met this weekend. What do you recommend for tomorrow?",
+     "ko": "어젯밤엔 공연을 봤어요. 주말엔 메트로폴리탄 미술관에 가볼까 해요. 내일은 뭐 추천해요?",
+     "chunks": [
+      "w2c19",
+      "w3c06"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "You're here for Thanksgiving, right? You have to see the parade.",
+     "ko": "추수감사절에 와 있는 거죠? 퍼레이드는 꼭 봐야 해요."
+    },
+    {
+     "sp": "B",
+     "en": "Really? Is it within walking distance from Times Square?",
+     "ko": "진짜요? 타임스스퀘어에서 걸어갈 수 있는 거리예요?",
+     "chunks": [
+      "w1c01",
+      "w4c23"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Totally. But go early. It gets really crowded.",
+     "ko": "그럼요. 근데 일찍 가요. 엄청 붐벼요."
+    },
+    {
+     "sp": "B",
+     "en": "That makes sense. Oh, my girlfriend's back. It was nice talking to you!",
+     "ko": "그렇겠네요. 아, 여자친구 왔어요. 얘기 즐거웠어요!",
+     "chunks": [
+      "w1c03",
+      "w2c22"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "You too! Enjoy the city!",
+     "ko": "저도요! 뉴욕 즐기세요!"
+    }
+   ],
+   "chunks": [],
+   "pragmatic": "한 달 동안 배운 표현이 실제 여행 대화 속에서 이어져요. 말 걸기, 내 소개, 추천 받기, 마무리 인사까지 한 흐름으로 연습해보세요.",
+   "improv": [
+    {
+     "situation_ko": "뉴욕 카페에서 처음 만난 사람과 대화를 시작하고, 내 여행 이야기와 직업을 소개하고, 추천을 받은 뒤 마무리해보세요. 1~4주 표현을 최대한 넣으세요.",
+     "starter_en": "Hi! Are you visiting New York?"
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "type": "review_cum",
+   "title": "월간 총복습 2: 여행 첫날 이야기하기",
+   "cast": {
+    "A": {
+     "name": "Mia",
+     "gender": "f",
+     "desc": "서울에 있는 친구"
+    }
+   },
+   "context_ko": "서울에 있는 Mia와 영상통화를 해요. 뉴욕 첫날 이야기를 해요. 끝나면 60초 측정을 하고, 홈에서 이번 달 기준 테스트도 해보세요.",
+   "listen_q": {
+    "q": "'나'가 입국심사에서 한 일은?",
+    "options": [
+     "못 알아들은 질문을 다시 물어봤다",
+     "통역을 불렀다",
+     "질문에 대답을 못 했다",
+     "서류를 잃어버렸다"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Hey! How's New York?",
+     "ko": "야! 뉴욕은 어때?"
+    },
+    {
+     "sp": "B",
+     "en": "Amazing! But things have been crazy since we landed.",
+     "ko": "최고야! 근데 도착하고 나서 계속 정신없어.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "Ha, I bet. How was immigration?",
+     "ko": "하, 그렇겠지. 입국심사는 어땠어?"
+    },
+    {
+     "sp": "B",
+     "en": "A little scary. I didn't catch one question, so I asked him to say it again.",
+     "ko": "좀 무서웠어. 질문 하나를 못 알아들어서 다시 말해달라고 했어.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "Good for you! That's the right thing to do.",
+     "ko": "잘했다! 그게 맞는 거야."
+    },
+    {
+     "sp": "B",
+     "en": "I know, right? And we bought Broadway tickets. The seats were together, too.",
+     "ko": "그러니까! 그리고 브로드웨이 표도 샀어. 자리도 나란히 붙어 있었어.",
+     "chunks": [
+      "w1c04"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "No way! I'm so jealous.",
+     "ko": "말도 안 돼! 너무 부럽다."
+    },
+    {
+     "sp": "B",
+     "en": "Next time, come with us! I'll bring you something from Trader Joe's!",
+     "ko": "다음엔 같이 가자! 트레이더 조에서 뭐 사다 줄게!",
+     "chunks": []
+    }
+   ],
+   "chunks": [],
+   "pragmatic": "여행에서 있었던 일을 배운 표현으로 다시 말하면 표현이 내 경험과 묶여서 오래 기억에 남아요.",
+   "improv": [
+    {
+     "situation_ko": "친구에게 뉴욕에 도착한 날 있었던 일을 순서대로 이야기해보세요. 입국심사, 공항에서 이동, 호텔, 저녁까지 1~4주 표현을 5개 이상 넣으세요.",
+     "starter_en": "So tell me everything! How was your first day?"
+    }
+   ]
+  }
+ ]
+}

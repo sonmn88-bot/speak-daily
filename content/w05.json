@@ -1,0 +1,1480 @@
+{
+ "week": 5,
+ "theme": "뉴욕 쇼핑",
+ "cast": {
+  "A": {
+   "name": "Mia",
+   "gender": "f",
+   "desc": "서울에 있는 친구"
+  }
+ },
+ "days": [
+  {
+   "day": 1,
+   "type": "learn",
+   "title": "가게 둘러보기",
+   "cast": {
+    "A": {
+     "name": "Taylor",
+     "gender": "f",
+     "desc": "소호 잡화 매장 직원"
+    }
+   },
+   "context_ko": "소호의 잡화 매장에 들어왔어요. 여자친구 선물로 가방과 모자를 보고 있는데 직원이 말을 걸어요.",
+   "listen_q": {
+    "q": "'나'가 찾는 것은?",
+    "options": [
+     "검은색 토트백과 비니",
+     "흰색 운동화",
+     "가죽 지갑",
+     "선글라스"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Hi there! Are you looking for anything special today?",
+     "ko": "안녕하세요! 오늘 특별히 찾으시는 거 있으세요?"
+    },
+    {
+     "sp": "B",
+     "en": "I'm just looking, thanks.",
+     "ko": "그냥 구경하는 중이에요, 감사합니다.",
+     "chunks": [
+      "w5c01"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Sure, take your time. Let me know if you need anything.",
+     "ko": "네, 천천히 보세요. 필요한 거 있으면 말씀하세요."
+    },
+    {
+     "sp": "B",
+     "en": "Actually, I'm looking for a tote bag for my girlfriend.",
+     "ko": "사실 여자친구한테 줄 토트백을 찾고 있어요.",
+     "chunks": [
+      "w5c05"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Nice! The bags are right over here.",
+     "ko": "좋네요! 가방은 바로 이쪽에 있어요."
+    },
+    {
+     "sp": "B",
+     "en": "This one is nice. Do you have this in black?",
+     "ko": "이거 예쁘네요. 이거 검은색 있어요?",
+     "chunks": [
+      "w5c03"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "We do. Let me grab one from the back.",
+     "ko": "있어요. 창고에서 하나 가져올게요."
+    },
+    {
+     "sp": "B",
+     "en": "Thanks. And where can I find beanies?",
+     "ko": "감사해요. 그리고 비니는 어디 있어요?",
+     "chunks": [
+      "w5c02"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Hats and beanies are by the register.",
+     "ko": "모자랑 비니는 계산대 옆에 있어요."
+    },
+    {
+     "sp": "B",
+     "en": "Could you show me the gray one on the top shelf?",
+     "ko": "맨 위 칸에 있는 회색 거 좀 보여주실래요?",
+     "chunks": [
+      "w5c04"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Of course. Here you go. It's really soft.",
+     "ko": "물론이죠. 여기요. 정말 부드러워요."
+    },
+    {
+     "sp": "B",
+     "en": "Oh, it's kind of like a blanket. Perfect for New York in November.",
+     "ko": "오, 담요 같네요. 11월 뉴욕에 딱이에요.",
+     "chunks": [
+      "w1c15"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Ha, it really is. Anything else?",
+     "ko": "하, 정말 그래요. 더 필요하신 건요?"
+    },
+    {
+     "sp": "B",
+     "en": "Let me think... That's it for now.",
+     "ko": "음… 일단 그거면 돼요.",
+     "chunks": [
+      "w1c11",
+      "w3c04"
+     ]
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w5c01",
+     "en": "I'm just looking.",
+     "ko": "그냥 구경하는 중이에요.",
+     "use_ko": "직원이 도와줄지 물었는데 아직 혼자 보고 싶을 때",
+     "note": "미국 매장 직원은 들어오자마자 말을 거는 경우가 많아요. thanks를 붙이면 부드러워요.",
+     "sound": "just looking이 '저스룩킹', just의 t는 거의 안 들려요.",
+     "ex": [
+      {
+       "en": "I'm just looking for now, thanks.",
+       "ko": "일단은 그냥 구경할게요, 감사해요."
+      },
+      {
+       "en": "No, I'm just looking. Thank you!",
+       "ko": "아니요, 그냥 구경하는 중이에요. 감사해요!"
+      }
+     ]
+    },
+    {
+     "id": "w5c02",
+     "en": "Where can I find ~?",
+     "ko": "~는 어디 있어요?",
+     "use_ko": "찾는 물건이 어디 있는지 물을 때",
+     "note": "마트, 옷가게, 서점 어디서나 써요. 대답은 It's in aisle 5.처럼 와요.",
+     "sound": "Where can I가 '웨어r캐나이'로 이어지고, find는 끝 d를 약하게.",
+     "ex": [
+      {
+       "en": "Excuse me, where can I find scarves?",
+       "ko": "실례지만, 스카프는 어디 있어요?"
+      },
+      {
+       "en": "Where can I find the fitting rooms?",
+       "ko": "탈의실은 어디 있어요?"
+      }
+     ]
+    },
+    {
+     "id": "w5c03",
+     "en": "Do you have this in ~?",
+     "ko": "이거 ~ 있어요?",
+     "use_ko": "다른 색이나 사이즈가 있는지 물을 때",
+     "note": "여러 개인 물건은 Do you have these in ~? 이에요. ~에 black, navy 같은 색이나 a medium, a size 8 같은 사이즈를 넣어요.",
+     "sound": "Do you have this in이 '두유해브디씬'으로 붙어요.",
+     "ex": [
+      {
+       "en": "Do you have this in navy?",
+       "ko": "이거 남색 있어요?"
+      },
+      {
+       "en": "Do you have this in a medium?",
+       "ko": "이거 미디엄 있어요?"
+      }
+     ]
+    },
+    {
+     "id": "w5c04",
+     "en": "Could you show me ~?",
+     "ko": "~ 좀 보여주실래요?",
+     "use_ko": "진열장이나 높은 곳에 있는 물건을 보고 싶을 때",
+     "note": "the one on the left(왼쪽 거), the one in the window(쇼윈도에 있는 거)처럼 가리키며 말해요.",
+     "sound": "Could you가 '쿠쥬', show me는 '쇼우미'.",
+     "ex": [
+      {
+       "en": "Could you show me the one in the window?",
+       "ko": "쇼윈도에 있는 거 좀 보여주실래요?"
+      },
+      {
+       "en": "Could you show me a smaller one?",
+       "ko": "더 작은 거 좀 보여주실래요?"
+      }
+     ]
+    },
+    {
+     "id": "w5c05",
+     "en": "I'm looking for ~.",
+     "ko": "~를 찾고 있어요.",
+     "use_ko": "찾는 물건을 직원에게 말할 때",
+     "note": "a gift for ~(~에게 줄 선물)를 붙이면 직원이 추천도 해줘요.",
+     "sound": "looking for가 '루킹퍼r', for는 약하게.",
+     "ex": [
+      {
+       "en": "I'm looking for a gift for my mom.",
+       "ko": "엄마한테 줄 선물을 찾고 있어요."
+      },
+      {
+       "en": "I'm looking for a warm scarf.",
+       "ko": "따뜻한 목도리를 찾고 있어요."
+      }
+     ]
+    }
+   ],
+   "pragmatic": "미국 매장에서 직원이 말을 걸면 무시하지 말고 I'm just looking, thanks. 로 답하는 게 예의예요. 도움이 필요해지면 그때 Excuse me로 다시 부르면 돼요.",
+   "roleplay": {
+    "situation_ko": "백화점 액세서리 코너에서 모자를 찾아요.",
+    "turns": [
+     {
+      "a": "Hi! Can I help you find something?",
+      "intent_ko": "일단 구경 중이라고 하세요.",
+      "hint": "I'm just looking.",
+      "model": "I'm just looking, thanks."
+     },
+     {
+      "a": "No problem. Just let me know.",
+      "intent_ko": "잠시 뒤 직원을 불러 따뜻한 모자를 찾는다고 하세요.",
+      "hint": "I'm looking for ~.",
+      "model": "Excuse me, I'm looking for a warm hat."
+     },
+     {
+      "a": "They're right here. This one is really popular.",
+      "intent_ko": "갈색이 있는지 물어보세요.",
+      "hint": "Do you have this in ~?",
+      "model": "This is nice. Do you have this in brown?"
+     },
+     {
+      "a": "Hmm, brown is sold out, I'm afraid. We have dark green or gray.",
+      "intent_ko": "원하는 색이 없대요. 다른 색으로 하거나 고민해보겠다고, 원하는 대로 대답하세요.",
+      "hint": "",
+      "model": "Oh, okay. I'll go with the gray.",
+      "model_alt": "That's okay. I'll think about it."
+     },
+     {
+      "a": "Sure. Anything else today?",
+      "intent_ko": "목도리는 어디 있는지 물어보세요.",
+      "hint": "Where can I find ~?",
+      "model": "Yes, where can I find scarves?"
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "여자친구 선물을 사러 잡화점에 왔어요. 처음엔 구경만 하다가, 찾는 물건을 말하고, 위치와 다른 색을 물어보세요.",
+     "starter_en": "Hey, welcome in! Looking for anything in particular?"
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "type": "learn",
+   "title": "옷 입어보고 사이즈 고르기",
+   "cast": {
+    "A": {
+     "name": "Chris",
+     "gender": "m",
+     "desc": "옷가게 직원"
+    }
+   },
+   "context_ko": "마음에 드는 코트를 발견했어요. 입어보고 사이즈를 골라요.",
+   "listen_q": {
+    "q": "'나'는 결국 어떤 사이즈를 골랐나요?",
+    "options": [
+     "라지",
+     "미디엄",
+     "스몰",
+     "엑스라지"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "B",
+     "en": "Excuse me, can I try this on?",
+     "ko": "실례지만, 이거 입어봐도 돼요?",
+     "chunks": [
+      "w5c06"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Absolutely. What size are you?",
+     "ko": "그럼요. 사이즈가 어떻게 되세요?"
+    },
+    {
+     "sp": "B",
+     "en": "I'm not sure about American sizes. Maybe a medium?",
+     "ko": "미국 사이즈를 잘 몰라서요. 아마 미디엄?",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "Let's start with a medium.",
+     "ko": "미디엄부터 입어보죠."
+    },
+    {
+     "sp": "B",
+     "en": "Great. Where's the fitting room?",
+     "ko": "좋아요. 탈의실이 어디예요?",
+     "chunks": [
+      "w5c07"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Right in the back, on your left.",
+     "ko": "안쪽에 왼쪽이요."
+    },
+    {
+     "sp": "B",
+     "en": "Hmm, it's a little tight in the shoulders.",
+     "ko": "음, 어깨가 좀 끼네요.",
+     "chunks": [
+      "w5c08"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Yeah, these run a little small.",
+     "ko": "네, 이게 좀 작게 나와요."
+    },
+    {
+     "sp": "B",
+     "en": "I see. Do you have a bigger size?",
+     "ko": "그렇군요. 더 큰 사이즈 있어요?",
+     "chunks": [
+      "w5c09"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Here's a large. Try this one.",
+     "ko": "여기 라지요. 이거 입어보세요."
+    },
+    {
+     "sp": "B",
+     "en": "Babe, how does it look?",
+     "ko": "자기야, 어때 보여?",
+     "chunks": [
+      "w5c10"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "If I may, it looks great on you. The large fits much better.",
+     "ko": "말씀드려도 된다면, 정말 잘 어울려요. 라지가 훨씬 잘 맞아요."
+    },
+    {
+     "sp": "B",
+     "en": "I think so too. I'll go with the large.",
+     "ko": "저도 그렇게 생각해요. 라지로 할게요.",
+     "chunks": [
+      "w3c02"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Great choice!",
+     "ko": "좋은 선택이에요!"
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w5c06",
+     "en": "Can I try this on?",
+     "ko": "이거 입어봐도 돼요?",
+     "use_ko": "옷이나 신발을 입어보고 싶을 때",
+     "note": "these를 넣어 Can I try these on? 이면 바지, 신발처럼 복수인 물건에 써요.",
+     "sound": "try this on이 '트라이디쏜', this와 on이 붙어요.",
+     "ex": [
+      {
+       "en": "Can I try this on in black?",
+       "ko": "이거 검은색으로 입어봐도 돼요?"
+      },
+      {
+       "en": "Can I try this on in a small?",
+       "ko": "이거 스몰로 입어봐도 돼요?"
+      }
+     ]
+    },
+    {
+     "id": "w5c07",
+     "en": "Where's the fitting room?",
+     "ko": "탈의실이 어디예요?",
+     "use_ko": "옷을 입어볼 곳을 찾을 때",
+     "note": "fitting room은 미국에서 가장 흔한 말이고, dressing room이라고도 해요.",
+     "sound": "Where's the가 '웨어r즈더', fitting은 t가 ㄹ처럼 '피링룸'.",
+     "ex": [
+      {
+       "en": "Excuse me, where's the fitting room?",
+       "ko": "실례지만, 탈의실이 어디예요?"
+      },
+      {
+       "en": "Where's the fitting room? I want to try these.",
+       "ko": "탈의실이 어디예요? 이거 입어보고 싶어요."
+      }
+     ]
+    },
+    {
+     "id": "w5c08",
+     "en": "It's a little ~.",
+     "ko": "좀 ~하네요.",
+     "use_ko": "사이즈나 느낌이 살짝 안 맞을 때",
+     "note": "tight(끼는), loose(헐렁한), long(긴), short(짧은)를 넣어요. a little을 붙이면 부드러워요.",
+     "sound": "It's a little이 '잇처리를'처럼 이어지고, little의 t는 ㄹ처럼.",
+     "ex": [
+      {
+       "en": "It's a little loose around the waist.",
+       "ko": "허리가 좀 헐렁하네요."
+      },
+      {
+       "en": "It's a little long. Do you have a shorter one?",
+       "ko": "좀 기네요. 더 짧은 거 있어요?"
+      }
+     ]
+    },
+    {
+     "id": "w5c09",
+     "en": "Do you have a bigger size?",
+     "ko": "더 큰 사이즈 있어요?",
+     "use_ko": "사이즈를 바꾸고 싶을 때",
+     "note": "작은 건 a smaller size예요. one size up(한 치수 위)도 같이 알아두세요.",
+     "sound": "Do you have a가 '두유해버', bigger size는 '비거r사이즈'.",
+     "ex": [
+      {
+       "en": "It's tight. Do you have a bigger size?",
+       "ko": "끼네요. 더 큰 사이즈 있어요?"
+      },
+      {
+       "en": "Do you have a bigger size in this color?",
+       "ko": "이 색으로 더 큰 사이즈 있어요?"
+      }
+     ]
+    },
+    {
+     "id": "w5c10",
+     "en": "How does it look?",
+     "ko": "어때 보여요?",
+     "use_ko": "입어보고 일행이나 직원에게 의견을 물을 때",
+     "note": "여러 개면 How do they look? 이에요. on me를 붙여 How does it look on me? 라고도 해요.",
+     "sound": "does it이 '더짓'으로 붙어 '하우더짓룩'.",
+     "ex": [
+      {
+       "en": "How does it look on me?",
+       "ko": "저한테 어때 보여요?"
+      },
+      {
+       "en": "Be honest. How does it look?",
+       "ko": "솔직하게 말해줘. 어때 보여?"
+      }
+     ]
+    }
+   ],
+   "pragmatic": "미국 옷 사이즈는 브랜드마다 달라요. 직원이 These run small(작게 나와요), They run big(크게 나와요)이라고 말해주면 그걸 참고해서 사이즈를 고르면 돼요.",
+   "roleplay": {
+    "situation_ko": "옷가게에서 스웨터를 입어봐요.",
+    "turns": [
+     {
+      "a": "Hey! Find everything okay?",
+      "intent_ko": "이 스웨터를 입어봐도 되는지 물어보세요.",
+      "hint": "Can I try this on?",
+      "model": "Yes, can I try this on?"
+     },
+     {
+      "a": "Sure. What size do you need?",
+      "intent_ko": "탈의실이 어디인지 물어보세요.",
+      "hint": "Where's the fitting room?",
+      "model": "A medium, I think. Where's the fitting room?"
+     },
+     {
+      "a": "Right over there. How does it fit?",
+      "intent_ko": "좀 낀다고 말하세요.",
+      "hint": "It's a little ~.",
+      "model": "It's a little tight."
+     },
+     {
+      "a": "Hmm, this style runs small. But we're out of the large in this color.",
+      "intent_ko": "더 큰 사이즈가 이 색으로는 없대요. 다른 색으로 하든 고민해보든, 원하는 대로 대답하세요.",
+      "hint": "",
+      "model": "That's okay. Do you have it in black?",
+      "model_alt": "Oh, too bad. I'll think about it."
+     },
+     {
+      "a": "Let me check... Here you go. Try this one.",
+      "intent_ko": "입어보고 여자친구에게 어때 보이는지 물어보세요.",
+      "hint": "How does it look?",
+      "model": "Thanks. Babe, how does it look?"
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "옷가게에서 마음에 드는 재킷을 발견했어요. 입어보고, 사이즈가 안 맞다고 말하고, 다른 사이즈를 요청하고, 여자친구 의견을 물어보세요.",
+     "starter_en": "Hi! That jacket is really popular. Want to try it on?"
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "type": "learn",
+   "title": "블랙프라이데이 할인 확인하기",
+   "cast": {
+    "A": {
+     "name": "Jordan",
+     "gender": "f",
+     "desc": "백화점 계산대 직원"
+    }
+   },
+   "context_ko": "추수감사절 다음 날, 블랙프라이데이예요. 백화점이 사람으로 꽉 찼어요. 할인과 세금을 확인하고 계산해요.",
+   "listen_q": {
+    "q": "직원 말에 따르면 110달러 미만 옷에 대해 맞는 것은?",
+    "options": [
+     "판매세가 붙지 않는다",
+     "추가 30% 할인된다",
+     "환불이 안 된다",
+     "선물 포장이 무료다"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "B",
+     "en": "Hi. Is this on sale?",
+     "ko": "안녕하세요. 이거 할인해요?",
+     "chunks": [
+      "w5c11"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Yes! Everything on that table is forty percent off today.",
+     "ko": "네! 그 테이블에 있는 건 오늘 전부 40% 할인이에요."
+    },
+    {
+     "sp": "B",
+     "en": "No way! So how much is it after the discount?",
+     "ko": "말도 안 돼! 그럼 할인하면 얼마예요?",
+     "chunks": [
+      "w1c02"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "It comes to fifty-four dollars.",
+     "ko": "54달러예요."
+    },
+    {
+     "sp": "B",
+     "en": "Is tax included?",
+     "ko": "세금 포함이에요?",
+     "chunks": [
+      "w5c12"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Actually, clothes under a hundred and ten dollars don't have sales tax in New York City.",
+     "ko": "사실 뉴욕시에서는 110달러 미만 옷에는 판매세가 안 붙어요."
+    },
+    {
+     "sp": "B",
+     "en": "Oh, really? That's good to know.",
+     "ko": "아, 진짜요? 알아두면 좋겠네요.",
+     "chunks": [
+      "w1c01"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "And this coat is on sale, too. It's two hundred and forty.",
+     "ko": "그리고 이 코트도 할인 중이에요. 240달러예요."
+    },
+    {
+     "sp": "B",
+     "en": "Hmm, that's a little over my budget.",
+     "ko": "음, 제 예산보다 조금 넘네요.",
+     "chunks": [
+      "w5c13"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "No pressure. The sweater's a great deal, though.",
+     "ko": "부담 갖지 마세요. 그래도 스웨터는 정말 싸게 사시는 거예요."
+    },
+    {
+     "sp": "B",
+     "en": "You're right. I'll take it.",
+     "ko": "맞아요. 이걸로 살게요.",
+     "chunks": [
+      "w5c14"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Is this a gift?",
+     "ko": "선물이세요?"
+    },
+    {
+     "sp": "B",
+     "en": "Yes, it's for my mom. Could I get a gift receipt?",
+     "ko": "네, 엄마 거예요. 선물용 영수증 받을 수 있어요?",
+     "chunks": [
+      "w5c15"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Of course. I'll put it in the bag.",
+     "ko": "물론이죠. 봉투에 넣어드릴게요."
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w5c11",
+     "en": "Is this on sale?",
+     "ko": "이거 할인해요?",
+     "use_ko": "할인 중인지 확인할 때",
+     "note": "여러 개면 Are these on sale? 이에요. 대답은 It's 30 percent off.처럼 와요.",
+     "sound": "Is this on이 '이즈디쏜'으로 붙어요.",
+     "ex": [
+      {
+       "en": "Excuse me, is this on sale?",
+       "ko": "실례지만, 이거 할인해요?"
+      },
+      {
+       "en": "Is this on sale, too?",
+       "ko": "이것도 할인해요?"
+      }
+     ]
+    },
+    {
+     "id": "w5c12",
+     "en": "Is tax included?",
+     "ko": "세금 포함이에요?",
+     "use_ko": "표시된 가격에 세금이 들어 있는지 확인할 때",
+     "note": "미국은 가격표에 세금이 빠져 있고, 계산할 때 따로 붙는 경우가 많아요. 뉴욕시에서는 110달러 미만 옷과 신발에는 판매세가 붙지 않아요.",
+     "sound": "included는 가운데 clu에 힘을 줘 '인클루디드'.",
+     "ex": [
+      {
+       "en": "Is tax included in this price?",
+       "ko": "이 가격에 세금 포함이에요?"
+      },
+      {
+       "en": "So, is tax included or not?",
+       "ko": "그럼 세금 포함이에요, 아니에요?"
+      }
+     ]
+    },
+    {
+     "id": "w5c13",
+     "en": "That's a little over my budget.",
+     "ko": "제 예산보다 조금 넘네요.",
+     "use_ko": "가격이 부담될 때 부드럽게 거절할 때",
+     "note": "It's too expensive. 보다 훨씬 부드러운 표현이에요. 직원이 더 싼 걸 보여주기도 해요.",
+     "sound": "That's a little over가 '대처리를오우버r'처럼 이어져요.",
+     "ex": [
+      {
+       "en": "It's beautiful, but that's a little over my budget.",
+       "ko": "예쁘긴 한데, 제 예산보다 조금 넘네요."
+      },
+      {
+       "en": "That's a little over my budget. Do you have anything cheaper?",
+       "ko": "예산보다 조금 넘네요. 더 싼 거 있어요?"
+      }
+     ]
+    },
+    {
+     "id": "w5c14",
+     "en": "I'll take it.",
+     "ko": "이걸로 살게요.",
+     "use_ko": "사기로 결정했을 때",
+     "note": "여러 개면 I'll take them. 이에요. 두 개 살 땐 I'll take two.라고 해요.",
+     "sound": "I'll take it이 '알테이킷', it의 t는 거의 안 들려요.",
+     "ex": [
+      {
+       "en": "Okay, I'll take it.",
+       "ko": "좋아요, 이걸로 살게요."
+      },
+      {
+       "en": "I love the color. I'll take it.",
+       "ko": "색이 너무 좋아요. 이걸로 살게요."
+      }
+     ]
+    },
+    {
+     "id": "w5c15",
+     "en": "Could I get a gift receipt?",
+     "ko": "선물용 영수증 받을 수 있어요?",
+     "use_ko": "선물로 사는 물건을 계산할 때",
+     "note": "gift receipt는 가격 없이 교환이나 환불할 수 있는 영수증이에요. 받는 사람이 사이즈를 바꿀 수 있어요.",
+     "sound": "Could I get a가 '쿠다이게러', receipt의 p는 소리 내지 않아 '리씻'.",
+     "ex": [
+      {
+       "en": "It's a gift. Could I get a gift receipt?",
+       "ko": "선물이에요. 선물용 영수증 받을 수 있어요?"
+      },
+      {
+       "en": "Could I get a gift receipt for each one?",
+       "ko": "하나씩 선물용 영수증 받을 수 있어요?"
+      }
+     ]
+    }
+   ],
+   "pragmatic": "블랙프라이데이에는 매장이 엄청 붐비고 직원도 바빠요. 질문은 짧게 하고, 할인율은 percent off(몇 퍼센트 할인)로 말한다는 걸 기억하세요. 뉴욕시에서는 110달러 미만 옷과 신발은 판매세가 없어서 실제 계산 금액이 예상보다 적을 수 있어요.",
+   "roleplay": {
+    "situation_ko": "블랙프라이데이에 신발 매장에서 운동화를 사요.",
+    "turns": [
+     {
+      "a": "Hi! Find everything okay?",
+      "intent_ko": "이 운동화가 할인 중인지 물어보세요.",
+      "hint": "Is this on sale?",
+      "model": "Yes. Is this on sale?"
+     },
+     {
+      "a": "It's thirty percent off. So it's ninety-eight dollars.",
+      "intent_ko": "세금 포함인지 물어보세요.",
+      "hint": "Is tax included?",
+      "model": "Is tax included?"
+     },
+     {
+      "a": "Shoes under a hundred and ten don't have sales tax here. Oh, and these boots are a hundred and eighty.",
+      "intent_ko": "부츠는 예산보다 조금 넘는다고 말하세요.",
+      "hint": "That's a little over my budget.",
+      "model": "Hmm, that's a little over my budget."
+     },
+     {
+      "a": "Totally fine. But there's an extra ten percent off if you buy two pairs today.",
+      "intent_ko": "두 켤레 사면 10% 추가 할인이래요. 계산해보고 원하는 대로 결정하세요.",
+      "hint": "",
+      "model": "Really? Then I'll take both.",
+      "model_alt": "Thanks, but I'll just take the sneakers."
+     },
+     {
+      "a": "Sounds good. Is this a gift?",
+      "intent_ko": "선물이라고 하면서 선물용 영수증을 달라고 하세요.",
+      "hint": "Could I get a gift receipt?",
+      "model": "Yes. Could I get a gift receipt?"
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "블랙프라이데이 백화점이에요. 마음에 드는 옷의 할인 여부와 세금을 묻고, 비싼 건 부드럽게 거절하고, 하나는 사겠다고 말한 뒤 선물용 영수증을 요청하세요.",
+     "starter_en": "Happy Black Friday! Can I help you with anything?"
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "type": "learn",
+   "title": "트레이더 조에서 장보기",
+   "cast": {
+    "A": {
+     "name": "Sam",
+     "gender": "m",
+     "desc": "트레이더 조 직원"
+    }
+   },
+   "context_ko": "여자친구가 가장 기대한 트레이더 조에 왔어요. 한국 친구들에게 줄 간식과 우리가 먹을 걸 골라요.",
+   "listen_q": {
+    "q": "직원이 추천한 것은?",
+    "options": [
+     "다크 초콜릿 과자",
+     "냉동 피자",
+     "꽃다발",
+     "커피 원두"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "B",
+     "en": "Excuse me, which aisle has the snacks?",
+     "ko": "실례지만, 과자는 몇 번 통로에 있어요?",
+     "chunks": [
+      "w5c16"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Snacks are in aisle three, next to the cookies.",
+     "ko": "과자는 3번 통로, 쿠키 옆에 있어요."
+    },
+    {
+     "sp": "B",
+     "en": "Thanks. Also, is this any good? My girlfriend wants to try it.",
+     "ko": "감사해요. 그리고 이거 맛있어요? 여자친구가 먹어보고 싶대요.",
+     "chunks": [
+      "w5c17"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "That one's okay, but honestly, these dark chocolate ones are my favorite.",
+     "ko": "그것도 괜찮은데, 솔직히 이 다크 초콜릿 과자가 제일 좋아요."
+    },
+    {
+     "sp": "B",
+     "en": "Really? Can we try a sample?",
+     "ko": "진짜요? 시식해봐도 돼요?",
+     "chunks": [
+      "w1c01",
+      "w5c18"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Sure, there's a sample station in the back. Today it's this one.",
+     "ko": "그럼요, 안쪽에 시식대가 있어요. 오늘은 마침 이거예요."
+    },
+    {
+     "sp": "B",
+     "en": "Wow, this is so good. I'll take two of these.",
+     "ko": "와, 진짜 맛있다. 이거 두 개 살게요.",
+     "chunks": [
+      "w5c19"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Good call. They make great gifts, too.",
+     "ko": "잘 고르셨어요. 선물로도 좋아요."
+    },
+    {
+     "sp": "B",
+     "en": "Perfect. We're bringing some back to Korea.",
+     "ko": "완벽하네요. 한국에 좀 가져가려고요.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "Nice! Do you need a bag?",
+     "ko": "좋네요! 봉투 필요하세요?"
+    },
+    {
+     "sp": "B",
+     "en": "No, I don't need a bag, thanks. We brought our own.",
+     "ko": "아니요, 봉투는 괜찮아요, 감사해요. 장바구니 가져왔어요.",
+     "chunks": [
+      "w5c20"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Love it. Do you have any Trader Joe's in Korea?",
+     "ko": "좋네요. 한국에도 트레이더 조 있어요?"
+    },
+    {
+     "sp": "B",
+     "en": "No, that's why my girlfriend wanted to come here so badly.",
+     "ko": "아니요, 그래서 여자친구가 여기 엄청 오고 싶어 했어요.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "Ha! Well, I hope she likes it. Have a great trip!",
+     "ko": "하! 마음에 드셨으면 좋겠네요. 좋은 여행 되세요!"
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w5c16",
+     "en": "Which aisle has ~?",
+     "ko": "~는 몇 번 통로에 있어요?",
+     "use_ko": "마트에서 물건 위치를 물을 때",
+     "note": "aisle의 s는 소리가 나지 않아요. Where can I find ~? 와 같은 상황에서 바꿔 써요.",
+     "sound": "aisle은 '아일', Which aisle has가 '위치아일해즈'로 이어져요.",
+     "ex": [
+      {
+       "en": "Which aisle has the pasta?",
+       "ko": "파스타는 몇 번 통로에 있어요?"
+      },
+      {
+       "en": "Sorry, which aisle has coffee?",
+       "ko": "죄송한데, 커피는 몇 번 통로에 있어요?"
+      }
+     ]
+    },
+    {
+     "id": "w5c17",
+     "en": "Is this any good?",
+     "ko": "이거 괜찮아요?",
+     "use_ko": "직원이나 현지인에게 맛이나 품질을 물을 때",
+     "note": "가볍게 묻는 말이라 마트, 식당, 가게 어디서나 써요. 추천을 받는 계기가 돼요.",
+     "sound": "any good이 '애니굿', 끝 d는 약하게.",
+     "ex": [
+      {
+       "en": "I've never tried this. Is this any good?",
+       "ko": "이거 안 먹어봤는데요. 괜찮아요?"
+      },
+      {
+       "en": "Is this any good with cheese?",
+       "ko": "이거 치즈랑 먹어도 괜찮아요?"
+      }
+     ]
+    },
+    {
+     "id": "w5c18",
+     "en": "Can we try a sample?",
+     "ko": "시식해봐도 돼요?",
+     "use_ko": "먹어보거나 써보고 싶을 때",
+     "note": "혼자면 Can I try a sample? 이에요. 화장품 매장에서도 써요.",
+     "sound": "try a sample이 '트라이어샘플'로 붙어요.",
+     "ex": [
+      {
+       "en": "These look good. Can we try a sample?",
+       "ko": "이거 맛있어 보이네요. 시식해봐도 돼요?"
+      },
+      {
+       "en": "Can we try a sample of this one?",
+       "ko": "이거 시식해봐도 돼요?"
+      }
+     ]
+    },
+    {
+     "id": "w5c19",
+     "en": "I'll take two of these.",
+     "ko": "이거 두 개 살게요.",
+     "use_ko": "같은 물건을 여러 개 살 때",
+     "note": "two 자리에 three, five 같은 숫자를 바꿔 넣어요. 하나만 살 땐 I'll take one.이라고 해요.",
+     "sound": "take two of these가 '테익투어디즈', of는 약하게 '어'로 거의 안 들려요.",
+     "ex": [
+      {
+       "en": "I'll take two of these, please.",
+       "ko": "이거 두 개 주세요."
+      },
+      {
+       "en": "They're perfect gifts. I'll take two of these.",
+       "ko": "선물로 딱이네요. 이거 두 개 살게요."
+      }
+     ]
+    },
+    {
+     "id": "w5c20",
+     "en": "I don't need a bag, thanks.",
+     "ko": "봉투는 괜찮아요, 감사해요.",
+     "use_ko": "봉투가 필요 없을 때",
+     "note": "뉴욕은 일회용 비닐봉투를 주지 않아요. 종이봉투는 보통 5센트를 받으니 장바구니를 챙겨 가면 편해요.",
+     "sound": "don't need a가 '돈니더', 끝 t는 거의 안 들려요.",
+     "ex": [
+      {
+       "en": "No, I don't need a bag, thanks. I have one.",
+       "ko": "아니요, 봉투는 괜찮아요. 하나 있어요."
+      },
+      {
+       "en": "I don't need a bag, thanks. It's just one item.",
+       "ko": "봉투는 괜찮아요. 하나뿐이에요."
+      }
+     ]
+    }
+   ],
+   "pragmatic": "트레이더 조 직원들은 손님과 이야기하는 걸 좋아해요. 계산할 때 What did you get? 처럼 말을 걸면 짧게라도 대답해보세요. 좋은 회화 연습이 돼요.",
+   "roleplay": {
+    "situation_ko": "트레이더 조에서 장을 봐요.",
+    "turns": [
+     {
+      "a": "Hi! Finding everything okay?",
+      "intent_ko": "커피는 몇 번 통로인지 물어보세요.",
+      "hint": "Which aisle has ~?",
+      "model": "Hi. Which aisle has the coffee?"
+     },
+     {
+      "a": "Aisle five. We just got a new holiday blend.",
+      "intent_ko": "새로 나온 커피가 괜찮은지 물어보세요.",
+      "hint": "Is this any good?",
+      "model": "Is this any good?"
+     },
+     {
+      "a": "It's great. Oh, and there are free samples of it right now.",
+      "intent_ko": "시식해봐도 되는지 물어보세요.",
+      "hint": "Can we try a sample?",
+      "model": "Can we try a sample?"
+     },
+     {
+      "a": "Here you go. Oh, and the dark chocolate bars are limited to two per person today.",
+      "intent_ko": "1인당 두 개만 살 수 있대요. 몇 개 살지 원하는 대로 말하세요.",
+      "hint": "",
+      "model": "Oh, okay. I'll take two of these, then.",
+      "model_alt": "That's fine. We only need one."
+     },
+     {
+      "a": "Sounds good. Do you need a bag?",
+      "intent_ko": "봉투는 괜찮다고 하세요.",
+      "hint": "I don't need a bag, thanks.",
+      "model": "No, I don't need a bag, thanks."
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "트레이더 조에서 한국 친구들에게 줄 선물을 고르고 있어요. 직원에게 위치를 묻고, 추천을 받고, 시식하고, 몇 개 살지 정해보세요.",
+     "starter_en": "Hey! Can I help you find something?"
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "type": "learn",
+   "title": "교환하고 환불하기",
+   "cast": {
+    "A": {
+     "name": "Nina",
+     "gender": "f",
+     "desc": "옷가게 고객 서비스 직원"
+    }
+   },
+   "context_ko": "어제 산 재킷이 호텔에서 입어보니 안 맞아요. 영수증을 들고 가게에 다시 왔어요.",
+   "listen_q": {
+    "q": "'나'는 결국 무엇을 했나요?",
+    "options": [
+     "재킷을 한 치수 큰 것으로 교환했다",
+     "전액 환불을 받았다",
+     "가게 포인트로 받았다",
+     "아무것도 못 했다"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "B",
+     "en": "Hi. Sorry to bother you, but I'd like to exchange this jacket.",
+     "ko": "안녕하세요. 번거롭게 해서 죄송한데, 이 재킷 교환하고 싶어요.",
+     "chunks": [
+      "w3c16",
+      "w5c21"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Sure. What's wrong with it?",
+     "ko": "네. 어떤 문제가 있으세요?"
+    },
+    {
+     "sp": "B",
+     "en": "It doesn't fit. It's a little tight.",
+     "ko": "안 맞아요. 좀 끼네요.",
+     "chunks": [
+      "w5c22",
+      "w5c08"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "I see. Do you have the receipt?",
+     "ko": "그렇군요. 영수증 있으세요?"
+    },
+    {
+     "sp": "B",
+     "en": "Yes, here's the receipt. I bought them yesterday.",
+     "ko": "네, 여기 영수증이요. 어제 샀어요.",
+     "chunks": [
+      "w5c23"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Thanks. What would you like to do?",
+     "ko": "감사해요. 어떻게 해드릴까요?"
+    },
+    {
+     "sp": "B",
+     "en": "Can I exchange it for a bigger size?",
+     "ko": "더 큰 사이즈로 바꿀 수 있어요?",
+     "chunks": [
+      "w5c24"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Let me check... Yes, we have a large in the same color.",
+     "ko": "확인해볼게요… 네, 같은 색으로 라지 있어요."
+    },
+    {
+     "sp": "B",
+     "en": "Great. Just in case, what's your return policy?",
+     "ko": "좋아요. 혹시 몰라서 그런데, 환불 규정이 어떻게 돼요?",
+     "chunks": [
+      "w5c25"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "You can return anything within thirty days with the receipt.",
+     "ko": "영수증이 있으면 30일 안에 뭐든 환불할 수 있어요."
+    },
+    {
+     "sp": "B",
+     "en": "Sorry, what do you mean by \"store credit\" on the sign?",
+     "ko": "죄송한데, 안내판에 있는 \"store credit\"은 무슨 뜻이에요?",
+     "chunks": [
+      "w1c08"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Without a receipt, you get store credit instead of your money back.",
+     "ko": "영수증이 없으면 현금 대신 이 가게에서 쓸 수 있는 금액으로 받는 거예요."
+    },
+    {
+     "sp": "B",
+     "en": "That makes sense. Thanks for your help!",
+     "ko": "이해했어요. 도와주셔서 감사합니다!",
+     "chunks": [
+      "w1c03"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Happy to help. Enjoy the rest of your trip!",
+     "ko": "도와드려서 기뻐요. 남은 여행 잘 하세요!"
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w5c21",
+     "en": "I'd like to exchange ~.",
+     "ko": "~ 교환하고 싶어요.",
+     "use_ko": "산 물건을 바꾸고 싶을 때",
+     "note": "환불은 I'd like to return ~. 이에요. 무엇을 원하는지 먼저 말하면 일이 빨라요.",
+     "sound": "I'd like to가 '아이라잌투', exchange는 뒤에 힘을 줘 '익스체인지'.",
+     "ex": [
+      {
+       "en": "I'd like to exchange this shirt.",
+       "ko": "이 셔츠 교환하고 싶어요."
+      },
+      {
+       "en": "I'd like to exchange this for a different color.",
+       "ko": "이거 다른 색으로 교환하고 싶어요."
+      }
+     ]
+    },
+    {
+     "id": "w5c22",
+     "en": "It doesn't fit.",
+     "ko": "안 맞아요.",
+     "use_ko": "사이즈가 맞지 않을 때",
+     "note": "바지나 신발처럼 복수인 물건은 They don't fit. 이라고 해요.",
+     "sound": "doesn't fit이 t가 겹쳐 '더즌핏'.",
+     "ex": [
+      {
+       "en": "I'd like to return this. It doesn't fit.",
+       "ko": "이거 환불하고 싶어요. 안 맞아요."
+      },
+      {
+       "en": "It doesn't fit my girlfriend.",
+       "ko": "여자친구한테 안 맞아요."
+      }
+     ]
+    },
+    {
+     "id": "w5c23",
+     "en": "Here's the receipt.",
+     "ko": "여기 영수증이요.",
+     "use_ko": "교환, 환불할 때 영수증을 건넬 때",
+     "note": "gift receipt(선물용 영수증)를 받았으면 그걸 내도 돼요.",
+     "sound": "receipt의 p는 소리 내지 않아 '리씻'.",
+     "ex": [
+      {
+       "en": "Here's the receipt. I bought it on Friday.",
+       "ko": "여기 영수증이요. 금요일에 샀어요."
+      },
+      {
+       "en": "Here's the receipt and the card I used.",
+       "ko": "여기 영수증이랑 쓴 카드요."
+      }
+     ]
+    },
+    {
+     "id": "w5c24",
+     "en": "Can I exchange ~?",
+     "ko": "~ 바꿀 수 있어요?",
+     "use_ko": "다른 사이즈나 색으로 바꾸고 싶을 때",
+     "note": "Can I exchange it for ~? 처럼 for 뒤에 a bigger size, a smaller size, a different color를 넣어요.",
+     "sound": "exchange it for가 '익스체인짓퍼r'로 붙어요.",
+     "ex": [
+      {
+       "en": "Can I exchange it for a smaller size?",
+       "ko": "이거 더 작은 사이즈로 바꿀 수 있어요?"
+      },
+      {
+       "en": "Can I exchange these for a different color?",
+       "ko": "이거 다른 색으로 바꿀 수 있어요?"
+      }
+     ]
+    },
+    {
+     "id": "w5c25",
+     "en": "What's your return policy?",
+     "ko": "환불 규정이 어떻게 돼요?",
+     "use_ko": "사기 전이나 교환할 때 환불 조건을 확인할 때",
+     "note": "가게마다 기간과 조건이 달라요. 큰 물건을 사기 전에 미리 물어보면 안심돼요.",
+     "sound": "What's your가 '왓츄어r', policy는 '팔러시'.",
+     "ex": [
+      {
+       "en": "Before I buy this, what's your return policy?",
+       "ko": "사기 전에요, 환불 규정이 어떻게 돼요?"
+      },
+      {
+       "en": "What's your return policy for sale items?",
+       "ko": "할인 상품 환불 규정은 어떻게 돼요?"
+      }
+     ]
+    }
+   ],
+   "pragmatic": "미국 가게는 교환·환불이 비교적 쉬운 편이에요. 영수증과 결제한 카드를 챙겨 가고, 할인 상품은 환불 조건이 다를 수 있으니 What's your return policy? 로 먼저 확인하세요.",
+   "roleplay": {
+    "situation_ko": "선물로 산 스웨터를 교환하러 왔어요.",
+    "turns": [
+     {
+      "a": "Hi, how can I help you?",
+      "intent_ko": "이 스웨터를 교환하고 싶다고 하세요.",
+      "hint": "I'd like to exchange ~.",
+      "model": "Hi. I'd like to exchange this sweater."
+     },
+     {
+      "a": "Sure. What's the problem?",
+      "intent_ko": "안 맞는다고 하세요.",
+      "hint": "It doesn't fit.",
+      "model": "It doesn't fit my mom."
+     },
+     {
+      "a": "No problem. Do you have the receipt?",
+      "intent_ko": "영수증을 건네세요.",
+      "hint": "Here's the receipt.",
+      "model": "Yes, here's the receipt."
+     },
+     {
+      "a": "Thanks. Oh, this was on sale, so we can't give you a refund. Only an exchange.",
+      "intent_ko": "할인 상품이라 환불이 안 된대요. 교환은 되는지 묻거나 원하는 대로 대처하세요.",
+      "hint": "",
+      "model": "Oh, I see. Can I exchange it for a smaller size, then?",
+      "model_alt": "I didn't know that. Is an exchange possible?"
+     },
+     {
+      "a": "An exchange is fine. Anything else?",
+      "intent_ko": "이 가게의 환불 규정을 물어보세요.",
+      "hint": "What's your return policy?",
+      "model": "Yes, just in case, what's your return policy?"
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "여자친구 신발이 안 맞아서 가게에 다시 왔어요. 교환하고 싶다고 말하고, 이유를 설명하고, 영수증을 내고, 원하는 사이즈를 말하고, 환불 규정을 확인하세요.",
+     "starter_en": "Hi there! What can I do for you today?"
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "type": "review_week",
+   "title": "주간 복습: 소호에서 쇼핑하는 하루",
+   "cast": {
+    "A": {
+     "name": "Ava",
+     "gender": "f",
+     "desc": "소호 편집숍 직원"
+    }
+   },
+   "context_ko": "소호의 편집숍에서 여자친구 생일 선물로 코트를 골라요. 이번 주 표현이 한 대화에 다 나와요.",
+   "listen_q": {
+    "q": "'나'가 이 가게에서 확인하지 않은 것은?",
+    "options": [
+     "배송이 되는지",
+     "선물용 영수증",
+     "환불 규정",
+     "할인 여부"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Hi! Can I help you find anything?",
+     "ko": "안녕하세요! 찾으시는 거 있으세요?"
+    },
+    {
+     "sp": "B",
+     "en": "I'm just looking, thanks... Well, actually, I'm looking for a coat for my girlfriend.",
+     "ko": "그냥 구경 중이에요. 사실 여자친구 코트를 찾고 있어요.",
+     "chunks": [
+      "w5c01",
+      "w5c05"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Our coats are right here. This camel one is really popular.",
+     "ko": "코트는 바로 여기 있어요. 이 카멜색이 정말 인기 많아요."
+    },
+    {
+     "sp": "B",
+     "en": "It's beautiful. Is this on sale?",
+     "ko": "예쁘네요. 이거 할인해요?",
+     "chunks": [
+      "w5c11"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "It's twenty-five percent off. So it's two hundred and ten.",
+     "ko": "25% 할인이에요. 그래서 210달러예요."
+    },
+    {
+     "sp": "B",
+     "en": "Hmm, that's a little over my budget. Do you have this in a shorter length?",
+     "ko": "음, 예산보다 조금 넘네요. 이거 더 짧은 기장 있어요?",
+     "chunks": [
+      "w5c13",
+      "w5c03"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "We do. This one is a hundred and sixty.",
+     "ko": "있어요. 이건 160달러예요."
+    },
+    {
+     "sp": "B",
+     "en": "Babe, can you try this on? I want to see it on you.",
+     "ko": "자기야, 이거 입어볼래? 입은 거 보고 싶어.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "The fitting room is right over there.",
+     "ko": "탈의실은 바로 저쪽이에요."
+    },
+    {
+     "sp": "B",
+     "en": "Wow, it looks great on you. I'll take it.",
+     "ko": "와, 정말 잘 어울려. 이걸로 살게요.",
+     "chunks": [
+      "w5c14"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Great choice! Is it a gift?",
+     "ko": "좋은 선택이에요! 선물이세요?"
+    },
+    {
+     "sp": "B",
+     "en": "Yes, it's for her birthday. Could I get a gift receipt?",
+     "ko": "네, 생일 선물이에요. 선물용 영수증 받을 수 있어요?",
+     "chunks": [
+      "w5c15"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Of course. Do you need a bag?",
+     "ko": "물론이죠. 봉투 필요하세요?"
+    },
+    {
+     "sp": "B",
+     "en": "Yes, please. And just in case, what's your return policy?",
+     "ko": "네, 주세요. 그리고 혹시 몰라서요, 환불 규정이 어떻게 돼요?",
+     "chunks": [
+      "w5c25"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Thirty days with the receipt. Happy birthday to her!",
+     "ko": "영수증 있으면 30일이요. 여자친구분 생일 축하드려요!"
+    },
+    {
+     "sp": "B",
+     "en": "Thank you! Everything was great.",
+     "ko": "감사합니다! 다 정말 좋았어요.",
+     "chunks": [
+      "w3c25"
+     ]
+    }
+   ],
+   "chunks": [],
+   "pragmatic": "쇼핑 대화는 구경 → 찾는 물건 → 가격 → 입어보기 → 결정 → 계산 순서로 흘러가요. 이 흐름을 머릿속에 넣어두면 어떤 가게에서도 당황하지 않아요.",
+   "improv": [
+    {
+     "situation_ko": "소호 옷가게에서 나를 위한 옷을 하나 사요. 구경, 사이즈, 가격, 결정, 계산, 환불 규정까지 이번 주 표현을 최대한 넣어 한 번에 해보세요.",
+     "starter_en": "Hey, welcome! Anything I can help you with?"
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "type": "review_cum",
+   "title": "누적 복습: 쇼핑한 이야기 들려주기",
+   "cast": {
+    "A": {
+     "name": "Mia",
+     "gender": "f",
+     "desc": "서울에 있는 친구"
+    }
+   },
+   "context_ko": "서울에 있는 Mia와 다시 영상통화를 해요. 이번엔 쇼핑 이야기를 해요.",
+   "listen_q": {
+    "q": "'나'가 Mia를 위해 산 것은?",
+    "options": [
+     "트레이더 조 초콜릿",
+     "스웨터",
+     "코트",
+     "비니"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "So, how was the shopping? Did you go crazy?",
+     "ko": "그래서 쇼핑은 어땠어? 엄청 샀어?"
+    },
+    {
+     "sp": "B",
+     "en": "Kind of. Black Friday was insane. Everything was forty percent off.",
+     "ko": "좀 그랬지. 블랙프라이데이 장난 아니었어. 전부 40% 할인이었어.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "No way! What did you get?",
+     "ko": "말도 안 돼! 뭐 샀어?"
+    },
+    {
+     "sp": "B",
+     "en": "A coat for my girlfriend. The first one was a little over my budget, so we got a cheaper one. It looked great on her.",
+     "ko": "여자친구 코트. 처음 본 건 예산보다 좀 넘어서 더 싼 걸로 샀어. 진짜 잘 어울렸어.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "Aw, that's sweet. Anything for me?",
+     "ko": "아, 스윗하다. 나한테 줄 건?"
+    },
+    {
+     "sp": "B",
+     "en": "Of course! I got you some chocolate from Trader Joe's. We tried a sample first.",
+     "ko": "당연하지! 트레이더 조에서 초콜릿 샀어. 먼저 시식해봤어.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "Yay! And did you have any problems?",
+     "ko": "야호! 문제는 없었어?"
+    },
+    {
+     "sp": "B",
+     "en": "My jacket didn't fit, but I exchanged it for a bigger size. Easy.",
+     "ko": "재킷이 안 맞았는데 더 큰 사이즈로 바꿨어. 쉬웠어.",
+     "chunks": []
+    }
+   ],
+   "chunks": [],
+   "pragmatic": "쇼핑하면서 쓴 표현을 친구에게 과거형으로 다시 말해보세요. I tried it on, I exchanged it, I took two처럼 바꿔 말하면 표현이 더 단단해져요.",
+   "improv": [
+    {
+     "situation_ko": "친구에게 뉴욕에서 쇼핑한 하루를 이야기해보세요. 어디 갔는지, 뭘 샀는지, 가격과 할인, 입어본 일, 교환한 일까지 이번 주 표현을 5개 이상 넣으세요.",
+     "starter_en": "Okay, tell me about your shopping day! What did you buy?"
+    }
+   ]
+  }
+ ]
+}
