@@ -362,7 +362,7 @@ function listen(el) {
   function showQ() {
     const q = d.listen_q;
     if (!q) { $("#q").innerHTML = `<button class="go" id="nx">다음: ${nextLabel()}</button>`; $("#nx").onclick = next; return; }
-    $("#q").innerHTML = `<p class="ko" style="margin-top:18px">${esc(q.q)}</p>${q.options.map((o, i) => `<button class="opt" data-i="${i}">${esc(o)}</button>`).join("")}<p class="muted" id="fb"></p>`;
+    $("#q").innerHTML = `<p class="ko" style="margin-top:18px">${esc(q.q)}</p>${q.options.map((o, i) => [o, i]).sort(() => Math.random() - .5).map(([o, i]) => `<button class="opt" data-i="${i}">${esc(o)}</button>`).join("")}<p class="muted" id="fb"></p>`;
     $("#q").querySelectorAll(".opt").forEach(b => b.onclick = () => {
       LS.stats.listenTries++;
       if (+b.dataset.i !== q.answer) { b.classList.add("wrong"); b.disabled = true; $("#fb").textContent = "다시 들어보고 골라보세요."; return; }
