@@ -236,7 +236,15 @@
    "improv": [
     {
      "situation_ko": "친구가 이번 주에 있었던 좋은 일 세 가지를 차례로 말해요. 한 문장마다 오늘 맞장구 표현으로 반응하고, 마지막엔 질문을 하나 하세요.",
-     "starter_en": "Guess what? I finally finished my big project!"
+     "starter_en": "Guess what? I finally finished my big project!",
+     "flow_ko": [
+      "놀라며 반응하기",
+      "축하해주기",
+      "이해했다고 반응하기",
+      "질문 하나 하기"
+     ],
+     "model": "Really? You finally finished it? Good for you! You worked late every night, so that makes sense. No way, your boss gave you a day off, too? I know, right? You totally deserve it. So how are you going to celebrate?",
+     "model_ko": "진짜? 드디어 끝냈어? 잘됐다! 매일 밤늦게까지 일했으니까 그럴 만하지. 말도 안 돼, 사장님이 하루 휴가까지 줬어? 그러니까! 넌 그럴 자격 있어. 그래서 어떻게 축하할 거야?"
     }
    ]
   },
@@ -474,7 +482,15 @@
    "improv": [
     {
      "situation_ko": "외국인 동료가 빠르게 말해서 두 군데를 놓쳤다고 가정하고, 되묻기 표현 3개로 확인한 뒤 내용을 정리해서 말해보세요.",
-     "starter_en": "So we're meeting at the place near the station around seven-ish, right?"
+     "starter_en": "So we're meeting at the place near the station around seven-ish, right?",
+     "flow_ko": [
+      "못 들었다고 말하기",
+      "천천히 말해달라고 하기",
+      "모르는 말 뜻 묻고 확인하기",
+      "다시 말해달라고 한 뒤 정리하기"
+     ],
+     "model": "Sorry, I didn't catch that. Could you speak a little slower? Thanks. What do you mean by \"seven-ish\"? You mean around seven, not exactly seven? Got it. And which place? Could you say that again? Okay, so the café near the station, around seven.",
+     "model_ko": "죄송한데, 못 들었어요. 조금만 천천히 말해줄래요? 고마워요. \"seven-ish\"가 무슨 뜻이에요? 정확히 7시가 아니라 7시쯤이라는 거죠? 알겠어요. 그리고 어디라고요? 다시 말해줄래요? 좋아요, 그럼 역 근처 카페에서 7시쯤이요."
     }
    ]
   },
@@ -709,7 +725,15 @@
    "improv": [
     {
      "situation_ko": "처음 만난 외국인이 무슨 일을 하는지 물어요. 시간 벌기 표현으로 시작해서 내 일을 2~3문장으로 설명하세요.",
-     "starter_en": "So, what do you do?"
+     "starter_en": "So, what do you do?",
+     "flow_ko": [
+      "좋은 질문이라며 시간 벌기",
+      "뭐라고 할지 고민하는 말",
+      "내 일을 비유로 설명하기",
+      "알아들었는지 확인하기"
+     ],
+     "model": "That's a good question. Let me think. How can I put it... I'm a teacher, but not at a school. It's kind of like private tutoring. I help high school students get ready for a big English exam. It's hard work, but I love it. You know what I mean?",
+     "model_ko": "좋은 질문이네요. 음, 뭐라고 해야 하나… 선생님인데 학교 선생님은 아니에요. 개인 과외 같은 거예요. 고등학생들이 큰 영어 시험을 준비하게 도와줘요. 힘들지만 좋아해요. 무슨 말인지 아시죠?"
     }
    ]
   },
@@ -948,7 +972,15 @@
    "improv": [
     {
      "situation_ko": "친구가 휴가 이야기를 꺼내요. 질문 되돌리기 표현으로 최소 3번 질문을 이어가며 이야기를 끝까지 끌어내세요.",
-     "starter_en": "I just got back from a trip to Jeju!"
+     "starter_en": "I just got back from a trip to Jeju!",
+     "flow_ko": [
+      "어땠는지 묻기",
+      "더 얘기해달라고 하기",
+      "왜 거기로 갔는지 묻기",
+      "그다음 이야기 묻고 질문 되돌리기"
+     ],
+     "model": "Oh, nice! How was it? Really? Tell me more about it. What made you choose Jeju this time? Wow. So what happened next? That sounds amazing. How about you? Are you going anywhere else this year?",
+     "model_ko": "오, 좋다! 어땠어? 진짜? 더 얘기해줘. 이번엔 왜 제주로 정했어? 와. 그래서 그다음엔 어떻게 됐어? 완전 좋았겠다. 너는 올해 또 어디 갈 데 있어?"
     }
    ]
   },
@@ -1185,7 +1217,15 @@
    "improv": [
     {
      "situation_ko": "외국인이 '수능'이 뭐냐고 물어요. 막힐 때 표현을 쓰면서 쉬운 영어로 풀어서 설명하세요.",
-     "starter_en": "What's this big exam everyone in Korea talks about?"
+     "starter_en": "What's this big exam everyone in Korea talks about?",
+     "flow_ko": [
+      "단어가 안 떠오르는 척 시간 벌기",
+      "영어로 말하기 어렵다고 말하기",
+      "비슷한 것으로 설명하기",
+      "다르게 한 번 더 설명하기"
+     ],
+     "model": "Oh, the Suneung. What's the word... It's something like the SAT in Korea. I'm not sure how to say this in English, but it's a national college entrance exam. I mean, one test day decides a lot. Let me put it another way. It's the most stressful day for high school seniors in Korea.",
+     "model_ko": "아, 수능이요. 뭐라고 하더라… 한국의 SAT 같은 거예요. 영어로 어떻게 말해야 할지 모르겠는데, 전국 대학 입학 시험이에요. 그러니까 시험 하루가 많은 걸 결정해요. 다르게 말해볼게요. 한국 고3한테 가장 스트레스 받는 날이에요."
     }
    ]
   },
@@ -1322,7 +1362,15 @@
    "improv": [
     {
      "situation_ko": "Mia가 다음 주 계획을 물어요. 이번 주 표현을 최대한 섞어 대답하고, 질문을 되돌려주세요.",
-     "starter_en": "So, what's your plan for next week?"
+     "starter_en": "So, what's your plan for next week?",
+     "flow_ko": [
+      "생각할 시간 벌기",
+      "다음 주 일정 말하기",
+      "비유로 설명하기",
+      "질문 되돌리기"
+     ],
+     "model": "Let me think. Next week is pretty busy. I have classes almost every day. It's kind of like exam season for my students. But on Saturday, I'm going to relax. How about you? Any plans?",
+     "model_ko": "음, 다음 주는 꽤 바빠요. 거의 매일 수업이 있어요. 우리 학생들한테는 시험 기간 같은 거예요. 그래도 토요일엔 쉴 거예요. 당신은요? 계획 있어요?"
     }
    ]
   },
@@ -1335,7 +1383,15 @@
    "improv": [
     {
      "situation_ko": "다른 친구에게 이번 주 Mia와 있었던 일 중 하나를 이야기하듯 말해보세요. 이번 주 표현을 최소 5개 넣어보세요.",
-     "starter_en": "So, what happened with your friend Mia this week?"
+     "starter_en": "So, what happened with your friend Mia this week?",
+     "flow_ko": [
+      "무슨 일이 있었는지 한 문장으로",
+      "맞장구 쓴 장면 말하기",
+      "되묻기 쓴 장면 말하기",
+      "질문으로 대화 이어간 이야기"
+     ],
+     "model": "It was fun. Mia got a new job, so we had coffee to celebrate. I said, \"Good for you!\" She talked really fast, so sometimes I said, \"Sorry, I didn't catch that.\" I asked a lot of questions like, \"How was it?\" and \"So what happened next?\" It was a really nice talk.",
+     "model_ko": "재밌었어. Mia가 새 직장을 구해서 축하하려고 커피 마셨어. 내가 \"잘됐다!\"라고 했지. Mia가 엄청 빨리 말해서 가끔 \"미안, 못 들었어\"라고 했어. \"어땠어?\", \"그래서 어떻게 됐어?\" 같은 질문을 많이 했어. 정말 좋은 대화였어."
     }
    ]
   }

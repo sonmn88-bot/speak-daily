@@ -247,7 +247,15 @@
    "improv": [
     {
      "situation_ko": "오랜만에 길에서 아는 외국인을 만났어요. 인사하고, 근황을 묻고, 내 근황을 짧게 말하세요.",
-     "starter_en": "Oh my gosh, hi! How have you been?"
+     "starter_en": "Oh my gosh, hi! How have you been?",
+     "flow_ko": [
+      "반갑게 인사하기",
+      "오랜만이라고 말하기",
+      "내 근황 짧게",
+      "상대 근황 묻기"
+     ],
+     "model": "Oh my gosh, long time no see! It's been a while. I've been good. Same old, same old. Just teaching and studying. How's it going with you? What have you been up to?",
+     "model_ko": "어머, 오랜만이에요! 진짜 오래됐네요. 저는 잘 지냈어요. 맨날 똑같죠. 가르치고 공부하고요. 당신은 어떻게 지내요? 요즘 뭐 하고 지냈어요?"
     }
    ]
   },
@@ -490,7 +498,15 @@
    "improv": [
     {
      "situation_ko": "공항 대기실 옆자리 외국인에게 먼저 말을 걸어 대화를 3번 이상 주고받아 보세요.",
-     "starter_en": "(옆자리 사람이 책을 읽고 있어요.)"
+     "starter_en": "(옆자리 사람이 책을 읽고 있어요.)",
+     "flow_ko": [
+      "자리 있는지 묻기",
+      "날씨로 말 걸기",
+      "상대 물건 칭찬하기",
+      "여기 와봤는지 묻기"
+     ],
+     "model": "Excuse me, is this seat taken? Thanks. It's freezing today, isn't it? I love your bag, by the way. What a nice color! Have you been here before? I'm a little lost.",
+     "model_ko": "실례지만, 이 자리 있어요? 고마워요. 오늘 엄청 춥죠? 그런데 가방 예쁘네요. 색깔 정말 예뻐요! 여기 와본 적 있어요? 저는 좀 헤매고 있어서요."
     }
    ]
   },
@@ -735,7 +751,15 @@
    "improv": [
     {
      "situation_ko": "모임에서 만난 사람과 공통점을 두 개 이상 찾아보세요. Me too / Me neither를 꼭 한 번씩 쓰세요.",
-     "starter_en": "So, what do you do for fun?"
+     "starter_en": "So, what do you do for fun?",
+     "flow_ko": [
+      "내 취미 말하기",
+      "공통점에 Me too",
+      "싫어하는 것 공통점에 Me neither",
+      "상대 취미 묻고 반응하기"
+     ],
+     "model": "For fun? I like watching movies and going to cafés. Oh, you love coffee? Me too! You don't like crowded places? Me neither. Same here, I like quiet places. What do you do for fun on weekends? Hiking? That sounds like fun.",
+     "model_ko": "재미로요? 영화 보고 카페 가는 거 좋아해요. 아, 커피 좋아해요? 저도요! 붐비는 데 안 좋아해요? 저도요. 저도 조용한 데가 좋아요. 주말엔 뭐 하고 놀아요? 등산이요? 재밌겠네요."
     }
    ]
   },
@@ -973,7 +997,15 @@
    "improv": [
     {
      "situation_ko": "친구가 요즘 어떻게 지내냐고 물어요. 바빴던 이유, 하려다 못 한 일, 생각 중인 계획을 차례로 말하세요.",
-     "starter_en": "Hey! What have you been up to lately?"
+     "starter_en": "Hey! What have you been up to lately?",
+     "flow_ko": [
+      "별일 없다고 시작하기",
+      "바빴던 이유",
+      "하려다 못 한 일",
+      "생각 중인 계획"
+     ],
+     "model": "Not much, just work. Things have been crazy lately. It's exam season, so I've been teaching a lot. It's been a long week. I've been meaning to go to the gym, but I haven't had time. And I'm thinking about taking a trip to New York.",
+     "model_ko": "별거 없어, 그냥 일. 요즘 진짜 정신없었어. 시험 기간이라 수업을 많이 했거든. 긴 한 주였어. 헬스장 가려고 했는데 시간이 없었어. 그리고 뉴욕 여행 갈까 생각 중이야."
     }
    ]
   },
@@ -1218,7 +1250,15 @@
    "improv": [
     {
      "situation_ko": "카페에서 대화하다가 이제 가야 해요. 신호 주기, 즐거웠다는 말, 다음 약속, 작별 인사 순서로 마무리하세요.",
-     "starter_en": "...and that's the whole story!"
+     "starter_en": "...and that's the whole story!",
+     "flow_ko": [
+      "가야 한다는 신호",
+      "즐거웠다는 말",
+      "다음 약속",
+      "작별 인사"
+     ],
+     "model": "Wow, what a story! Oh, look at the time. I should get going. It was nice talking to you. Let's catch up soon. Let me know if you're free next week. Take care!",
+     "model_ko": "와, 대단한 이야기네요! 어, 시간 좀 봐. 저 가봐야겠어요. 얘기 즐거웠어요. 조만간 또 만나요. 다음 주에 시간 되면 알려줘요. 잘 지내요!"
     }
    ]
   },
@@ -1353,7 +1393,15 @@
    "improv": [
     {
      "situation_ko": "파티에서 처음 만난 사람과 대화를 시작하고, 이어가고, 마무리하는 전 과정을 혼자 말해보세요. 이번 주 표현을 최대한 넣으세요.",
-     "starter_en": "Hi! I don't think we've met. How do you know Mia?"
+     "starter_en": "Hi! I don't think we've met. How do you know Mia?",
+     "flow_ko": [
+      "어떻게 아는 사이인지 답하기",
+      "자리·취미로 대화 시작",
+      "공통점 찾기",
+      "자연스럽게 마무리"
+     ],
+     "model": "Hi! Mia and I are old friends. Is this seat taken? Thanks. So, what do you do for fun? Oh, me too! That sounds like fun. Oh, I should get going. It was nice talking to you. Take care!",
+     "model_ko": "안녕하세요! Mia랑 오랜 친구예요. 이 자리 있어요? 고마워요. 그래서, 재미로 뭐 해요? 오, 저도요! 재밌겠다. 아, 저 가봐야겠어요. 얘기 즐거웠어요. 잘 지내요!"
     }
    ]
   },
@@ -1366,7 +1414,15 @@
    "improv": [
     {
      "situation_ko": "파티에서 처음 만난 사람에게 요즘 내 근황과 취미를 소개해보세요. 1~2주차 표현을 5개 이상 넣으세요.",
-     "starter_en": "So, tell me about yourself. What have you been up to lately?"
+     "starter_en": "So, tell me about yourself. What have you been up to lately?",
+     "flow_ko": [
+      "시간 벌며 시작",
+      "직업과 요즘 근황",
+      "취미",
+      "계획 말하고 질문 되돌리기"
+     ],
+     "model": "Let me think. I'm a teacher. Things have been crazy lately because it's exam season. For fun, I like watching movies and trying new cafés. I'm thinking about traveling soon. How about you? What do you do for fun?",
+     "model_ko": "음, 저는 선생님이에요. 시험 기간이라 요즘 진짜 정신없었어요. 재미로는 영화 보고 새 카페 가보는 거 좋아해요. 곧 여행 갈까 생각 중이에요. 당신은요? 재미로 뭐 해요?"
     }
    ]
   }

@@ -254,7 +254,15 @@
    "improv": [
     {
      "situation_ko": "입국심사관이 방문 목적, 기간, 숙소, 동행, 뉴욕 방문 여부를 차례로 물어요. 오늘 표현으로 막힘 없이 대답해보세요.",
-     "starter_en": "Passport, please. What's the purpose of your trip?"
+     "starter_en": "Passport, please. What's the purpose of your trip?",
+     "flow_ko": [
+      "여권 건네기",
+      "방문 목적",
+      "기간과 숙소",
+      "동행 + 처음 왔다는 말"
+     ],
+     "model": "Hi. Here's my passport. I'm here for sightseeing and some shopping. I'm staying for seven days. I'm staying at a hotel in Midtown. I'm traveling with my girlfriend. This is my first time in New York.",
+     "model_ko": "안녕하세요. 여기 제 여권이요. 관광이랑 쇼핑하러 왔어요. 7일 있어요. 미드타운 호텔에서 묵어요. 여자친구랑 여행 중이에요. 뉴욕은 처음이에요."
     }
    ]
   },
@@ -504,7 +512,15 @@
    "improv": [
     {
      "situation_ko": "공항에 도착했는데 휴대폰 배터리가 거의 없어요. 안내 데스크에서 숙소까지 가는 방법, 시간, 더 싼 방법, 요금 내는 곳을 차례로 물어보세요.",
-     "starter_en": "Hi, welcome to JFK. What can I do for you?"
+     "starter_en": "Hi, welcome to JFK. What can I do for you?",
+     "flow_ko": [
+      "가는 방법 묻기",
+      "걸리는 시간",
+      "더 싼 방법",
+      "노선 + 요금 내는 곳"
+     ],
+     "model": "Hi. How do I get to Midtown? How long does it take by taxi? Hmm, is there a cheaper way? Okay, which train goes to Times Square? And where do I pay? Thanks so much!",
+     "model_ko": "안녕하세요. 미드타운에 어떻게 가요? 택시로는 얼마나 걸려요? 음, 더 싼 방법 있어요? 좋아요, 어느 노선이 타임스스퀘어 가요? 그리고 요금은 어디서 내요? 정말 감사합니다!"
     }
    ]
   },
@@ -755,7 +771,15 @@
    "improv": [
     {
      "situation_ko": "호텔에 너무 일찍 도착했어요. 예약자 이름을 말하고, 일찍 체크인할 수 있는지, 짐을 맡길 수 있는지, 조식과 체크아웃 시간까지 물어보세요.",
-     "starter_en": "Hi there! How can I help you?"
+     "starter_en": "Hi there! How can I help you?",
+     "flow_ko": [
+      "예약자 이름",
+      "일찍 체크인 가능한지",
+      "짐 맡기기",
+      "조식·체크아웃 확인"
+     ],
+     "model": "Hi, I have a reservation under James Lee. We're a little early. Is early check-in possible? No worries. Could we leave our bags here? And is breakfast included? What time is checkout? Thank you!",
+     "model_ko": "안녕하세요, James Lee로 예약했어요. 저희가 좀 일찍 왔는데요. 일찍 체크인할 수 있어요? 괜찮아요. 짐 여기 맡겨도 될까요? 그리고 조식 포함이에요? 체크아웃은 몇 시예요? 감사합니다!"
     }
    ]
   },
@@ -1007,7 +1031,15 @@
    "improv": [
     {
      "situation_ko": "박물관 매표소에서 여자친구와 함께 들어갈 표를 사요. 남은 표, 장수, 가격, 할인, 투어 시간까지 오늘 표현으로 물어보세요.",
-     "starter_en": "Hi! Tickets for today?"
+     "starter_en": "Hi! Tickets for today?",
+     "flow_ko": [
+      "남은 표 묻기",
+      "몇 장인지",
+      "가격",
+      "할인 + 투어 시간"
+     ],
+     "model": "Hi. Are there any tickets left for today? Two tickets, please. How much are they? Is there a discount for buying online? Oh, no? That's okay. And what time is the next tour?",
+     "model_ko": "안녕하세요. 오늘 표 남은 거 있어요? 두 장 주세요. 얼마예요? 온라인으로 사면 할인돼요? 아, 안 돼요? 괜찮아요. 그리고 다음 투어는 몇 시예요?"
     }
    ]
   },
@@ -1258,7 +1290,15 @@
    "improv": [
     {
      "situation_ko": "지하철에서 내려 출구로 나왔는데 방향을 모르겠어요. 지나가는 사람에게 목적지가 어느 쪽인지, 걸어갈 수 있는지, 얼마나 걸리는지 물어보세요.",
-     "starter_en": "Hey, you look lost. Where are you headed?"
+     "starter_en": "Hey, you look lost. Where are you headed?",
+     "flow_ko": [
+      "방향 묻기",
+      "걸어갈 수 있는지",
+      "열차 확인",
+      "내릴 역 + 고마움"
+     ],
+     "model": "Excuse me, which way is the Met? Is it within walking distance? Thirty minutes? That's a lot. Does this train go to the museum? Where should I get off? Thanks, you're a lifesaver!",
+     "model_ko": "실례지만, 메트로폴리탄 미술관은 어느 쪽이에요? 걸어갈 수 있는 거리예요? 30분이요? 꽤 머네요. 이 열차 미술관 가요? 어디서 내려야 해요? 감사해요, 덕분에 살았어요!"
     }
    ]
   },
@@ -1400,7 +1440,15 @@
    "improv": [
     {
      "situation_ko": "뉴욕 카페에서 처음 만난 사람과 대화를 시작하고, 내 여행 이야기와 직업을 소개하고, 추천을 받은 뒤 마무리해보세요. 1~4주 표현을 최대한 넣으세요.",
-     "starter_en": "Hi! Are you visiting New York?"
+     "starter_en": "Hi! Are you visiting New York?",
+     "flow_ko": [
+      "여행 중이라고 소개",
+      "온 목적",
+      "내 직업 설명",
+      "추천받고 마무리"
+     ],
+     "model": "Hi! Yes, I'm visiting. This is my first time in New York. I'm from Seoul. I'm here for sightseeing and shopping. Back home, I teach English. How can I put it... I help students get ready for a big exam. What do you recommend for this weekend? That makes sense. It was nice talking to you!",
+     "model_ko": "안녕하세요! 네, 여행 중이에요. 뉴욕은 처음이에요. 서울에서 왔어요. 관광이랑 쇼핑하러 왔어요. 한국에선 영어를 가르쳐요. 뭐라고 해야 하나… 학생들이 큰 시험을 준비하게 도와줘요. 이번 주말엔 뭐 추천해요? 그렇겠네요. 얘기 즐거웠어요!"
     }
    ]
   },
@@ -1479,7 +1527,15 @@
    "improv": [
     {
      "situation_ko": "친구에게 뉴욕에 도착한 날 있었던 일을 순서대로 이야기해보세요. 입국심사, 공항에서 이동, 호텔, 저녁까지 1~4주 표현을 5개 이상 넣으세요.",
-     "starter_en": "So tell me everything! How was your first day?"
+     "starter_en": "So tell me everything! How was your first day?",
+     "flow_ko": [
+      "입국심사",
+      "공항에서 이동",
+      "호텔",
+      "저녁 일정"
+     ],
+     "model": "It was crazy! At immigration, I didn't catch one question, so I said, \"Could you say that again?\" Then we took the AirTrain and the subway to Midtown. Our room wasn't ready, so we left our bags at the hotel. At night, we saw a Broadway show. The seats were together, and it was amazing.",
+     "model_ko": "정신없었어! 입국심사에서 질문 하나를 못 알아들어서 \"다시 말해주실래요?\"라고 했어. 그다음 에어트레인이랑 지하철 타고 미드타운에 갔어. 방이 아직 안 돼서 호텔에 짐을 맡겼어. 밤엔 브로드웨이 공연을 봤어. 자리도 나란히 붙어 있었고 진짜 최고였어."
     }
    ]
   }

@@ -257,7 +257,15 @@
    "improv": [
     {
      "situation_ko": "여자친구 선물을 사러 잡화점에 왔어요. 처음엔 구경만 하다가, 찾는 물건을 말하고, 위치와 다른 색을 물어보세요.",
-     "starter_en": "Hey, welcome in! Looking for anything in particular?"
+     "starter_en": "Hey, welcome in! Looking for anything in particular?",
+     "flow_ko": [
+      "구경 중이라고 답하기",
+      "찾는 물건 말하기",
+      "위치 묻기",
+      "다른 색 + 보여달라고 하기"
+     ],
+     "model": "Oh, I'm just looking, thanks. Actually, I'm looking for a scarf for my girlfriend. Where can I find scarves? This one is nice. Do you have this in gray? Could you show me the one on the top shelf?",
+     "model_ko": "아, 그냥 구경 중이에요, 감사해요. 사실 여자친구 목도리를 찾고 있어요. 목도리는 어디 있어요? 이거 예쁘네요. 이거 회색 있어요? 맨 위 칸에 있는 거 좀 보여주실래요?"
     }
    ]
   },
@@ -506,7 +514,15 @@
    "improv": [
     {
      "situation_ko": "옷가게에서 마음에 드는 재킷을 발견했어요. 입어보고, 사이즈가 안 맞다고 말하고, 다른 사이즈를 요청하고, 여자친구 의견을 물어보세요.",
-     "starter_en": "Hi! That jacket is really popular. Want to try it on?"
+     "starter_en": "Hi! That jacket is really popular. Want to try it on?",
+     "flow_ko": [
+      "입어봐도 되는지",
+      "탈의실 위치",
+      "사이즈 느낌 말하기",
+      "큰 사이즈 + 여자친구 의견"
+     ],
+     "model": "Excuse me, can I try this on? Where's the fitting room? Hmm, it's a little tight. Do you have a bigger size? Thanks. Babe, how does it look?",
+     "model_ko": "실례지만, 이거 입어봐도 돼요? 탈의실이 어디예요? 음, 좀 끼네요. 더 큰 사이즈 있어요? 고마워요. 자기야, 어때 보여?"
     }
    ]
   },
@@ -757,7 +773,15 @@
    "improv": [
     {
      "situation_ko": "블랙프라이데이 백화점이에요. 마음에 드는 옷의 할인 여부와 세금을 묻고, 비싼 건 부드럽게 거절하고, 하나는 사겠다고 말한 뒤 선물용 영수증을 요청하세요.",
-     "starter_en": "Happy Black Friday! Can I help you with anything?"
+     "starter_en": "Happy Black Friday! Can I help you with anything?",
+     "flow_ko": [
+      "할인 여부",
+      "세금 포함인지",
+      "비싼 건 부드럽게 거절",
+      "사겠다 + 선물용 영수증"
+     ],
+     "model": "Hi, is this on sale? Is tax included? Oh, nice. And this one is two hundred dollars? That's a little over my budget. Okay, I'll take the first one. It's a gift. Could I get a gift receipt?",
+     "model_ko": "안녕하세요, 이거 할인해요? 세금 포함이에요? 오, 좋네요. 이건 200달러요? 예산보다 조금 넘네요. 좋아요, 첫 번째 걸로 살게요. 선물이에요. 선물용 영수증 받을 수 있어요?"
     }
    ]
   },
@@ -1005,7 +1029,15 @@
    "improv": [
     {
      "situation_ko": "트레이더 조에서 한국 친구들에게 줄 선물을 고르고 있어요. 직원에게 위치를 묻고, 추천을 받고, 시식하고, 몇 개 살지 정해보세요.",
-     "starter_en": "Hey! Can I help you find something?"
+     "starter_en": "Hey! Can I help you find something?",
+     "flow_ko": [
+      "통로 위치",
+      "괜찮은지 묻기",
+      "시식",
+      "몇 개 살지 + 봉투"
+     ],
+     "model": "Excuse me, which aisle has the snacks? Thanks. Is this any good? Can we try a sample? Wow, so good. I'll take two of these. And I don't need a bag, thanks.",
+     "model_ko": "실례지만, 과자는 몇 번 통로에 있어요? 감사해요. 이거 괜찮아요? 시식해봐도 돼요? 와, 진짜 맛있다. 이거 두 개 살게요. 그리고 봉투는 괜찮아요, 감사해요."
     }
    ]
   },
@@ -1257,8 +1289,16 @@
    },
    "improv": [
     {
-     "situation_ko": "여자친구 신발이 안 맞아서 가게에 다시 왔어요. 교환하고 싶다고 말하고, 이유를 설명하고, 영수증을 내고, 원하는 사이즈를 말하고, 환불 규정을 확인하세요.",
-     "starter_en": "Hi there! What can I do for you today?"
+     "situation_ko": "여자친구 스웨터가 안 맞아서 가게에 다시 왔어요. 교환하고 싶다고 말하고, 이유를 설명하고, 영수증을 내고, 원하는 사이즈를 말하고, 환불 규정을 확인하세요.",
+     "starter_en": "Hi there! What can I do for you today?",
+     "flow_ko": [
+      "교환하고 싶다고 말하기",
+      "이유",
+      "영수증 건네기",
+      "원하는 사이즈 + 환불 규정"
+     ],
+     "model": "Hi. Sorry to bother you, but I'd like to exchange this sweater. It doesn't fit. It's a little tight. Here's the receipt. Can I exchange it for a bigger size? And just in case, what's your return policy?",
+     "model_ko": "안녕하세요. 번거롭게 해서 죄송한데, 이 스웨터 교환하고 싶어요. 안 맞아요. 좀 끼네요. 여기 영수증이요. 더 큰 사이즈로 바꿀 수 있어요? 그리고 혹시 몰라서요, 환불 규정이 어떻게 돼요?"
     }
    ]
   },
@@ -1395,7 +1435,15 @@
    "improv": [
     {
      "situation_ko": "소호 옷가게에서 나를 위한 옷을 하나 사요. 구경, 사이즈, 가격, 결정, 계산, 환불 규정까지 이번 주 표현을 최대한 넣어 한 번에 해보세요.",
-     "starter_en": "Hey, welcome! Anything I can help you with?"
+     "starter_en": "Hey, welcome! Anything I can help you with?",
+     "flow_ko": [
+      "구경하다 찾는 물건 말하기",
+      "입어보고 사이즈",
+      "할인 확인 후 결정",
+      "환불 규정"
+     ],
+     "model": "I'm just looking, thanks... Well, actually, I'm looking for a jacket for me. Can I try this on? It's a little tight. Do you have a bigger size? Perfect. Is this on sale? Okay, I'll take it. And what's your return policy?",
+     "model_ko": "그냥 구경 중이에요… 음, 사실 제 재킷을 찾고 있어요. 이거 입어봐도 돼요? 좀 끼네요. 더 큰 사이즈 있어요? 딱이네요. 이거 할인해요? 좋아요, 이걸로 살게요. 그리고 환불 규정은 어떻게 돼요?"
     }
    ]
   },
@@ -1472,7 +1520,15 @@
    "improv": [
     {
      "situation_ko": "친구에게 뉴욕에서 쇼핑한 하루를 이야기해보세요. 어디 갔는지, 뭘 샀는지, 가격과 할인, 입어본 일, 교환한 일까지 이번 주 표현을 5개 이상 넣으세요.",
-     "starter_en": "Okay, tell me about your shopping day! What did you buy?"
+     "starter_en": "Okay, tell me about your shopping day! What did you buy?",
+     "flow_ko": [
+      "어디 갔는지",
+      "옷 산 이야기",
+      "트레이더 조",
+      "교환한 일"
+     ],
+     "model": "It was a great day! We went to SoHo, and everything was forty percent off. I tried on a jacket, but it was a little tight, so I got a bigger size. At Trader Joe's, we tried a sample and bought a lot of snacks. And I exchanged a sweater. It was easy.",
+     "model_ko": "최고의 하루였어! 소호에 갔는데 전부 40% 할인이었어. 재킷을 입어봤는데 좀 껴서 더 큰 사이즈로 샀어. 트레이더 조에선 시식해보고 과자를 잔뜩 샀어. 그리고 스웨터도 교환했어. 쉬웠어."
     }
    ]
   }
