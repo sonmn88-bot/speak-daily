@@ -355,30 +355,62 @@ ROUTES.radio = el => {
       if (d.lines && d.lines.length && dayN(w, d.day) <= S.n) list.push({ w, d, n: dayN(w, d.day), cast: d.cast || S.weeks[w].cast || {} });
   if (!list.length) { el.innerHTML = `<div class="card"><p class="muted">대화가 있는 레슨을 시작하면 듣기 모드를 쓸 수 있어요.</p></div>`; return; }
   let idx = 0, line = 0, mode = "gap", rate = 1, playing = false, subs = true, token = 0;
+  // 표현 떠올리기: 배운 표현을 한국어로 듣고 → 잠깐 멈춤 → 영어 정답 (복습일·약한 표현 먼저, 20개)
+  const srs = S.st.srs, rk = c => (srs[c.id].due <= S.st.date ? 0 : 10) + (srs[c.id].grad ? 9 : srs[c.id].level), cards = Object.values(S.chunks).filter(c => srs[c.id])
+    .sort((a, b) => rk(a) - rk(b))
+    .slice(0, 20).map(c => { const l = cuesFor(c, "type").filter(x => x.ko); return { c, cue: l.length ? l[Math.floor(Math.random() * l.length)] : null }; }).filter(x => x.cue);
+  let ci = 0;
   try { mode = localStorage.getItem("sd_rmode") || "gap"; subs = localStorage.getItem("sd_rsubs") !== "0"; } catch (e) {}
   const voiceOf = (it, sp) => (sp === "A" && it.cast.A && it.cast.A.gender === "m" ? "C" : sp);
   const draw = () => {
+    const modeCard = `<div class="card"><h3>방식</h3><div class="row"><button id="mg" class="${mode === "gap" ? "sel" : ""}">내 차례 먼저 말하기</button><button id="ma" class="${mode === "all" ? "sel" : ""}">대화 그대로</button></div>
+        <button id="mc" class="${mode === "chunk" ? "sel" : ""}">표현 떠올리기 (한국어 → 영어)</button>`;
+    if (mode === "chunk") {
+      const x = cards[Math.min(ci, cards.length - 1)];
+      el.innerHTML = `<header><h1>듣기 모드</h1><h2>표현 떠올리기</h2></header>
+        <div class="card">${x ? `<div class="count">${Math.min(ci + 1, cards.length)} / ${cards.length}</div><div class="radio-now" aria-live="polite"><span class="cue">${x.cue.kind}</span><div class="ko">${esc(x.cue.ko)}</div>${subs || x.shown ? `<div class="en" id="cen" ${x.shown ? "" : "hidden"}>${esc(x.cue.en)}</div>` : ""}</div>` : `<p class="muted">레슨을 시작하면 배운 표현으로 연습할 수 있어요.</p>`}
+        <div class="row"><button id="pv" aria-label="이전 표현">이전</button><button class="go" id="pp" ${x ? "" : "disabled"}>${playing ? `${ic("pause")} 멈춤` : `${ic("play")} 재생`}</button><button id="nx2" aria-label="다음 표현">다음</button></div></div>
+        ${modeCard}<p class="muted">한국어를 듣고, 멈춘 사이에 영어로 먼저 소리 내 말한 뒤 정답과 비교하세요. 복습일이 된 표현과 약한 표현이 먼저 나와요.</p>
+        <div class="row"><button id="rt">속도 ${rate === 1 ? "1.0배" : "0.85배"}</button><button id="sb">자막 ${subs ? "끄기" : "켜기"}</button></div>
+        <p class="muted">iPhone은 화면이 꺼지면 소리가 멈출 수 있어요. 화면을 켠 채로 주머니에 넣어두세요.</p></div>`;
+      bind(); $("#pv").onclick = () => { stop(); ci = Math.max(0, ci - 1); draw(); }; $("#nx2").onclick = () => { stop(); ci = Math.min(cards.length - 1, ci + 1); draw(); };
+      return;
+    }
     const it = list[idx], L = it.d.lines, l = L[Math.min(line, L.length - 1)];
     el.innerHTML = `<header><h1>듣기 모드</h1><h2>레슨 ${it.n} · ${esc(it.d.title)}</h2></header>
       <div class="card"><div class="count">${Math.min(line + 1, L.length)} / ${L.length}</div>
         <div class="radio-now" aria-live="polite">${subs ? `<div class="sp">${l.sp === "A" ? esc((it.cast.A || {}).name || "상대") : "나"}</div><div class="en">${esc(l.en)}</div><div class="muted">${esc(l.ko)}</div>` : `<p class="muted">자막을 끄고 소리에만 집중하는 중이에요.</p>`}</div>
         <div class="row"><button id="pv" aria-label="이전 레슨">이전</button><button class="go" id="pp">${playing ? `${ic("pause")} 멈춤` : `${ic("play")} 재생`}</button><button id="nx2" aria-label="다음 레슨">다음</button></div></div>
-      <div class="card"><h3>방식</h3><div class="row"><button id="mg" class="${mode === "gap" ? "sel" : ""}">내 차례 먼저 말하기</button><button id="ma" class="${mode === "all" ? "sel" : ""}">대화 그대로</button></div>
+      ${modeCard}
         <p class="muted">${mode === "gap" ? "상대 말이 끝나면 잠깐 멈춰요. 그 사이에 내 대사를 속으로(또는 작게) 먼저 말하고, 이어서 나오는 정답과 비교하세요." : "대화를 처음부터 끝까지 이어서 들어요."}</p>
         <div class="row"><button id="rt">속도 ${rate === 1 ? "1.0배" : "0.85배"}</button><button id="sb">자막 ${subs ? "끄기" : "켜기"}</button></div>
         <p class="muted">iPhone은 화면이 꺼지면 소리가 멈출 수 있어요. 화면을 켠 채로 주머니에 넣어두세요.</p></div>`;
-    $("#pp").onclick = () => (playing ? stop() : play());
+    bind();
     $("#pv").onclick = () => { stop(); idx = Math.min(list.length - 1, idx + 1); line = 0; draw(); };
     $("#nx2").onclick = () => { stop(); idx = Math.max(0, idx - 1); line = 0; draw(); };
-    $("#mg").onclick = () => { mode = "gap"; try { localStorage.setItem("sd_rmode", mode); } catch (e) {} draw(); };
-    $("#ma").onclick = () => { mode = "all"; try { localStorage.setItem("sd_rmode", mode); } catch (e) {} draw(); };
+  };
+  function bind() {
+    $("#pp").onclick = () => (playing ? stop() : play());
+    const setMode = m => { if (mode !== m) stop(); mode = m; try { localStorage.setItem("sd_rmode", mode); } catch (e) {} draw(); };
+    $("#mg").onclick = () => setMode("gap"); $("#ma").onclick = () => setMode("all"); $("#mc").onclick = () => setMode("chunk");
     $("#rt").onclick = () => { rate = rate === 1 ? 0.85 : 1; draw(); };
     $("#sb").onclick = () => { subs = !subs; try { localStorage.setItem("sd_rsubs", subs ? "1" : "0"); } catch (e) {} draw(); };
-  };
+  }
   const stop = () => { playing = false; token++; stopAudio(); draw(); };
   const play = async () => {
     playing = true; const my = ++token, r = RUN; draw(); track("radio", { lesson: list[idx].n, mode });
-    while (playing && my === token && r === RUN) {
+    while (mode === "chunk" && playing && my === token && r === RUN) {
+      if (ci >= cards.length) { playing = false; ci = 0; cards.forEach(x => x.shown = false); draw(); return; }
+      const x = cards[ci]; x.shown = false; draw();
+      await speak(x.cue.ko, { rate, who: "K" });
+      if (!playing || my !== token || r !== RUN) return;
+      await sleep(Math.min(7000, 2500 + x.cue.en.split(" ").length * 400) / rate); // 영어로 먼저 말해볼 시간
+      if (!playing || my !== token || r !== RUN) return;
+      x.shown = true; draw();
+      await speak(x.cue.en, { rate, who: "B" }); await sleep(900);
+      ci++;
+    }
+    while (mode !== "chunk" && playing && my === token && r === RUN) {
       const it = list[idx], L = it.d.lines;
       if (line >= L.length) { // 다음(더 예전) 레슨으로 자동 이동
         if (idx >= list.length - 1) { playing = false; line = 0; draw(); return; }

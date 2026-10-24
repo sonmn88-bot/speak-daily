@@ -19,6 +19,7 @@ async function loadAll() {
   if (!r.ok) throw new Error(r.status);
   S.st = await r.json();
   S.st.history = S.st.history || []; S.st.srs = S.st.srs || {}; S.st.today = S.st.today || {};
+  S.st.mine = { ...loadMineLocal(), ...(S.st.mine || {}) }; // 내 문장: 서버 우선, 이 기기 사본으로 보완
   S.n = S.st.n; S.week = Math.ceil(S.n / 7); S.dw = ((S.n - 1) % 7) + 1;
   S.monthly = S.week % 4 === 0 && S.dw >= 6;
   S.weeks = {}; S.chunks = {};
@@ -74,12 +75,21 @@ function speak(text, { rate = 1, who = "A" } = {}) {
   return new Promise(res => {
     if (!("speechSynthesis" in window)) return res();
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = "en-US"; u.rate = rate;
-    const v = who === "B" ? VB : who === "C" ? VC : VA; if (v) u.voice = v;
-    const t = setTimeout(res, 2000 + text.split(" ").length * 700 / rate); // iOS onend 누락 대비
+    const ko = who === "K"; // K = 한국어 안내 음성
+    u.lang = ko ? "ko-KR" : "en-US"; u.rate = rate;
+    const v = ko ? speechSynthesis.getVoices().find(x => /^ko/i.test(x.lang)) : who === "B" ? VB : who === "C" ? VC : VA; if (v) u.voice = v;
+    const t = setTimeout(res, 2000 + (ko ? text.length * 180 : text.split(" ").length * 700) / rate); // iOS onend 누락 대비
     u.onend = u.onerror = () => { clearTimeout(t); res(); };
     speechSynthesis.speak(u);
   });
+}
+// ---------- 내 문장 (표현으로 직접 만든 문장): 서버에 저장 + 이 기기에 사본 ----------
+const MKEY = () => "sd_mine_" + String(KEY || "").slice(0, 10);
+function loadMineLocal() { try { return JSON.parse(localStorage.getItem(MKEY()) || "{}") || {}; } catch (e) { return {}; } }
+async function saveMine(id, text) {
+  S.st.mine = S.st.mine || {}; if (text) S.st.mine[id] = text; else delete S.st.mine[id];
+  try { localStorage.setItem(MKEY(), JSON.stringify(S.st.mine)); } catch (e) {}
+  try { const r = await fetch(`${API}/api/mine?k=${encodeURIComponent(KEY)}`, { method: "POST", body: JSON.stringify({ id, text }) }); return r.ok; } catch (e) { return false; }
 }
 const stopAudio = () => { try { speechSynthesis.cancel(); } catch (e) {} };
 // 조용한 모드: 말하기 대신 단어 조각 맞추기, 자동 재생 끔
