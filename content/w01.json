@@ -69,8 +69,8 @@
     },
     {
      "sp": "B",
-     "en": "That makes sense. Everyone's hiring before the year ends.",
-     "ko": "그럴 만하네요. 연말 전에 다들 사람 뽑잖아요.",
+     "en": "That makes sense. They probably need you right away.",
+     "ko": "그럴 만하네요. 당장 사람이 필요하겠네요.",
      "chunks": [
       "w1c03"
      ]
@@ -128,7 +128,7 @@
       }
      ],
      "use_ko": "상대 말이 놀랍거나 믿기 어려울 때",
-     "sound": "'뤼을리'에 가깝게 r을 굴리고, 놀랐으면 끝을 확 올려요"
+     "sound": "r은 혀를 어디에도 대지 않고 입술을 살짝 오므려 시작해요('(우)뤼-얼리'). l에서 혀끝을 윗잇몸에 대요. 놀랐으면 끝을 확 올려요."
     },
     {
      "id": "w1c02",
@@ -164,7 +164,7 @@
       }
      ],
      "use_ko": "상대 설명을 듣고 이유가 이해될 때",
-     "sound": "makes sense가 이어져 '메익쎈스', That은 약하게"
+     "sound": "makes의 s와 sense의 s가 하나로 이어져 '메익센스', 강세는 sense에 둬요."
     },
     {
      "id": "w1c04",
@@ -232,7 +232,13 @@
       "model": "I know, right? But you'll do great."
      }
     ]
-   }
+   },
+   "improv": [
+    {
+     "situation_ko": "친구가 이번 주에 있었던 좋은 일 세 가지를 차례로 말해요. 한 문장마다 오늘 맞장구 표현으로 반응하고, 마지막엔 질문을 하나 하세요.",
+     "starter_en": "Guess what? I finally finished my big project!"
+    }
+   ]
   },
   {
    "day": 2,
@@ -252,13 +258,13 @@
    "lines": [
     {
      "sp": "A",
-     "en": "Hey, it's Mia! Do you have a minute?",
-     "ko": "안녕, 나 Mia예요! 잠깐 시간 돼요?"
+     "en": "Hey, it's Mia! Guess what? I just finished my first day at the new job!",
+     "ko": "저 Mia예요! 있잖아요, 새 회사 첫날 막 끝났어요!"
     },
     {
      "sp": "B",
-     "en": "Sure. Sorry, I didn't catch that. It's really loud out here.",
-     "ko": "그럼요. 미안, 잘 못 들었어요. 여기 엄청 시끄럽네요.",
+     "en": "Sorry, I didn't catch that. It's really loud out here.",
+     "ko": "미안해요, 잘 못 들었어요. 여기 엄청 시끄러워서요.",
      "chunks": [
       "w1c06"
      ]
@@ -323,7 +329,7 @@
     {
      "sp": "B",
      "en": "That makes sense. Just like you right now! Could you speak a little slower?",
-     "ko": "그럴 만하네요. 지금 당신처럼요! 조금만 천천히 말해줄래요?",
+     "ko": "아, 이해돼요. 지금 Mia처럼요! 조금만 천천히 말해줄래요?",
      "chunks": [
       "w1c03",
       "w1c10"
@@ -351,8 +357,8 @@
      "note": "What?보다 훨씬 부드러워요. 소음이나 속도 탓으로 돌리는 느낌이라 상대가 기분 상하지 않아요.",
      "ex": [
       {
-       "en": "Sorry, I didn't catch your name.",
-       "ko": "죄송해요, 성함을 못 들었어요."
+       "en": "Sorry, I didn't catch that. What was your name again?",
+       "ko": "죄송해요, 잘 못 들었어요. 성함이 뭐라고 하셨죠?"
       },
       {
        "en": "Sorry, I didn't catch that. The music is too loud.",
@@ -396,7 +402,7 @@
       }
      ],
      "use_ko": "모르는 단어나 표현의 뜻을 물을 때",
-     "sound": "What do you가 '와루유'처럼 빠르게 뭉개져요"
+     "sound": "What do you가 '와러유'처럼 뭉개져요. t·d가 혀를 한 번 튕기는 소리(r 비슷)가 되고 do는 '러'로 약해져요."
     },
     {
      "id": "w1c09",
@@ -464,7 +470,13 @@
       "model": "Could you speak a little slower? Past the bank, and then?"
      }
     ]
-   }
+   },
+   "improv": [
+    {
+     "situation_ko": "외국인 동료가 빠르게 말해서 두 군데를 놓쳤다고 가정하고, 되묻기 표현 3개로 확인한 뒤 내용을 정리해서 말해보세요.",
+     "starter_en": "So we're meeting at the place near the station around seven-ish, right?"
+    }
+   ]
   },
   {
    "day": 3,
@@ -607,7 +619,7 @@
       }
      ],
      "use_ko": "어려운 질문을 받아 시간을 벌 때",
-     "sound": "That's a가 '댓처', good question은 d가 약해져 '구퀘스천'"
+     "sound": "That's a는 s가 a에 붙어 '댓써', good question은 d를 거의 삼켜 '굿퀘스천'."
     },
     {
      "id": "w1c13",
@@ -693,7 +705,13 @@
       "model": "Like, you can order fried chicken at 2 a.m. You know what I mean?"
      }
     ]
-   }
+   },
+   "improv": [
+    {
+     "situation_ko": "처음 만난 외국인이 무슨 일을 하는지 물어요. 시간 벌기 표현으로 시작해서 내 일을 2~3문장으로 설명하세요.",
+     "starter_en": "So, what do you do?"
+    }
+   ]
   },
   {
    "day": 4,
@@ -719,7 +737,7 @@
     {
      "sp": "B",
      "en": "Pretty quiet. I mostly worked. How about you?",
-     "ko": "꽤 조용했어요. 거의 일했어요. 당신은요?",
+     "ko": "꽤 조용했어요. 거의 일했어요. Mia는요?",
      "chunks": [
       "w1c16"
      ]
@@ -809,16 +827,16 @@
     {
      "id": "w1c16",
      "en": "How about you?",
-     "ko": "당신은요?",
+     "ko": "너는? / ~는요?",
      "note": "대답한 뒤 공을 넘기는 스몰토크 기본기예요. 끝을 올려 말해요.",
      "ex": [
       {
        "en": "I'm doing great. How about you?",
-       "ko": "전 잘 지내요. 당신은요?"
+       "ko": "전 잘 지내요. 그쪽은요?"
       },
       {
        "en": "I'll have a latte. How about you?",
-       "ko": "전 라떼 마실래요. 당신은요?"
+       "ko": "전 라떼 마실래요. 뭐 마실래요?"
       }
      ],
      "use_ko": "내 대답 뒤에 같은 질문을 돌려줄 때",
@@ -920,13 +938,19 @@
       "model": "Really? So what happened next?"
      },
      {
-      "a": "A kid stood up on his first try and laughed at me. Anyway, what did you do this weekend?",
-      "intent_ko": "짧게 답하고, 다음 주 계획을 되물으세요.",
+      "a": "A kid stood up on his first try and laughed at me. Anyway, any plans for next weekend?",
+      "intent_ko": "아직 계획 없다고 짧게 답하고, 질문을 되돌리세요.",
       "hint": "How about you?",
-      "model": "Nothing special, I just rested. How about you? Any plans for next weekend?"
+      "model": "Not yet. Maybe I'll just rest. How about you?"
      }
     ]
-   }
+   },
+   "improv": [
+    {
+     "situation_ko": "친구가 휴가 이야기를 꺼내요. 질문 되돌리기 표현으로 최소 3번 질문을 이어가며 이야기를 끝까지 끌어내세요.",
+     "starter_en": "I just got back from a trip to Jeju!"
+    }
+   ]
   },
   {
    "day": 5,
@@ -998,8 +1022,8 @@
     },
     {
      "sp": "A",
-     "en": "That's wild. Why is it such a big deal?",
-     "ko": "대박이네요. 왜 그렇게 큰일이에요?"
+     "en": "That's wild. I don't get it, though. It's just one test.",
+     "ko": "대박이네요. 근데 이해가 안 돼요. 그냥 시험 하나잖아요."
     },
     {
      "sp": "B",
@@ -1071,7 +1095,7 @@
       }
      ],
      "use_ko": "영어로 딱 맞는 말이 없는 걸 설명하기 시작할 때",
-     "sound": "not sure가 '낫슈어', how to가 '하우루'"
+     "sound": "not sure는 t를 멈추듯 삼켜 '낫슈어', how to는 to가 약해져 '하우러'."
     },
     {
      "id": "w1c23",
@@ -1154,10 +1178,16 @@
       "a": "Oh! So it's like a tradition?",
       "intent_ko": "그러니까 그걸 먹으며 엄마를 기억하는 거라고, 천 년쯤 된 전통이라고 하세요.",
       "hint": "I mean, ~ / something like ~",
-      "model": "Yes. I mean, you remember your mom. It's something like a thousand-year-old tradition."
+      "model": "Yeah. I mean, it's a way to remember your mom. It's been around for something like a thousand years."
      }
     ]
-   }
+   },
+   "improv": [
+    {
+     "situation_ko": "외국인이 '수능'이 뭐냐고 물어요. 막힐 때 표현을 쓰면서 쉬운 영어로 풀어서 설명하세요.",
+     "starter_en": "What's this big exam everyone in Korea talks about?"
+    }
+   ]
   },
   {
    "day": 6,
@@ -1190,8 +1220,8 @@
     },
     {
      "sp": "A",
-     "en": "So, first week done. And guess what? My manager gave me a big project.",
-     "ko": "첫 주 끝났어요. 근데 있잖아요, 매니저가 큰 프로젝트를 맡겼어요."
+     "en": "So, almost two weeks in. And guess what? My manager gave me a big project.",
+     "ko": "벌써 거의 2주 됐네요. 근데 있잖아요, 매니저가 큰 프로젝트를 맡겼어요."
     },
     {
      "sp": "B",
@@ -1209,30 +1239,30 @@
     },
     {
      "sp": "B",
-     "en": "Sorry, I didn't catch that. You mean it's chaos again?",
-     "ko": "미안, 잘 못 들었어요. 또 난장판이라는 말이에요?",
+     "en": "Sorry, I didn't catch that. A bit of a what?",
+     "ko": "미안해요, 잘 못 들었어요. 좀 뭐라고요?",
      "chunks": [
-      "w1c06",
-      "w1c09"
+      "w1c06"
      ]
     },
     {
      "sp": "A",
-     "en": "Ha, you remembered. Yeah, total chaos.",
-     "ko": "하, 기억하네요. 네, 완전 난장판이요."
+     "en": "A zoo! Total chaos, remember?",
+     "ko": "동물원이요! 완전 난장판이요, 기억나죠?"
     },
     {
      "sp": "B",
-     "en": "That makes sense. It's a new team.",
-     "ko": "그럴 만하죠. 새로운 팀이잖아요.",
+     "en": "Oh, you mean like your first day? That makes sense. It's a new team.",
+     "ko": "아, 첫날처럼요? 그럴 만하죠. 새 팀이잖아요.",
      "chunks": [
+      "w1c09",
       "w1c03"
      ]
     },
     {
      "sp": "A",
      "en": "Anyway, enough about me. How was your week?",
-     "ko": "아무튼 제 얘기는 그만. 당신 한 주는 어땠어요?"
+     "ko": "아무튼 제 얘기는 그만. 이번 주 어땠어요?"
     },
     {
      "sp": "B",
@@ -1279,8 +1309,8 @@
     },
     {
      "sp": "B",
-     "en": "I will. And tell me more about that big project. How was the first meeting?",
-     "ko": "그럴게요. 그 큰 프로젝트 얘기도 더 해줘요. 첫 회의는 어땠어요?",
+     "en": "I will. But first, that big project! Tell me more about it. You had the first meeting, right? How was it?",
+     "ko": "그럴게요. 근데 먼저 그 큰 프로젝트요! 더 얘기해줘요. 첫 회의 했죠? 어땠어요?",
      "chunks": [
       "w1c19",
       "w1c17"

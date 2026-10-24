@@ -175,7 +175,7 @@
       }
      ],
      "use_ko": "한동안 못 본 사람에게 근황을 물을 때",
-     "sound": "What have you가 '와래뷰', been up to가 '비넙투'"
+     "sound": "have가 약해져 What have you가 '와러뷰', been up to는 '비넙터'로 이어져요."
     },
     {
      "id": "w2c04",
@@ -193,7 +193,7 @@
       }
      ],
      "use_ko": "마지막으로 본 지 꽤 됐다고 느낄 때",
-     "sound": "It's가 '츠'로 약해져 '츠빈어와일'"
+     "sound": "It's는 '츠'로 약해지고 been a가 붙어 '(이)츠비너와일'."
     },
     {
      "id": "w2c05",
@@ -211,7 +211,7 @@
       }
      ],
      "use_ko": "별일 없이 지냈다고 답할 때",
-     "sound": "'세임올드' 두 번, 두 번째는 살짝 내려요"
+     "sound": "same의 m이 old에 붙어 '세이모울(드)', d는 거의 안 들려요. 두 번째는 살짝 내려요."
     }
    ],
    "pragmatic": "How's it going?에 진지하게 답할 필요 없어요. Good! / Not bad!처럼 짧게 답하고 질문을 돌려주는 게 원어민식 인사예요.",
@@ -243,7 +243,13 @@
       "model": "So what have you been up to since you got back?"
      }
     ]
-   }
+   },
+   "improv": [
+    {
+     "situation_ko": "오랜만에 길에서 아는 외국인을 만났어요. 인사하고, 근황을 묻고, 내 근황을 짧게 말하세요.",
+     "starter_en": "Oh my gosh, hi! How have you been?"
+    }
+   ]
   },
   {
    "day": 2,
@@ -364,11 +370,11 @@
      "id": "w2c06",
      "en": "It's freezing today, isn't it?",
      "ko": "오늘 엄청 춥네요, 그렇죠?",
-     "note": "문장 끝의 isn't it?은 동의를 구하며 말을 거는 장치예요. 끝을 내려 말하면 '그렇죠?' 느낌이에요.",
+     "note": "문장 끝의 isn't it?은 동의를 구하며 말을 거는 장치예요. 끝을 내려 말하면 '그렇죠?' 느낌이에요. freezing 대신 so hot, so nice처럼 바꿔 써도 돼요.",
      "ex": [
       {
-       "en": "It's so hot today, isn't it?",
-       "ko": "오늘 엄청 덥네요, 그렇죠?"
+       "en": "Wow, it's freezing today, isn't it?",
+       "ko": "와, 오늘 진짜 춥네요, 그렇죠?"
       },
       {
        "en": "It's freezing today, isn't it? I forgot my gloves.",
@@ -376,24 +382,24 @@
       }
      ],
      "use_ko": "날씨로 처음 보는 사람에게 말을 걸 때",
-     "sound": "isn't it이 '이즌잇'으로 붙고 끝을 내려요"
+     "sound": "isn't it은 n이 it에 붙어 '이즈닛', 끝 t는 거의 안 들리고 끝을 내려요."
     },
     {
      "id": "w2c07",
-     "en": "What a nice day!",
-     "ko": "날씨 정말 좋다!",
-     "note": "What a + 형용사 + 명사! 형태의 감탄이에요. What a view! / What a nice place!처럼 응용해요.",
+     "en": "What a nice ~!",
+     "ko": "~ 정말 좋다!",
+     "note": "What a + 형용사 + 명사! 형태의 감탄이에요. nice 뒤에 day, place, view 등을 넣어 응용해요.",
      "ex": [
       {
        "en": "What a nice day! Let's eat outside.",
        "ko": "날씨 정말 좋다! 밖에서 먹자."
       },
       {
-       "en": "What a view! It's beautiful.",
-       "ko": "경치 끝내준다! 정말 예뻐."
+       "en": "What a nice view! It's beautiful.",
+       "ko": "경치 정말 좋다! 너무 예뻐."
       }
      ],
-     "use_ko": "날씨나 풍경에 감탄할 때",
+     "use_ko": "날씨나 풍경, 장소에 감탄할 때",
      "sound": "What a가 '와러'로 붙어요"
     },
     {
@@ -425,12 +431,12 @@
        "ko": "여기 와본 적 있어요? 뭐가 맛있어요?"
       },
       {
-       "en": "Have you been to this museum before?",
-       "ko": "이 박물관 와본 적 있어요?"
+       "en": "We love this place. Have you been here before?",
+       "ko": "저흰 여기 정말 좋아해요. 와본 적 있어요?"
       }
      ],
      "use_ko": "같은 장소에 있는 사람에게 대화를 시작할 때",
-     "sound": "Have you가 '해뷰', been here가 '비니어'"
+     "sound": "Have you가 '해뷰'로 붙고, here는 h를 살려 '빈 히어'. 끝을 올려요."
     },
     {
      "id": "w2c10",
@@ -477,10 +483,16 @@
       "a": "Thanks! I got it at a market in Insadong.",
       "intent_ko": "이 공원에 와본 적 있는지 물어보세요.",
       "hint": "Have you been here before?",
-      "model": "Nice! Have you been to this park before?"
+      "model": "Nice! Have you been here before?"
      }
     ]
-   }
+   },
+   "improv": [
+    {
+     "situation_ko": "공항 대기실 옆자리 외국인에게 먼저 말을 걸어 대화를 3번 이상 주고받아 보세요.",
+     "starter_en": "(옆자리 사람이 책을 읽고 있어요.)"
+    }
+   ]
   },
   {
    "day": 3,
@@ -591,8 +603,8 @@
     },
     {
      "sp": "B",
-     "en": "Definitely. Tell me more about your league later.",
-     "ko": "좋아요. 리그 얘기는 나중에 더 해줘요.",
+     "en": "Definitely. And your soccer league sounds cool. Tell me more about it later.",
+     "ko": "좋아요. 축구 리그도 재밌을 것 같아요. 나중에 더 얘기해줘요.",
      "chunks": [
       "w1c19"
      ]
@@ -669,7 +681,7 @@
       }
      ],
      "use_ko": "상대의 취미를 물을 때",
-     "sound": "What do you do가 '와루유두'로 빠르게"
+     "sound": "What do you가 '와러유'로 뭉개지고, 뒤의 do는 또렷하게 '두'."
     },
     {
      "id": "w2c15",
@@ -710,7 +722,7 @@
       "a": "Deal! I love board games, that's why I joined.",
       "intent_ko": "게임 말고 쉴 때 뭐 하는지 물어보세요.",
       "hint": "What do you do for fun?",
-      "model": "Nice. What else do you do for fun?"
+      "model": "Nice. So what do you do for fun besides games?"
      },
      {
       "a": "I bake bread on weekends. Last week I made croissants.",
@@ -719,13 +731,19 @@
       "model": "That sounds like fun! Croissants are so hard to make."
      }
     ]
-   }
+   },
+   "improv": [
+    {
+     "situation_ko": "모임에서 만난 사람과 공통점을 두 개 이상 찾아보세요. Me too / Me neither를 꼭 한 번씩 쓰세요.",
+     "starter_en": "So, what do you do for fun?"
+    }
+   ]
   },
   {
    "day": 4,
    "type": "learn",
    "title": "내 근황 자연스럽게 말하기",
-   "context_ko": "퇴근길에 Mia에게서 안부 전화가 왔어요.",
+   "context_ko": "퇴근길에 Mia에게서 안부 전화가 왔어요. 이제 Mia와는 서로 말을 편하게 해요.",
    "listen_q": {
     "q": "Mia가 '나'를 초대한 곳은?",
     "options": [
@@ -758,7 +776,7 @@
     {
      "sp": "B",
      "en": "Nothing serious. It's been a long week, that's all.",
-     "ko": "심각한 건 아니고. 그냥 긴 한 주였어.",
+     "ko": "심각한 건 아니고. 그냥 이번 주가 좀 길었어, 그게 다야.",
      "chunks": [
       "w2c20"
      ]
@@ -770,7 +788,7 @@
     },
     {
      "sp": "B",
-     "en": "Not much, just resting. I'm thinking about going to the Han River.",
+     "en": "Not much, just relaxing. I'm thinking about going to the Han River.",
      "ko": "별거 없어, 그냥 쉬려고. 한강에 갈까 생각 중이야.",
      "chunks": [
       "w2c18",
@@ -792,14 +810,16 @@
     },
     {
      "sp": "A",
-     "en": "Ha, I know that feeling. Oh, and Jake told me he met you at a café!",
-     "ko": "하, 그 기분 알아. 아, Jake가 카페에서 너 만났다더라!"
+     "en": "Ha, I know that feeling. Oh, and Jake had fun at lunch the other day!",
+     "ko": "하, 그 기분 알아. 아, Jake가 지난번 점심 재밌었대!"
     },
     {
      "sp": "B",
-     "en": "Yeah! What a small world. He seems really nice.",
-     "ko": "응! 세상 좁더라. 되게 좋은 사람 같아.",
-     "chunks": []
+     "en": "Me too! He seems really nice.",
+     "ko": "나도! 되게 좋은 사람 같아.",
+     "chunks": [
+      "w2c11"
+     ]
     },
     {
      "sp": "A",
@@ -821,8 +841,8 @@
     },
     {
      "sp": "B",
-     "en": "Perfect. Tell me more about the new place when I see you.",
-     "ko": "좋아. 만나면 새 집 얘기 더 해줘.",
+     "en": "Perfect. And the new place? Tell me more about it when I see you.",
+     "ko": "좋아. 새 집 얘기는 만나면 더 해줘.",
      "chunks": [
       "w1c19"
      ]
@@ -840,8 +860,8 @@
        "ko": "전화 못 해서 미안. 요즘 정신없었어."
       },
       {
-       "en": "Things have been crazy lately at work.",
-       "ko": "요즘 회사가 정신없어."
+       "en": "Things have been crazy lately, so I haven't cooked at all.",
+       "ko": "요즘 정신없어서 요리를 하나도 못 했어."
       }
      ],
      "use_ko": "요즘 바빴다고 근황을 말할 때",
@@ -863,7 +883,7 @@
       }
      ],
      "use_ko": "하려던 일을 아직 못 했을 때",
-     "sound": "I've been이 '아입빈', meaning to가 '미닝투'"
+     "sound": "I've been이 '아이브빈'(빠르면 '아입빈'), meaning to는 to가 약해져 '미닝터'."
     },
     {
      "id": "w2c18",
@@ -885,7 +905,7 @@
     },
     {
      "id": "w2c19",
-     "en": "I'm thinking about ~ing.",
+     "en": "I'm thinking about ~.",
      "ko": "~할까 생각 중이야.",
      "note": "아직 확정되지 않은 계획을 말할 때 써요. about 뒤에는 -ing 형태가 와요.",
      "ex": [
@@ -904,16 +924,16 @@
     {
      "id": "w2c20",
      "en": "It's been a long week.",
-     "ko": "긴 한 주였어.",
+     "ko": "이번 주 진짜 길었다.",
      "note": "지친 한 주를 표현하는 관용구예요. 주말을 앞두고 인사처럼 자주 써요.",
      "ex": [
       {
        "en": "Finally Friday. It's been a long week.",
-       "ko": "드디어 금요일. 긴 한 주였어."
+       "ko": "드디어 금요일. 이번 주 진짜 길었다."
       },
       {
        "en": "It's been a long week. I need a nap.",
-       "ko": "긴 한 주였어. 낮잠이 필요해."
+       "ko": "이번 주 진짜 길었어. 낮잠 좀 자야겠어."
       }
      ],
      "use_ko": "지친 한 주를 마무리하며 말할 때",
@@ -925,10 +945,10 @@
     "situation_ko": "월요일 아침, 동료가 근황을 물어요.",
     "turns": [
      {
-      "a": "Morning! How was your weekend?",
+      "a": "Morning! What did you do this weekend?",
       "intent_ko": "별거 없었고 그냥 집에서 쉬었다고 하세요.",
       "hint": "Not much, just ~.",
-      "model": "Not much, just stayed home and rested."
+      "model": "Not much, just stayed home and relaxed."
      },
      {
       "a": "Lucky you. My weekend was so busy.",
@@ -939,7 +959,7 @@
      {
       "a": "Any plans for this week?",
       "intent_ko": "요가를 시작할까 생각 중이라고 하세요.",
-      "hint": "I'm thinking about ~ing.",
+      "hint": "I'm thinking about ~.",
       "model": "I'm thinking about starting yoga."
      },
      {
@@ -949,7 +969,13 @@
       "model": "I've been meaning to try it for months."
      }
     ]
-   }
+   },
+   "improv": [
+    {
+     "situation_ko": "친구가 요즘 어떻게 지내냐고 물어요. 바빴던 이유, 하려다 못 한 일, 생각 중인 계획을 차례로 말하세요.",
+     "starter_en": "Hey! What have you been up to lately?"
+    }
+   ]
   },
   {
    "day": 5,
@@ -982,7 +1008,7 @@
     {
      "sp": "B",
      "en": "Jake! How's it going? Shopping for Mia's party too?",
-     "ko": "Jake! 잘 지내요? 당신도 Mia 파티 장 보러 왔어요?",
+     "ko": "Jake! 잘 지내요? Jake도 Mia 파티 장 보러 왔어요?",
      "chunks": [
       "w2c02"
      ]
@@ -990,7 +1016,7 @@
     {
      "sp": "A",
      "en": "Yeah, I'm in charge of snacks. What about you?",
-     "ko": "네, 전 간식 담당이에요. 당신은요?"
+     "ko": "네, 전 간식 담당이에요. 그쪽은요?"
     },
     {
      "sp": "B",
@@ -1097,8 +1123,8 @@
        "ko": "얘기 즐거웠어요. 좋은 밤 보내요!"
       },
       {
-       "en": "It was so nice talking to you again.",
-       "ko": "다시 얘기하게 돼서 정말 좋았어."
+       "en": "It was nice talking to you. See you next week!",
+       "ko": "얘기 즐거웠어요. 다음 주에 봐요!"
       }
      ],
      "use_ko": "헤어지며 대화가 즐거웠다고 할 때",
@@ -1173,7 +1199,7 @@
       "a": "Oh, already? Time flies.",
       "intent_ko": "얘기 즐거웠다고 말하세요.",
       "hint": "It was nice talking to you.",
-      "model": "I know. It was really nice talking to you."
+      "model": "I know! It was nice talking to you."
      },
      {
       "a": "Same here! I'm free most weekends, by the way.",
@@ -1188,7 +1214,13 @@
       "model": "Definitely. Let's catch up soon. Take care!"
      }
     ]
-   }
+   },
+   "improv": [
+    {
+     "situation_ko": "카페에서 대화하다가 이제 가야 해요. 신호 주기, 즐거웠다는 말, 다음 약속, 작별 인사 순서로 마무리하세요.",
+     "starter_en": "...and that's the whole story!"
+    }
+   ]
   },
   {
    "day": 6,
@@ -1248,26 +1280,26 @@
     },
     {
      "sp": "A",
-     "en": "Emma from the study group? No way!",
-     "ko": "스터디 했던 Emma? 말도 안 돼!"
+     "en": "Emma? From your old study group? No way!",
+     "ko": "Emma? 예전 스터디 친구? 말도 안 돼!"
     },
     {
      "sp": "B",
-     "en": "Yeah! It's been a while, right? She said hi.",
-     "ko": "응! 꽤 됐지? 너한테 안부 전해달래.",
+     "en": "Yeah! It's been a while since I last saw her. Almost a year.",
+     "ko": "응! 마지막으로 본 지 꽤 됐거든. 거의 1년.",
      "chunks": [
       "w2c04"
      ]
     },
     {
      "sp": "A",
-     "en": "Aw. Oh, Jake's here too. He said you two love hiking.",
-     "ko": "아. 참, Jake도 왔어. 너희 둘 다 등산 좋아한다며."
+     "en": "Fun! Oh, Jake's here too. He said you two love hiking.",
+     "ko": "재밌다! 참, Jake도 왔어. 너희 둘 다 등산 좋아한다며."
     },
     {
      "sp": "B",
-     "en": "Yeah, turns out we both do. We're thinking about going next month.",
-     "ko": "응, 알고 보니 둘 다 좋아하더라. 다음 달에 갈까 생각 중이야.",
+     "en": "Yeah, turns out we both do. I'm thinking about going with him next month.",
+     "ko": "응, 알고 보니 둘 다 좋아하더라. 다음 달에 같이 갈까 생각 중이야.",
      "chunks": [
       "w2c19"
      ]
@@ -1279,8 +1311,8 @@
     },
     {
      "sp": "B",
-     "en": "Me neither! Day hikes are perfect. That sounds like fun.",
-     "ko": "나도! 당일치기가 딱이야. 재밌겠다.",
+     "en": "Me neither! A day hike with you guys? That sounds like fun.",
+     "ko": "나도! 너희랑 당일치기 등산? 재밌겠다.",
      "chunks": [
       "w2c13",
       "w2c15"
@@ -1288,13 +1320,13 @@
     },
     {
      "sp": "A",
-     "en": "Great! Oh, it's getting late. Are you heading out?",
-     "ko": "좋아! 어, 벌써 늦었네. 이제 가?"
+     "en": "Great! Oh wow, it's already ten.",
+     "ko": "좋아! 어머, 벌써 10시네."
     },
     {
      "sp": "B",
      "en": "Yeah, I should get going. It's been a long week.",
-     "ko": "응, 이제 가봐야겠어. 긴 한 주였거든.",
+     "ko": "응, 이제 가봐야겠어. 이번 주가 길었거든.",
      "chunks": [
       "w2c21",
       "w2c20"

@@ -1,0 +1,1507 @@
+{
+ "week": 3,
+ "theme": "카페·식당",
+ "cast": {
+  "A": {
+   "name": "Mia",
+   "gender": "f",
+   "desc": "동네 단골 카페에서 알게 된 캐나다 출신 디자이너"
+  }
+ },
+ "days": [
+  {
+   "day": 1,
+   "type": "learn",
+   "title": "카페에서 주문하기",
+   "cast": {
+    "A": {
+     "name": "Chris",
+     "gender": "m",
+     "desc": "새로 생긴 카페의 바리스타"
+    }
+   },
+   "context_ko": "과외 수업 가기 전, 학원가에 새로 생긴 카페에 들렀어요. 영어를 쓰는 바리스타가 주문을 받아요.",
+   "listen_q": {
+    "q": "'나'는 결제를 어떻게 하나요?",
+    "options": [
+     "카드로 한다",
+     "현금으로 한다",
+     "휴대폰으로 한다",
+     "쿠폰을 쓴다"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Hi there! What can I get for you?",
+     "ko": "안녕하세요! 뭐 드릴까요?"
+    },
+    {
+     "sp": "B",
+     "en": "Hi! Can I get an iced Americano?",
+     "ko": "안녕하세요! 아이스 아메리카노 하나 주시겠어요?",
+     "chunks": [
+      "w3c01"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Sure. Small, medium, or large?",
+     "ko": "네. 스몰, 미디엄, 라지 중에 어떤 걸로 드릴까요?"
+    },
+    {
+     "sp": "B",
+     "en": "Let me think... I'll go with a large. It's been a long week.",
+     "ko": "음… 라지로 할게요. 이번 주 진짜 길었거든요.",
+     "chunks": [
+      "w1c11",
+      "w3c02",
+      "w2c20"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Ha, I hear you. Is that for here or to go?",
+     "ko": "하, 그 마음 알죠. 드시고 가세요, 가져가세요?"
+    },
+    {
+     "sp": "B",
+     "en": "For here, please. I have a class at seven, so I have some time.",
+     "ko": "먹고 갈게요. 7시에 수업이 있어서 시간이 좀 있어요.",
+     "chunks": [
+      "w3c03"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "A class? Are you a student?",
+     "ko": "수업이요? 학생이세요?"
+    },
+    {
+     "sp": "B",
+     "en": "No, I'm a tutor. I teach English to high school students.",
+     "ko": "아니요, 저는 과외 선생님이에요. 고등학생들한테 영어를 가르쳐요.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "Oh, nice! By the way, our muffins are half off today. Want one?",
+     "ko": "오, 멋지네요! 참, 오늘 머핀이 반값인데, 하나 드릴까요?"
+    },
+    {
+     "sp": "B",
+     "en": "Really? Sure, why not. A blueberry one.",
+     "ko": "진짜요? 좋아요. 블루베리로요.",
+     "chunks": [
+      "w1c01"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Anything else?",
+     "ko": "더 필요하신 건요?"
+    },
+    {
+     "sp": "B",
+     "en": "That's it. Oh, do you take cards?",
+     "ko": "그거면 돼요. 아, 카드 되나요?",
+     "chunks": [
+      "w3c04",
+      "w3c05"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Of course. Just tap here. Your name for the order?",
+     "ko": "물론이죠. 여기 대주세요. 주문하시는 분 성함은요?"
+    },
+    {
+     "sp": "B",
+     "en": "It's James. Thanks!",
+     "ko": "James예요. 감사합니다!",
+     "chunks": []
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w3c01",
+     "en": "Can I get ~?",
+     "ko": "~ 주시겠어요?",
+     "use_ko": "카페나 식당에서 원하는 걸 주문할 때",
+     "note": "원어민이 가장 흔히 쓰는 주문 표현이에요. 한국식 'Give me ~'는 명령처럼 들려서 피하세요.",
+     "sound": "Can I가 붙어 '캐나이', get은 t를 멈추듯 삼켜 '캐나이겟'. 뒤에 a가 오면 '캐나이게러'처럼 t가 ㄹ로 변해요.",
+     "ex": [
+      {
+       "en": "Can I get a hot latte?",
+       "ko": "따뜻한 라떼 하나 주시겠어요?"
+      },
+      {
+       "en": "Can I get some water, please?",
+       "ko": "물 좀 주시겠어요?"
+      }
+     ]
+    },
+    {
+     "id": "w3c02",
+     "en": "I'll go with ~.",
+     "ko": "~로 할게요.",
+     "use_ko": "여러 선택지 중에서 하나를 고를 때",
+     "note": "메뉴, 사이즈, 옵션을 정할 때 써요. I want ~보다 부드럽고 자연스러워요.",
+     "sound": "I'll은 '아을'처럼 짧게 한 박자, go with의 with는 끝이 d가 아니라 th예요. 혀끝을 윗니에 살짝 대고 짧게 끝내 '아을 고우위th'.",
+     "ex": [
+      {
+       "en": "I'll go with the chicken salad.",
+       "ko": "치킨 샐러드로 할게요."
+      },
+      {
+       "en": "Hmm, I'll go with the small one.",
+       "ko": "음, 작은 걸로 할게요."
+      }
+     ]
+    },
+    {
+     "id": "w3c03",
+     "en": "For here, please.",
+     "ko": "먹고 갈게요.",
+     "use_ko": "'드시고 가세요, 가져가세요?'라는 질문에 답할 때",
+     "note": "포장은 To go, please. 둘 다 짝으로 알아두세요. 질문은 For here or to go? 로 빠르게 들려요.",
+     "sound": "For가 약해져 '퍼히어', please는 끝을 짧게 '퍼히어 플리즈'.",
+     "ex": [
+      {
+       "en": "For here, please. Could I get it in a mug?",
+       "ko": "먹고 갈게요. 머그잔에 주실 수 있어요?"
+      },
+      {
+       "en": "Oh, for here, please. Thanks.",
+       "ko": "아, 먹고 갈게요. 감사합니다."
+      }
+     ]
+    },
+    {
+     "id": "w3c04",
+     "en": "That's it.",
+     "ko": "그거면 돼요.",
+     "use_ko": "'더 필요한 거 있으세요?'에 더 없다고 답할 때",
+     "note": "Anything else?에 대한 가장 짧고 자연스러운 답이에요. That's all.도 같은 뜻이에요.",
+     "sound": "That's의 s가 it에 붙어 '댓츠잇', 마지막 t는 거의 안 들려요.",
+     "ex": [
+      {
+       "en": "Anything else? — No, that's it.",
+       "ko": "더 필요하신 건요? — 아니요, 그거면 돼요."
+      },
+      {
+       "en": "That's it for now, thanks.",
+       "ko": "일단 그거면 돼요, 감사합니다."
+      }
+     ]
+    },
+    {
+     "id": "w3c05",
+     "en": "Do you take ~?",
+     "ko": "~ 되나요?",
+     "use_ko": "결제 수단이 되는지 물을 때",
+     "note": "카드, 현금, 애플페이처럼 결제 방법을 물을 때 써요. take는 '받다'라는 뜻이에요.",
+     "sound": "Do you가 약해져 '드유', 뒤의 take와 이어져 '드유테익'.",
+     "ex": [
+      {
+       "en": "Do you take Apple Pay?",
+       "ko": "애플페이 되나요?"
+      },
+      {
+       "en": "Sorry, do you take cash?",
+       "ko": "죄송한데, 현금 되나요?"
+      }
+     ]
+    }
+   ],
+   "pragmatic": "영어권 카페에서는 주문할 때 Can I get ~? 처럼 질문 형태로 부탁하는 게 기본 예의예요. 바리스타가 이름을 물으면 컵에 쓰려는 거라 자연스럽게 알려주면 돼요.",
+   "roleplay": {
+    "situation_ko": "해외 출장 중, 공항 카페에서 음료를 주문해요.",
+    "turns": [
+     {
+      "a": "Hi! What can I get you?",
+      "intent_ko": "따뜻한 라떼를 주문하세요.",
+      "hint": "Can I get ~?",
+      "model": "Hi! Can I get a hot latte?",
+      "model_alt": "Hi, can I get a latte, please? A hot one."
+     },
+     {
+      "a": "What size would you like?",
+      "intent_ko": "작은 사이즈로 하겠다고 하세요.",
+      "hint": "I'll go with ~.",
+      "model": "I'll go with a small, please."
+     },
+     {
+      "a": "For here or to go?",
+      "intent_ko": "먹고 가겠다고 하세요.",
+      "hint": "For here, please.",
+      "model": "For here, please."
+     },
+     {
+      "a": "Sorry, our card machine is down right now. Is that okay?",
+      "intent_ko": "카드가 안 된다는 말에 당황하지 말고, 다른 결제 방법이 되는지 물어보세요.",
+      "hint": "",
+      "model": "Oh, really? Do you take cash, then?",
+      "model_alt": "Oh no. Do you take cash? I have some."
+     },
+     {
+      "a": "Yes, we do. Anything else?",
+      "intent_ko": "더 필요한 건 없다고 하세요.",
+      "hint": "That's it.",
+      "model": "No, that's it. Thanks!"
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "친구 두 명 몫까지 카페에서 주문하는 상황이에요. 각자 다른 음료와 사이즈를 정하고, 먹고 갈지와 결제 수단까지 오늘 표현으로 말해보세요.",
+     "starter_en": "Hi! What can I get for you three?"
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "type": "learn",
+   "title": "메뉴 묻고 추천받기",
+   "cast": {
+    "A": {
+     "name": "Mia",
+     "gender": "f",
+     "desc": "동네 단골 카페에서 알게 된 캐나다 출신 디자이너"
+    }
+   },
+   "context_ko": "주말에 Mia와 이태원 브런치 가게에 왔어요. Mia는 와본 적이 있고, '나'는 처음이에요. 둘은 편하게 반말해요.",
+   "listen_q": {
+    "q": "두 사람이 마지막에 정한 것은?",
+    "options": [
+     "메뉴 두 개를 나눠 먹기로 했다",
+     "각자 하나씩 따로 시켰다",
+     "디저트만 먹기로 했다",
+     "다른 가게로 가기로 했다"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "This place is my favorite. Everything here is so good.",
+     "ko": "여기 내 최애 가게야. 다 진짜 맛있어."
+    },
+    {
+     "sp": "B",
+     "en": "I've never been here before. What do you recommend?",
+     "ko": "난 여기 처음이야. 뭐 추천해?",
+     "chunks": [
+      "w3c06"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Definitely the shakshuka. It's their most popular dish.",
+     "ko": "무조건 샥슈카. 여기서 제일 인기 많은 메뉴야."
+    },
+    {
+     "sp": "B",
+     "en": "Shak-what? Sorry, I didn't catch that.",
+     "ko": "샥 뭐? 미안, 잘 못 들었어.",
+     "chunks": [
+      "w1c06"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Shakshuka! It's eggs cooked in a spicy tomato sauce.",
+     "ko": "샥슈카! 매콤한 토마토소스에 달걀을 익힌 요리야."
+    },
+    {
+     "sp": "B",
+     "en": "Oh, I see. What's in the sauce? Is it really spicy?",
+     "ko": "아, 그렇구나. 소스엔 뭐가 들어가? 많이 매워?",
+     "chunks": [
+      "w3c07"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Tomatoes, peppers, onions. It's only a little spicy.",
+     "ko": "토마토, 피망, 양파. 아주 살짝만 매워."
+    },
+    {
+     "sp": "B",
+     "en": "Sounds good. Does it come with bread?",
+     "ko": "좋다. 빵도 같이 나와?",
+     "chunks": [
+      "w3c08"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Yeah, it comes with toast. But the pancakes are amazing too.",
+     "ko": "응, 토스트가 같이 나와. 근데 팬케이크도 끝내줘."
+    },
+    {
+     "sp": "B",
+     "en": "Hmm, I can't decide. They both look great.",
+     "ko": "음, 못 고르겠다. 둘 다 맛있어 보여.",
+     "chunks": [
+      "w3c09"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "I know, right? I always have the same problem.",
+     "ko": "그러니까! 나도 항상 그래."
+    },
+    {
+     "sp": "B",
+     "en": "Then let's share both. We can try a little of each.",
+     "ko": "그럼 둘 다 시켜서 나눠 먹자. 조금씩 다 먹어보는 거지.",
+     "chunks": [
+      "w3c10"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Perfect. You're a genius.",
+     "ko": "완벽해. 너 천재다."
+    },
+    {
+     "sp": "B",
+     "en": "Ha, I'm a teacher. I solve problems all day.",
+     "ko": "하, 내가 선생님이잖아. 하루 종일 문제 푸는 사람이야.",
+     "chunks": []
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w3c06",
+     "en": "What do you recommend?",
+     "ko": "뭐 추천해요?",
+     "use_ko": "메뉴를 잘 모를 때 점원이나 친구에게 물을 때",
+     "note": "식당, 여행지, 책 등 어디에나 쓸 수 있어요. 점원에게 물으면 대개 인기 메뉴를 알려줘요.",
+     "sound": "What do you가 '와러유'로 빠르게 뭉개지고, recommend는 마지막 mend에 힘을 줘요. '와러유 레커멘드'.",
+     "ex": [
+      {
+       "en": "It's my first time here. What do you recommend?",
+       "ko": "여기 처음인데요. 뭐 추천하세요?"
+      },
+      {
+       "en": "What do you recommend for dessert?",
+       "ko": "디저트로는 뭐 추천해요?"
+      }
+     ]
+    },
+    {
+     "id": "w3c07",
+     "en": "What's in ~?",
+     "ko": "~에 뭐가 들어가요?",
+     "use_ko": "음식 재료가 궁금할 때",
+     "note": "알레르기나 싫어하는 재료를 확인할 때도 꼭 필요한 질문이에요.",
+     "sound": "What's의 ts가 in에 그대로 붙어 '왓츤'처럼 이어져요. ch(취) 소리가 아니에요.",
+     "ex": [
+      {
+       "en": "What's in this salad?",
+       "ko": "이 샐러드에 뭐가 들어가요?"
+      },
+      {
+       "en": "Excuse me, what's in the house special?",
+       "ko": "저기요, 하우스 스페셜엔 뭐가 들어가요?"
+      }
+     ]
+    },
+    {
+     "id": "w3c08",
+     "en": "Does it come with ~?",
+     "ko": "~도 같이 나와요?",
+     "use_ko": "메뉴에 사이드나 음료가 포함되는지 물을 때",
+     "note": "come with는 '함께 나오다'라는 뜻이에요. 대답도 It comes with ~ 로 돌아와요.",
+     "sound": "Does it이 '더짓'으로 붙고, come with는 '컴위th'(with 끝은 d가 아니라 혀를 윗니에 대는 th).",
+     "ex": [
+      {
+       "en": "Does it come with fries?",
+       "ko": "감자튀김도 같이 나와요?"
+      },
+      {
+       "en": "Does it come with a drink?",
+       "ko": "음료도 같이 나와요?"
+      }
+     ]
+    },
+    {
+     "id": "w3c09",
+     "en": "I can't decide.",
+     "ko": "못 고르겠어요.",
+     "use_ko": "메뉴나 선택지 사이에서 고민될 때",
+     "note": "고민 중이라는 걸 솔직하게 말하면 상대가 추천이나 의견을 더 해줘요.",
+     "sound": "can't는 t를 멈추듯 거의 삼켜서 '캔(ㅌ)'. 대신 모음을 길게 '아이 캐앤 디사이드'.",
+     "ex": [
+      {
+       "en": "They all look good. I can't decide.",
+       "ko": "다 맛있어 보여요. 못 고르겠어요."
+      },
+      {
+       "en": "I can't decide between these two.",
+       "ko": "이 두 개 중에 못 고르겠어요."
+      }
+     ]
+    },
+    {
+     "id": "w3c10",
+     "en": "Let's share ~.",
+     "ko": "~ 나눠 먹자.",
+     "use_ko": "일행과 음식을 나눠 먹자고 할 때",
+     "note": "Can we share ~? 처럼 질문으로 바꾸면 더 부드러워요.",
+     "sound": "Let's의 ts가 share의 sh와 겹쳐 '렛쉐어r'처럼 한 번에 이어져요.",
+     "ex": [
+      {
+       "en": "Let's share a pizza.",
+       "ko": "피자 하나 나눠 먹자."
+      },
+      {
+       "en": "Let's share the dessert. I'm full.",
+       "ko": "디저트는 나눠 먹자. 나 배불러."
+      }
+     ]
+    }
+   ],
+   "pragmatic": "영어권 식당에서는 점원에게 추천을 묻는 게 아주 흔하고 자연스러워요. 추천을 받으면 Sounds good! 처럼 반응해주면 대화가 부드러워요.",
+   "roleplay": {
+    "situation_ko": "처음 가본 태국 음식점에서 점원에게 메뉴를 물어봐요.",
+    "turns": [
+     {
+      "a": "Hi, are you ready to order?",
+      "intent_ko": "처음 왔다고 말하고 추천을 부탁하세요.",
+      "hint": "What do you recommend?",
+      "model": "Not yet. It's my first time here. What do you recommend?"
+     },
+     {
+      "a": "Our green curry is really popular.",
+      "intent_ko": "그 커리에 뭐가 들어가는지 물어보세요.",
+      "hint": "What's in ~?",
+      "model": "Oh, what's in the green curry?"
+     },
+     {
+      "a": "Chicken, eggplant, and basil in coconut milk.",
+      "intent_ko": "밥도 같이 나오는지 물어보세요.",
+      "hint": "Does it come with ~?",
+      "model": "Sounds good. Does it come with rice?"
+     },
+     {
+      "a": "Actually, the green curry is sold out for today. Sorry about that.",
+      "intent_ko": "추천 메뉴가 다 떨어졌어요. 당황하지 말고 다른 걸 정할 수 있게 대처하세요.",
+      "hint": "",
+      "model": "Oh, no worries. Then what else do you recommend?",
+      "model_alt": "That's okay. Hmm, let me think. What else is popular?"
+     },
+     {
+      "a": "The pad thai and the red curry are both great.",
+      "intent_ko": "둘 다 좋아 보여서 못 고르겠다고 하세요.",
+      "hint": "I can't decide.",
+      "model": "They both sound great. I can't decide!"
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "외국인 친구에게 내가 좋아하는 한식당을 소개하는 상황이에요. 친구가 메뉴를 고르게 도와주고, 무엇을 나눠 먹을지 정해보세요.",
+     "starter_en": "I've never had Korean food before. What should I get?"
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "type": "learn",
+   "title": "내 입맛대로 바꿔 주문하기",
+   "cast": {
+    "A": {
+     "name": "Ben",
+     "gender": "m",
+     "desc": "수제버거 가게 직원"
+    }
+   },
+   "context_ko": "수업 사이에 학원 근처 수제버거 가게에 들렀어요. 땅콩 알레르기가 있어서 조심해야 해요.",
+   "listen_q": {
+    "q": "'나'는 왜 소스를 따로 달라고 했나요?",
+    "options": [
+     "소스가 많으면 싫어서",
+     "소스에 땅콩이 들어갈까 봐",
+     "포장하려고",
+     "친구 몫이라서"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Hi, welcome! What can I get you?",
+     "ko": "안녕하세요, 어서 오세요! 뭐 드릴까요?"
+    },
+    {
+     "sp": "B",
+     "en": "Hi. Can I get the classic burger?",
+     "ko": "안녕하세요. 클래식 버거 주시겠어요?",
+     "chunks": [
+      "w3c01"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Sure. It comes with fries, and it has lettuce, tomato, onion, and our special sauce.",
+     "ko": "네. 감자튀김이 같이 나오고, 양상추, 토마토, 양파, 저희 특제 소스가 들어가요."
+    },
+    {
+     "sp": "B",
+     "en": "Can I have it without onions?",
+     "ko": "양파는 빼주실 수 있어요?",
+     "chunks": [
+      "w3c11"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "No problem. Anything else?",
+     "ko": "그럼요. 다른 건요?"
+    },
+    {
+     "sp": "B",
+     "en": "Yes. Could I get the sauce on the side? I don't like too much sauce.",
+     "ko": "네. 소스는 따로 주시겠어요? 소스 많은 걸 안 좋아해서요.",
+     "chunks": [
+      "w3c12"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Got it. Any allergies we should know about?",
+     "ko": "알겠습니다. 혹시 알레르기 있으세요?"
+    },
+    {
+     "sp": "B",
+     "en": "Actually, yes. I'm allergic to peanuts. Does this have any nuts?",
+     "ko": "사실 있어요. 땅콩 알레르기가 있어요. 이거에 견과류 들어가요?",
+     "chunks": [
+      "w3c13",
+      "w3c15"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "The burger doesn't, but the fries are cooked in peanut oil.",
+     "ko": "버거엔 없는데, 감자튀김은 땅콩기름에 튀겨요."
+    },
+    {
+     "sp": "B",
+     "en": "Really? Good thing I asked. Then no fries, please.",
+     "ko": "진짜요? 물어보길 잘했네요. 그럼 감자튀김은 빼주세요.",
+     "chunks": [
+      "w1c01"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Sure. How would you like the burger cooked?",
+     "ko": "네. 버거 패티는 어떻게 익혀드릴까요?"
+    },
+    {
+     "sp": "B",
+     "en": "Could you make it well-done?",
+     "ko": "완전히 익혀주실 수 있어요?",
+     "chunks": [
+      "w3c14"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Of course. Well-done takes a little longer, so it'll be about fifteen minutes.",
+     "ko": "물론이죠. 웰던은 조금 더 걸려서 15분 정도 걸려요."
+    },
+    {
+     "sp": "B",
+     "en": "That makes sense. I'll wait here. Thanks!",
+     "ko": "그렇겠네요. 여기서 기다릴게요. 감사합니다!",
+     "chunks": [
+      "w1c03"
+     ]
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w3c11",
+     "en": "Can I have it without ~?",
+     "ko": "~ 빼주실 수 있어요?",
+     "use_ko": "싫어하거나 못 먹는 재료를 빼달라고 할 때",
+     "note": "without 뒤에 재료만 바꿔 넣으면 돼요. No onions, please. 처럼 짧게 말해도 돼요.",
+     "sound": "Can I가 '캐나이', have it이 붙어 '해빗'. '캐나이 해빗 위다웃'.",
+     "ex": [
+      {
+       "en": "Can I have it without cheese?",
+       "ko": "치즈 빼주실 수 있어요?"
+      },
+      {
+       "en": "Can I have it without ice, please?",
+       "ko": "얼음 빼주실 수 있어요?"
+      }
+     ]
+    },
+    {
+     "id": "w3c12",
+     "en": "~ on the side",
+     "ko": "~는 따로",
+     "use_ko": "소스나 드레싱을 음식에 붓지 말고 따로 달라고 할 때",
+     "note": "dressing on the side, sauce on the side 처럼 앞에 재료를 붙여요.",
+     "sound": "the가 약해져 '온더사이드', side에 힘을 줘요.",
+     "ex": [
+      {
+       "en": "Can I get the dressing on the side?",
+       "ko": "드레싱은 따로 주시겠어요?"
+      },
+      {
+       "en": "Sauce on the side, please.",
+       "ko": "소스는 따로 주세요."
+      }
+     ]
+    },
+    {
+     "id": "w3c13",
+     "en": "I'm allergic to ~.",
+     "ko": "~ 알레르기가 있어요.",
+     "use_ko": "알레르기를 알려야 할 때",
+     "note": "해외 식당에서는 꼭 미리 말해야 해요. allergic의 강세는 가운데 ler에 있어요. I have an allergy to ~보다 I'm allergic to ~가 훨씬 흔해요. 마요네즈(달걀)처럼 숨은 재료도 있으니 What's in ~?으로 같이 확인하세요.",
+     "sound": "allergic은 가운데에 힘을 줘서 '얼러-직'. to는 약하게 '터'.",
+     "ex": [
+      {
+       "en": "I'm allergic to shrimp.",
+       "ko": "새우 알레르기가 있어요."
+      },
+      {
+       "en": "I'm allergic to eggs. Can I have it without the mayo?",
+       "ko": "제가 달걀 알레르기가 있어요. 마요네즈 빼주실 수 있어요?"
+      }
+     ]
+    },
+    {
+     "id": "w3c14",
+     "en": "Could you make it ~?",
+     "ko": "~하게 해주실 수 있어요?",
+     "use_ko": "익힘 정도, 맵기, 온도 등을 원하는 대로 부탁할 때",
+     "note": "make it spicy, make it less sweet, make it extra hot 처럼 응용해요.",
+     "sound": "Could you가 '쿠쥬', make it이 붙어 '메이킷'. '쿠쥬 메이킷'.",
+     "ex": [
+      {
+       "en": "Could you make it less sweet?",
+       "ko": "덜 달게 해주실 수 있어요?"
+      },
+      {
+       "en": "Could you make it extra hot?",
+       "ko": "더 뜨겁게 해주실 수 있어요?"
+      }
+     ]
+    },
+    {
+     "id": "w3c15",
+     "en": "Does this have ~?",
+     "ko": "이거에 ~ 들어가요?",
+     "use_ko": "음식에 특정 재료가 들어가는지 확인할 때",
+     "note": "Does this have any ~? 처럼 any를 넣으면 '조금이라도'라는 뜻이 돼요.",
+     "sound": "Does this가 '더즈디스'로 이어지고, have는 '해브'를 짧게.",
+     "ex": [
+      {
+       "en": "Does this have any meat?",
+       "ko": "이거에 고기 들어가요?"
+      },
+      {
+       "en": "Does this have garlic in it?",
+       "ko": "이거에 마늘 들어가요?"
+      }
+     ]
+    }
+   ],
+   "pragmatic": "해외에서는 재료를 빼거나 바꿔 달라는 요청이 아주 흔해서 미안해할 필요 없어요. 다만 Can I ~? / Could you ~? 처럼 질문으로 부탁하면 훨씬 정중하게 들려요.",
+   "roleplay": {
+    "situation_ko": "샐러드 가게에서 내 입맛대로 주문을 바꿔요.",
+    "turns": [
+     {
+      "a": "Here's our chicken salad. It comes with nuts and blue cheese.",
+      "intent_ko": "견과류 알레르기가 있다고 알려주세요.",
+      "hint": "I'm allergic to ~.",
+      "model": "Oh, I'm allergic to nuts."
+     },
+     {
+      "a": "No problem, we can leave them out.",
+      "intent_ko": "블루치즈도 빼줄 수 있는지 물어보세요.",
+      "hint": "Can I have it without ~?",
+      "model": "Great. Can I have it without blue cheese too?"
+     },
+     {
+      "a": "Sure. And the dressing?",
+      "intent_ko": "드레싱은 따로 달라고 하세요.",
+      "hint": "~ on the side",
+      "model": "Could I get the dressing on the side?"
+     },
+     {
+      "a": "Just so you know, the chicken is a little spicy today.",
+      "intent_ko": "치킨이 맵다고 해요. 내가 원하는 대로 부탁해서 해결하세요.",
+      "hint": "",
+      "model": "Oh, could you make it less spicy?",
+      "model_alt": "Hmm, could you make it mild? I can't eat spicy food."
+     },
+     {
+      "a": "I'll ask the kitchen. Anything else?",
+      "intent_ko": "더 필요한 건 없다고 하세요.",
+      "hint": "That's it.",
+      "model": "No, that's it. Thank you!"
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "내가 좋아하는 메뉴를 내 입맛대로 바꿔서 주문해보세요. 빼고 싶은 것, 따로 받고 싶은 것, 바꾸고 싶은 것을 하나씩 넣으세요.",
+     "starter_en": "Hi, what would you like today?"
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "type": "learn",
+   "title": "주문이 잘못 나왔을 때 정중하게 말하기",
+   "cast": {
+    "A": {
+     "name": "Grace",
+     "gender": "f",
+     "desc": "파스타 가게 직원"
+    }
+   },
+   "context_ko": "수업이 끝나고 지친 상태로 파스타 가게에 왔는데, 주문한 것과 다른 음식이 나왔어요.",
+   "listen_q": {
+    "q": "직원은 문제를 어떻게 해결했나요?",
+    "options": [
+     "새로 만들어 주고 음료를 무료로 줬다",
+     "돈을 돌려줬다",
+     "그냥 먹으라고 했다",
+     "다른 가게를 추천했다"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Here's your cream pasta. Enjoy!",
+     "ko": "크림 파스타 나왔습니다. 맛있게 드세요!"
+    },
+    {
+     "sp": "B",
+     "en": "Oh, sorry to bother you, but I think there's a mistake.",
+     "ko": "아, 번거롭게 해서 죄송한데, 주문이 잘못된 것 같아요.",
+     "chunks": [
+      "w3c16",
+      "w3c17"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Oh no. What did you order?",
+     "ko": "어머. 뭐 주문하셨어요?"
+    },
+    {
+     "sp": "B",
+     "en": "I actually ordered the tomato pasta.",
+     "ko": "저는 토마토 파스타를 시켰거든요.",
+     "chunks": [
+      "w3c18"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "You're right. I'm so sorry about that. I'll fix it right away.",
+     "ko": "맞네요. 정말 죄송해요. 바로 바꿔드릴게요."
+    },
+    {
+     "sp": "B",
+     "en": "No worries. It happens.",
+     "ko": "괜찮아요. 그럴 수도 있죠.",
+     "chunks": [
+      "w3c20"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "It'll take about ten minutes. Is that okay?",
+     "ko": "10분 정도 걸리는데, 괜찮으세요?"
+    },
+    {
+     "sp": "B",
+     "en": "Ten minutes? That's fine. I'm not in a hurry.",
+     "ko": "10분이요? 괜찮아요. 급하지 않아요.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "Thanks for your patience. Can I get you anything while you wait?",
+     "ko": "양해해 주셔서 감사해요. 기다리시는 동안 뭐 갖다드릴까요?"
+    },
+    {
+     "sp": "B",
+     "en": "Would you mind bringing some water? It's a little warm in here.",
+     "ko": "물 좀 갖다주실 수 있을까요? 여기가 좀 덥네요.",
+     "chunks": [
+      "w3c19"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Of course. And your drink is on the house today.",
+     "ko": "물론이죠. 그리고 오늘 음료는 서비스예요."
+    },
+    {
+     "sp": "B",
+     "en": "Really? That's so kind. Thank you.",
+     "ko": "진짜요? 정말 친절하시네요. 감사합니다.",
+     "chunks": [
+      "w1c01"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Here's your tomato pasta. Sorry again for the wait.",
+     "ko": "토마토 파스타 나왔습니다. 기다리게 해서 다시 한번 죄송해요."
+    },
+    {
+     "sp": "B",
+     "en": "No worries. It looks great!",
+     "ko": "괜찮아요. 맛있어 보여요!",
+     "chunks": [
+      "w3c20"
+     ]
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w3c16",
+     "en": "Sorry to bother you, but ~",
+     "ko": "번거롭게 해서 죄송한데, ~",
+     "use_ko": "바쁜 직원이나 모르는 사람에게 부탁이나 문제를 말할 때",
+     "note": "불만을 말하기 전에 먼저 완충해주는 표현이에요. 상대가 기분 나쁘지 않게 들어줘요.",
+     "sound": "Sorry는 미국식으로 '싸-리'(쏘리 아님). Sorry to는 t가 약해져 '싸리러', bother you는 '바더r유'.",
+     "ex": [
+      {
+       "en": "Sorry to bother you, but could I get a new fork?",
+       "ko": "번거롭게 해서 죄송한데, 포크 새로 주실 수 있어요?"
+      },
+      {
+       "en": "Sorry to bother you, but is this seat free?",
+       "ko": "번거롭게 해서 죄송한데, 이 자리 비었나요?"
+      }
+     ]
+    },
+    {
+     "id": "w3c17",
+     "en": "I think there's a mistake.",
+     "ko": "잘못된 것 같아요.",
+     "use_ko": "주문이나 계산이 잘못됐을 때",
+     "note": "I think를 붙이면 상대 탓을 하지 않고 부드럽게 말하는 느낌이 돼요.",
+     "sound": "there's a가 붙어 '데어r저', mistake는 두 번째 음절 stake에 힘을 주고 t는 된소리처럼 '미스떼익'.",
+     "ex": [
+      {
+       "en": "Excuse me, I think there's a mistake on the bill.",
+       "ko": "저기요, 계산서가 잘못된 것 같아요."
+      },
+      {
+       "en": "I think there's a mistake. This isn't mine.",
+       "ko": "잘못된 것 같아요. 이건 제 게 아니에요."
+      }
+     ]
+    },
+    {
+     "id": "w3c18",
+     "en": "I actually ordered ~.",
+     "ko": "저는 ~를 시켰거든요.",
+     "use_ko": "다른 음식이 나왔을 때 원래 주문을 알려줄 때",
+     "note": "actually는 '사실은'이라는 뜻으로, 정정할 때 부드럽게 해줘요.",
+     "sound": "actually는 t가 ch처럼 바뀌어 '액츄얼리', ordered는 '오-덜드'.",
+     "ex": [
+      {
+       "en": "Sorry, I actually ordered a hot one.",
+       "ko": "죄송한데, 저는 따뜻한 걸로 시켰거든요."
+      },
+      {
+       "en": "I actually ordered the small size.",
+       "ko": "저는 작은 사이즈로 시켰거든요."
+      }
+     ]
+    },
+    {
+     "id": "w3c19",
+     "en": "Would you mind ~?",
+     "ko": "~해주실 수 있을까요?",
+     "use_ko": "조심스럽게 부탁할 때",
+     "note": "mind 뒤에는 -ing가 와요. Would you mind bringing ~? 처럼요. 들어줄 땐 상대가 Not at all.이라고 해요.",
+     "sound": "Would you가 '우쥬'로 붙어 '우쥬 마인드'.",
+     "ex": [
+      {
+       "en": "Would you mind closing the window?",
+       "ko": "창문 좀 닫아주실 수 있을까요?"
+      },
+      {
+       "en": "Would you mind waiting a minute?",
+       "ko": "잠깐 기다려주실 수 있을까요?"
+      }
+     ]
+    },
+    {
+     "id": "w3c20",
+     "en": "No worries.",
+     "ko": "괜찮아요.",
+     "use_ko": "상대가 사과하거나 고마워할 때 가볍게 받아줄 때",
+     "note": "It's okay.보다 캐주얼하고 따뜻한 느낌이에요. 친구와 점원 모두에게 써요.",
+     "sound": "'노우 워리즈', worries의 r 소리를 혀를 말아 부드럽게.",
+     "ex": [
+      {
+       "en": "Sorry I'm late! — No worries.",
+       "ko": "늦어서 미안! — 괜찮아."
+      },
+      {
+       "en": "No worries, take your time.",
+       "ko": "괜찮아요, 천천히 하세요."
+      }
+     ]
+    }
+   ],
+   "pragmatic": "영어권에서는 음식이 잘못 나와도 참지 말고 말하는 게 당연해요. 대신 Sorry to bother you, but ~ / I think ~ 처럼 완충 표현을 쓰면 정중한 불만이 돼요. 참고로 한국어 '서비스예요'는 영어로 It's on the house.예요. 영어 service에는 '공짜'라는 뜻이 없어요.",
+   "roleplay": {
+    "situation_ko": "카페에서 주문과 다른 음료가 나왔어요. 정중하게 해결해보세요.",
+    "turns": [
+     {
+      "a": "Here's your hot chocolate!",
+      "intent_ko": "직원을 정중하게 불러 세우며, 주문이 잘못된 것 같다고 하세요.",
+      "hint": "Sorry to bother you, but ~ / I think there's a mistake.",
+      "model": "Oh, sorry to bother you, but I think there's a mistake."
+     },
+     {
+      "a": "Oh, what did you order?",
+      "intent_ko": "원래 주문은 아이스 라떼였다고 하세요.",
+      "hint": "I actually ordered ~.",
+      "model": "I actually ordered an iced latte."
+     },
+     {
+      "a": "I'm so sorry! I'll make a new one right now.",
+      "intent_ko": "괜찮다고 가볍게 받아주세요.",
+      "hint": "No worries.",
+      "model": "No worries."
+     },
+     {
+      "a": "Actually, we just ran out of milk. Would oat milk be okay?",
+      "intent_ko": "우유가 떨어졌대요. 내가 원하는 대로 정해서 대답하세요.",
+      "hint": "",
+      "model": "Sure, oat milk is fine. Thanks!",
+      "model_alt": "Hmm, could you make it an Americano instead?"
+     },
+     {
+      "a": "Of course. Can I get you anything else while you wait?",
+      "intent_ko": "기다리는 동안 냅킨을 좀 갖다줄 수 있는지 조심스럽게 부탁하세요.",
+      "hint": "Would you mind ~?",
+      "model": "Would you mind bringing some napkins?"
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "식당에서 계산서에 먹지 않은 메뉴가 들어가 있어요. 완충 표현으로 시작해서, 문제를 설명하고, 해결해준 직원에게 고마움까지 말해보세요.",
+     "starter_en": "Here's your bill. Have a great night!"
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "type": "learn",
+   "title": "계산하고 기분 좋게 마무리하기",
+   "cast": {
+    "A": {
+     "name": "Mia",
+     "gender": "f",
+     "desc": "동네 단골 카페에서 알게 된 캐나다 출신 디자이너"
+    }
+   },
+   "context_ko": "Mia와 저녁을 먹고 계산할 시간이에요. Mia가 지난번에 커피를 샀던 게 생각났어요.",
+   "listen_q": {
+    "q": "오늘 저녁은 누가 계산했나요?",
+    "options": [
+     "'나'가 다 냈다",
+     "Mia가 다 냈다",
+     "반반 나눠 냈다",
+     "점원이 서비스로 줬다"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "That was amazing. I'm so full.",
+     "ko": "진짜 맛있었다. 나 너무 배불러."
+    },
+    {
+     "sp": "B",
+     "en": "Same here. Excuse me! Could we get the check?",
+     "ko": "나도. 저기요! 계산서 좀 주시겠어요?",
+     "chunks": [
+      "w2c12",
+      "w3c21"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Let's split it this time.",
+     "ko": "이번엔 나눠서 내자."
+    },
+    {
+     "sp": "B",
+     "en": "Okay. Excuse me, can we pay separately?",
+     "ko": "알았어. 저기요, 따로 계산돼요?",
+     "chunks": [
+      "w3c22"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Hmm, she says they only do one check per table.",
+     "ko": "음, 테이블당 한 번만 계산된대."
+    },
+    {
+     "sp": "B",
+     "en": "Really? Then it's on me tonight.",
+     "ko": "진짜? 그럼 오늘은 내가 살게.",
+     "chunks": [
+      "w1c01",
+      "w3c23"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "What? You don't have to do that.",
+     "ko": "뭐? 그럴 필요 없어."
+    },
+    {
+     "sp": "B",
+     "en": "You bought me coffee last time, remember? When I had that crazy week.",
+     "ko": "지난번에 네가 커피 사줬잖아, 기억나? 나 정신없던 그 주에.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "Oh, right! But that was just coffee.",
+     "ko": "아, 맞다! 근데 그건 그냥 커피였잖아."
+    },
+    {
+     "sp": "B",
+     "en": "And you listened to me complain about my students for hours. So it's only fair.",
+     "ko": "그리고 몇 시간 동안 내 학생들 얘기 투덜대는 거 다 들어줬잖아. 그러니까 이게 공평하지.",
+     "chunks": []
+    },
+    {
+     "sp": "A",
+     "en": "Ha, okay. Thank you. Then I'll get the next one.",
+     "ko": "하, 알았어. 고마워. 그럼 다음엔 내가 살게."
+    },
+    {
+     "sp": "B",
+     "en": "Deal. I'll get the next one after that, then.",
+     "ko": "좋아. 그럼 그다음엔 또 내가 살게.",
+     "chunks": [
+      "w3c24"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Ha, we'll be doing this forever.",
+     "ko": "하, 우리 이거 평생 하겠다."
+    },
+    {
+     "sp": "B",
+     "en": "Excuse me. Everything was great. Thank you!",
+     "ko": "저기요. 음식 다 정말 맛있었어요. 감사합니다!",
+     "chunks": [
+      "w3c25"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Should we get going? You have class tomorrow morning, right?",
+     "ko": "이제 갈까? 너 내일 아침에 수업 있지?"
+    },
+    {
+     "sp": "B",
+     "en": "Yeah, I should get going. It was a great night.",
+     "ko": "응, 이제 가봐야겠다. 오늘 진짜 좋았어.",
+     "chunks": [
+      "w2c21"
+     ]
+    }
+   ],
+   "chunks": [
+    {
+     "id": "w3c21",
+     "en": "Could we get the check?",
+     "ko": "계산서 좀 주시겠어요?",
+     "use_ko": "식당에서 계산하고 싶을 때",
+     "note": "영어권 식당은 보통 손님이 요청해야 계산서를 가져다줘요. 미국은 check(bill도 통해요), 영국·캐나다는 주로 bill이라고 해요.",
+     "sound": "Could we가 '쿠위', get the는 t를 멈추듯 삼켜 '겟더'. '쿠위겟더첵'.",
+     "ex": [
+      {
+       "en": "Excuse me, could we get the check, please?",
+       "ko": "저기요, 계산서 좀 주시겠어요?"
+      },
+      {
+       "en": "We're all done. Could we get the check?",
+       "ko": "저희 다 먹었어요. 계산서 주시겠어요?"
+      }
+     ]
+    },
+    {
+     "id": "w3c22",
+     "en": "Can we pay separately?",
+     "ko": "따로 계산돼요?",
+     "use_ko": "일행과 각자 계산하고 싶을 때",
+     "note": "Can we split the bill? 도 같은 뜻이에요. 미리 말하면 점원이 계산서를 나눠줘요.",
+     "sound": "Can we가 '캔위', separately는 '쎄퍼럿리'처럼 가운데 모음이 약해져요.",
+     "ex": [
+      {
+       "en": "Hi, can we pay separately?",
+       "ko": "안녕하세요, 따로 계산돼요?"
+      },
+      {
+       "en": "There are three of us. Can we pay separately?",
+       "ko": "저희 세 명인데요, 따로 계산돼요?"
+      }
+     ]
+    },
+    {
+     "id": "w3c23",
+     "en": "It's on me.",
+     "ko": "내가 살게.",
+     "use_ko": "친구에게 한턱낼 때",
+     "note": "Coffee's on me. 처럼 앞에 메뉴를 넣어도 돼요. 상대가 사양하면 I insist.라고 한 번 더 말해요.",
+     "sound": "It's의 s가 on에 붙어 '잇쏜미'.",
+     "ex": [
+      {
+       "en": "Put your wallet away. It's on me.",
+       "ko": "지갑 넣어. 내가 살게."
+      },
+      {
+       "en": "It's on me tonight. You can get dessert.",
+       "ko": "오늘은 내가 살게. 디저트는 네가 사."
+      }
+     ]
+    },
+    {
+     "id": "w3c24",
+     "en": "I'll get the next one.",
+     "ko": "다음엔 내가 살게.",
+     "use_ko": "상대가 계산했을 때 다음에 내가 사겠다고 할 때",
+     "note": "얻어먹고 고마움을 표현하는 자연스러운 방법이에요. 다음 만남을 약속하는 효과도 있어요.",
+     "sound": "get the는 t를 멈춰 '겟더', next one은 t가 빠져 '넥스원'. '아일겟더 넥스원'.",
+     "ex": [
+      {
+       "en": "Thanks for lunch! I'll get the next one.",
+       "ko": "점심 고마워! 다음엔 내가 살게."
+      },
+      {
+       "en": "Okay, but I'll get the next one.",
+       "ko": "알았어, 근데 다음엔 내가 살게."
+      }
+     ]
+    },
+    {
+     "id": "w3c25",
+     "en": "Everything was great.",
+     "ko": "다 정말 좋았어요.",
+     "use_ko": "식당을 나서며 점원에게 고마움을 전할 때",
+     "note": "점원이 How was everything? 이라고 물을 때 답으로도 써요.",
+     "sound": "Everything은 첫 음절에 힘을 줘 '에브리띵', was가 약해져 '워즈'.",
+     "ex": [
+      {
+       "en": "How was everything? — Everything was great, thanks!",
+       "ko": "식사 어떠셨어요? — 다 정말 좋았어요, 감사합니다!"
+      },
+      {
+       "en": "Everything was great. We'll come again.",
+       "ko": "다 정말 좋았어요. 또 올게요."
+      }
+     ]
+    }
+   ],
+   "pragmatic": "영어권에서도 친구 사이에 번갈아 사는 문화가 있어요. 얻어먹으면 I'll get the next one.으로 고마움을 표현하고, 나올 때 점원에게 짧게 인사하면 좋은 인상을 남겨요. 미국 식당은 테이블에서 계산하고 팁(보통 18~20%)을 더하지만, 한국처럼 카운터에서 계산하는 곳은 팁이 없고 Can we split it between two cards? 처럼 카드를 나눠 내면 돼요.",
+   "roleplay": {
+    "situation_ko": "동료와 점심을 먹고 계산하려고 해요.",
+    "turns": [
+     {
+      "a": "Wow, that was so good.",
+      "intent_ko": "나도 그렇다고 하고, 점원에게 계산서를 부탁하세요.",
+      "hint": "Same here. / Could we get the check?",
+      "model": "Same here. Excuse me, could we get the check?"
+     },
+     {
+      "a": "Should we split it?",
+      "intent_ko": "오늘은 내가 사겠다고 하세요.",
+      "hint": "It's on me.",
+      "model": "No, it's on me today."
+     },
+     {
+      "a": "Really? Thank you so much!",
+      "intent_ko": "괜찮다고 가볍게 받아주세요.",
+      "hint": "No worries.",
+      "model": "No worries."
+     },
+     {
+      "a": "Oh no, wait. I think they charged us for two desserts. We only had one.",
+      "intent_ko": "계산서에 디저트가 두 개 찍혔대요. 점원에게 정중하게 바로잡아 보세요.",
+      "hint": "",
+      "model": "Excuse me, sorry to bother you, but I think there's a mistake. We only had one dessert.",
+      "model_alt": "Sorry, I think there's a mistake on the bill. We only ordered one dessert."
+     },
+     {
+      "a": "You're right, I'll fix that. How was everything?",
+      "intent_ko": "음식이 다 좋았다고 인사하세요.",
+      "hint": "Everything was great.",
+      "model": "Everything was great, thank you!"
+     }
+    ]
+   },
+   "improv": [
+    {
+     "situation_ko": "친구와 식사를 마쳤어요. 계산서를 부탁하고, 누가 낼지 정하고, 나오면서 인사하는 과정을 처음부터 끝까지 말해보세요.",
+     "starter_en": "That was delicious! Okay, how should we pay?"
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "type": "review_week",
+   "title": "주간 복습: 레스토랑 처음부터 끝까지",
+   "cast": {
+    "A": {
+     "name": "Olivia",
+     "gender": "f",
+     "desc": "레스토랑 직원"
+    }
+   },
+   "context_ko": "Mia의 생일이라 둘이 근사한 레스토랑에 왔어요. 주문부터 계산까지 이번 주 표현이 전부 섞여 나와요.",
+   "listen_q": {
+    "q": "이 식사에서 생긴 문제는?",
+    "options": [
+     "케이크에 친구 이름이 잘못 쓰여 있었다",
+     "예약이 안 되어 있었다",
+     "카드 결제가 안 됐다",
+     "음식이 너무 늦게 나왔다"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Good evening! Are you ready to order?",
+     "ko": "안녕하세요! 주문하시겠어요?"
+    },
+    {
+     "sp": "B",
+     "en": "Almost. It's our first time here. What do you recommend?",
+     "ko": "거의 다 골랐어요. 여기 처음 와서요. 뭐 추천하세요?",
+     "chunks": [
+      "w3c06"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Our steak is very popular, and the seafood pasta is great too.",
+     "ko": "스테이크가 아주 인기 있고, 해산물 파스타도 맛있어요."
+    },
+    {
+     "sp": "B",
+     "en": "What's in the seafood pasta? My friend is allergic to shellfish.",
+     "ko": "해산물 파스타엔 뭐가 들어가요? 친구가 갑각류·조개류 알레르기가 있어서요.",
+     "chunks": [
+      "w3c07"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Shrimp and clams, so maybe the steak is safer.",
+     "ko": "새우랑 조개가 들어가서, 스테이크가 더 안전할 것 같아요."
+    },
+    {
+     "sp": "B",
+     "en": "That makes sense. Then can I get two steaks? Does it come with salad?",
+     "ko": "그럴 만하네요. 그럼 스테이크 두 개 주시겠어요? 샐러드도 같이 나와요?",
+     "chunks": [
+      "w1c03",
+      "w3c01",
+      "w3c08"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Yes, it does. How would you like them cooked?",
+     "ko": "네, 나와요. 굽기는 어떻게 해드릴까요?"
+    },
+    {
+     "sp": "B",
+     "en": "Medium, please. Oh, and can I have it without garlic? And the sauce on the side.",
+     "ko": "미디엄으로요. 아, 마늘은 빼주실 수 있어요? 소스는 따로 주시고요.",
+     "chunks": [
+      "w3c11",
+      "w3c12"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Of course. And I saw on your reservation that it's a birthday. I'll bring a little dessert later.",
+     "ko": "물론이죠. 그리고 예약하실 때 생일이라고 적어주셨더라고요. 이따 작은 디저트 갖다드릴게요."
+    },
+    {
+     "sp": "B",
+     "en": "Really? That's so nice. Thank you.",
+     "ko": "진짜요? 정말 감사해요.",
+     "chunks": [
+      "w1c01"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Here's your birthday cake! Happy birthday!",
+     "ko": "생일 케이크 나왔습니다! 생일 축하드려요!"
+    },
+    {
+     "sp": "B",
+     "en": "Sorry to bother you, but I think there's a mistake. It says \"Happy Birthday, Mina.\" Her name is Mia.",
+     "ko": "번거롭게 해서 죄송한데, 잘못된 것 같아요. 'Happy Birthday, Mina'라고 써 있는데, 친구 이름은 Mia예요.",
+     "chunks": [
+      "w3c16",
+      "w3c17"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Oh, I'm so sorry! I'll fix that right away.",
+     "ko": "어머, 정말 죄송해요! 바로 고쳐 드릴게요."
+    },
+    {
+     "sp": "B",
+     "en": "No worries. Thank you. And could we get the check after that?",
+     "ko": "괜찮아요. 감사합니다. 그리고 그다음에 계산서 좀 주시겠어요?",
+     "chunks": [
+      "w3c20",
+      "w3c21"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Sure. Separate checks, or together?",
+     "ko": "네. 따로 계산하실까요, 같이 하실까요?"
+    },
+    {
+     "sp": "B",
+     "en": "Together, please. It's on me tonight, Mia. Oh, and everything was great, by the way.",
+     "ko": "같이 해주세요. Mia, 오늘은 내가 살게. 아, 그나저나 음식 다 정말 좋았어요.",
+     "chunks": [
+      "w3c23",
+      "w3c25"
+     ]
+    }
+   ],
+   "chunks": [],
+   "pragmatic": "이번 주 표현을 실제 식사 순서대로 다시 꺼내 쓰는 날이에요. 주문, 요청, 문제 해결, 계산이 하나의 흐름으로 이어지는 걸 느껴보세요.",
+   "improv": [
+    {
+     "situation_ko": "외국인 친구를 데리고 내가 아는 식당에 갔다고 상상하고, 추천부터 주문, 요청, 계산까지 혼자 말해보세요. 이번 주 표현을 최대한 넣으세요.",
+     "starter_en": "Hi, welcome! Table for two?"
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "type": "review_cum",
+   "title": "누적 복습: 한 주 이야기하기",
+   "cast": {
+    "A": {
+     "name": "Mia",
+     "gender": "f",
+     "desc": "동네 단골 카페에서 알게 된 캐나다 출신 디자이너"
+    }
+   },
+   "context_ko": "Mia와 통화하며 이번 주 이야기를 나눠요. 1~3주차 표현이 섞여 나와요. 끝나면 세 번째 60초 측정을 해요.",
+   "listen_q": {
+    "q": "'나'가 이번 주에 처음 해본 것은?",
+    "options": [
+     "재료를 묻고 소스를 따로 달라고 했다",
+     "외국 여행을 갔다",
+     "요리 수업을 들었다",
+     "새 학생을 받았다"
+    ],
+    "answer": 0
+   },
+   "lines": [
+    {
+     "sp": "A",
+     "en": "Hey! What have you been up to this week?",
+     "ko": "안녕! 이번 주 뭐 하고 지냈어?"
+    },
+    {
+     "sp": "B",
+     "en": "Not much, just classes. But I ate out a lot.",
+     "ko": "별거 없어, 수업만 했지. 근데 외식을 많이 했어.",
+     "chunks": [
+      "w2c18"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Oh yeah? Anything good?",
+     "ko": "오 그래? 맛있는 거 있었어?"
+    },
+    {
+     "sp": "B",
+     "en": "A burger place near where I teach. I asked what's in it because of my allergy, and I got the sauce on the side.",
+     "ko": "내가 수업하는 데 근처 버거집. 알레르기 때문에 뭐 들어가는지 물어보고, 소스는 따로 달라고 했어.",
+     "chunks": [
+      "w3c07",
+      "w3c12"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "Look at you! Ordering like a pro.",
+     "ko": "오, 완전 프로처럼 주문하네!"
+    },
+    {
+     "sp": "B",
+     "en": "Ha, I know, right? I used to just point at the menu.",
+     "ko": "하, 그러니까! 예전엔 그냥 메뉴판 손가락으로 가리켰는데.",
+     "chunks": [
+      "w1c04"
+     ]
+    },
+    {
+     "sp": "A",
+     "en": "So, where are you eating next?",
+     "ko": "그럼 다음엔 어디서 먹을 거야?"
+    },
+    {
+     "sp": "B",
+     "en": "I'm thinking about trying that Thai place. What do you recommend there?",
+     "ko": "그 태국 음식점 가볼까 생각 중이야. 거기서 뭐 추천해?",
+     "chunks": [
+      "w2c19",
+      "w3c06"
+     ]
+    }
+   ],
+   "chunks": [],
+   "pragmatic": "배운 표현을 내 경험 이야기 속에 넣어 말하면 오래 기억에 남아요. 오늘은 내 한 주를 이 표현들로 말해보세요.",
+   "improv": [
+    {
+     "situation_ko": "친구에게 이번 주에 있었던 일 중 하나를 이야기하듯 말해보세요. 1~3주차 표현을 5개 이상 넣으세요.",
+     "starter_en": "So, how was your week? Anything interesting happen?"
+    }
+   ]
+  }
+ ]
+}
