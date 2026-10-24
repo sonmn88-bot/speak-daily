@@ -12,26 +12,37 @@ ROUTES.home = el => {
     const n = dayN(S.week, d), cls = n < S.n ? "done" : n === S.n ? "today" : "";
     return `<div class="${cls}"><b>${n < S.n ? "✓" : d}</b>${dayLabel(d)}</div>`;
   }).join("");
-  const startLabel = done ? (cnt < MAX_PER_DAY && S.today ? `레슨 ${S.n} 이어서 하기` : "기록 탭에서 복습하기") : (LS && !LS.practice) || loadResume() ? "이어서 학습하기" : `레슨 ${S.n} 시작`;
-  el.innerHTML = `${S.st.owner ? `<a class="gear" href="admin.html" aria-label="관리자 페이지">⚙️</a>` : ""}<header><h1>${S.st.date} 레슨 ${S.n}</h1><h2>${esc(S.st.label)}</h2></header>
+  const resume = (LS && !LS.practice && LS.n === S.n) || loadResume();
+  const startLabel = !S.today ? "준비된 레슨을 모두 끝냈어요" : resume ? "이어서 학습하기" : done ? `레슨 ${S.n} 미리 하기` : `레슨 ${S.n} 시작`;
+  el.innerHTML = `${S.st.owner ? `<a class="gear" href="admin.html" aria-label="관리자 페이지">${ic("gear", 22)}</a>` : ""}<header><h1>${S.st.date} · 레슨 ${S.n}</h1><h2>${esc(S.st.label)}</h2></header>
     <div class="card"><p class="ko">${done ? "오늘 학습 완료" : "오늘 과제가 남아 있어요"}</p>
-      <p class="muted">${done ? `오늘 ${cnt}레슨 완료. 오늘 알림은 더 오지 않아요.${cnt < MAX_PER_DAY ? " 놓친 진도가 있으면 한 레슨 더 할 수 있어요." : ""}` : `지금까지 받은 알림 ${t.alarms || 0}번. 완료하면 알림이 멈춰요.`}</p>
-      <button class="go" id="start">${startLabel}</button></div>
+      <p class="muted">${done ? `오늘 ${cnt}레슨 완료. 오늘 알림은 더 오지 않아요.${S.today ? " 원하면 다음 레슨을 미리 해도 돼요." : ""}${cnt >= SOFT_PER_DAY ? " 다만 하루에 몰아서 하면 기억 효과가 줄어요." : ""}` : `지금까지 받은 알림 ${t.alarms || 0}번. 완료하면 알림이 멈춰요.`}</p>
+      <button class="go" id="start" ${S.today ? "" : "disabled"}>${startLabel}</button></div>
     <div class="card"><h3>${S.week}주차</h3><div class="wk">${cells}</div>
-      <p class="muted">연속 ${streak()}일째 학습 중이고, 오늘 복습할 표현이 ${dueCount}개 있어요.</p></div>
+      <p class="muted">${streak() ? `연속 ${streak()}일째 학습 중이에요.` : done ? "" : "오늘 하면 연속 1일째가 돼요."} 오늘 복습할 표현은 ${dueCount}개예요.</p></div>
     ${missionCard()}${S.st.monthly && S.st.monthly[S.st.date.slice(0, 7)] ? "" : `<div class="card"><p class="ko">이번 달 기준 테스트를 아직 안 했어요</p>
       <p class="muted">매달 같은 질문 3개에 답해 녹음해두면, 달마다 내 말하기가 어떻게 달라졌는지 직접 들을 수 있어요. 약 5분.</p><button id="mt">기준 테스트 하기</button></div>`}
-    <div class="card"><h3>학습 모드</h3><div class="row"><button id="mv" class="${isSilent() ? "" : "go"}">🗣 소리 모드</button><button id="ms" class="${isSilent() ? "go" : ""}">🤫 조용한 모드</button></div>
-      <p class="muted">조용한 모드는 말하기 대신 단어 조각 맞추기와 고르기로 진행돼요. 밖에서 소리 내기 어려울 때 쓰고, 일주일에 사흘 이상은 소리 모드를 추천해요.</p></div>
-    <button class="go" id="cd">📚 주차별 표현 카드</button>
-    <div class="row"><button id="rv">🗂 지난 대화</button><button id="an">📈 분석</button></div>`;
-  const mode = v => { if (isSilent() !== v) { clearResume(); if (LS && !LS.practice) LS = null; } setSilent(v); ROUTES.home(el); };
+    <div class="card"><h3>학습 모드</h3><div class="row"><button id="mv" class="${isSilent() ? "" : "sel"}" aria-pressed="${!isSilent()}">소리 모드</button><button id="ms" class="${isSilent() ? "sel" : ""}" aria-pressed="${isSilent()}">조용한 모드</button></div>
+      <div id="mconf"></div><p class="muted">조용한 모드는 말하기 대신 영어로 직접 입력하고 고르는 방식으로 진행돼요. 밖에서 소리 내기 어려울 때 쓰고, 일주일에 사흘 이상은 소리 모드를 추천해요.</p></div>
+    <div class="card"><h3>이동 중 복습</h3><div class="row"><button id="lm">${ic("headphones")} 듣기 모드</button><button id="cd">${ic("cards")} 표현 카드</button></div>
+      <p class="muted">듣기 모드는 화면을 보지 않고 이어폰으로 지난 대화를 들으며, 내 차례에 속으로 먼저 말해보는 복습이에요.</p></div>
+    <div class="row"><button id="rv">지난 대화</button><button id="an">분석</button></div>`;
+  const mode = v => {
+    if (isSilent() === v) return;
+    const busy = (LS && !LS.practice && LS.n === S.n) || loadResume();
+    const apply = () => { clearResume(); if (LS && !LS.practice) LS = null; setSilent(v); ROUTES.home(el); };
+    if (!busy) return apply();
+    const box = $("#mconf"); // 진행 중인 레슨이 있으면 먼저 확인
+    box.innerHTML = `<p class="muted gate">진행 중인 레슨은 처음부터 다시 시작돼요. 모드를 바꿀까요?</p><div class="row"><button id="mno">그대로 두기</button><button class="go" id="myes">바꾸기</button></div>`;
+    $("#mno").onclick = () => { box.innerHTML = ""; }; $("#myes").onclick = apply;
+  };
   $("#mv").onclick = () => mode(false); $("#ms").onclick = () => mode(true);
   $("#cd").onclick = () => location.hash = "cards";
+  $("#lm").onclick = () => location.hash = "radio";
   if ($("#mt")) $("#mt").onclick = () => location.hash = "mtest";
   $("#start").onclick = () => {
-    if (done && !(cnt < MAX_PER_DAY && S.today)) return (location.hash = "review");
     if (LS && LS.practice) LS = null;
+    if (done && !resume && S.today) { startLesson(); } // 오늘 과제 뒤 미리 하기: 바로 다음 레슨 시작
     location.hash = "learn";
   };
   $("#rv").onclick = () => location.hash = "review";
@@ -41,7 +52,7 @@ ROUTES.home = el => {
 function missionCard() {
   const m = [...S.st.history].reverse().find(h => h.stats && h.stats.mission);
   if (!m) return "";
-  return `<div class="card"><h3>🎯 실전 미션</h3><p class="ko">${esc(m.stats.mission)}</p><p class="muted">${m.date === S.st.date ? "내일까지" : "다음 학습 전까지"} 실제 대화나 혼잣말에서 한 번 써보세요.</p></div>`;
+  return `<div class="card"><h3>실전 미션</h3><p class="ko">${esc(m.stats.mission)}</p><p class="muted">${m.date === S.st.date ? "내일까지" : "다음 학습 전까지"} 실제 대화나 혼잣말에서 한 번 써보세요.</p></div>`;
 }
 
 // ---------- 분석 계산 ----------
@@ -56,7 +67,7 @@ function analyze() {
   const mastered = items.filter(([, it]) => it.grad).length;
   const risk = items.filter(([, it]) => !it.grad && (it.due < date || it.x >= 2))
     .map(([id, it]) => ({ c: S.chunks[id], it, why: it.due < date ? `복습 ${Math.round((Date.parse(date) - Date.parse(it.due)) / DAYMS)}일 밀림` : `${it.x}번 틀림` }));
-  const mins = H.map(h => (h.stats || {}).minutes).filter(x => x > 0);
+  const mins = H.map(h => (h.stats || {}).minutes).filter(x => x > 0 && x < 120); // 이어하기로 생긴 비정상 값 제외
   const alarms = H.map(h => h.alarms || 0);
   const hours = H.filter(h => h.doneAt).map(h => kstHour(h.doneAt));
   const measures = H.filter(h => h.measure).map(h => ({ date: h.date, ...h.measure }));
@@ -79,7 +90,7 @@ function diagnose(a) {
   const overdue = a.risk.filter(r => r.it.due < S.st.date).length;
   if (overdue >= 5) out.push(`복습이 ${overdue}개 밀려 있어요. 밀린 표현은 워밍업에 자동으로 나오니, 하루도 빠지지 않는 게 가장 효과적이에요.`);
   if (a.listenN >= 3 && a.listen1 < 60) out.push(`듣기 첫 시도 정답률이 ${a.listen1}%예요. 대화를 처음 들을 때 핵심 단어 하나만 잡는 데 집중해보세요.`);
-  if (a.H.length >= 3 && a.x7 >= 30) out.push(`최근 7일 인출에서 못 한 비율이 ${a.x7}%예요. 섀도잉 1.0배를 한 번 더 하고 인출로 넘어가 보세요.`);
+  if (a.H.length >= 3 && a.x7 >= 30) out.push(`최근 7일 인출에서 못 한 비율이 ${a.x7}%예요. 섀도잉을 보통 속도로 한 번 더 하고 인출로 넘어가 보세요.`);
   else if (a.H.length >= 3 && a.x7 <= 10) out.push(`최근 7일 인출 실패율이 ${a.x7}%로 낮아요. 즉흥 단계에서 새 표현을 더 섞어보세요.`);
   const am = avg(a.alarms);
   if (a.H.length >= 3 && am >= 2) out.push(`평균 ${am.toFixed(1)}번째 알림쯤 완료하고 있어요. 첫 알림 시간을 실제 학습 시간에 맞추면 알림 부담이 줄어요.`);
@@ -122,7 +133,7 @@ ROUTES.stats = el => {
 
   // 1. 요약
   html += `<div class="card"><h3>요약</h3><div class="kpi">
-    <div><b>${a.H.length}</b><span>총 학습일</span></div><div><b>${streak()}</b><span>연속 학습일</span></div>
+    <div><b>${new Set(a.H.map(h => h.date)).size}</b><span>학습한 날 (레슨 ${a.H.length}개)</span></div><div><b>${streak()}</b><span>연속 학습일</span></div>
     <div><b>${a.mastered}/${a.items.length}</b><span>졸업한 표현 / 배운 표현</span></div>
     <div><b>${a.mins.length ? Math.round(avg(a.mins)) : "-"}</b><span>평균 학습 시간(분)</span></div></div></div>`;
 
@@ -147,9 +158,9 @@ ROUTES.stats = el => {
 
   // 4. 일별 인출 결과
   const recent = a.H.slice(-14).reverse();
-  html += `<div class="card"><h3>일별 결과 (최근 14일)</h3>${recent.length ? recent.map(h => {
+  html += `<div class="card"><h3>레슨별 결과 (최근 14회)</h3>${recent.length ? recent.map(h => {
     const c = { O: 0, T: 0, X: 0 }; Object.values(h.results || {}).forEach(r => c[r]++);
-    return `<div class="brow"><span>${h.date.slice(5)}</span>${stackBar(c.O, c.T, c.X)}<em>${c.O}/${c.O + c.T + c.X}</em></div>`;
+    return `<div class="brow"><span>${h.date.slice(5)} L${h.n}</span>${stackBar(c.O, c.T, c.X)}<em>${c.O}/${c.O + c.T + c.X}</em></div>`;
   }).join("") + `<p class="muted"><span style="color:var(--o)">●</span> O <span style="color:var(--t)">●</span> △ <span style="color:var(--x)">●</span> X, 오른쪽 숫자는 O 개수 / 전체</p>` :
     `<p class="muted">아직 기록이 없어요.</p>`}</div>`;
 
@@ -177,7 +188,7 @@ ROUTES.stats = el => {
   const ac = [0, 1, 2, 3, 4].map(k => a.alarms.filter(x => (k < 4 ? x === k : x >= 4)).length);
   const avgH = a.hours.length ? avg(a.hours) : null;
   html += `<div class="card"><h3>학습 습관</h3>
-    <p class="muted">${avgH === null ? "아직 기록이 없어요." : `평균 완료 시각은 ${Math.floor(avgH)}시 ${String(Math.round((avgH % 1) * 60)).padStart(2, "0")}분쯤이에요.`}</p>
+    <p class="muted">${avgH === null ? "아직 기록이 없어요." : `평균 완료 시각은 ${Math.floor(Math.round(avgH * 60) / 60) % 24}시 ${String(Math.round(avgH * 60) % 60).padStart(2, "0")}분쯤이에요.`}</p>
     ${a.H.length ? ac.map((c, k) => meter(k === 0 ? "알림 전" : k < 4 ? `${k}번째 뒤` : "4번 이상", pct(c, a.H.length), "var(--now)")).join("") : ""}
     <p class="muted">완료하기 전까지 받은 알림 수 기준이에요.</p>
     ${a.mission.n ? meter("실전 미션", pct(a.mission.used, a.mission.n), "var(--o)") : ""}
@@ -227,13 +238,13 @@ function monthlyCard() {
   if (!months.length) return h + `<p class="muted">매달 같은 질문 3개에 60초씩 답하고 녹음해요. 첫 기록이 기준점이 돼요.</p><button class="go" id="mt2">첫 테스트 하기</button></div>`;
   if (months.length >= 2) h += `<div class="brow"><span></span><em style="width:auto;flex:1;text-align:left">월별 멈춤 합계 → ${months.map(m => M[m].answers.reduce((a, x) => a + (x.pauses || 0), 0)).join(" → ")}</em></div>`;
   h += MQ.map((q, i) => `<p class="muted" style="margin-bottom:4px">${i + 1}. ${esc(q.ko)}</p><div class="pills">${months.map(m =>
-    `<button class="pill" data-play="${m}-q${i + 1}">▶ ${m}</button>`).join("")}</div>`).join("");
+    `<button class="pill" data-play="${m}-q${i + 1}">${ic("play", 14)} ${m}</button>`).join("")}</div>`).join("");
   if (!M[S.st.date.slice(0, 7)]) h += `<button class="go" id="mt2">이번 달 테스트 하기</button>`;
   return h + `<p class="muted">같은 질문에 대한 지난달과 이번 달 내 목소리를 비교해 들어보세요.</p></div>`;
 }
 function bindMonthly() {
   if ($("#mt2")) $("#mt2").onclick = () => location.hash = "mtest";
-  document.querySelectorAll("[data-play]").forEach(b => b.onclick = () => playUrl(`${API}/api/rec?k=${encodeURIComponent(KEY)}&id=${b.dataset.play}`));
+  document.querySelectorAll("[data-play]").forEach(b => b.onclick = () => playRemote(`${API}/api/rec?k=${encodeURIComponent(KEY)}&id=${encodeURIComponent(b.dataset.play)}`).catch(() => { b.textContent = "재생 실패"; }));
 }
 ROUTES.mtest = el => {
   const month = S.st.date.slice(0, 7), answers = []; let i = 0;
@@ -241,33 +252,33 @@ ROUTES.mtest = el => {
     if (i >= MQ.length) return save();
     const q = MQ[i]; let blob = null, rec = null;
     el.innerHTML = `<header><h1>${month} 기준 테스트</h1><h2>질문 ${i + 1} / ${MQ.length}</h2></header>
-      <div class="card"><p class="en" style="margin:0">${esc(q.en)}</p><p class="muted">${esc(q.ko)}</p><button id="hq">🔊 질문 듣기</button></div>
+      <div class="card"><p class="en" style="margin:0">${esc(q.en)}</p><p class="muted">${esc(q.ko)}</p><button id="hq">${ic("speaker")} 질문 듣기</button></div>
       <div class="card"><p class="muted">녹음을 시작하고 60초 동안 답하세요. 완벽하지 않아도 멈추지 말고 계속 말하는 게 중요해요.</p>
-      <div class="timer" id="tm">60</div><button class="go" id="rc">🎙 녹음 시작</button><button id="pb" disabled>▶ 내 답 들어보기</button></div>
+      <div class="timer" id="tm">60</div><button class="go" id="rc">${ic("mic")} 녹음 시작</button><button id="pb" disabled>${ic("play")} 내 답 들어보기</button></div>
       <div class="card"><label>3초 넘게 멈춘 횟수<input id="p" type="number" inputmode="numeric" min="0"></label>
       <label>자신감 (1~5)</label><div class="row" id="cf">${[1, 2, 3, 4, 5].map(v => `<button data-v="${v}">${v}</button>`).join("")}</div></div>
       <button class="go" id="nx" disabled>다음</button><p class="muted" id="msg"></p>`;
     let conf = 0;
-    const check = () => { $("#nx").disabled = !(blob && conf && $("#p").value !== ""); };
+    const check = () => { $("#nx").disabled = !!rec || !(blob && conf && $("#p").value !== ""); }; // 녹음 중엔 다음으로 못 넘어감
     $("#hq").onclick = () => speak(q.en, { who: "A" });
     $("#p").oninput = check;
-    el.querySelectorAll("#cf button").forEach(b => b.onclick = () => { conf = +b.dataset.v; el.querySelectorAll("#cf button").forEach(x => x.classList.toggle("go", x === b)); check(); });
+    el.querySelectorAll("#cf button").forEach(b => b.onclick = () => { conf = +b.dataset.v; el.querySelectorAll("#cf button").forEach(x => x.classList.toggle("sel", x === b)); check(); });
     $("#pb").onclick = () => blob && playBlob(blob);
-    const stop = async () => { if (!rec) return; const r = rec; rec = null; blob = await r.stop(); $("#rc").textContent = "🎙 다시 녹음"; $("#pb").disabled = !blob; check(); };
+    const stop = async () => { if (!rec) return; const r = rec; rec = null; blob = await r.stop(); $("#rc").innerHTML = `${ic("mic")} 다시 녹음`; $("#pb").disabled = !blob; check(); };
     $("#rc").onclick = async () => {
       if (rec) return stop();
       try { stopAudio(); rec = await recStart(); } catch (e) { $("#msg").textContent = "마이크 권한이 필요해요. 설정에서 허용해주세요."; return; }
-      $("#rc").textContent = "⏹ 녹음 멈추기";
-      const r = RUN, me = rec;
-      for (let s = 60; s > 0; s--) { if (r !== RUN || rec !== me) return; $("#tm").textContent = s; await sleep(1000); }
-      if (rec === me) { $("#tm").textContent = "0"; stop(); }
+      $("#rc").innerHTML = `${ic("stop")} 녹음 멈추기`; check();
+      const r = RUN, me = rec, tm = $("#tm");
+      for (let s = 60; s > 0; s--) { if (r !== RUN || rec !== me || !tm.isConnected) return; tm.textContent = s; await sleep(1000); }
+      if (rec === me && tm.isConnected) { tm.textContent = "0"; stop(); }
     };
-    $("#nx").onclick = () => { answers.push({ q: q.en, id: `${month}-q${i + 1}`, blob, pauses: +$("#p").value, confidence: conf }); i++; show(); };
+    $("#nx").onclick = async () => { if (rec) await stop(); if (!blob) return; answers.push({ q: q.en, id: `${month}-q${i + 1}`, blob, pauses: +$("#p").value, confidence: conf }); i++; show(); };
   };
   const save = async () => {
     el.innerHTML = `<div class="card"><p class="ko">저장하는 중…</p><p class="muted" id="msg"></p></div>`;
     try {
-      for (const a of answers) {
+      for (const a of answers.filter(x => x.blob)) {
         const r = await fetch(`${API}/api/rec?k=${encodeURIComponent(KEY)}&id=${a.id}`, { method: "POST", headers: { "Content-Type": a.blob.type || "audio/mp4" }, body: a.blob });
         if (!r.ok) throw new Error("녹음 " + r.status);
       }
@@ -295,11 +306,11 @@ ROUTES.cards = (el, parts) => {
   if (weak) list = list.filter(isWeak);
   const lv = c => (!srs[c.id] ? "" : srs[c.id].grad ? "lvg" : "lv" + srs[c.id].level);
   el.innerHTML = `<header><h1>주차별 표현</h1><h2>${w}주차 ${esc(S.weeks[w].theme)}</h2></header>
-    <div class="pills">${weeks.map(x => `<button class="pill ${x === w ? "go" : ""}" data-w="${x}">${x}주차</button>`).join("")}
-      <button class="pill ${weak ? "go" : ""}" id="wk">약한 표현만</button></div>
-    <button class="go" id="fl" ${list.length ? "" : "disabled"}>🃏 카드로 외우기 (${list.length}개)</button>
+    <div class="pills">${weeks.map(x => `<button class="pill ${x === w ? "sel" : ""}" data-w="${x}">${x}주차</button>`).join("")}
+      <button class="pill ${weak ? "sel" : ""}" id="wk">약한 표현만</button></div>
+    <button class="go" id="fl" ${list.length ? "" : "disabled"}>${ic("cards")} 카드로 외우기 (${list.length}개)</button>
     <div class="card" style="margin-top:14px">${list.length ? `<ul class="list">${list.map(c => `<li><span class="pill ${lv(c)}" style="display:inline-block;padding:2px 8px;font-size:11px;margin-right:6px">${srs[c.id] ? (srs[c.id].grad ? "졸업" : "Lv" + srs[c.id].level) : "새"}</span>
-      <b>${esc(c.en)}</b> <button class="vbtn" style="margin:0 0 0 4px;padding:2px 8px" data-s="${c.id}">🔊</button><br><span class="muted">${esc(c.ko)}${c.sound ? ` · 🗣 ${esc(c.sound)}` : ""}</span></li>`).join("")}</ul>`
+      <b>${esc(c.en)}</b> <button class="vbtn iconbtn" aria-label="${esc(c.en)} 듣기" data-s="${esc(c.id)}">${ic("speaker")}</button><br><span class="muted">${esc(c.ko)}${c.sound ? ` · ${ic("wave", 14)} ${esc(c.sound)}` : ""}</span></li>`).join("")}</ul>`
       : `<p class="muted">${weak ? "이 주차에는 약한 표현이 없어요." : "아직 배운 표현이 없어요."}</p>`}</div>`;
   el.querySelectorAll("[data-w]").forEach(b => b.onclick = () => location.hash = `cards/${b.dataset.w}${weak ? "/weak" : ""}`);
   $("#wk").onclick = () => location.hash = `cards/${w}${weak ? "" : "/weak"}`;
@@ -318,15 +329,15 @@ function flash(el, list, back) {
     }
     const it = q[0], c = it.c, front = dir === "ko" ? c.ko : c.en;
     el.innerHTML = `<header><h1>카드로 외우기</h1><h2>남은 카드 ${q.length}</h2></header>
-      <div class="row" style="margin-top:-6px"><button class="pill ${dir === "ko" ? "go" : ""}" id="dk">한→영</button><button class="pill ${dir === "en" ? "go" : ""}" id="de">영→한</button></div>
+      <div class="row" style="margin-top:-6px"><button class="pill ${dir === "ko" ? "sel" : ""}" id="dk">한→영</button><button class="pill ${dir === "en" ? "sel" : ""}" id="de">영→한</button></div>
       <div class="card" style="min-height:200px;margin-top:12px"><p class="ko" style="font-size:24px">${esc(front)}</p>
-        ${dir === "ko" && c.use_ko ? `<p class="muted">📍 ${esc(c.use_ko)}</p>` : ""}<div id="bk2"></div></div>
+        ${dir === "ko" && c.use_ko ? `<p class="muted">${ic("pin", 14)} ${esc(c.use_ko)}</p>` : ""}<div id="bk2"></div></div>
       <div id="ctl"><button class="go" id="fp">뒤집기</button></div>`;
     const setDir = d => { dir = d; try { localStorage.setItem("sd_dir", d); } catch (e) {} show(); };
     $("#dk").onclick = () => setDir("ko"); $("#de").onclick = () => setDir("en");
     $("#fp").onclick = () => {
       $("#bk2").innerHTML = `<p class="en" style="font-size:22px;font-weight:700">${esc(dir === "ko" ? c.en : c.ko)}</p>
-        ${c.sound ? `<p class="muted">🗣 ${esc(c.sound)}</p>` : ""}<p class="muted">💡 ${esc(c.note || "")}</p><button class="vbtn" id="sp">🔊 듣기</button>`;
+        ${c.sound ? `<p class="muted">${ic("wave", 14)} ${esc(c.sound)}</p>` : ""}<p class="muted">${ic("bulb", 14)} ${esc(c.note || "")}</p><button class="vbtn" id="sp">${ic("speaker")} 듣기</button>`;
       $("#sp").onclick = () => speak(c.en, { who: "B" });
       $("#ctl").innerHTML = `<div class="row"><button class="bX" id="no">몰랐음</button><button class="bO" id="ok">알았음</button></div>`;
       $("#ok").onclick = () => { if (!it.miss) known++; q.shift(); show(); };
@@ -335,3 +346,52 @@ function flash(el, list, back) {
   };
   show();
 }
+
+// ---------- 듣기 모드: 화면 없이 이어폰으로 지난 대화 복습 ----------
+ROUTES.radio = el => {
+  const list = [];
+  for (const w of Object.keys(S.weeks).map(Number).sort((a, b) => b - a))
+    for (const d of [...S.weeks[w].days].sort((a, b) => b.day - a.day))
+      if (d.lines && d.lines.length && dayN(w, d.day) <= S.n) list.push({ w, d, n: dayN(w, d.day), cast: d.cast || S.weeks[w].cast || {} });
+  if (!list.length) { el.innerHTML = `<div class="card"><p class="muted">대화가 있는 레슨을 시작하면 듣기 모드를 쓸 수 있어요.</p></div>`; return; }
+  let idx = 0, line = 0, mode = "gap", rate = 1, playing = false, subs = true, token = 0;
+  try { mode = localStorage.getItem("sd_rmode") || "gap"; subs = localStorage.getItem("sd_rsubs") !== "0"; } catch (e) {}
+  const voiceOf = (it, sp) => (sp === "A" && it.cast.A && it.cast.A.gender === "m" ? "C" : sp);
+  const draw = () => {
+    const it = list[idx], L = it.d.lines, l = L[Math.min(line, L.length - 1)];
+    el.innerHTML = `<header><h1>듣기 모드</h1><h2>레슨 ${it.n} · ${esc(it.d.title)}</h2></header>
+      <div class="card"><div class="count">${Math.min(line + 1, L.length)} / ${L.length}</div>
+        <div class="radio-now" aria-live="polite">${subs ? `<div class="sp">${l.sp === "A" ? esc((it.cast.A || {}).name || "상대") : "나"}</div><div class="en">${esc(l.en)}</div><div class="muted">${esc(l.ko)}</div>` : `<p class="muted">자막을 끄고 소리에만 집중하는 중이에요.</p>`}</div>
+        <div class="row"><button id="pv" aria-label="이전 레슨">이전</button><button class="go" id="pp">${playing ? `${ic("pause")} 멈춤` : `${ic("play")} 재생`}</button><button id="nx2" aria-label="다음 레슨">다음</button></div></div>
+      <div class="card"><h3>방식</h3><div class="row"><button id="mg" class="${mode === "gap" ? "sel" : ""}">내 차례 먼저 말하기</button><button id="ma" class="${mode === "all" ? "sel" : ""}">대화 그대로</button></div>
+        <p class="muted">${mode === "gap" ? "상대 말이 끝나면 잠깐 멈춰요. 그 사이에 내 대사를 속으로(또는 작게) 먼저 말하고, 이어서 나오는 정답과 비교하세요." : "대화를 처음부터 끝까지 이어서 들어요."}</p>
+        <div class="row"><button id="rt">속도 ${rate === 1 ? "1.0배" : "0.85배"}</button><button id="sb">자막 ${subs ? "끄기" : "켜기"}</button></div>
+        <p class="muted">iPhone은 화면이 꺼지면 소리가 멈출 수 있어요. 화면을 켠 채로 주머니에 넣어두세요.</p></div>`;
+    $("#pp").onclick = () => (playing ? stop() : play());
+    $("#pv").onclick = () => { stop(); idx = Math.min(list.length - 1, idx + 1); line = 0; draw(); };
+    $("#nx2").onclick = () => { stop(); idx = Math.max(0, idx - 1); line = 0; draw(); };
+    $("#mg").onclick = () => { mode = "gap"; try { localStorage.setItem("sd_rmode", mode); } catch (e) {} draw(); };
+    $("#ma").onclick = () => { mode = "all"; try { localStorage.setItem("sd_rmode", mode); } catch (e) {} draw(); };
+    $("#rt").onclick = () => { rate = rate === 1 ? 0.85 : 1; draw(); };
+    $("#sb").onclick = () => { subs = !subs; try { localStorage.setItem("sd_rsubs", subs ? "1" : "0"); } catch (e) {} draw(); };
+  };
+  const stop = () => { playing = false; token++; stopAudio(); draw(); };
+  const play = async () => {
+    playing = true; const my = ++token, r = RUN; draw(); track("radio", { lesson: list[idx].n, mode });
+    while (playing && my === token && r === RUN) {
+      const it = list[idx], L = it.d.lines;
+      if (line >= L.length) { // 다음(더 예전) 레슨으로 자동 이동
+        if (idx >= list.length - 1) { playing = false; line = 0; draw(); return; }
+        idx++; line = 0; draw(); await sleep(1500); continue;
+      }
+      const l = L[line];
+      if (mode === "gap" && l.sp === "B") await sleep(Math.min(6000, 1800 + l.en.split(" ").length * 450) / rate); // 내 차례: 먼저 말해볼 시간
+      if (!playing || my !== token || r !== RUN) return;
+      draw();
+      await speak(l.en, { rate, who: voiceOf(it, l.sp) });
+      await sleep(350);
+      line++;
+    }
+  };
+  draw();
+};

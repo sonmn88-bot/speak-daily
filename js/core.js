@@ -22,14 +22,13 @@ async function loadAll() {
   S.n = S.st.n; S.week = Math.ceil(S.n / 7); S.dw = ((S.n - 1) % 7) + 1;
   S.monthly = S.week % 4 === 0 && S.dw >= 6;
   S.weeks = {}; S.chunks = {};
-  for (let w = 1; w <= S.week; w++) {
-    try {
-      const res = await fetch(`content/w${String(w).padStart(2, "0")}.json`, { cache: "no-cache" });
-      if (!res.ok) continue;
-      const d = await res.json(); S.weeks[w] = d;
-      for (const dd of d.days) for (const c of dd.chunks || []) S.chunks[c.id] = { ...c, week: w };
-    } catch (e) {}
-  }
+  const ws = Array.from({ length: S.week }, (_, i) => i + 1); // 주차 파일을 동시에 받아 시작 속도 유지
+  const got = await Promise.all(ws.map(w => fetch(`content/w${String(w).padStart(2, "0")}.json`, { cache: "no-cache" })
+    .then(r => (r.ok ? r.json() : null)).catch(() => null)));
+  got.forEach((d, i) => {
+    if (!d) return; const w = ws[i]; S.weeks[w] = d;
+    for (const dd of d.days) for (const c of dd.chunks || []) S.chunks[c.id] = { ...c, week: w };
+  });
   S.today = (S.weeks[S.week] || { days: [] }).days.find(x => x.day === S.dw) || null;
 }
 const dayN = (w, d) => (w - 1) * 7 + d;
@@ -109,14 +108,30 @@ function playUrl(url) {
   return new Promise(res => { const a = new Audio(url); a.onended = a.onerror = res; a.play().catch(res); });
 }
 const playBlob = blob => playUrl(URL.createObjectURL(blob));
+// 서버에 저장된 녹음: iPhone은 범위 요청 없는 오디오 주소를 재생 못 할 수 있어서 먼저 받아서 재생
+const playRemote = url => fetch(url).then(r => (r.ok ? r.blob() : Promise.reject(r.status))).then(playBlob);
+
+// ---------- 아이콘 (선 아이콘, 글자색을 따름) ----------
+const IC = {
+  speaker: '<path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/>',
+  mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+  play: '<path d="M7 5l12 7-12 7z"/>', pause: '<path d="M8 5v14M16 5v14"/>', stop: '<rect x="6" y="6" width="12" height="12" rx="2"/>',
+  bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5V16h8v-2.5A6 6 0 0 0 12 3z"/>',
+  pin: '<path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/>',
+  wave: '<path d="M3 12h2M7 8v8M11 5v14M15 8v8M19 11v2"/>', book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',
+  slow: '<circle cx="12" cy="13" r="7"/><path d="M12 9v4l2 2"/>', cards: '<rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/>',
+  headphones: '<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1"/><rect x="17" y="14" width="4" height="6" rx="1"/>',
+  gear: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+};
+const ic = (n, s = 18) => `<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n] || ""}</svg>`;
 
 function voicePanel(box) {
   if (box.innerHTML) { box.innerHTML = ""; return; }
   const all = enVoices();
   if (!all.length) { box.innerHTML = `<div class="card"><p class="muted">이 브라우저에서 영어 음성을 찾지 못했어요. 사파리로 열어보세요.</p></div>`; return; }
   const opts = sel => all.map(v => `<option value="${esc(v.name)}"${v === sel ? " selected" : ""}>${esc(v.name)} (${esc(v.lang)})</option>`).join("");
-  box.innerHTML = `<div class="card"><label>상대 목소리<select id="sa">${opts(VA)}</select></label><button id="ta">▶ 미리듣기</button>
-    <label>내 목소리<select id="sb">${opts(VB)}</select></label><button id="tb">▶ 미리듣기</button>
+  box.innerHTML = `<div class="card"><label>상대 목소리<select id="sa">${opts(VA)}</select></label><button id="ta">${ic("play")} 미리듣기</button>
+    <label>내 목소리<select id="sb">${opts(VB)}</select></label><button id="tb">${ic("play")} 미리듣기</button>
     <p class="muted">이 브라우저에서 쓸 수 있는 음성 ${all.length}개. 고른 음성은 이 기기에 저장돼요.</p></div>`;
   const set = (id, key, isA) => { const v = all.find(x => x.name === $(id).value); if (isA) VA = v; else VB = v; try { localStorage.setItem(key, v.name); } catch (e) {} };
   $("#sa").onchange = () => set("#sa", "sd_va", true);
@@ -153,7 +168,8 @@ function route() {
   if (CUR_REC) CUR_REC.stop();
   const parts = (location.hash.slice(1) || "home").split("/");
   const name = ROUTES[parts[0]] ? parts[0] : "home";
-  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.r === name));
+  const tabOf = { cards: "home", radio: "home", mtest: "home" }[name] || name;
+  document.querySelectorAll(".tab").forEach(t => { const on = t.dataset.r === tabOf; t.classList.toggle("on", on); on ? t.setAttribute("aria-current", "page") : t.removeAttribute("aria-current"); });
   track("view", { r: name });
   ROUTES[name]($("#view"), parts.slice(1));
   window.scrollTo(0, 0);
