@@ -12,7 +12,7 @@ ROUTES.home = el => {
     const n = dayN(S.week, d), cls = n < S.n ? "done" : n === S.n ? "today" : "";
     return `<div class="${cls}"><b>${n < S.n ? "✓" : d}</b>${dayLabel(d)}</div>`;
   }).join("");
-  const startLabel = done ? (cnt < MAX_PER_DAY && S.today ? `레슨 ${S.n} 이어서 하기` : "기록 탭에서 복습하기") : LS && !LS.practice ? "이어서 학습하기" : `레슨 ${S.n} 시작`;
+  const startLabel = done ? (cnt < MAX_PER_DAY && S.today ? `레슨 ${S.n} 이어서 하기` : "기록 탭에서 복습하기") : (LS && !LS.practice) || loadResume() ? "이어서 학습하기" : `레슨 ${S.n} 시작`;
   el.innerHTML = `${S.st.owner ? `<a class="gear" href="admin.html" aria-label="관리자 페이지">⚙️</a>` : ""}<header><h1>${S.st.date} 레슨 ${S.n}</h1><h2>${esc(S.st.label)}</h2></header>
     <div class="card"><p class="ko">${done ? "오늘 학습 완료" : "오늘 과제가 남아 있어요"}</p>
       <p class="muted">${done ? `오늘 ${cnt}레슨 완료. 오늘 알림은 더 오지 않아요.${cnt < MAX_PER_DAY ? " 놓친 진도가 있으면 한 레슨 더 할 수 있어요." : ""}` : `지금까지 받은 알림 ${t.alarms || 0}번. 완료하면 알림이 멈춰요.`}</p>
@@ -25,7 +25,7 @@ ROUTES.home = el => {
       <p class="muted">조용한 모드는 말하기 대신 단어 조각 맞추기와 고르기로 진행돼요. 밖에서 소리 내기 어려울 때 쓰고, 일주일에 사흘 이상은 소리 모드를 추천해요.</p></div>
     <button class="go" id="cd">📚 주차별 표현 카드</button>
     <div class="row"><button id="rv">🗂 지난 대화</button><button id="an">📈 분석</button></div>`;
-  const mode = v => { if (LS && !LS.practice && LS.silent !== v) LS = null; setSilent(v); ROUTES.home(el); };
+  const mode = v => { if (isSilent() !== v) { clearResume(); if (LS && !LS.practice) LS = null; } setSilent(v); ROUTES.home(el); };
   $("#mv").onclick = () => mode(false); $("#ms").onclick = () => mode(true);
   $("#cd").onclick = () => location.hash = "cards";
   if ($("#mt")) $("#mt").onclick = () => location.hash = "mtest";

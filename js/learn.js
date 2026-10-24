@@ -73,13 +73,13 @@ function testList(day) {
   }
   return shuffle(ids.map(id => S.chunks[id]));
 }
-function newSession(day, w, practice) {
+function newSession(day, w, practice, silentOv) {
   const n = dayN(w, day.day), dw = day.day, monthly = w % 4 === 0 && dw >= 6;
   const s = { id: `${w}-${dw}${practice ? "p" : ""}`, w, n, day, practice,
     cast: day.cast || (S.weeks[w] || {}).cast || {}, theme: (S.weeks[w] || {}).theme || "",
     step: 0, results: {}, measure: null, steps: [], due: [], recs: {},
     stats: { start: Date.now(), listenTries: 0, listenPlays: 0, hints: 0, replays: 0, drill: {}, mode: "voice" } };
-  s.silent = isSilent(); s.stats.mode = s.silent ? "silent" : "voice";
+  s.silent = silentOv ?? isSilent(); s.stats.mode = s.silent ? "silent" : "voice";
   s.diff = difficulty(); s.stats.level = s.diff.lv;
   if (!practice) {
     const srs = S.st.srs, cap = day.type !== "learn" || monthly ? 20 : 8;
@@ -106,6 +106,32 @@ function newSession(day, w, practice) {
   return s;
 }
 
+// ---------- 중간 저장·이어하기 (단계 단위, 이 기기에 저장) ----------
+const RKEY = () => "sd_resume_" + String(KEY || "").slice(0, 10);
+function saveResume() {
+  if (!LS || LS.practice) return;
+  const d = { n: LS.n, at: Date.now(), step: LS.step, silent: LS.silent, results: LS.results, stats: LS.stats, measure: LS.measure,
+    due: LS.due.map(c => c.id), test: LS.test.map(c => c.id) };
+  try { localStorage.setItem(RKEY(), JSON.stringify(d)); } catch (e) {}
+}
+function loadResume() {
+  try {
+    const d = JSON.parse(localStorage.getItem(RKEY()) || "null");
+    if (d && d.n === S.n && Date.now() - d.at < 3 * DAYMS) return d;
+  } catch (e) {}
+  return null;
+}
+function clearResume() { try { localStorage.removeItem(RKEY()); } catch (e) {} }
+function startLesson() {
+  const r = loadResume();
+  LS = newSession(S.today, S.week, false, r ? r.silent : undefined);
+  if (!r) return;
+  const pick = ids => ids.map(id => S.chunks[id]).filter(Boolean);
+  Object.assign(LS, { step: Math.min(r.step, LS.steps.length - 1), results: r.results || {}, measure: r.measure || null,
+    stats: { ...LS.stats, ...r.stats }, due: pick(r.due || []), test: pick(r.test || []), resumed: true });
+  track("resume", { lesson: LS.n, step: LS.steps[LS.step][0] });
+}
+
 ROUTES.learn = el => {
   if (LS && (LS.practice || LS.n === S.n)) return renderLearn(el);
   if (!S.today) { el.innerHTML = `<div class="card"><p class="ko">레슨 ${S.n} 콘텐츠가 아직 올라오지 않았어요.</p><p class="muted">${S.week}주차 ${S.dw}일 자료를 기다리는 중이에요.</p></div>`; return; }
@@ -120,10 +146,10 @@ ROUTES.learn = el => {
     el.innerHTML = `<header><h1>오늘 ${cnt}레슨 완료</h1><h2>다음 레슨도 할까요?</h2></header>
       <div class="card"><p class="muted">오늘 과제는 끝났고 알림도 멈췄어요. 놓친 진도를 채우고 싶을 때만 다음 레슨을 이어서 하세요. 진도에 반영돼요.</p>
       <button class="go" id="more">레슨 ${S.n} 이어서 하기</button><button id="rv">기록 탭에서 복습하기</button></div>`;
-    $("#more").onclick = () => { LS = newSession(S.today, S.week, false); renderLearn(el); };
+    $("#more").onclick = () => { startLesson(); renderLearn(el); };
     $("#rv").onclick = () => location.hash = "review"; return;
   }
-  LS = newSession(S.today, S.week, false);
+  startLesson();
   renderLearn(el);
 };
 
@@ -132,11 +158,14 @@ function renderLearn(el) {
   if (LS.lastStep != null && LS.lastStep !== LS.step)
     track("step", { lesson: LS.n, name: LS.steps[LS.lastStep][0], ms: Date.now() - LS.stepAt, practice: LS.practice });
   if (LS.lastStep !== LS.step) { LS.stepAt = Date.now(); LS.lastStep = LS.step; }
+  saveResume();
   const [, fn] = LS.steps[LS.step];
   el.innerHTML = `<header><h1>레슨 ${LS.n} ${esc(LS.theme)}${LS.practice ? " (연습 모드)" : ""}</h1><h2>${esc(LS.day.title)}</h2></header>
     <p class="muted" style="margin-top:-8px">난이도 ${LS.diff.lv} · ${LS.silent ? "🤫 조용한 모드" : "🗣 소리 모드"}</p>
     <nav class="map" aria-label="진행 단계">${LS.steps.map(([t], i) => `<div class="st ${i < LS.step ? "pass" : i === LS.step ? "cur" : ""}"><i></i>${t}</div>`).join("")}</nav>
+    ${LS.resumed ? `<p class="muted resume">이어서 학습해요. ${esc(LS.steps[LS.step][0])} 단계부터 다시 시작해요.</p>` : ""}
     <button class="vbtn" id="vbtn">🔊 음성 설정</button><div id="vp"></div><section id="stage"></section>`;
+  LS.resumed = false;
   $("#vbtn").onclick = () => voicePanel($("#vp"));
   fn($("#stage"));
   window.scrollTo(0, 0);
@@ -371,13 +400,13 @@ function finish(el) {
       const res = await r.json().catch(() => ({}));
       if (!r.ok) throw new Error(res.error || r.status);
       track("complete", { lesson: LS.n, minutes, O: t.O, T: t.T, X: t.X, mode: LS.stats.mode }); flush();
-      LS = null;
+      LS = null; clearResume();
       await loadAll();
       const cnt = S.st.today.lessons || 1, can = cnt < MAX_PER_DAY && S.today;
       el.innerHTML = `<div class="card"><p class="ko">레슨 완료</p><p class="muted">오늘 ${cnt}레슨 완료, 연속 ${streak()}일째예요. 오늘 알림은 더 오지 않아요.</p>
         ${can ? `<button class="go" id="more">레슨 ${S.n} 이어서 하기</button><p class="muted">놓친 진도를 채울 때만 추천해요. 하루 최대 ${MAX_PER_DAY}레슨.</p>` : ""}</div>
         <div class="row"><button id="h">홈</button><button id="a">분석 보기</button></div>`;
-      if (can) $("#more").onclick = () => { LS = newSession(S.today, S.week, false); renderLearn(el); };
+      if (can) $("#more").onclick = () => { startLesson(); renderLearn(el); };
       $("#h").onclick = () => location.hash = "home";
       $("#a").onclick = () => location.hash = "stats";
     } catch (e) { b.disabled = false; $("#msg").textContent = `저장하지 못했어요. (${e.message})`; }
