@@ -159,7 +159,7 @@ const meter = (label, v, color, tail) => `<div class="brow"><span>${esc(label)}<
 function render() {
   const tabs = [["now", "멤버 현황"], ["cmp", "비교"], ["user", "사용자 상세"], ["content", "콘텐츠"], ["ops", "운영"]];
   $("#app").innerHTML = `<h1>Speak Daily 관리자 · ${D.date}</h1><h2>${tabs.find(t => t[0] === TAB)[1]}</h2>
-    <div class="tabs">${tabs.map(([k, n]) => `<button class="${k === TAB ? "go" : ""}" data-t="${k}">${n}</button>`).join("")}<button id="rl">새로고침</button><button id="lo">로그아웃</button><a href="./" style="align-self:center;margin-left:6px" class="muted">← 앱으로</a></div><div id="v"></div>`;
+    <div class="tabs">${tabs.map(([k, n]) => `<button class="${k === TAB ? "go" : ""}" data-t="${k}">${n}</button>`).join("")}<button id="rl">새로고침</button><button id="lo">로그아웃</button><a href="./" style="align-self:center;margin-left:6px;display:inline-flex;align-items:center;min-height:44px;padding:0 8px" class="muted">← 앱으로</a></div><div id="v"></div>`;
   $("#lo").onclick = () => { store.clear(); KEY = ""; login(); };
   document.querySelectorAll("[data-t]").forEach(b => b.onclick = () => { TAB = b.dataset.t; render(); });
   $("#rl").onclick = load;
