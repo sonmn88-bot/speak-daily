@@ -8,27 +8,32 @@ const dayLabel = d => (d <= 5 ? `${d}일` : d === 6 ? "주간" : "누적");
 ROUTES.home = el => {
   const t = S.st.today, done = !!t.done, srs = S.st.srs, cnt = t.lessons || (done ? 1 : 0);
   const dueCount = Object.values(srs).filter(it => it.due <= S.st.date && !it.grad).length;
-  const cells = [1, 2, 3, 4, 5, 6, 7].map(d => {
-    const n = dayN(S.week, d), cls = n < S.n ? "done" : n === S.n ? "today" : "";
-    return `<div class="${cls}"><b>${n < S.n ? "✓" : d}</b>${dayLabel(d)}</div>`;
-  }).join("");
+  const weekDone = [1, 2, 3, 4, 5, 6, 7].filter(d => dayN(S.week, d) < S.n).length;
   const resume = (LS && !LS.practice && LS.n === S.n) || loadResume();
   const startLabel = !S.today ? "준비된 레슨을 모두 끝냈어요" : resume ? "이어서 학습하기" : done ? `레슨 ${S.n} 미리 하기` : `레슨 ${S.n} 시작`;
-  const urgent = personaUrgent();
-  el.innerHTML = `${S.st.owner ? `<a class="gear" href="admin.html" aria-label="관리자 페이지">${ic("gear", 22)}</a>` : ""}<a class="hbtn ${S.st.owner ? "o" : ""}" href="#help" aria-label="사용법 도움말">${ic("help", 22)}</a><header style="padding-right:${S.st.owner ? 96 : 48}px"><h1>${S.st.date} · 레슨 ${S.n}</h1><h2>${esc(S.st.label)}</h2></header>
-    <div class="card"><p class="ko">${done ? "오늘 학습 완료" : "오늘 과제가 남아 있어요"}</p>
-      <p class="muted">${done ? `오늘 ${cnt}레슨 완료. 오늘 알림은 더 오지 않아요.${S.today ? " 원하면 다음 레슨을 미리 해도 돼요." : ""}${cnt >= SOFT_PER_DAY ? " 다만 하루에 몰아서 하면 기억 효과가 줄어요." : ""}` : `지금까지 받은 알림 ${t.alarms || 0}번. 완료하면 알림이 멈춰요.`}</p>
-      <button class="go" id="start" ${S.today ? "" : "disabled"}>${startLabel}</button><div id="gate"></div></div>
-    ${introCard()}${urgent ? personaCard() : ""}
-    <div class="card"><h3>${S.week}주차</h3><div class="wk">${cells}</div>
-      <p class="muted">${streak() ? `연속 ${streak()}일째 학습 중이에요.` : done ? "" : "오늘 하면 연속 1일째가 돼요."} 오늘 복습할 표현은 ${dueCount}개예요.</p></div>
-    ${urgent ? "" : personaCard()}${missionCard()}${S.st.monthly && S.st.monthly[S.st.date.slice(0, 7)] ? "" : `<div class="card"><p class="ko">이번 달 기준 테스트를 아직 안 했어요</p>
-      <p class="muted">매달 같은 질문 3개에 답해 녹음해두면, 달마다 내 말하기가 어떻게 달라졌는지 직접 들을 수 있어요. 약 5분.</p><button id="mt">기준 테스트 하기</button></div>`}
-    <div class="card"><h3>학습 모드</h3><div class="row"><button id="mv" class="${isSilent() ? "" : "sel"}" aria-pressed="${!isSilent()}">소리 모드</button><button id="ms" class="${isSilent() ? "sel" : ""}" aria-pressed="${isSilent()}">조용한 모드</button></div>
-      <div id="mconf"></div><p class="muted">밖에서 소리 내기 어려울 땐 조용한 모드(입력·선택으로 진행). 주 3일 이상은 소리 모드를 추천해요.</p></div>
-    <div class="card"><h3>이동 중 복습</h3><div class="row"><button id="lm">${ic("headphones")} 듣기 모드</button><button id="cd">${ic("cards")} 표현 카드</button></div>
-      <p class="muted">이어폰으로 듣고 내 차례에 먼저 말해보는 복습이에요.</p></div>
-    <div class="row"><button id="rv">지난 대화</button><button id="an">분석</button></div>`;
+  const D = S.today || {}, ch = D.chunks || [];
+  // 첫 화면의 주인공: 오늘의 첫 표현(학습일) 또는 오늘 대화의 내 첫 표현(복습일)
+  const heroEn = ch.length ? ch[0].en : ((D.lines || []).find(l => l.sp === "B" && (l.chunks || []).length) || {}).en || "";
+  const heroKo = ch.length ? ch[0].ko : "";
+  const heroHTML = heroEn ? (() => { const w = heroEn.replace(/~/g, "…").split(" "), k = Math.max(1, Math.ceil(w.length / 2)); return `${esc(w.slice(0, w.length - k).join(" "))}${w.length > k ? "<br>" : ""}<em>${esc(w.slice(-k).join(" "))}</em>`; })() : "";
+  const size = heroEn.length > 34 ? "s" : heroEn.length > 22 ? "m" : "";
+  const meta = ch.slice(1, 4).map(c => `<span>${esc(c.en.replace(/[.!?]$/, "").replace(/~/g, "…"))}</span>`).join("");
+  el.innerHTML = `${S.st.owner ? `<a class="gear" href="admin.html" aria-label="관리자 페이지">${ic("gear", 22)}</a>` : ""}<a class="hbtn ${S.st.owner ? "o" : ""}" href="#help" aria-label="사용법 도움말">${ic("help", 22)}</a>
+    <div class="eyebrow" style="padding-right:${S.st.owner ? 96 : 48}px">Lesson ${S.n} · Week ${S.week} · Day ${S.dw}</div>
+    ${heroEn ? `<div class="hero ${size}" lang="en">${heroHTML}</div>` : `<div class="hero ko-hero">${esc(D.title || S.st.label)}</div>`}
+    <p class="hero-sub">${heroKo ? `<b>${esc(heroKo)}</b> ` : ""}${esc(D.title || S.st.label)}${ch.length ? ` · 표현 ${ch.length}개` : ""}</p>
+    ${meta ? `<div class="hmeta">${meta}</div>` : ""}
+    <button class="go big" id="start" ${S.today ? "" : "disabled"}><span>${startLabel}</span><span class="arr">→</span></button>
+    <p class="muted" style="margin-top:10px">${done ? `오늘 ${cnt}레슨 완료 · 오늘 알림은 더 오지 않아요${cnt >= SOFT_PER_DAY ? " · 몰아서 하기보다 복습을 추천해요" : ""}` : `오늘 과제가 남아 있어요 · 받은 알림 ${t.alarms || 0}번`}</p>
+    <div id="gate"></div>
+    <div class="stats3"><div><b>${weekDone}/7</b><small>이번 주</small></div><div><b>${dueCount}</b><small>복습할 표현</small></div><div><b>${streak()}</b><small>연속 일수</small></div></div>
+    <div class="sec">Today</div>
+    ${todayRows()}${missionRow()}${S.st.monthly && S.st.monthly[S.st.date.slice(0, 7)] ? "" : rowHTML("mt", "이번 달 기준 테스트", "같은 질문 3개에 답해 녹음 · 달마다 비교 · 약 5분", "→")}
+    <div class="sec">On the go</div>
+    ${rowHTML("lm", "듣기 모드", "이어폰으로 듣고 내 차례에 먼저 말하기", "♪")}${rowHTML("cd", "표현 카드", "배운 표현 넘겨보기", "→")}
+    <div class="sec">Mode</div>
+    <div class="row seg"><button id="mv" class="${isSilent() ? "" : "sel"}" aria-pressed="${!isSilent()}">소리 모드</button><button id="ms" class="${isSilent() ? "sel" : ""}" aria-pressed="${isSilent()}">조용한 모드</button></div>
+    <div id="mconf"></div><p class="muted">밖에서 소리 내기 어려울 땐 조용한 모드(입력·선택으로 진행). 주 3일 이상은 소리 모드를 추천해요.</p>`;
   const mode = v => {
     if (isSilent() === v) return;
     const busy = (LS && !LS.practice && LS.n === S.n) || loadResume();
@@ -49,18 +54,14 @@ ROUTES.home = el => {
   };
   $("#start").onclick = () => { if (resume || !lessonGate($("#gate"), go)) go(); }; // 질문지·3일 체크가 남았으면 시작 전에 한 번 안내
   bindIntro();
-  $("#rv").onclick = () => location.hash = "review";
-  $("#an").onclick = () => location.hash = "stats";
   bindPersonaCard();
 };
 
-function missionCard() {
+function rowHTML(id, t1, t2, mark, cls = "", attr = "") { return `<button class="lrow ${cls}" id="${id}" ${attr}><span class="lt"><b>${esc(t1)}</b><small>${esc(t2)}</small></span><span class="lm">${mark}</span></button>`; }
+function missionRow() {
   const m = [...S.st.history].reverse().find(h => h.stats && h.stats.mission);
-  if (!m) return "";
-  return `<div class="card"><h3>실전 미션</h3><p class="ko">${esc(m.stats.mission)}</p><p class="muted">${m.date === S.st.date ? "내일까지" : "다음 학습 전까지"} 실제 대화나 혼잣말에서 한 번 써보세요.</p></div>`;
+  return m ? `<div class="lrow static"><span class="lt"><b>실전 미션</b><small>“${esc(m.stats.mission)}” ${m.date === S.st.date ? "내일까지" : "다음 학습 전까지"} 한 번 써보기</small></span><span class="lm">→</span></div>` : "";
 }
-
-// ---------- 분석 계산 ----------
 function analyze() {
   const H = S.st.history, srs = S.st.srs, date = S.st.date;
   const res = { O: 0, T: 0, X: 0 };

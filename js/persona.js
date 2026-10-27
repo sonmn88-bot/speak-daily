@@ -268,6 +268,20 @@ function bindPersonaCard() {
   if ($("#mec")) $("#mec").onclick = () => location.hash = "me";
 }
 
+// 홈 TODAY 목록 (C 디자인: 카드 대신 한 줄씩)
+function todayRows() {
+  const r = [], done = testsDone(), next = TORDER.find(k => !done.includes(k));
+  const old = ["situ", "voice"].find(k => S.st.tests && S.st.tests[k] && (Date.parse(S.st.date) - Date.parse(S.st.tests[k].date)) / DAYMS >= 60);
+  if (!helpSeen()) r.push(`<div class="lrow-wrap" id="intro">${rowHTML("ih", "처음이세요? 1분 사용법", "레슨 순서·채점·복습 시기 · 오른쪽 위 ?로 다시 보기", "?")}<button class="x" id="ix" aria-label="사용법 안내 닫기">${ic("x", 18)}</button></div>`);
+  if (!profileDone()) r.push(rowHTML("pf", "3분 질문지", "직업·만나는 사람·말투를 고르면 대화가 내 이야기로", "NEW", "t"));
+  else if (checkDue()) r.push(rowHTML("ck", "3일 체크 · 1분", "며칠 안에 있을 대화를 미리 연습하게 바꿔줘요", "DUE", "t"));
+  if (next) r.push(rowHTML("tn", `${TESTS[next].name}`, `성격·말투 검사 ${done.length}/3 · 할수록 대사가 더 나다워져요`, TESTS[next].time.split(" · ")[0].replace(/[^0-9]/g, "") + "분", "", `data-k="${next}"`));
+  else if (old) r.push(rowHTML("tn", `${TESTS[old].name} 다시 하기`, "두 달이 지났어요 · 그사이 달라졌을 수 있어요", "→", "", `data-k="${old}"`));
+  if (done.length) r.push(rowHTML("mec", "내 캐릭터 보기", "검사로 정리된 레슨 속 '나'", "→"));
+  if (profileDone()) r.push(rowHTML("nt", "추가 정보 보내기", "다가오는 일정·배우고 싶은 말", "+"), rowHTML("pf", "내 답 고치기", "질문지 답 바꾸기", "→"));
+  return r.join("");
+}
+
 // ---------- 홈 상단 배치·레슨 시작 전 안내 ----------
 const gateKey = k => `sd_gate_${S.st.date}_${k}`;
 const skipped = k => { try { return localStorage.getItem(gateKey(k)) === "1"; } catch (e) { return false; } };
