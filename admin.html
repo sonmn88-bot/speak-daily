@@ -201,6 +201,9 @@ function personaSummary(u) {
   if (C.length) L.push("3일 체크:", ...C.map(c => `- ${c.date} · 3일 안: ${av(c.soon)} · ${c.drill ? `${c.drill.q} ${av(c.drill)}` : ""} · 나 같음 ${c.fit || "-"}/5${c.want ? ` · 영어로 하고 싶던 말: "${c.want}"` : ""}${c.odd ? ` · 어색했던 점: "${c.odd}"` : ""}`));
   const N = (u.notes || []).slice(-10);
   if (N.length) L.push("추가 정보:", ...N.map(n => `- ${n.date} [${n.cat}] ${n.text}`));
+  const T = u.tests || {};
+  if (T.bigfive && T.bigfive.scores) { const sc = T.bigfive.scores; L.push(`성격(Mini-IPIP 1~5): 외향 ${sc.E} · 친화 ${sc.A} · 성실 ${sc.C} · 정서안정 ${sc.S} · 개방 ${sc.O} (${T.bigfive.date})`); }
+  for (const k of ["situ", "voice"]) if (T[k]) L.push(`${k === "situ" ? "상황별 반응" : "말투"} (${T[k].date}): ` + Object.entries(T[k].answers || {}).map(([id, a]) => `${id}=${av(a)}`).join(" | "));
   const weak = Object.entries(u.srs || {}).filter(([, it]) => !it.grad && (it.x > 0 || it.level === 0)).sort((x, y) => y[1].x - x[1].x).slice(0, 8).map(([id]) => `${id} ${(D.chunks[id] || {}).en || ""}`);
   if (weak.length) L.push("약한 표현: " + weak.join(" / "));
   return L.join("\n");

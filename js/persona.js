@@ -220,12 +220,15 @@ function personaCard() {
   const due = checkDue();
   return `<div class="card"><h3>나에 맞춘 레슨</h3>${due ? `<p class="ko">3일 체크할 때예요 · 1분</p><p class="muted">앞으로 며칠 안에 있을 대화를 알려주면 그 상황을 미리 연습하는 레슨이 나와요.</p><button class="go" id="ck">3일 체크하기</button>`
     : `<p class="muted">다음 3일 체크는 ${(lastCheck() || {}).date ? "며칠 뒤" : "곧"} 나와요. 그 전에 알려줄 게 있으면 바로 보내세요.</p>`}
+    ${testLine()}
     <div class="row"><button id="nt">추가 정보 보내기</button><button id="pf">내 답 고치기</button></div></div>`;
 }
 function bindPersonaCard() {
   if ($("#pf")) $("#pf").onclick = () => location.hash = "profile";
   if ($("#ck")) $("#ck").onclick = () => location.hash = "checkin";
   if ($("#nt")) $("#nt").onclick = () => location.hash = "note";
+  if ($("#tn")) $("#tn").onclick = () => location.hash = "test/" + $("#tn").dataset.k;
+  if ($("#mec")) $("#mec").onclick = () => location.hash = "me";
 }
 
 // ---------- 홈 상단 배치·레슨 시작 전 안내 ----------
@@ -283,5 +286,119 @@ ROUTES.help = el => {
     <p>원하면 다음 레슨을 미리 해도 돼요. 다만 하루 2레슨이 넘으면 기억에 남는 양이 줄어서, 남은 시간엔 복습을 추천해요.</p>`)}
   ${sec("월간 기준 테스트", `<p>한 달에 한 번 같은 질문 3개에 답해 녹음해요. 달마다 내 말하기가 어떻게 달라졌는지 직접 비교해 들을 수 있어요.</p>`)}
   </div><button class="go" id="hm">홈으로</button>`;
+  $("#hm").onclick = () => location.hash = "home";
+};
+
+// ===== 성격·상황·말투 검사 → 캐릭터 시트의 재료 =====
+// 성격: Mini-IPIP (Donnellan 외 2006, 공개 IPIP 문항) 20문항을 한국어로 옮김. 공식 한국어판 아님 · 진단 아님 · 캐릭터 설계 참고용
+const LIKERT = ["전혀 아니다", "아닌 편이다", "보통이다", "그런 편이다", "매우 그렇다"];
+const BF = [ // [문항, 요인, 역채점]
+  ["모임에서 분위기를 띄우는 편이다", "E", 0], ["다른 사람의 감정에 공감하는 편이다", "A", 0], ["할 일이 생기면 미루지 않고 바로 한다", "C", 0], ["기분 변화가 잦은 편이다", "N", 0], ["상상력이 풍부한 편이다", "O", 0],
+  ["말수가 적은 편이다", "E", 1], ["다른 사람의 고민에는 별로 관심이 없다", "A", 1], ["물건을 제자리에 두는 걸 자주 잊는다", "C", 1], ["대부분의 시간에 마음이 편안하다", "N", 1], ["추상적인 생각에는 흥미가 없다", "O", 1],
+  ["모임에서 여러 사람과 두루 이야기한다", "E", 0], ["다른 사람의 기분을 잘 느낀다", "A", 0], ["정리정돈된 상태를 좋아한다", "C", 0], ["쉽게 속상해지는 편이다", "N", 0], ["추상적인 개념은 이해하기 어렵다", "O", 1],
+  ["눈에 띄지 않게 뒤에 있는 편이다", "E", 1], ["다른 사람에게 크게 관심이 없다", "A", 1], ["일을 엉망으로 만들 때가 있다", "C", 1], ["우울한 기분은 거의 들지 않는다", "N", 1], ["상상력이 풍부한 편은 아니다", "O", 1],
+];
+const MBTI = [["에너지", ["E (외향)", "I (내향)"]], ["정보", ["S (감각)", "N (직관)"]], ["판단", ["T (사고)", "F (감정)"]], ["생활", ["J (계획)", "P (즉흥)"]]];
+const SITU = [
+  ["음식이 주문과 다르게 나왔다", ["그냥 먹는다", "웃으며 조심스럽게 말한다", "바로 정확히 말한다", "같이 간 사람에게 말해달라고 한다"]],
+  ["처음 보는 사람이 옆자리에 앉았다", ["먼저 가볍게 말을 건다", "눈인사 정도만 한다", "상대가 말 걸면 반갑게 받는다", "내 할 일에 집중한다"]],
+  ["대화 중 모르는 단어가 나왔다", ["바로 무슨 뜻이냐고 묻는다", "맥락으로 짐작하고 넘어간다", "아는 척 고개를 끄덕인다", "나중에 찾아본다"]],
+  ["친구가 말없이 30분 늦었다", ["괜찮다고 웃어넘긴다", "농담으로 한마디 한다", "다음엔 미리 연락하라고 솔직히 말한다", "기다리며 내 할 일을 한다"]],
+  ["친구와 의견이 부딪쳤다", ["내 의견을 끝까지 설명한다", "상대 말을 먼저 듣고 맞춰준다", "농담으로 분위기를 푼다", "중간 지점을 제안한다"]],
+  ["하기 싫은 부탁을 받았다", ["이유를 대고 정중히 거절한다", "일단 들어준다", "생각해보겠다며 시간을 번다", "대신 다른 방법을 제안한다"]],
+  ["칭찬을 받았다", ["아니라며 손사래 친다", "고맙다고 웃는다", "농담으로 받는다", "상대 칭찬으로 돌려준다"]],
+  ["내 실수로 약속에 늦었다", ["짧게 사과하고 바로 본론", "이유를 자세히 설명하며 사과", "웃으며 사과하고 커피를 산다", "미리 연락해서 양해를 구한다"]],
+  ["재밌었던 일을 이야기할 때", ["결론부터 말한다", "처음부터 순서대로 자세히", "표정과 리액션을 크게 섞는다", "짧게 말하고 상대 반응을 본다"]],
+  ["상대가 좋은 소식을 전했다", ["크게 리액션한다", "차분하게 축하한다", "어떻게 된 건지 자세히 묻는다", "축하하며 밥이나 선물을 제안한다"]],
+  ["모임에서 나는 주로", ["대화를 이끈다", "분위기를 띄운다", "잘 들어준다", "친한 사람과만 이야기한다"]],
+  ["서비스가 불만족스러웠다", ["그 자리에서 바로 말한다", "참고 다음에 안 간다", "정중하게 개선을 부탁한다", "후기로 남긴다"]],
+  ["처음 가는 곳에서 길을 잃었다", ["바로 사람에게 묻는다", "지도 앱으로 혼자 해결한다", "일행에게 맡긴다", "일단 걸으며 찾아본다"]],
+  ["대화가 끊겨 어색해졌다", ["새 화제를 꺼낸다", "상대에게 질문한다", "농담을 던진다", "상대가 말할 때까지 기다린다"]],
+  ["누군가에게 고마운 일이 생겼다", ["그 자리에서 말로 고맙다고 한다", "나중에 메시지로 전한다", "밥이나 작은 선물로 갚는다", "행동으로 은근히 표현한다"]],
+];
+const VOICE = [
+  ["친구가 승진했다고 할 때", ["헐 대박! 축하해!!", "오 잘됐다, 고생 많았어", "진짜? 어떻게 된 거야?", "축하해! 오늘 내가 쏠게"]],
+  ["카페에서 주문할 때", ["아이스 아메리카노 하나요.", "안녕하세요~ 아이스 아메리카노 하나 주세요!", "음… 여기 뭐가 맛있어요?", "늘 먹던 걸로 주세요"]],
+  ["친구가 고민을 털어놓을 때", ["헐… 진짜 힘들었겠다", "그래서 어떻게 할 건데?", "괜찮아, 다 잘될 거야", "일단 맛있는 거 먹으러 가자"]],
+  ["약속 시간을 정할 때", ["7시 어때?", "난 아무 때나 괜찮아, 너 편할 때!", "7시랑 8시 중에 골라", "일단 저녁쯤 보고 연락하자"]],
+  ["맛있는 걸 먹었을 때", ["와 미쳤다…", "오 맛있네", "이거 뭐 들어간 거지?", "다음에 또 오자"]],
+  ["모르는 사람에게 길을 물을 때", ["저기요, 역이 어디예요?", "죄송한데 혹시 역 어떻게 가는지 아세요?", "역 이쪽 맞죠?", "묻기 전에 지도부터 본다"]],
+  ["친구 답장이 늦었을 때", ["왜 이제 봐ㅋㅋ", "괜찮아~", "바빴어?", "ㅇㅇ"]],
+  ["약속을 거절할 때", ["아 미안, 그날은 안 돼", "가고 싶은데 그날 일이 있어서… 다음엔 꼭!", "음 생각해볼게", "그날은 안 되고, 대신 토요일은?"]],
+  ["깜짝 놀랐을 때", ["헐", "진짜?", "말도 안 돼", "오…"]],
+  ["헤어지면서", ["나 가볼게!", "오늘 진짜 재밌었다, 또 보자", "조심히 들어가~ 도착하면 연락해", "다음엔 내가 살게"]],
+];
+const TESTS = {
+  bigfive: { name: "성격 검사", time: "약 3분 · 20문항", desc: "평소의 나에 가장 가까운 정도를 고르세요. 정답은 없어요. 대화 속 '나'가 먼저 말을 거는지, 어떻게 반응하는지 정하는 데 써요.",
+    qs: () => [...BF.map(([q], i) => ({ id: "b" + (i + 1), q, ex: "평소의 나 기준으로", type: "one", plain: true, opts: LIKERT })),
+      ...MBTI.map(([q, o], i) => ({ id: "m" + (i + 1), q: `(선택) MBTI를 안다면 · ${q}`, ex: "몰라도 괜찮아요. '잘 모르겠어요'를 누르세요.", type: "one", opts: o }))] },
+  situ: { name: "상황별 반응", time: "약 3분 · 15문항", desc: "이럴 때 실제로 어떻게 하는지 고르세요. 레슨 속 장면에서 '나'가 그렇게 행동해요.",
+    qs: () => SITU.map(([q, o], i) => ({ id: "s" + (i + 1), q: q + " → 나는?", ex: "가장 자주 하는 행동 하나", type: "one", opts: o })) },
+  voice: { name: "말투 고르기", time: "약 2분 · 10문항", desc: "같은 상황에서 가장 '나 같은' 말을 고르세요. 고른 말투가 영어 대사의 톤과 길이로 옮겨져요.",
+    qs: () => VOICE.map(([q, o], i) => ({ id: "v" + (i + 1), q, ex: "가장 나 같은 말 하나", type: "one", opts: o })) },
+};
+const TORDER = ["bigfive", "situ", "voice"];
+const testsDone = () => TORDER.filter(k => S.st.tests && S.st.tests[k]);
+function bigFive(ans) { // 요인별 평균 1~5 (N은 정서 안정성으로 뒤집어 표시)
+  const sum = {}, cnt = {};
+  BF.forEach(([, f, r], i) => { const a = ans["b" + (i + 1)]; const v = a && LIKERT.indexOf((a.sel || [])[0]) + 1; if (!v) return; const x = r ? 6 - v : v; sum[f] = (sum[f] || 0) + x; cnt[f] = (cnt[f] || 0) + 1; });
+  const m = f => (cnt[f] ? Math.round((sum[f] / cnt[f]) * 10) / 10 : null);
+  return { E: m("E"), A: m("A"), C: m("C"), S: m("N") == null ? null : Math.round((6 - m("N")) * 10) / 10, O: m("O") };
+}
+const BF_TXT = { E: ["외향성", "대화를 먼저 열고 분위기를 이끄는 편", "먼저 나서기보다 듣고 받아주는 편"], A: ["친화성", "상대 감정에 잘 공감하는 편", "감정보다 사실과 해결에 집중하는 편"],
+  C: ["성실성", "계획하고 정리하는 걸 좋아하는 편", "그때그때 유연하게 움직이는 편"], S: ["정서 안정성", "문제가 생겨도 침착한 편", "감정을 솔직하게 드러내는 편"], O: ["개방성", "새로운 것과 아이디어를 즐기는 편", "익숙하고 검증된 걸 좋아하는 편"] };
+const bfLine = (k, v) => v == null ? "" : `${BF_TXT[k][0]} ${v}/5 · ${v >= 3.6 ? BF_TXT[k][1] : v <= 2.4 ? BF_TXT[k][2] : "상황에 따라 균형 있게"}`;
+function testLine() {
+  const done = testsDone(), next = TORDER.find(k => !done.includes(k));
+  return `<p class="muted" style="margin-top:12px">성격·말투 검사 ${done.length}/3 · 할수록 대사가 더 나다워져요</p><div class="row">${next ? `<button class="go" id="tn" data-k="${next}">${TESTS[next].name} (${TESTS[next].time.split(" · ")[0]})</button>` : ""}${done.length ? `<button id="mec">내 캐릭터 보기</button>` : ""}</div>`;
+}
+
+ROUTES.test = (el, parts = []) => {
+  const kind = TESTS[parts[0]] ? parts[0] : TORDER.find(k => !testsDone().includes(k)) || "bigfive", T = TESTS[kind], qs = T.qs();
+  const ans = {}; let i = -1;
+  const show = () => {
+    if (i < 0) {
+      el.innerHTML = `<header><h1>${T.name}</h1><h2>${T.time}</h2></header><div class="card"><p class="muted">${T.desc}</p>
+        <p class="muted">답은 레슨 대화를 만드는 데만 쓰여요. 진단이 아니고, 언제든 다시 할 수 있어요.</p><button class="go" id="st">시작</button></div>`;
+      $("#st").onclick = () => { i = 0; show(); }; return;
+    }
+    if (i >= qs.length) return save();
+    el.innerHTML = `<header><h1>${T.name}</h1><h2>${T.time.split(" · ")[0]}</h2></header><section id="pq"></section>`;
+    askOne($("#pq"), qs[i], ans[qs[i].id], { step: i + 1, total: qs.length, nextText: i === qs.length - 1 ? "저장하기" : "다음",
+      onBack: i ? () => { i--; show(); } : null, onDone: a => { ans[qs[i].id] = a; i++; show(); } });
+  };
+  const save = async () => {
+    const data = { kind, answers: ans };
+    if (kind === "bigfive") data.scores = bigFive(ans);
+    el.innerHTML = `<header><h1>${T.name}</h1><h2>저장 중…</h2></header>`;
+    try {
+      await postData("/api/test", data); (S.st.tests = S.st.tests || {})[kind] = { ...data, date: S.st.date }; track("test", { kind });
+      const next = TORDER.find(k => !testsDone().includes(k));
+      el.innerHTML = `<header><h1>${T.name}</h1><h2>저장했어요</h2></header>${meHTML([kind])}
+        <div class="card"><p class="muted">내일 새벽부터 아직 안 한 레슨의 '나'에 반영돼요.</p>${next ? `<button class="go" id="nx2">이어서 ${TESTS[next].name} (${TESTS[next].time.split(" · ")[0]})</button>` : ""}<button id="hm">홈으로</button></div>`;
+      $("#hm").onclick = () => location.hash = "home"; if ($("#nx2")) $("#nx2").onclick = () => location.hash = "test/" + next;
+    } catch (e) { el.innerHTML = `<header><h1>${T.name}</h1><h2>저장 실패</h2></header>`; saveFail(el, save); }
+  };
+  show();
+};
+
+// 결과 요약 (부정적인 표현 없이, 레슨에 어떻게 쓰이는지 중심)
+function meHTML(only) {
+  const t = S.st.tests || {}, out = [];
+  const show = k => (!only || only.includes(k)) && t[k];
+  if (show("bigfive")) {
+    const sc = t.bigfive.scores || bigFive(t.bigfive.answers || {}), mb = [1, 2, 3, 4].map(n => ((t.bigfive.answers || {})["m" + n] || {}).sel || []).map(x => (x[0] && x[0] !== UNSURE ? x[0][0] : "")).join("");
+    out.push(`<div class="card"><h3>성격</h3>${["E", "A", "C", "S", "O"].map(k => sc[k] == null ? "" : `<p class="muted">${esc(bfLine(k, sc[k]))}</p>`).join("")}${mb.length === 4 ? `<p class="muted">MBTI ${esc(mb)}</p>` : ""}</div>`);
+  }
+  const picks = (k, list, pre) => Object.entries((t[k] || {}).answers || {}).slice(0, 6).map(([id, a]) => { const n = +id.slice(1) - 1; const s0 = (a.sel || [])[0], v = s0 === UNSURE ? "알아서" : s0 || a.other; return list[n] ? `<li>${esc(list[n][0])}: ${esc(v || "")}</li>` : ""; }).join("");
+  if (show("situ")) out.push(`<div class="card"><h3>이럴 때 나는</h3><ul>${picks("situ", SITU)}</ul><p class="muted">레슨 속 장면에서 '나'가 이렇게 행동해요.</p></div>`);
+  if (show("voice")) out.push(`<div class="card"><h3>내 말투</h3><ul>${picks("voice", VOICE)}</ul><p class="muted">이 말투가 영어 대사의 감탄사·길이·톤으로 옮겨져요.</p></div>`);
+  return out.join("");
+}
+ROUTES.me = el => {
+  const done = testsDone();
+  el.innerHTML = `<header><h1>내 캐릭터</h1><h2>레슨 속 '나'를 만드는 재료</h2></header>${meHTML() || `<div class="card"><p class="muted">아직 끝낸 검사가 없어요.</p></div>`}
+    <div class="card"><h3>검사</h3>${TORDER.map(k => `<button data-t="${k}">${TESTS[k].name} · ${done.includes(k) ? "다시 하기" : TESTS[k].time}</button>`).join("")}</div><button id="hm">홈으로</button>`;
+  el.querySelectorAll("[data-t]").forEach(b => b.onclick = () => location.hash = "test/" + b.dataset.t);
   $("#hm").onclick = () => location.hash = "home";
 };

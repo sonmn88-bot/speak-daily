@@ -19,7 +19,7 @@ async function loadAll() {
   if (!r.ok) throw new Error(r.status);
   S.st = await r.json();
   S.st.history = S.st.history || []; S.st.srs = S.st.srs || {}; S.st.today = S.st.today || {};
-  S.st.mine = { ...loadMineLocal(), ...(S.st.mine || {}) }; // 내 문장: 서버 우선, 이 기기 사본으로 보완
+  S.st.mine = { ...loadMineLocal(), ...(S.st.mine || {}) }; S.st.tests = S.st.tests || {}; // 내 문장: 서버 우선, 이 기기 사본으로 보완
   S.n = S.st.n; S.week = Math.ceil(S.n / 7); S.dw = ((S.n - 1) % 7) + 1;
   S.monthly = S.week % 4 === 0 && S.dw >= 6;
   S.weeks = {}; S.chunks = {};
@@ -181,7 +181,7 @@ function route() {
   if (CUR_REC) CUR_REC.stop();
   const parts = (location.hash.slice(1) || "home").split("/");
   const name = ROUTES[parts[0]] ? parts[0] : "home";
-  const tabOf = { cards: "home", radio: "home", mtest: "home", profile: "home", checkin: "home", note: "home", help: "home" }[name] || name;
+  const tabOf = { cards: "home", radio: "home", mtest: "home", profile: "home", checkin: "home", note: "home", help: "home", test: "home", me: "home" }[name] || name;
   document.querySelectorAll(".tab").forEach(t => { const on = t.dataset.r === tabOf; t.classList.toggle("on", on); on ? t.setAttribute("aria-current", "page") : t.removeAttribute("aria-current"); });
   track("view", { r: name });
   ROUTES[name]($("#view"), parts.slice(1));
