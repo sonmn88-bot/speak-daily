@@ -24,8 +24,10 @@ async function loadAll() {
   S.monthly = S.week % 4 === 0 && S.dw >= 6;
   S.weeks = {}; S.chunks = {};
   const ws = Array.from({ length: S.week }, (_, i) => i + 1); // 주차 파일을 동시에 받아 시작 속도 유지
-  const got = await Promise.all(ws.map(w => fetch(`content/w${String(w).padStart(2, "0")}.json`, { cache: "no-cache" })
-    .then(r => (r.ok ? r.json() : null)).catch(() => null)));
+  const pub = w => fetch(`content/w${String(w).padStart(2, "0")}.json`, { cache: "no-cache" }).then(r => (r.ok ? r.json() : null)).catch(() => null);
+  // 맞춤 레슨: 서버가 비공개 저장소에서 내 레슨을 주면 그걸 쓰고, 없으면 공개 레슨
+  const mine = w => fetch(`${API}/api/week?k=${encodeURIComponent(KEY)}&w=${w}`, { cache: "no-cache" }).then(r => (r.ok ? r.json() : null)).catch(() => null);
+  const got = await Promise.all(ws.map(async w => (S.st.privateContent && (await mine(w))) || pub(w)));
   got.forEach((d, i) => {
     if (!d) return; const w = ws[i]; S.weeks[w] = d;
     for (const dd of d.days) for (const c of dd.chunks || []) S.chunks[c.id] = { ...c, week: w };
@@ -178,7 +180,7 @@ function route() {
   if (CUR_REC) CUR_REC.stop();
   const parts = (location.hash.slice(1) || "home").split("/");
   const name = ROUTES[parts[0]] ? parts[0] : "home";
-  const tabOf = { cards: "home", radio: "home", mtest: "home" }[name] || name;
+  const tabOf = { cards: "home", radio: "home", mtest: "home", profile: "home", checkin: "home", note: "home" }[name] || name;
   document.querySelectorAll(".tab").forEach(t => { const on = t.dataset.r === tabOf; t.classList.toggle("on", on); on ? t.setAttribute("aria-current", "page") : t.removeAttribute("aria-current"); });
   track("view", { r: name });
   ROUTES[name]($("#view"), parts.slice(1));

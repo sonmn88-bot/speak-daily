@@ -191,6 +191,33 @@ function vCmp(el) {
     <div class="card"><h3>읽는 법</h3><p class="muted">학습일 비율이 낮으면 습관 문제, 정답률이 낮으면 난이도 문제, 알림 후 접속이 길면 알림 시간 문제일 가능성이 커요. 소리 모드 비율이 50% 미만이면 말하기 연습량이 부족해요.</p></div>`;
 }
 
+// 맞춤 레슨용 요약: 그대로 복사해 Claude에게 보내면 됨
+const PL = { name: "이름", job: "하는 일", place: "주로 있는 곳", people: "자주 대화하는 상대", start: "대화 시작", joke: "농담", direct: "부탁·거절", habit: "말버릇", use: "영어 쓸 상황", likes: "관심사", event: "다가오는 일", eventWhen: "언제" };
+const av = a => !a ? "" : typeof a === "string" ? a : !(a.sel || []).length ? a.other || "" : [...a.sel.map(x => (x === "?" ? "알아서" : x)), ...(a.other ? [`기타: ${a.other}`] : [])].join(", ");
+function personaSummary(u) {
+  const p = u.profile, L = [`[맞춤 레슨 요청] 사용자: ${u.name} (${u.id}) · 현재 진도 레슨 ${u.n} (${Math.ceil(u.n / 7)}주차 ${((u.n - 1) % 7) + 1}일)`];
+  L.push(p ? `프로필 (${p.updatedAt || "-"}): ` + Object.keys(PL).filter(k => p[k]).map(k => `${PL[k]}=${av(p[k])}`).join(" | ") : "프로필: 아직 없음");
+  const C = (u.checkins || []).slice(-6);
+  if (C.length) L.push("3일 체크:", ...C.map(c => `- ${c.date} · 3일 안: ${av(c.soon)} · ${c.drill ? `${c.drill.q} ${av(c.drill)}` : ""} · 나 같음 ${c.fit || "-"}/5${c.want ? ` · 영어로 하고 싶던 말: "${c.want}"` : ""}${c.odd ? ` · 어색했던 점: "${c.odd}"` : ""}`));
+  const N = (u.notes || []).slice(-10);
+  if (N.length) L.push("추가 정보:", ...N.map(n => `- ${n.date} [${n.cat}] ${n.text}`));
+  const weak = Object.entries(u.srs || {}).filter(([, it]) => !it.grad && (it.x > 0 || it.level === 0)).sort((x, y) => y[1].x - x[1].x).slice(0, 8).map(([id]) => `${id} ${(D.chunks[id] || {}).en || ""}`);
+  if (weak.length) L.push("약한 표현: " + weak.join(" / "));
+  return L.join("\n");
+}
+function personaCard(u) {
+  return `<div class="card wrap"><h3>맞춤 레슨용 요약</h3><p class="muted">아래 내용을 복사해서 Claude 대화창에 붙여넣으면 맞춤 레슨을 만들어요. 비밀번호는 들어 있지 않아요.</p>
+    <textarea id="ps" rows="8" readonly style="width:100%;font-size:13px">${esc(personaSummary(u))}</textarea><button class="go" id="pc">요약 복사</button><p class="muted" id="pcr"></p></div>`;
+}
+function bindPersona() {
+  if (!$("#pc")) return;
+  $("#pc").onclick = async () => {
+    const t = $("#ps"); t.focus(); t.select();
+    let ok = false; try { await navigator.clipboard.writeText(t.value); ok = true; } catch (e) { try { ok = document.execCommand("copy"); } catch (e2) {} }
+    $("#pcr").textContent = ok ? "복사했어요. Claude 대화창에 붙여넣으세요." : "자동 복사가 안 돼요. 위 내용을 길게 눌러 전체 선택 후 복사하세요.";
+  };
+}
+
 function vUser(el) {
   const u = D.users.find(x => x.id === SEL) || D.users[0], a = u.a, C = D.chunks;
   const stepOrder = ["워밍업", "듣기", "표현", "드릴", "섀도잉", "인출", "롤플레이", "즉흥", "측정", "마무리"];
@@ -198,6 +225,7 @@ function vUser(el) {
   const days = ["일", "월", "화", "수", "목", "금", "토"], bl = ["0-6", "6-9", "9-12", "12-15", "15-18", "18-21", "21-24"], hmax = Math.max(1, ...a.heat.flat());
   const pills = obj => Object.entries(obj).sort((x, y) => y[1] - x[1]).map(([k, v]) => `${esc(k)} <b>${v}</b>`).join(" · ") || "기록 없음";
   el.innerHTML = `<div class="tabs">${D.users.map(x => `<button class="${x.id === u.id ? "go" : ""}" data-u="${esc(x.id)}">${esc(x.name)}</button>`).join("")}</div>
+  ${personaCard(u)}
   <div class="grid">
     <div class="card"><h3>단계별 평균 소요 시간</h3>${st.length ? st.map(([s, m]) => meter(s, (m / maxSt) * 100, "var(--line)", m.toFixed(1) + "분")).join("") : '<p class="muted">기록 없음</p>'}</div>
     <div class="card"><h3>중간 이탈 지점</h3>${Object.keys(a.drop).length ? Object.entries(a.drop).sort((x, y) => y[1] - x[1]).map(([s, n]) => meter(s, pct(n, Math.max(...Object.values(a.drop))), "var(--x)", n + "회")).join("") : '<p class="muted">이탈 기록 없음</p>'}
@@ -215,6 +243,7 @@ function vUser(el) {
   <div class="card wrap"><h3>최근 접속 기록</h3><table><tr><th>시각</th><th>경로</th><th>기기</th><th>레슨</th></tr>
     ${a.recentOpens.map(e => `<tr><td>${fmt(e.t)}</td><td>${esc(e.src)}</td><td>${esc(e.dev)} · ${esc(e.app)}</td><td>${e.lesson ?? "-"}</td></tr>`).join("") || '<tr><td colspan="4" class="muted">기록 없음</td></tr>'}</table></div>`;
   document.querySelectorAll("[data-u]").forEach(b => b.onclick = () => { SEL = b.dataset.u; vUser(el); });
+  bindPersona();
 }
 
 function vContent(el) {

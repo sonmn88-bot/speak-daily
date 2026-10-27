@@ -20,7 +20,7 @@ ROUTES.home = el => {
       <button class="go" id="start" ${S.today ? "" : "disabled"}>${startLabel}</button></div>
     <div class="card"><h3>${S.week}주차</h3><div class="wk">${cells}</div>
       <p class="muted">${streak() ? `연속 ${streak()}일째 학습 중이에요.` : done ? "" : "오늘 하면 연속 1일째가 돼요."} 오늘 복습할 표현은 ${dueCount}개예요.</p></div>
-    ${missionCard()}${S.st.monthly && S.st.monthly[S.st.date.slice(0, 7)] ? "" : `<div class="card"><p class="ko">이번 달 기준 테스트를 아직 안 했어요</p>
+    ${personaCard()}${missionCard()}${S.st.monthly && S.st.monthly[S.st.date.slice(0, 7)] ? "" : `<div class="card"><p class="ko">이번 달 기준 테스트를 아직 안 했어요</p>
       <p class="muted">매달 같은 질문 3개에 답해 녹음해두면, 달마다 내 말하기가 어떻게 달라졌는지 직접 들을 수 있어요. 약 5분.</p><button id="mt">기준 테스트 하기</button></div>`}
     <div class="card"><h3>학습 모드</h3><div class="row"><button id="mv" class="${isSilent() ? "" : "sel"}" aria-pressed="${!isSilent()}">소리 모드</button><button id="ms" class="${isSilent() ? "sel" : ""}" aria-pressed="${isSilent()}">조용한 모드</button></div>
       <div id="mconf"></div><p class="muted">조용한 모드는 말하기 대신 영어로 직접 입력하고 고르는 방식으로 진행돼요. 밖에서 소리 내기 어려울 때 쓰고, 일주일에 사흘 이상은 소리 모드를 추천해요.</p></div>
@@ -47,6 +47,7 @@ ROUTES.home = el => {
   };
   $("#rv").onclick = () => location.hash = "review";
   $("#an").onclick = () => location.hash = "stats";
+  bindPersonaCard();
 };
 
 function missionCard() {
