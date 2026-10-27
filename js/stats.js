@@ -16,18 +16,18 @@ ROUTES.home = el => {
   const startLabel = !S.today ? "준비된 레슨을 모두 끝냈어요" : resume ? "이어서 학습하기" : done ? `레슨 ${S.n} 미리 하기` : `레슨 ${S.n} 시작`;
   const urgent = personaUrgent();
   el.innerHTML = `${S.st.owner ? `<a class="gear" href="admin.html" aria-label="관리자 페이지">${ic("gear", 22)}</a>` : ""}<a class="hbtn ${S.st.owner ? "o" : ""}" href="#help" aria-label="사용법 도움말">${ic("help", 22)}</a><header style="padding-right:${S.st.owner ? 96 : 48}px"><h1>${S.st.date} · 레슨 ${S.n}</h1><h2>${esc(S.st.label)}</h2></header>
-    ${introCard()}${urgent ? personaCard() : ""}
     <div class="card"><p class="ko">${done ? "오늘 학습 완료" : "오늘 과제가 남아 있어요"}</p>
       <p class="muted">${done ? `오늘 ${cnt}레슨 완료. 오늘 알림은 더 오지 않아요.${S.today ? " 원하면 다음 레슨을 미리 해도 돼요." : ""}${cnt >= SOFT_PER_DAY ? " 다만 하루에 몰아서 하면 기억 효과가 줄어요." : ""}` : `지금까지 받은 알림 ${t.alarms || 0}번. 완료하면 알림이 멈춰요.`}</p>
       <button class="go" id="start" ${S.today ? "" : "disabled"}>${startLabel}</button><div id="gate"></div></div>
+    ${introCard()}${urgent ? personaCard() : ""}
     <div class="card"><h3>${S.week}주차</h3><div class="wk">${cells}</div>
       <p class="muted">${streak() ? `연속 ${streak()}일째 학습 중이에요.` : done ? "" : "오늘 하면 연속 1일째가 돼요."} 오늘 복습할 표현은 ${dueCount}개예요.</p></div>
     ${urgent ? "" : personaCard()}${missionCard()}${S.st.monthly && S.st.monthly[S.st.date.slice(0, 7)] ? "" : `<div class="card"><p class="ko">이번 달 기준 테스트를 아직 안 했어요</p>
       <p class="muted">매달 같은 질문 3개에 답해 녹음해두면, 달마다 내 말하기가 어떻게 달라졌는지 직접 들을 수 있어요. 약 5분.</p><button id="mt">기준 테스트 하기</button></div>`}
     <div class="card"><h3>학습 모드</h3><div class="row"><button id="mv" class="${isSilent() ? "" : "sel"}" aria-pressed="${!isSilent()}">소리 모드</button><button id="ms" class="${isSilent() ? "sel" : ""}" aria-pressed="${isSilent()}">조용한 모드</button></div>
-      <div id="mconf"></div><p class="muted">조용한 모드는 말하기 대신 영어로 직접 입력하고 고르는 방식으로 진행돼요. 밖에서 소리 내기 어려울 때 쓰고, 일주일에 사흘 이상은 소리 모드를 추천해요.</p></div>
+      <div id="mconf"></div><p class="muted">밖에서 소리 내기 어려울 땐 조용한 모드(입력·선택으로 진행). 주 3일 이상은 소리 모드를 추천해요.</p></div>
     <div class="card"><h3>이동 중 복습</h3><div class="row"><button id="lm">${ic("headphones")} 듣기 모드</button><button id="cd">${ic("cards")} 표현 카드</button></div>
-      <p class="muted">듣기 모드는 화면을 보지 않고 이어폰으로 지난 대화를 들으며, 내 차례에 속으로 먼저 말해보는 복습이에요.</p></div>
+      <p class="muted">이어폰으로 듣고 내 차례에 먼저 말해보는 복습이에요.</p></div>
     <div class="row"><button id="rv">지난 대화</button><button id="an">분석</button></div>`;
   const mode = v => {
     if (isSilent() === v) return;

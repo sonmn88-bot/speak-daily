@@ -253,9 +253,9 @@ ROUTES.note = el => {
 // 홈에 넣는 카드
 function personaCard() {
   if (!profileDone()) return `<div class="card"><h3>나에 맞춘 레슨</h3><p class="ko">3분 질문지로 대화를 내 이야기로 바꿔요</p>
-    <p class="muted">직업, 자주 만나는 사람, 말투를 탭으로 고르면 레슨 속 '나'가 진짜 내가 돼요. 모르면 "알아서"를 눌러도 돼요.</p><button class="go" id="pf">질문지 시작</button></div>`;
+    <p class="muted">직업, 자주 만나는 사람, 말투를 탭으로 고르면 레슨 속 '나'가 진짜 내가 돼요. 모르면 "알아서"를 눌러도 돼요.</p><button class="go2" id="pf">질문지 시작</button></div>`;
   const due = checkDue();
-  return `<div class="card"><h3>나에 맞춘 레슨</h3>${due ? `<p class="ko">3일 체크할 때예요 · 1분</p><p class="muted">앞으로 며칠 안에 있을 대화를 알려주면 그 상황을 미리 연습하는 레슨이 나와요.</p><button class="go" id="ck">3일 체크하기</button>`
+  return `<div class="card"><h3>나에 맞춘 레슨</h3>${due ? `<p class="ko">3일 체크할 때예요 · 1분</p><p class="muted">앞으로 며칠 안에 있을 대화를 알려주면 그 상황을 미리 연습하는 레슨이 나와요.</p><button class="go2" id="ck">3일 체크하기</button>`
     : `<p class="muted">다음 3일 체크는 ${(lastCheck() || {}).date ? "며칠 뒤" : "곧"} 나와요. 그 전에 알려줄 게 있으면 바로 보내세요.</p>`}
     ${testLine()}
     <div class="row"><button id="nt">추가 정보 보내기</button><button id="pf">내 답 고치기</button></div></div>`;
@@ -295,8 +295,8 @@ function lessonGate(box, go) {
 const helpSeen = () => { try { return localStorage.getItem("sd_help_seen") === "1"; } catch (e) { return true; } };
 function introCard() {
   if (helpSeen()) return "";
-  return `<div class="card" id="intro"><p class="ko">처음이세요? 사용법부터 보세요</p><p class="muted">레슨이 어떻게 진행되는지, 채점은 어떻게 하는지, 복습이 언제 나오는지 정리해뒀어요. 오른쪽 위 ? 버튼으로 언제든 다시 볼 수 있어요.</p>
-    <div class="row"><button class="go" id="ih">사용법 보기</button><button id="ix">닫기</button></div></div>`;
+  return `<div class="card" id="intro"><p class="ko">처음이세요? 1분 사용법</p><p class="muted">레슨 순서, 채점, 복습 시기를 정리해뒀어요. 오른쪽 위 ? 버튼으로 다시 볼 수 있어요.</p>
+    <div class="row"><button class="go2" id="ih">사용법 보기</button><button id="ix">닫기</button></div></div>`;
 }
 function bindIntro() {
   if (!$("#intro")) return;
@@ -388,8 +388,8 @@ const bfLine = (k, v) => v == null ? "" : `${BF_TXT[k][0]} ${v}/5 · ${v >= 3.6 
 function testLine() {
   const done = testsDone(), next = TORDER.find(k => !done.includes(k));
   const old = ["situ", "voice"].find(k => S.st.tests && S.st.tests[k] && (Date.parse(S.st.date) - Date.parse(S.st.tests[k].date)) / DAYMS >= 60);
-  if (!next && old) return `<p class="muted" style="margin-top:12px">${TESTS[old].name}를 한 지 두 달이 지났어요. 그사이 달라졌을 수 있어요.</p><div class="row"><button class="go" id="tn" data-k="${old}">${TESTS[old].name} 다시 하기</button><button id="mec">내 캐릭터 보기</button></div>`;
-  return `<p class="muted" style="margin-top:12px">성격·말투 검사 ${done.length}/3 · 할수록 대사가 더 나다워져요</p><div class="row">${next ? `<button class="go" id="tn" data-k="${next}">${TESTS[next].name} (${TESTS[next].time.split(" · ")[0]})</button>` : ""}${done.length ? `<button id="mec">내 캐릭터 보기</button>` : ""}</div>`;
+  if (!next && old) return `<p class="muted" style="margin-top:12px">${TESTS[old].name}를 한 지 두 달이 지났어요. 그사이 달라졌을 수 있어요.</p><div class="row"><button id="tn" data-k="${old}">${TESTS[old].name} 다시 하기</button><button id="mec">내 캐릭터 보기</button></div>`;
+  return `<p class="muted" style="margin-top:12px">성격·말투 검사 ${done.length}/3 · 할수록 대사가 더 나다워져요</p><div class="row">${next ? `<button id="tn" data-k="${next}">${TESTS[next].name} (${TESTS[next].time.split(" · ")[0]})</button>` : ""}${done.length ? `<button id="mec">내 캐릭터 보기</button>` : ""}</div>`;
 }
 
 ROUTES.test = (el, parts = []) => {
