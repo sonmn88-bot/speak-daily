@@ -131,7 +131,8 @@ function saveFail(el, retry) {
 }
 
 // ---------- 처음 질문지 (고치기도 같은 화면) ----------
-ROUTES.profile = el => {
+ROUTES.profile = (el, parts = []) => {
+  const thenLesson = parts[0] === "go"; // 레슨 시작 전에 들어온 경우: 끝나면 바로 레슨으로
   const ans = { ...(S.st.profile || {}) }; delete ans.updatedAt;
   const list = () => PQ.filter(q => !q.when || q.when(ans));
   let i = 0;
@@ -149,16 +150,17 @@ ROUTES.profile = el => {
     try {
       await postData("/api/profile", ans); S.st.profile = { ...ans, updatedAt: S.st.date }; track("profile", { n: Object.keys(ans).length });
       el.innerHTML = `<header><h1>나에 맞춘 레슨</h1><h2>저장했어요</h2></header><div class="card"><p class="ko">고마워요, ${esc(pv(ans, "name")[0] || "")}!</p>
-        <p class="muted">다음 레슨부터 대화 속 '나'가 당신의 상황과 말투로 바뀌어요. ${CHECK_EVERY}일마다 1분짜리 체크가 홈에 나와요. 답은 언제든 고칠 수 있어요.</p>
-        <button class="go" id="hm">홈으로</button></div>`;
-      $("#hm").onclick = () => location.hash = "home";
+        <p class="muted">내일 새벽부터 아직 안 한 레슨의 대화 속 '나'가 당신의 상황과 말투로 바뀌어요. ${CHECK_EVERY}일마다 1분짜리 체크가 홈에 나와요. 답은 언제든 고칠 수 있어요.</p>
+        ${thenLesson ? `<button class="go" id="gl">레슨 ${S.n} 시작</button><button id="hm">홈으로</button>` : `<button class="go" id="hm">홈으로</button>`}</div>`;
+      $("#hm").onclick = () => location.hash = "home"; if ($("#gl")) $("#gl").onclick = startFromGate;
     } catch (e) { el.innerHTML = `<header><h1>나에 맞춘 레슨</h1><h2>저장 실패</h2></header>`; saveFail(el, save); }
   };
   show();
 };
 
 // ---------- 3일 체크 (탭 3번) ----------
-ROUTES.checkin = el => {
+ROUTES.checkin = (el, parts = []) => {
+  const thenLesson = parts[0] === "go";
   if (!profileDone()) { location.hash = "profile"; return; }
   const d = nextDrill(), out = {};
   const steps = [
@@ -184,8 +186,9 @@ ROUTES.checkin = el => {
       $("#sv").disabled = true;
       try {
         await postData("/api/checkin", data); (S.st.checkins = S.st.checkins || []).push({ date: S.st.date, ...data }); track("checkin", { fit: data.fit });
-        el.innerHTML = `<header><h1>3일 체크</h1><h2>보냈어요</h2></header><div class="card"><p class="muted">다음 맞춤 레슨에 반영할게요. 다음 체크는 ${CHECK_EVERY}일 뒤예요.</p><button class="go" id="hm">홈으로</button></div>`;
-        $("#hm").onclick = () => location.hash = "home";
+        el.innerHTML = `<header><h1>3일 체크</h1><h2>보냈어요</h2></header><div class="card"><p class="muted">내일 새벽에 다음 레슨들에 반영돼요. 다음 체크는 ${CHECK_EVERY}일 뒤예요.</p>
+          ${thenLesson ? `<button class="go" id="gl">레슨 ${S.n} 시작</button><button id="hm">홈으로</button>` : `<button class="go" id="hm">홈으로</button>`}</div>`;
+        $("#hm").onclick = () => location.hash = "home"; if ($("#gl")) $("#gl").onclick = startFromGate;
       } catch (e) { $("#sv").disabled = false; saveFail(el, send); }
     };
     $("#sv").onclick = send;
@@ -224,3 +227,61 @@ function bindPersonaCard() {
   if ($("#ck")) $("#ck").onclick = () => location.hash = "checkin";
   if ($("#nt")) $("#nt").onclick = () => location.hash = "note";
 }
+
+// ---------- 홈 상단 배치·레슨 시작 전 안내 ----------
+const gateKey = k => `sd_gate_${S.st.date}_${k}`;
+const skipped = k => { try { return localStorage.getItem(gateKey(k)) === "1"; } catch (e) { return false; } };
+const skip = k => { try { localStorage.setItem(gateKey(k), "1"); } catch (e) {} };
+const personaUrgent = () => !profileDone() || checkDue(); // 할 일이 있으면 홈 맨 위로
+function startFromGate() {
+  if (LS && LS.practice) LS = null;
+  if (S.st.today.done && S.today) startLesson();
+  location.hash = "learn";
+}
+// 레슨 시작을 누르면: 질문지가 없거나 3일 체크 날이면 한 번 물어봄 (그날 '바로 시작'을 고르면 다시 안 물음)
+function lessonGate(box, go) {
+  const kind = !profileDone() ? "profile" : checkDue() ? "checkin" : null;
+  if (!kind || skipped(kind)) return false;
+  box.innerHTML = `<div class="card" style="margin-top:12px;border:1px solid var(--now)"><p class="ko">${kind === "profile" ? "3분 질문지를 먼저 할까요?" : "3일 체크할 때예요 · 1분"}</p>
+    <p class="muted">${kind === "profile" ? "직업·자주 만나는 사람·말투를 탭으로 고르면, 앞으로의 레슨 대화가 내 이야기로 바뀌어요." : "앞으로 3일 안에 있을 대화를 알려주면, 그 상황을 미리 연습하는 레슨으로 바꿔줘요."} 끝나면 바로 레슨으로 이어져요.</p>
+    <button class="go" id="gyes">${kind === "profile" ? "질문지 하고 시작" : "체크하고 시작"}</button><button id="gno">오늘은 바로 레슨 시작</button></div>`;
+  $("#gyes").onclick = () => { location.hash = kind + "/go"; };
+  $("#gno").onclick = () => { skip(kind); track("gateSkip", { kind }); go(); };
+  box.scrollIntoView({ behavior: "smooth", block: "center" });
+  return true;
+}
+
+// ---------- 처음 온 사람에게 사용법 안내 ----------
+const helpSeen = () => { try { return localStorage.getItem("sd_help_seen") === "1"; } catch (e) { return true; } };
+function introCard() {
+  if (helpSeen()) return "";
+  return `<div class="card" id="intro"><p class="ko">처음이세요? 사용법부터 보세요</p><p class="muted">레슨이 어떻게 진행되는지, 채점은 어떻게 하는지, 복습이 언제 나오는지 정리해뒀어요. 오른쪽 위 ? 버튼으로 언제든 다시 볼 수 있어요.</p>
+    <div class="row"><button class="go" id="ih">사용법 보기</button><button id="ix">닫기</button></div></div>`;
+}
+function bindIntro() {
+  if (!$("#intro")) return;
+  const seen = () => { try { localStorage.setItem("sd_help_seen", "1"); } catch (e) {} };
+  $("#ih").onclick = () => { seen(); location.hash = "help"; };
+  $("#ix").onclick = () => { seen(); $("#intro").remove(); };
+}
+
+// ---------- 도움말 ----------
+ROUTES.help = el => {
+  try { localStorage.setItem("sd_help_seen", "1"); } catch (e) {}
+  const sec = (t, body, open) => `<details class="hp"${open ? " open" : ""}><summary>${t}</summary>${body}</details>`;
+  el.innerHTML = `<header><h1>사용법</h1><h2>하루 15분, 이렇게 쓰면 돼요</h2></header><div class="card">
+  ${sec("이 앱은 어떻게 말을 늘려주나요?", `<p>보고 이해하는 것보다 <b>직접 떠올려 말해보는 것</b>이 훨씬 오래 남아요. 그래서 레슨 대부분이 "한국어를 보고 → 영어로 먼저 말해보고 → 정답 확인" 순서예요.</p>
+    <p>틀리거나 느렸던 표현은 잊어버리기 직전에 다시 나와요(1일·3일·7일·16일·35일 뒤). 그리고 질문지에 답하면 대화 속 '나'가 진짜 내 상황과 말투로 바뀌어서 바로 써먹을 수 있어요.</p>`, true)}
+  ${sec("레슨 순서", `<ol><li><b>워밍업</b> · 복습할 때가 된 지난 표현</li><li><b>듣기</b> · 오늘 대화를 듣고 문제 하나</li><li><b>표현</b> · 오늘 표현 5개를 따라 말하기 (내 문장 만들기는 선택)</li><li><b>드릴</b> · 빈칸·조립·상황 고르기</li><li><b>섀도잉</b> · 내 대사를 소리 내 따라 하기</li><li><b>인출</b> · 상대 말을 보고 내 대사를 영어로</li><li><b>마무리</b> · 오늘 표현을 다시 떠올리기 (기억 기록에 가장 중요)</li><li><b>롤플레이</b> · 다른 상황에서 오늘 표현 쓰기</li><li><b>즉흥</b> · 표현과 순서를 보며 말하기 → 모범 답 → 점점 혼자</li></ol>
+    <p>중간에 닫아도 다음에 그 단계부터 이어져요.</p>`)}
+  ${sec("O · △ · X는 어떻게 고르나요?", `<p><b>O</b> 3초 안에 정확히 말했을 때 · <b>△</b> 느렸거나 표현이 조금 달랐을 때 · <b>X</b> 못 떠올렸을 때.</p><p>정직하게 고를수록 복습이 딱 필요한 때 나와요. 정답을 늦게 열면 O는 못 고르게 돼 있어요.</p>`)}
+  ${sec("나에 맞춘 레슨 (질문지 · 3일 체크)", `<p>처음 질문지(3분)와 3일마다 체크(1분)에 답하면, 다음 날 새벽에 <b>아직 안 한 레슨</b>의 대화가 내 상황으로 바뀌어요. 이미 한 레슨은 바뀌지 않아요.</p>
+    <p>모르는 질문은 "알아서"를 누르면 돼요. 다가오는 일정이나 배우고 싶은 말은 홈의 <b>추가 정보 보내기</b>로 언제든 알려주세요.</p>`)}
+  ${sec("소리 모드 · 조용한 모드", `<p>밖에서 소리 내기 어려우면 홈에서 <b>조용한 모드</b>로 바꾸세요. 말하기 대신 직접 입력하고 고르는 방식이에요. 그래도 일주일에 사흘 이상은 소리 내 말하는 게 좋아요.</p>`)}
+  ${sec("이동 중 복습", `<p><b>듣기 모드</b>: 이어폰으로 지난 대화를 듣고 내 차례에 먼저 말해보기, 또는 <b>표현 떠올리기</b>(한국어를 듣고 영어로 먼저 말하기). <b>표현 카드</b>: 배운 표현을 카드로 넘기며 복습.</p>`)}
+  ${sec("카톡 알림 · 미리 하기", `<p>오늘 레슨을 끝낼 때까지 하루 최대 4번(8·12·18·21시) 알림이 와요. 끝내면 멈추고, 저녁에 복습 퀴즈 하나가 와요.</p>
+    <p>원하면 다음 레슨을 미리 해도 돼요. 다만 하루 2레슨이 넘으면 기억에 남는 양이 줄어서, 남은 시간엔 복습을 추천해요.</p>`)}
+  ${sec("월간 기준 테스트", `<p>한 달에 한 번 같은 질문 3개에 답해 녹음해요. 달마다 내 말하기가 어떻게 달라졌는지 직접 비교해 들을 수 있어요.</p>`)}
+  </div><button class="go" id="hm">홈으로</button>`;
+  $("#hm").onclick = () => location.hash = "home";
+};

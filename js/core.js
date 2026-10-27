@@ -125,6 +125,7 @@ const playRemote = url => fetch(url).then(r => (r.ok ? r.blob() : Promise.reject
 
 // ---------- 아이콘 (선 아이콘, 글자색을 따름) ----------
 const IC = {
+  help: '<circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.2a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2.6-2.7 4"/><path d="M12 17.4h.01"/>',
   speaker: '<path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/>',
   mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
   play: '<path d="M7 5l12 7-12 7z"/>', pause: '<path d="M8 5v14M16 5v14"/>', stop: '<rect x="6" y="6" width="12" height="12" rx="2"/>',
@@ -180,7 +181,7 @@ function route() {
   if (CUR_REC) CUR_REC.stop();
   const parts = (location.hash.slice(1) || "home").split("/");
   const name = ROUTES[parts[0]] ? parts[0] : "home";
-  const tabOf = { cards: "home", radio: "home", mtest: "home", profile: "home", checkin: "home", note: "home" }[name] || name;
+  const tabOf = { cards: "home", radio: "home", mtest: "home", profile: "home", checkin: "home", note: "home", help: "home" }[name] || name;
   document.querySelectorAll(".tab").forEach(t => { const on = t.dataset.r === tabOf; t.classList.toggle("on", on); on ? t.setAttribute("aria-current", "page") : t.removeAttribute("aria-current"); });
   track("view", { r: name });
   ROUTES[name]($("#view"), parts.slice(1));
