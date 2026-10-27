@@ -58,6 +58,30 @@ const DRILL = [
   { id: "d_praise", when: () => true, q: "칭찬을 들으면", opts: ["아니에요~ 하고 넘겨요", "고맙다고 해요", "농담으로 받아요", "칭찬을 돌려줘요"] },
   { id: "d_late", when: () => true, q: "약속에 늦을 것 같으면", opts: ["미리 연락해요", "도착해서 사과해요", "농담으로 넘겨요", "거의 안 늦어요"] },
 ];
+// 차원별 질문 (직업·관심사와 무관하게 '나'를 알아가는 질문) — 덜 채워진 차원부터
+const DEEP = [
+  { id: "e_joy", dim: "감정 표현", q: "정말 기쁜 일이 생기면 나는", opts: ["바로 주변에 알린다", "가까운 한두 명에게만 말한다", "혼자 조용히 즐긴다", "축하 자리를 만든다"] },
+  { id: "e_angry", dim: "감정 표현", q: "화가 나면 나는", opts: ["그 자리에서 말한다", "티는 나지만 말은 안 한다", "시간이 지나고 차분히 말한다", "그냥 넘긴다"] },
+  { id: "e_sad", dim: "감정 표현", q: "속상한 일이 있으면", opts: ["누군가에게 털어놓는다", "혼자 정리한다", "운동이나 취미로 푼다", "맛있는 걸 먹는다"] },
+  { id: "st_busy", dim: "스트레스", q: "일이 몰려서 바쁠 때 나는", opts: ["목록을 만들어 하나씩 처리", "급한 것부터 몰아서", "도움을 요청한다", "잠깐 쉬고 다시 시작"] },
+  { id: "st_fail", dim: "스트레스", q: "일이 잘 안 풀리면", opts: ["원인을 분석한다", "다른 방법을 바로 시도한다", "잠깐 내려놓는다", "주변에 조언을 구한다"] },
+  { id: "h_style", dim: "유머", q: "내 유머 스타일은", opts: ["상황을 재밌게 꼬는 말장난", "나를 낮추는 셀프 디스", "과장된 리액션", "유머는 잘 안 쓰는 편"] },
+  { id: "h_when", dim: "유머", q: "농담을 하는 건 주로", opts: ["처음 만난 사람과 어색할 때", "친한 사람과만", "분위기가 무거울 때", "거의 안 해요"] },
+  { id: "d_pick", dim: "결정 방식", q: "메뉴를 고를 때 나는", opts: ["바로 정한다", "후기·추천을 찾아본다", "상대에게 맞춘다", "늘 먹던 걸 시킨다"] },
+  { id: "d_big", dim: "결정 방식", q: "큰 결정을 할 때는", opts: ["혼자 충분히 고민한다", "믿는 사람과 상의한다", "직감을 따른다", "장단점을 적어본다"] },
+  { id: "r_friend", dim: "관계별 말투", q: "친한 친구와 말할 때 나는", opts: ["장난이 많다", "편하지만 차분하다", "리액션이 크다", "주로 들어준다"] },
+  { id: "r_work", dim: "관계별 말투", q: "일로 만나는 사람과 말할 때 나는", opts: ["예의 바르고 간결하게", "친근하게 분위기를 푼다", "필요한 말만", "먼저 스몰토크를 건다"] },
+  { id: "r_new", dim: "관계별 말투", q: "처음 만난 사람에게 나는 주로", opts: ["질문을 많이 한다", "내 얘기를 먼저 한다", "공통점을 찾는다", "상대가 말하길 기다린다"] },
+  { id: "t_love", dim: "좋아하는 화제", q: "시간 가는 줄 모르고 하는 이야기는", opts: ["일·커리어", "돈·재테크", "취미·콘텐츠", "사람·연애·관계"] },
+  { id: "t_avoid", dim: "좋아하는 화제", q: "되도록 피하고 싶은 화제는", opts: ["정치·사회 이슈", "개인적인 사생활", "돈 이야기", "딱히 없어요"] },
+  { id: "v_value", dim: "가치관", q: "요즘 나에게 가장 중요한 건", opts: ["성장·실력", "여유·건강", "사람·관계", "돈·안정"] },
+  { id: "v_proud", dim: "가치관", q: "내가 자랑스러운 순간은", opts: ["목표를 이뤘을 때", "누군가를 도왔을 때", "꾸준히 해냈을 때", "새로운 걸 시도했을 때"] },
+  { id: "w_weekend", dim: "생활", q: "완벽한 주말은", opts: ["집에서 푹 쉬기", "약속 꽉 채우기", "혼자 취미 즐기기", "즉흥 나들이"] },
+  { id: "w_morning", dim: "생활", q: "아침의 나는", opts: ["일찍 일어나 루틴대로", "알람 여러 번 끄고 겨우", "날마다 다르다", "늦게 자고 늦게 일어난다"] },
+  { id: "c_listen", dim: "대화 습관", q: "상대가 길게 이야기하면 나는", opts: ["끝까지 듣는다", "중간중간 질문한다", "내 경험을 덧붙인다", "요점을 정리해준다"] },
+  { id: "c_story", dim: "대화 습관", q: "내 이야기를 할 때 나는", opts: ["짧고 굵게", "길고 자세하게", "재밌게 각색해서", "묻는 것만 답한다"] },
+];
+const DIMS = [...new Set(DEEP.map(d => d.dim))];
 
 // 답 꺼내기: { sel: [...], other: "" } 형식
 function pv(p, id) { const a = p && p[id]; return a ? [...(a.sel || []), ...(a.other ? [a.other] : [])] : []; }
@@ -68,9 +92,22 @@ function checkDue() {
   const base = (lastCheck() || {}).date || S.st.profile.updatedAt;
   return !base || (Date.parse(S.st.date) - Date.parse(base)) / DAYMS >= CHECK_EVERY;
 }
-function nextDrill() {
-  const p = S.st.profile, asked = new Set((S.st.checkins || []).map(c => c.drill && c.drill.id));
-  return DRILL.find(d => d.when(p) && !asked.has(d.id)) || DRILL.filter(d => d.when(p))[(S.st.checkins || []).length % 4] || DRILL[22];
+function askedIds() {
+  const ids = new Set();
+  for (const c of S.st.checkins || []) { if (c.drill) ids.add(c.drill.id); for (const d of c.deep || []) ids.add(d.id); }
+  return ids;
+}
+function nextDeep(n = 2) {
+  const p = S.st.profile, asked = askedIds(), out = [];
+  const nc = S.st.nextCheck && Array.isArray(S.st.nextCheck.questions) ? S.st.nextCheck.questions : [];
+  for (const q of nc) if (q && q.id && q.q && Array.isArray(q.opts) && q.opts.length >= 2 && !asked.has(q.id) && out.length < n) out.push({ ...q, src: "ai" });
+  for (const d of DRILL) if (out.length < n && d.when(p) && !asked.has(d.id) && !out.some(o => o.dim === "직업·관심사")) out.push({ id: d.id, q: d.q, opts: d.opts, dim: "직업·관심사", src: "bank" }); // 직업·관심사는 한 번에 1개까지
+  const cover = {}; for (const c of S.st.checkins || []) for (const d of c.deep || []) cover[d.dim] = (cover[d.dim] || 0) + 1;
+  const left = DEEP.filter(d => !asked.has(d.id)).sort((a, b) => (cover[a.dim] || 0) - (cover[b.dim] || 0) || DIMS.indexOf(a.dim) - DIMS.indexOf(b.dim));
+  for (const d of left) if (out.length < n && !out.some(o => o.dim === d.dim)) out.push({ ...d, src: "bank" });
+  for (const d of left) if (out.length < n && !out.some(o => o.id === d.id)) out.push({ ...d, src: "bank" });
+  if (out.length < n) { const all = [...DRILL.filter(d => d.when(p)), ...DEEP]; while (out.length < n && all.length) out.push({ ...all[((S.st.checkins || []).length * 7 + out.length) % all.length], src: "again" }); } // 다 물었으면 예전 질문을 다시 (답이 바뀌었는지)
+  return out.slice(0, n);
 }
 // 3일 체크 1번 선택지: 내 답에 맞춘 대화 상황
 function situations() {
@@ -162,16 +199,16 @@ ROUTES.profile = (el, parts = []) => {
 ROUTES.checkin = (el, parts = []) => {
   const thenLesson = parts[0] === "go";
   if (!profileDone()) { location.hash = "profile"; return; }
-  const d = nextDrill(), out = {};
+  const deep = nextDeep(2), out = {};
   const steps = [
     { id: "soon", q: "앞으로 3일 안에 있을 대화 상황", ex: "최대 2개. 그 상황을 미리 연습하는 레슨이 나와요.", type: "multi", max: 2, opts: situations() },
-    { id: "drill", q: d.q, ex: "점점 자세히 물어볼수록 대사가 더 나다워져요.", type: "one", opts: d.opts },
+    ...deep.map((d, k) => ({ id: "deep" + k, q: d.q, ex: d.ex || (d.src === "ai" ? "지난 답을 보고 만든 질문이에요. 점점 더 나다운 대사가 돼요." : "나를 알아가는 질문이에요. 레슨 속 '나'의 말과 행동이 돼요."), type: "one", opts: d.opts })),
     { id: "fit", q: "지난 레슨 대화가 나 같았나요?", ex: "1 = 전혀 나 같지 않음 · 5 = 딱 나예요", type: "one", plain: true, opts: ["1", "2", "3", "4", "5"] },
   ];
   let i = 0;
   const show = () => {
     if (i >= steps.length) return extra();
-    el.innerHTML = `<header><h1>3일 체크</h1><h2>약 1분</h2></header><section id="pq"></section>`;
+    el.innerHTML = `<header><h1>3일 체크</h1><h2>약 1~2분</h2></header><section id="pq"></section>`;
     askOne($("#pq"), steps[i], out[steps[i].id], { step: i + 1, total: steps.length, onBack: i ? () => { i--; show(); } : null,
       onDone: a => { out[steps[i].id] = a; i++; show(); } });
   };
@@ -182,7 +219,7 @@ ROUTES.checkin = (el, parts = []) => {
       <div class="row"><button id="bk">이전</button><button class="go" id="sv">보내기</button></div>`;
     $("#bk").onclick = () => { i = steps.length - 1; show(); };
     const send = async () => {
-      const data = { soon: out.soon, drill: { id: d.id, q: d.q, ...out.drill }, fit: +(out.fit.sel[0] || 0) || 0, want: $("#want") ? $("#want").value.trim() : "", odd: $("#odd") ? $("#odd").value.trim() : "" };
+      const data = { soon: out.soon, deep: deep.map((d, k) => ({ id: d.id, q: d.q, dim: d.dim || "", src: d.src, ...(out["deep" + k] || {}) })), fit: +(out.fit.sel[0] || 0) || 0, want: $("#want") ? $("#want").value.trim() : "", odd: $("#odd") ? $("#odd").value.trim() : "" };
       $("#sv").disabled = true;
       try {
         await postData("/api/checkin", data); (S.st.checkins = S.st.checkins || []).push({ date: S.st.date, ...data }); track("checkin", { fit: data.fit });
@@ -350,6 +387,8 @@ const BF_TXT = { E: ["외향성", "대화를 먼저 열고 분위기를 이끄�
 const bfLine = (k, v) => v == null ? "" : `${BF_TXT[k][0]} ${v}/5 · ${v >= 3.6 ? BF_TXT[k][1] : v <= 2.4 ? BF_TXT[k][2] : "상황에 따라 균형 있게"}`;
 function testLine() {
   const done = testsDone(), next = TORDER.find(k => !done.includes(k));
+  const old = ["situ", "voice"].find(k => S.st.tests && S.st.tests[k] && (Date.parse(S.st.date) - Date.parse(S.st.tests[k].date)) / DAYMS >= 60);
+  if (!next && old) return `<p class="muted" style="margin-top:12px">${TESTS[old].name}를 한 지 두 달이 지났어요. 그사이 달라졌을 수 있어요.</p><div class="row"><button class="go" id="tn" data-k="${old}">${TESTS[old].name} 다시 하기</button><button id="mec">내 캐릭터 보기</button></div>`;
   return `<p class="muted" style="margin-top:12px">성격·말투 검사 ${done.length}/3 · 할수록 대사가 더 나다워져요</p><div class="row">${next ? `<button class="go" id="tn" data-k="${next}">${TESTS[next].name} (${TESTS[next].time.split(" · ")[0]})</button>` : ""}${done.length ? `<button id="mec">내 캐릭터 보기</button>` : ""}</div>`;
 }
 

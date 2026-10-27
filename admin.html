@@ -198,7 +198,7 @@ function personaSummary(u) {
   const p = u.profile, L = [`[맞춤 레슨 요청] 사용자: ${u.name} (${u.id}) · 현재 진도 레슨 ${u.n} (${Math.ceil(u.n / 7)}주차 ${((u.n - 1) % 7) + 1}일)`];
   L.push(p ? `프로필 (${p.updatedAt || "-"}): ` + Object.keys(PL).filter(k => p[k]).map(k => `${PL[k]}=${av(p[k])}`).join(" | ") : "프로필: 아직 없음");
   const C = (u.checkins || []).slice(-6);
-  if (C.length) L.push("3일 체크:", ...C.map(c => `- ${c.date} · 3일 안: ${av(c.soon)} · ${c.drill ? `${c.drill.q} ${av(c.drill)}` : ""} · 나 같음 ${c.fit || "-"}/5${c.want ? ` · 영어로 하고 싶던 말: "${c.want}"` : ""}${c.odd ? ` · 어색했던 점: "${c.odd}"` : ""}`));
+  if (C.length) L.push("3일 체크:", ...C.map(c => `- ${c.date} · 3일 안: ${av(c.soon)} · ${c.drill ? `${c.drill.q} ${av(c.drill)}` : ""}${(c.deep || []).map(d => `[${d.dim || "-"}] ${d.q} → ${av(d)}`).join(" / ")} · 나 같음 ${c.fit || "-"}/5${c.want ? ` · 영어로 하고 싶던 말: "${c.want}"` : ""}${c.odd ? ` · 어색했던 점: "${c.odd}"` : ""}`));
   const N = (u.notes || []).slice(-10);
   if (N.length) L.push("추가 정보:", ...N.map(n => `- ${n.date} [${n.cat}] ${n.text}`));
   const T = u.tests || {};
