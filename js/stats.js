@@ -19,15 +19,19 @@ ROUTES.home = el => {
   const size = heroEn.length > 34 ? "s" : heroEn.length > 22 ? "m" : "";
   const meta = ch.slice(1, 4).map(c => `<span>${esc(c.en.replace(/[.!?]$/, "").replace(/~/g, "…"))}</span>`).join("");
   el.innerHTML = `${S.st.owner ? `<a class="gear" href="admin.html" aria-label="관리자 페이지">${ic("gear", 22)}</a>` : ""}<a class="hbtn ${S.st.owner ? "o" : ""}" href="#help" aria-label="사용법 도움말">${ic("help", 22)}</a>
-    <div class="eyebrow" style="padding-right:${S.st.owner ? 96 : 48}px">Lesson ${S.n} · Week ${S.week} · Day ${S.dw}</div>
+    <div class="wkhead" style="padding-right:${S.st.owner ? 96 : 48}px"><span class="wbadge" aria-hidden="true">${S.week}</span><span class="wt"><b>${S.week}주차${(S.weeks[S.week] || {}).theme ? ` · ${esc(S.weeks[S.week].theme)}` : ""}</b>레슨 ${S.n} · ${S.dw <= 5 ? `${S.dw}번째 정거장` : S.week % 4 === 0 ? "한 달 총복습 구간" : "복습 구간"}</span></div>
+    <ol class="route" style="--p:${(S.dw - 1) / 6}" aria-label="이번 주 진도 ${S.dw}/7">${[1, 2, 3, 4, 5, 6, 7].map(d => `<li class="${d < S.dw ? "pass" : d === S.dw ? "cur" : ""}"><i></i>${d <= 5 ? d : S.week % 4 === 0 ? "총복습" : "복습"}</li>`).join("")}</ol>
+    <section class="hcard">
+    <div class="eyebrow">${ch.length ? "Today's line" : "Today"}</div>
     ${heroEn ? `<div class="hero ${size}" lang="en">${heroHTML}</div>` : `<div class="hero ko-hero">${esc(D.title || S.st.label)}</div>`}
     <p class="hero-sub">${heroKo ? `<b>${esc(heroKo)}</b> ` : ""}${esc(D.title || S.st.label)}${ch.length ? ` · 표현 ${ch.length}개` : ""}</p>
-    ${meta ? `<div class="hmeta">${meta}</div>` : ""}
+    ${meta ? `<div class="hmeta">비슷하게 ${meta}</div>` : ""}
     <button class="go big" id="start" ${S.today ? "" : "disabled"}><span>${startLabel}</span><span class="arr">→</span></button>
+    </section>
     <p class="muted" style="margin-top:10px">${done ? `오늘 ${cnt}레슨 완료 · 오늘 알림은 더 오지 않아요${cnt >= SOFT_PER_DAY ? " · 몰아서 하기보다 복습을 추천해요" : ""}` : `오늘 과제가 남아 있어요 · 받은 알림 ${t.alarms || 0}번`}</p>
     <div id="gate"></div>
     <div class="stats3"><div><b>${weekDone}/7</b><small>이번 주</small></div><div><b>${dueCount}</b><small>복습할 표현</small></div><div><b>${streak()}</b><small>연속 일수</small></div></div>
-    <div class="sec">Today</div>
+    <div class="sec">Next stops</div>
     ${todayRows()}${missionRow()}${S.st.monthly && S.st.monthly[S.st.date.slice(0, 7)] ? "" : rowHTML("mt", "이번 달 기준 테스트", "같은 질문 3개에 답해 녹음 · 달마다 비교 · 약 5분", "→")}
     <div class="sec">On the go</div>
     ${rowHTML("lm", "듣기 모드", "이어폰으로 듣고 내 차례에 먼저 말하기", "♪")}${rowHTML("cd", "표현 카드", "배운 표현 넘겨보기", "→")}
