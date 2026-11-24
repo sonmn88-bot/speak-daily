@@ -523,6 +523,35 @@ function measure(el) {
   $("#sv").onclick = () => { LS.measure = { pauses: +$("#p").value, used: +$("#u").value, confidence: conf }; next(); };
 }
 
+// ---------- 내일 이야기 (레슨 끝 30초 질문 → 다음 맞춤 대화에 이어짐) ----------
+const STORY_REL = ["더 친해지고 싶어요", "같이 할 일이 생겨요", "부탁하거나 도와줄 일이 생겨요", "새 사람을 만나고 싶어요", "알아서 이어주세요"];
+function storyCard(who) {
+  return `<div class="card" id="story"><h3>내일 이야기</h3><p class="muted">고르거나 적으면 다음 레슨 대화가 이어서 만들어져요. 건너뛰어도 돼요.</p>
+    ${who ? `<p style="font-weight:600;margin:14px 0 8px">오늘 만난 ${esc(who.name)}, 다음엔 어떻게 될까요?</p>
+    <div class="pills" id="srel">${STORY_REL.map(v => `<button class="pill" data-v="${esc(v)}">${esc(v)}</button>`).join("")}</div>` : ""}
+    <label for="ssoon">곧 영어로 할 일이 있나요? (선택)</label>
+    <input id="ssoon" type="text" maxlength="100" autocomplete="off" placeholder="예: 목요일 회의에서 일정 미루자고 말하기">
+    <div class="pills" id="swhen" style="margin-top:8px"><button class="pill sel" data-v="내일">내일</button><button class="pill" data-v="이번 주">이번 주</button><button class="pill" data-v="언젠가">언젠가</button></div></div>`;
+}
+function bindStory(el, who) {
+  const v = { rel: "", when: "내일" };
+  const one = (box, key) => el.querySelectorAll(`#${box} button`).forEach(b => b.onclick = () => {
+    v[key] = v[key] === b.dataset.v && key === "rel" ? "" : b.dataset.v; // 다시 누르면 선택 취소 (관계만)
+    el.querySelectorAll(`#${box} button`).forEach(x => x.classList.toggle("sel", x.dataset.v === v[key]));
+  });
+  if (who) one("srel", "rel"); one("swhen", "when");
+  return () => {
+    const soon = ($("#ssoon") ? $("#ssoon").value : "").trim().slice(0, 100);
+    if (!v.rel && !soon) return null;
+    return { cat: "story", who: who ? who.name : "", whoDesc: who ? (who.desc || "") : "", rel: v.rel, soon, when: soon ? v.when : "" };
+  };
+}
+function sendStory(data, n) {
+  if (!data) return false;
+  postData("/api/note", { ...data, n }).then(() => track("story", { rel: !!data.rel, soon: !!data.soon })).catch(() => {});
+  return true;
+}
+
 // ---------- 완료 ----------
 function finish(el) {
   const t = { O: 0, T: 0, X: 0 }; Object.values(LS.results).forEach(r => t[r]++);
@@ -535,18 +564,21 @@ function finish(el) {
   const prev = [...S.st.history].reverse().find(h => h.date < S.st.date && h.stats && h.stats.mission);
   const askPrev = prev && !S.st.history.some(h => h.stats && h.stats.missionPrevFor === prev.date);
   const cands = (LS.day.chunks && LS.day.chunks.length ? LS.day.chunks : LS.test).slice(0, 5);
-  el.innerHTML = `<div class="card"><p class="ko">저장하면 오늘 알림이 멈춰요</p><p class="score"><b class="sO">맞음 ${t.O}</b><b class="sT">애매 ${t.T}</b><b class="sX">못 함 ${t.X}</b></p>
-    <button class="go" id="sv">저장하고 레슨 ${LS.n} 끝내기</button><p class="muted" id="msg" role="status"></p></div>
+  const who = LS.day.type === "learn" && LS.cast && LS.cast.A && LS.cast.A.name ? LS.cast.A : null;
+  el.innerHTML = `<div class="card"><p class="ko">저장하면 오늘 알림이 멈춰요</p><p class="score"><b class="sO">맞음 ${t.O}</b><b class="sT">애매 ${t.T}</b><b class="sX">못 함 ${t.X}</b></p></div>
     ${askPrev ? `<div class="card"><h3>지난 실전 미션</h3><p class="muted">"${esc(prev.stats.mission)}"를 실제 대화나 혼잣말로 써봤나요?</p>
       <div class="row" id="mp"><button data-v="1">써봤다</button><button data-v="0">못 썼다</button></div></div>` : ""}
     ${cands.length ? `<div class="card"><h3>오늘의 실전 미션</h3><p class="muted">다음 학습 전까지 실제로 한 번 써볼 표현을 고르세요. 누군가에게 말하거나, 혼잣말로 상황을 만들어 써도 돼요.</p>
-      <div class="pills" id="mi">${cands.map(c => `<button class="pill" data-v="${esc(c.en)}">${esc(c.en)}</button>`).join("")}</div><p class="muted">미션은 저장하기 전에 골라주세요.</p></div>` : ""}`;
+      <div class="pills" id="mi">${cands.map(c => `<button class="pill" data-v="${esc(c.en)}">${esc(c.en)}</button>`).join("")}</div></div>` : ""}
+    ${storyCard(who)}
+    <button class="go" id="sv">저장하고 레슨 ${LS.n} 끝내기</button><p class="muted" id="msg" role="status"></p>`;
   const pick = (box, key, conv) => el.querySelectorAll(`#${box} button`).forEach(b => b.onclick = () => {
     LS.stats[key] = conv(b.dataset.v); if (key === "missionPrev") LS.stats.missionPrevFor = prev.date;
     el.querySelectorAll(`#${box} button`).forEach(x => x.classList.toggle("sel", x === b));
   });
   if (askPrev) pick("mp", "missionPrev", v => v === "1");
   if (cands.length) pick("mi", "mission", v => v);
+  const story = bindStory(el, who);
   $("#sv").onclick = async () => {
     const b = $("#sv"); b.disabled = true; $("#msg").textContent = "저장하는 중…";
     const minutes = Math.max(1, Math.round(((LS.stats.activeMs || 0) + Math.min(Date.now() - LS.stepAt, 10 * 60000)) / 60000));
@@ -564,11 +596,12 @@ function finish(el) {
     }
     if (!r.ok) { b.disabled = false; $("#msg").textContent = `저장하지 못했어요. 다시 눌러주세요. (${res.error || r.status})`; return; }
     track("complete", { lesson: LS.n, minutes, O: t.O, T: t.T, X: t.X, mode: LS.stats.mode }); flush();
+    const sent = sendStory(story(), LS.n); // 내일 이야기: 레슨 저장과 따로, 기다리지 않음
     LS = null; clearResume();
     try { await loadAll(); }
     catch (e) { el.innerHTML = `<div class="card"><p class="ko">레슨 완료, 저장됐어요</p><p class="muted">화면을 새로 불러오지 못했어요. 새로고침해 주세요.</p><button class="go" id="rl">새로고침</button></div>`; $("#rl").onclick = () => location.reload(); return; }
     const cnt = doneToday();
-    el.innerHTML = `<div class="card"><p class="ko">레슨 완료</p><p class="muted">오늘 ${cnt}레슨 완료, 연속 ${streak()}일째예요. 오늘 알림은 더 오지 않아요.</p>
+    el.innerHTML = `<div class="card"><p class="ko">레슨 완료</p><p class="muted">오늘 ${cnt}레슨 완료, 연속 ${streak()}일째예요. 오늘 알림은 더 오지 않아요.</p>${sent ? `<p class="muted resume">알려준 이야기는 다음 레슨 대화에 이어서 넣을게요.</p>` : ""}
       ${S.today ? `<button class="${cnt >= SOFT_PER_DAY ? "" : "go"}" id="more">레슨 ${S.n} 미리 하기</button><p class="muted">${cnt >= SOFT_PER_DAY ? "오늘 이미 많이 했어요. 하루에 몰아서 하면 기억 효과가 줄어서, 내일 하는 걸 더 추천해요." : "원하면 다음 레슨도 이어서 할 수 있어요."}</p>` : ""}</div>
       <div class="row"><button id="h" class="${S.today && cnt < SOFT_PER_DAY ? "" : "go"}">홈</button><button id="a">분석 보기</button></div>`;
     if (S.today) $("#more").onclick = () => { startLesson(); renderLearn($("#view")); }; // 완료 카드 안이 아니라 화면 전체에 새 레슨
